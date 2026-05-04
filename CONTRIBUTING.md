@@ -4,16 +4,16 @@ Welcome to Estimatea! And thanks for bringing your attention to our project.
 Wether you are here to contribute or just looking for inspiration, we are open to all your inputs.  
 
 
-**Before you start:**  
-1. Read our README.md and please always throw questions our way.(Owners contact further down)
-2. Browse Issues: Browse our Issues to see what needs work. If you have a new idea, open an issue first to discuss it with us.  
-3. If you have any requests or just simply a question, contact us:   
-- [Simon](https://github.com/SimonBeCh)  
-- [Joakim](https://github.com/Joakim700)  
-- [Emil](https://github.com/Mowgli-dk)
+**Before you start:**
+1. **Read the README.md:** Please check our documentation first.
+2. **Browse Issues:** See what needs work or what is already in progress. If you have a new idea, open an issue first to discuss it with us.
+3. **Reach Out:** If you have questions or requests, contact the owners:
+    - [Simon](https://github.com/SimonBeCh)
+    - [Joakim](https://github.com/Joakim700)
+    - [Emil](https://github.com/Mowgli-dk)
 
-## Ways of Working  
-Feel free to fork the project and create a branch for your feature(e.g., feature/new-branch).  
-Always make sure to do a pull request, and it will be reviewed by the owners. It is also important that you write a  
-clear description of what you have been working on. This makes it easier for everyone to review you code, and easily integrate it into the program.  
-Comments inside the code is also important, as we want transparency throughout the whole project.
+## Ways of Working
+* **Fork & Branch:** Fork the repository and create a branch on your fork for your feature (e.g., `feature/new-rate-logic`).
+* **Pull Requests:** Always submit a Pull Request (PR) for review.
+* **Descriptions:** Include a clear description of your changes. This helps us review your code faster and integrate it smoothly.
+* **Code Comments:** We value transparency. Please include comments in your code to explain your logic, especially for complex calculations.
