@@ -5,5 +5,5 @@ Wether you are here to contribute or just looking for inspiration, we are open t
 
 Feel free to contact us at any time:  
 [Simon](https://github.com/SimonBeCh)  
-[Joakim](https://github.com/Joakim700)
+[Joakim](https://github.com/Joakim700)  
 [Emil](https://github.com/Mowgli-dk)
