@@ -13,7 +13,7 @@ Wether you are here to contribute or just looking for inspiration, we are open t
     - [Emil](https://github.com/Mowgli-dk)  
 
 **Project Stack**
-- **Backend:** Java (Springboot)
+- **Backend:** Java (Springboot) & MySQL
 - **Frontend:** HTML(Thymeleaf) & CSS
 - **Build Tool:** Maven/Gradle
 
