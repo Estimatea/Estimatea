@@ -13,7 +13,11 @@ Wether you are here to contribute or just looking for inspiration, we are open t
     - [Emil](https://github.com/Mowgli-dk)
 
 ## Ways of Working
-* **Fork & Branch:** Fork the repository and create a branch on your fork for your feature (e.g., `feature/new-rate-logic`).
+* **Fork & Branch:** Fork the repository and create a branch on your fork for your feature (e.g., `feature/new-branch`).
 * **Pull Requests:** Always submit a Pull Request (PR) for review.
 * **Descriptions:** Include a clear description of your changes. This helps us review your code faster and integrate it smoothly.
-* **Code Comments:** We value transparency. Please include comments in your code to explain your logic, especially for complex calculations.
+* **Code Comments:** We value transparency. Please include comments in your code to explain your logic, especially for complex calculations.  
+
+
+## Code of Conduct  
+Be respectful and professional. We're here to build a cool project, and learn from each other!
