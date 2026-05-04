@@ -16,7 +16,7 @@ Comments inside the code is also important, as we want transparancy throughout t
 
 
 
-Feel free to contact us at any time:  
+### Feel free to contact us at any time:  
 [Simon](https://github.com/SimonBeCh)  
 [Joakim](https://github.com/Joakim700)  
 [Emil](https://github.com/Mowgli-dk)
