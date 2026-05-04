@@ -10,7 +10,12 @@ Wether you are here to contribute or just looking for inspiration, we are open t
 3. **Reach Out:** If you have questions or requests, contact the owners:
     - [Simon](https://github.com/SimonBeCh)
     - [Joakim](https://github.com/Joakim700)
-    - [Emil](https://github.com/Mowgli-dk)
+    - [Emil](https://github.com/Mowgli-dk)  
+
+**Project Stack**
+- **Backend:** Java (Springboot)
+- **Frontend:** HTML(Thymeleaf) & CSS
+- **Build Tool:** Maven/Gradle
 
 ## Ways of Working
 * **Fork & Branch:** Fork the repository and create a branch on your fork for your feature (e.g., `feature/new-branch`).
