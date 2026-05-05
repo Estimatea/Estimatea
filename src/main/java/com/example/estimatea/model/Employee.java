@@ -6,13 +6,14 @@ public class Employee {
     private String employeeName;
     private String employeeUsername;
     private String employeePassword;
-    //private Enum Roletype;
+    private Role role;
 
-    public Employee(int employeeId, String employeeName, String employeeUsername, String employeePassword) {
+    public Employee(int employeeId, String employeeName, String employeeUsername, String employeePassword, Role role) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeUsername = employeeUsername;
         this.employeePassword = employeePassword;
+        this.role = role;
     }
 
     public Employee() {
@@ -49,5 +50,13 @@ public class Employee {
 
     public void setEmployeePassword(String employeePassword) {
         this.employeePassword = employeePassword;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

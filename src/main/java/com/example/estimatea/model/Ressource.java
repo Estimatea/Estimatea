@@ -11,6 +11,10 @@ public class Ressource {
         this.ressourceRate = ressourceRate;
     }
 
+    public Ressource() {
+
+    }
+
     public int getRessourceId() {
         return ressourceId;
     }
