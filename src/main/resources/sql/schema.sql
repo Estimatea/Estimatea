@@ -1,0 +1,81 @@
+DROP SCHEMA IF EXISTS estimatea;
+CREATE SCHEMA estimatea;
+USE estimatea;
+
+-- EMPLOYEE TABLE (Links to Project & Project_employee)
+CREATE TABLE IF NOT EXISTS employee(
+    employee_id INT AUTO_INCREMENT PRIMARY KEY,
+    employee_name VARCHAR(60),
+    employee_username VARCHAR(60) NOT NULL UNIQUE,
+    employee_password VARCHAR(60) NOT NULL UNIQUE
+    );
+
+-- PROJECT TABLE (Has project_employees and links to subproject and task)
+CREATE TABLE IF NOT EXISTS project(
+    project_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    project_name VARCHAR(60) UNIQUE,
+    sum_time INT,
+    sum_price INT,
+    deadline DATE,
+    employee_id INT,
+    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
+    );
+
+-- PROJECT_EMPLOYEE (Links to Project & Junction TABLE sub_project_emloyee)
+CREATE TABLE IF NOT EXISTS project_employee(
+    project_employee_id INT AUTO_INCREMENT PRIMARY KEY,
+    employee_id INT,
+    project_id INT,
+    FOREIGN KEY (employee_id) REFERENCES employee(employee_id) ON DELETE CASCADE,
+    FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE
+    );
+
+-- SUBPROJECT (Part of Project and links to task & Junction TABLE sub_project__employee)
+CREATE TABLE IF NOT EXISTS subproject(
+    sub_id INT AUTO_INCREMENT PRIMARY KEY,
+    sub_name VARCHAR(60),
+    sub_time INT,
+    sub_price INT,
+    project_id INT,
+    FOREIGN KEY (project_id) REFERENCES project(project_id)
+    );
+
+-- SUBPROJECT_EMPLOYEE (Junction TABLE and has PK FK (employee_id, sub_id))
+CREATE TABLE IF NOT EXISTS sub_project_employee_junction(
+    project_employee_id INT REFERENCES project_employee(project_employee_id),
+    sub_id INT REFERENCES subproject(sub_id),
+    PRIMARY KEY (project_employee_id, sub_id)
+    );
+
+-- TASK (Part of project & subproject (Links to Junction TABLE ressource_task))
+CREATE TABLE IF NOT EXISTS task(
+    task_id INT AUTO_INCREMENT PRIMARY KEY,
+    task_name VARCHAR(60),
+    task_time INT,
+    task_price INT,
+    project_id INT,
+    FOREIGN KEY (project_id) REFERENCES project(project_id)
+    );
+
+-- RESSOURCE (Links to Junction TABLE ressource_task)
+CREATE TABLE IF NOT EXISTS ressource(
+    res_id INT AUTO_INCREMENT PRIMARY KEY,
+    res_name VARCHAR(60),
+    res_rate INT
+    );
+
+-- RESSOURCE_TASK_JUNCTION (Junction TABLE and has PK FK (task_id, res_id))
+CREATE TABLE IF NOT EXISTS ressource_task_junction(
+    task_id INT REFERENCES task(task_id),
+    res_id INT REFERENCES ressource(res_id),
+    PRIMARY KEY (task_id, res_id)
+    );
+
+-- ROLE
+CREATE TABLE IF NOT EXISTS role(
+    role_id INT AUTO_INCREMENT PRIMARY KEY,
+    role_type VARCHAR(60),
+    role_rate INT
+    );
+
+
