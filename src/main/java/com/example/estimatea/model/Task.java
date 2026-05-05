@@ -19,22 +19,12 @@ public class Task {
         this.ressource = ressource;
     }
 
-    public Task(int taskId, String taskName, int taskTime, int taskPrice, Project project, Ressource ressource) {
-        this.taskId = taskId;
-        this.taskName = taskName;
-        this.taskTime = taskTime;
-        this.taskPrice = taskPrice;
+    public Task(Project project) {
         this.project = project;
-        this.ressource = ressource;
     }
 
-    public Task(int taskId, String taskName, int taskTime, int taskPrice, SubProject subProject, Ressource ressource) {
-        this.taskId = taskId;
-        this.taskName = taskName;
-        this.taskTime = taskTime;
-        this.taskPrice = taskPrice;
+    public Task(SubProject subProject) {
         this.subProject = subProject;
-        this.ressource = ressource;
     }
 
     public Task () {
