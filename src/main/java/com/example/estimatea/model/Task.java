@@ -1,13 +1,13 @@
 package com.example.estimatea.model;
 
 public class Task {
-    int taskId;
-    String taskName;
-    int taskTime;
-    int taskPrice;
-    Project project;
-    SubProject subProject;
-    Ressource ressource;
+    private int taskId;
+    private String taskName;
+    private int taskTime;
+    private int taskPrice;
+    private Project project;
+    private SubProject subProject;
+    private Ressource ressource;
 
     public Task(int taskId, String taskName, int taskTime, int taskPrice, Project project, SubProject subProject, Ressource ressource) {
         this.taskId = taskId;
