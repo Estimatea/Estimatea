@@ -2,12 +2,21 @@ DROP SCHEMA IF EXISTS estimatea;
 CREATE SCHEMA estimatea;
 USE estimatea;
 
+    -- ROLE
+CREATE TABLE IF NOT EXISTS role(
+    role_id INT AUTO_INCREMENT PRIMARY KEY,
+    role_type VARCHAR(60),
+    role_rate INT
+    );
+
 -- EMPLOYEE TABLE (Links to Project & Project_employee)
 CREATE TABLE IF NOT EXISTS employee(
     employee_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_name VARCHAR(60),
     employee_username VARCHAR(60) NOT NULL UNIQUE,
     employee_password VARCHAR(60) NOT NULL UNIQUE
+    role_id INT,
+    FOREIGN KEY (role_id) REFERENCES role(role_id)
     );
 
 -- PROJECT TABLE (Has project_employees and links to subproject and task)
@@ -70,12 +79,4 @@ CREATE TABLE IF NOT EXISTS ressource_task_junction(
     res_id INT REFERENCES ressource(res_id),
     PRIMARY KEY (task_id, res_id)
     );
-
--- ROLE
-CREATE TABLE IF NOT EXISTS role(
-    role_id INT AUTO_INCREMENT PRIMARY KEY,
-    role_type VARCHAR(60),
-    role_rate INT
-    );
-
 
