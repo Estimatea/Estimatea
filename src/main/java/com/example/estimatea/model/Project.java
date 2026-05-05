@@ -3,12 +3,12 @@ package com.example.estimatea.model;
 import java.time.LocalDate;
 
 public class Project {
-    int projectId;
-    String projectName;
-    int sumTime;
-    int sumPrice;
-    LocalDate deadLine;
-    Employee teamLead;
+    private int projectId;
+    private String projectName;
+    private int sumTime;
+    private int sumPrice;
+    private LocalDate deadLine;
+    private Employee teamLead;
 
     public Project(int projectId, String projectName, int sumTime, int sumPrice, LocalDate deadLine, Employee teamLead) {
         this.projectId = projectId;

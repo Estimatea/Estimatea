@@ -1,11 +1,11 @@
 package com.example.estimatea.model;
 
 public class SubProject {
-    int subId;
-    String subName;
-    int subTime;
-    int subPrice;
-    int projectId;
+    private int subId;
+    private String subName;
+    private int subTime;
+    private int subPrice;
+    private int projectId;
 
     public SubProject(int subId, String subName, int subTime, int subPrice, int projectId) {
         this.subId = subId;
@@ -16,7 +16,6 @@ public class SubProject {
     }
 
     public SubProject() {
-
     }
 
     public int getSubId() {

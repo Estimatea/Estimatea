@@ -1,9 +1,9 @@
 package com.example.estimatea.model;
 
 public class Ressource {
-    int ressourceId;
-    String ressourceName;
-    int ressourceRate;
+    private int ressourceId;
+    private String ressourceName;
+    private int ressourceRate;
 
     public Ressource(int ressourceId, String ressourceName, int ressourceRate) {
         this.ressourceId = ressourceId;
