@@ -6,10 +6,10 @@ public class Task {
     int taskTime;
     int taskPrice;
     Project project;
-    Subproject subProject;
+    SubProject subProject;
     Ressource ressource;
 
-    public Task(int taskId, String taskName, int taskTime, int taskPrice, Project project, Subproject subProject, Ressource ressource) {
+    public Task(int taskId, String taskName, int taskTime, int taskPrice, Project project, SubProject subProject, Ressource ressource) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskTime = taskTime;
@@ -23,7 +23,7 @@ public class Task {
         this.project = project;
     }
 
-    public Task(Subproject subProject) {
+    public Task(SubProject subProject) {
         this.subProject = subProject;
     }
 
@@ -71,11 +71,11 @@ public class Task {
         this.project = project;
     }
 
-    public Subproject getSubProject() {
+    public SubProject getSubProject() {
         return subProject;
     }
 
-    public void setSubProject(Subproject subProject) {
+    public void setSubProject(SubProject subProject) {
         this.subProject = subProject;
     }
 
