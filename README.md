@@ -14,13 +14,3 @@ Time Tracking & Planning: Granular scheduling to ensure deadlines are met withou
 Sustainable Architecture: Built to evolve alongside growing IT requirements.
 
 Data-Driven Insights: Leveraging historical data for more accurate future bidding.
-
-## 🛠 Tech Stack
-The platform is built on a robust, scalable architecture to ensure high performance and reliability.
-
-Layer	Technology	Purpose
-Frontend	HTML5 & CSS3	Custom-crafted styling for a clean, professional UI.
-Templating	Thymeleaf	Seamless server-side view implementation.
-Backend	Java Spring Boot	A powerful, enterprise-grade application framework.
-Database	MySQL	Reliable relational data storage for complex project tracking.
-Version Control	GitHub	Collaborative development and CI/CD integration.

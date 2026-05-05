@@ -21,7 +21,8 @@ Wether you are here to contribute or just looking for inspiration, we are open t
 * **Fork & Branch:** Fork the repository and create a branch on your fork for your feature (e.g., `feature/new-branch`).
 * **Pull Requests:** Always submit a Pull Request (PR) for review.
 * **Descriptions:** Include a clear description of your changes. This helps us review your code faster and integrate it smoothly.
-* **Code Comments:** We value transparency. Please include comments in your code to explain your logic, especially for complex calculations.  
+* **Code Comments:** We value transparency. Please include comments in your code to explain your logic, especially for complex calculations.
+* **Unit Testing:** Ensure all tests pass before submitting. If adding a new feature, please include corresponding unit tests.
 
 
 ## Code of Conduct  
