@@ -15,6 +15,10 @@ public class Employee {
         this.employeePassword = employeePassword;
     }
 
+    public Employee() {
+
+    }
+
     public int getEmployeeId() {
         return employeeId;
     }
