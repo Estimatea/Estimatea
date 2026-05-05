@@ -2,11 +2,18 @@ DROP SCHEMA IF EXISTS estimatea;
 CREATE SCHEMA estimatea;
 USE estimatea;
 
-    -- ROLE
+-- ROLE
 CREATE TABLE IF NOT EXISTS role(
     role_id INT AUTO_INCREMENT PRIMARY KEY,
     role_type VARCHAR(60),
     role_rate INT
+    );
+
+-- RESSOURCE (Links to Junction TABLE ressource_task)
+CREATE TABLE IF NOT EXISTS ressource(
+    res_id INT AUTO_INCREMENT PRIMARY KEY,
+    res_name VARCHAR(60),
+    res_rate INT
     );
 
 -- EMPLOYEE TABLE (Links to Project & Project_employee)
@@ -14,7 +21,7 @@ CREATE TABLE IF NOT EXISTS employee(
     employee_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_name VARCHAR(60),
     employee_username VARCHAR(60) NOT NULL UNIQUE,
-    employee_password VARCHAR(60) NOT NULL UNIQUE
+    employee_password VARCHAR(60) NOT NULL UNIQUE,
     role_id INT,
     FOREIGN KEY (role_id) REFERENCES role(role_id)
     );
@@ -26,8 +33,8 @@ CREATE TABLE IF NOT EXISTS project(
     sum_time INT,
     sum_price INT,
     deadline DATE,
-    employee_id INT,
-    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
+    project_manager INT,
+    FOREIGN KEY (project_manager) REFERENCES employee(employee_id)
     );
 
 -- PROJECT_EMPLOYEE (Links to Project & Junction TABLE sub_project_emloyee)
@@ -63,14 +70,9 @@ CREATE TABLE IF NOT EXISTS task(
     task_time INT,
     task_price INT,
     project_id INT,
-    FOREIGN KEY (project_id) REFERENCES project(project_id)
-    );
-
--- RESSOURCE (Links to Junction TABLE ressource_task)
-CREATE TABLE IF NOT EXISTS ressource(
-    res_id INT AUTO_INCREMENT PRIMARY KEY,
-    res_name VARCHAR(60),
-    res_rate INT
+    ressource_id INT,
+    FOREIGN KEY (project_id) REFERENCES project(project_id),
+    FOREIGN KEY (ressource_id) REFERENCES ressource(res_id)
     );
 
 -- RESSOURCE_TASK_JUNCTION (Junction TABLE and has PK FK (task_id, res_id))
@@ -79,4 +81,5 @@ CREATE TABLE IF NOT EXISTS ressource_task_junction(
     res_id INT REFERENCES ressource(res_id),
     PRIMARY KEY (task_id, res_id)
     );
+
 
