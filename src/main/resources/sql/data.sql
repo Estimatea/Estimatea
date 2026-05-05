@@ -1,6 +1,6 @@
 INSERT INTO employee VALUES ("Joakim", "Joes", "123", 1);
 INSERT INTO employee VALUES ("Simon", Sich, "007", 2);
-INSERT INTO employee VALUES ("Emil", "Eman", "010", 3)
+INSERT INTO employee VALUES ("Emil", "Eman", "010", 3);
 
 -- Leadership and Management
 INSERT INTO role VALUES
