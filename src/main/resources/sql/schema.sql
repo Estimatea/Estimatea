@@ -50,8 +50,6 @@ CREATE TABLE IF NOT EXISTS project_employee(
 CREATE TABLE IF NOT EXISTS subproject(
     sub_id INT AUTO_INCREMENT PRIMARY KEY,
     sub_name VARCHAR(60),
-    sub_time INT,
-    sub_price INT,
     project_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id)
     );
