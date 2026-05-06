@@ -73,6 +73,14 @@ CREATE TABLE IF NOT EXISTS task(
     FOREIGN KEY (ressource_id) REFERENCES ressource(res_id)
     );
 
+-- ESTIMATES (Gives a complexity score to the given task, meant to estimate the difficulty of a task and)
+    CREATE TABLE IF NOT EXISTS estimates(
+        estimate_id INT AUTO_INCREMENT PRIMARY KEY,
+        complexity_score INT,
+        task_id INT,
+        FOREIGN KEY (task_id) REFERENCES task(task_id)
+    );
+
 -- RESSOURCE_TASK_JUNCTION (Junction TABLE and has PK FK (task_id, res_id))
 CREATE TABLE IF NOT EXISTS ressource_task_junction(
     task_id INT REFERENCES task(task_id),
