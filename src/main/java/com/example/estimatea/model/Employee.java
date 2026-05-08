@@ -8,7 +8,7 @@ public class Employee {
     private String employeePassword;
     private int roleId; // Foreign key from role table (role_id)
 
-    public Employee(int employeeId, String employeeName, String employeeUsername, String employeePassword, Role role) {
+    public Employee(int employeeId, String employeeName, String employeeUsername, String employeePassword, int roleId) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeUsername = employeeUsername;

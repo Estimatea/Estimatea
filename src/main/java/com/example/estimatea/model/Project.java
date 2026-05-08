@@ -8,20 +8,18 @@ public class Project {
     private int sumTime;
     private int sumPrice;
     private LocalDate deadLine;
-    private Employee teamLead;
+    private int projectManager; // Foreign key from employee table
 
-    public Project(int projectId, String projectName, int sumTime, int sumPrice, LocalDate deadLine, Employee teamLead) {
+    public Project(int projectId, String projectName, int sumTime, int sumPrice, LocalDate deadLine, int projectManager) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.sumTime = sumTime;
         this.sumPrice = sumPrice;
         this.deadLine = deadLine;
-        this.teamLead = teamLead;
+        this.projectManager = projectManager;
     }
 
-    public Project(){
-
-    }
+    public Project() {}
 
     public int getProjectId() {
         return projectId;
@@ -63,11 +61,11 @@ public class Project {
         this.deadLine = deadLine;
     }
 
-    public Employee getTeamLead() {
-        return teamLead;
+    public int getProjectManager() {
+        return projectManager;
     }
 
-    public void setTeamLead(Employee teamLead) {
-        this.teamLead = teamLead;
+    public void setProjectManager(int projectManager) {
+        this.projectManager = projectManager;
     }
 }
