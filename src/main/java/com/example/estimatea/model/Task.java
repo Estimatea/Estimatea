@@ -5,40 +5,20 @@ public class Task {
     private String taskName;
     private int taskTime;
     private int taskPrice;
-    private Project project;
-    private SubProject subProject;
-    private Ressource ressource;
+    private int projectId;
+    private int ressourceId;
 
     public Task () {
 
     }
 
-    public Task(int taskId, String taskName, int taskTime, int taskPrice, Project project, SubProject subProject, Ressource ressource) {
+    public Task(int taskId, String taskName, int taskTime, int taskPrice, int projectId, int ressourceId) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskTime = taskTime;
         this.taskPrice = taskPrice;
-        this.project = project;
-        this.subProject = subProject;
-        this.ressource = ressource;
-    }
-
-    public Task(int taskId, String taskName, int taskTime, int taskPrice, Project project, Ressource ressource) {
-        this.taskId = taskId;
-        this.taskName = taskName;
-        this.taskTime = taskTime;
-        this.taskPrice = taskPrice;
-        this.project = project;
-        this.ressource = ressource;
-    }
-
-    public Task(int taskId, String taskName, int taskTime, int taskPrice, SubProject subProject, Ressource ressource) {
-        this.taskId = taskId;
-        this.taskName = taskName;
-        this.taskTime = taskTime;
-        this.taskPrice = taskPrice;
-        this.subProject = subProject;
-        this.ressource = ressource;
+        this.projectId = projectId;
+        this.ressourceId = ressourceId;
     }
 
     public int getTaskId() {
@@ -73,27 +53,19 @@ public class Task {
         this.taskPrice = taskPrice;
     }
 
-    public Project getProject() {
-        return project;
+    public int getProjectId() {
+        return projectId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
-    public SubProject getSubProject() {
-        return subProject;
+    public int getRessourceId() {
+        return ressourceId;
     }
 
-    public void setSubProject(SubProject subProject) {
-        this.subProject = subProject;
-    }
-
-    public Ressource getRessource() {
-        return ressource;
-    }
-
-    public void setRessource(Ressource ressource) {
-        this.ressource = ressource;
+    public void setRessourceId(int ressourceId) {
+        this.ressourceId = ressourceId;
     }
 }
