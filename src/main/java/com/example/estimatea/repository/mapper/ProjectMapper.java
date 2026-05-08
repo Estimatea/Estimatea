@@ -13,6 +13,7 @@ public class ProjectMapper implements RowMapper<Project> {
     @Override
     public Project mapRow(ResultSet rs, int rowNum) throws SQLException {
         Project project = new Project();
+        project.setProjectId(rs.getInt("project_id"));
         project.setProjectName(rs.getString("project_name"));
         project.setSumTime(rs.getInt("sum_time"));
         project.setSumPrice(rs.getInt("sum_price"));
