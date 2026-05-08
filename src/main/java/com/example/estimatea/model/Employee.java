@@ -6,14 +6,14 @@ public class Employee {
     private String employeeName;
     private String employeeUsername;
     private String employeePassword;
-    private Role role;
+    private int roleId; // Foreign key from role table (role_id)
 
     public Employee(int employeeId, String employeeName, String employeeUsername, String employeePassword, Role role) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeUsername = employeeUsername;
         this.employeePassword = employeePassword;
-        this.role = role;
+        this.roleId = roleId;
     }
 
     public Employee() {
@@ -52,11 +52,11 @@ public class Employee {
         this.employeePassword = employeePassword;
     }
 
-    public Role getRole() {
-        return role;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 }
