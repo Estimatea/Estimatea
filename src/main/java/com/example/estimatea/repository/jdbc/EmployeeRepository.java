@@ -31,7 +31,7 @@ public class EmployeeRepository {
     }
 
     public void removeEmployeeFromProject(Employee employee, Project project) {
-        jdbc.update(REMOVE_EMPLOYEE_FROM_PROJECT, employeeMapper, employee.getEmployeeId(), project.getProjectId());
+        jdbc.update(REMOVE_EMPLOYEE_FROM_PROJECT, employee.getEmployeeId(), project.getProjectId());
     }
 
     // CRUD QUERY'S For Subproject
@@ -40,7 +40,7 @@ public class EmployeeRepository {
     }
 
     public void removeEmployeeFromSubProject(Employee employee, SubProject subProject) {
-        jdbc.update(REMOVE_EMPLOYEE_FROM_SUB_PROJECT, employeeMapper, employee.getEmployeeId(), subProject.getProjectId());
+        jdbc.update(REMOVE_EMPLOYEE_FROM_SUB_PROJECT, employee.getEmployeeId(), subProject.getProjectId());
     }
 
 

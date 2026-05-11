@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS project(
     FOREIGN KEY (project_manager) REFERENCES employee(employee_id)
     );
 
--- PROJECT_EMPLOYEE (Links to Project & Junction TABLE sub_project_emloyee)
+-- PROJECT_EMPLOYEE (Links to Project & Junction TABLE sub_project_employee)
 CREATE TABLE IF NOT EXISTS project_employee(
     project_employee_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT,
