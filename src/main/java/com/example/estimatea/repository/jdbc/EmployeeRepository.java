@@ -26,20 +26,20 @@ public class EmployeeRepository {
     }
 
     // CRUD QUERY'S For Main project
-    public void setADD_EMPLOYEE_TO_PROJECT(Employee employee, Project project) {
+    public void addEmployeeToProject(Employee employee, Project project) {
         jdbc.update(ADD_EMPLOYEE_TO_PROJECT, employeeMapper, employee.getEmployeeId(), project.getProjectId());
     }
 
-    public void setREMOVE_EMPLOYEE_FROM_PROJECT(Employee employee, Project project) {
+    public void removeEmployeeFromProject(Employee employee, Project project) {
         jdbc.update(REMOVE_EMPLOYEE_FROM_PROJECT, employeeMapper, employee.getEmployeeId(), project.getProjectId());
     }
 
     // CRUD QUERY'S For Subproject
-    public void setADD_EMPLOYEE_TO_SUB_PROJECT(Employee employee, SubProject subProject) {
+    public void addEmployeeToSubProject(Employee employee, SubProject subProject) {
         jdbc.update(ADD_EMPLOYEE_TO_SUB_PROJECT, employeeMapper, employee.getEmployeeId(), subProject.getProjectId());
     }
 
-    public void setREMOVE_EMPLOYEE_FROM_SUB_PROJECT(Employee employee, SubProject subProject) {
+    public void removeEmployeeFromSubProject(Employee employee, SubProject subProject) {
         jdbc.update(REMOVE_EMPLOYEE_FROM_SUB_PROJECT, employeeMapper, employee.getEmployeeId(), subProject.getProjectId());
     }
 
