@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS project(
     );
 
 -- PROJECT_EMPLOYEE (Links to Project & Junction TABLE sub_project_emloyee)
-CREATE TABLE IF NOT EXISTS project_employee(
+CREATE TABLE IF NOT EXISTS project_employee_junction(
     project_employee_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT,
     project_id INT,

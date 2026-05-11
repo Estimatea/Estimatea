@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class RessourceMapper implements RowMapper<Ressource> {
 
     @Override
-    public Ressource mapRow(ResultSet rs, int rownum) throws SQLException {
+    public Ressource mapRow(ResultSet rs, int rowNum) throws SQLException {
         Ressource ressource = new Ressource();
         ressource.setRessourceId(rs.getInt("res_id"));
         ressource.setRessourceName(rs.getString("res_name"));
