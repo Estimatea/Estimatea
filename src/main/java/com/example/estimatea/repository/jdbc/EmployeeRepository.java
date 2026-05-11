@@ -1,10 +1,8 @@
 package com.example.estimatea.repository.jdbc;
-
 import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.Project;
 import com.example.estimatea.model.SubProject;
 import com.example.estimatea.repository.mapper.EmployeeMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,11 +11,6 @@ public class EmployeeRepository {
 
     private final JdbcTemplate jdbc;
     private final EmployeeMapper employeeMapper;
-
-    // MODELS
-    private Employee employee;
-    private Project project;
-    private SubProject subProject;
 
     // SQL STATEMENTS FOR project_employee Linked to a Project
     private final String ADD_EMPLOYEE_TO_PROJECT = "INSERT INTO project_employee (employee_id, project_id) VALUES (?, ?)";
@@ -33,21 +26,21 @@ public class EmployeeRepository {
     }
 
     // CRUD QUERY'S For Main project
-    public void setADD_EMPLOYEE_TO_PROJECT() {
-        jdbc.update(ADD_EMPLOYEE_TO_PROJECT, employee.getEmployeeId(), project.getProjectId());
+    public void setADD_EMPLOYEE_TO_PROJECT(Employee employee, Project project) {
+        jdbc.update(ADD_EMPLOYEE_TO_PROJECT, employeeMapper, employee.getEmployeeId(), project.getProjectId());
     }
 
-    public void setREMOVE_EMPLOYEE_FROM_PROJECT() {
-        jdbc.update(REMOVE_EMPLOYEE_FROM_PROJECT, employee.getEmployeeId(), project.getProjectId());
+    public void setREMOVE_EMPLOYEE_FROM_PROJECT(Employee employee, Project project) {
+        jdbc.update(REMOVE_EMPLOYEE_FROM_PROJECT, employeeMapper, employee.getEmployeeId(), project.getProjectId());
     }
 
     // CRUD QUERY'S For Subproject
-    public void setADD_EMPLOYEE_TO_SUB_PROJECT() {
-        jdbc.update(ADD_EMPLOYEE_TO_SUB_PROJECT, employee.getEmployeeId(), subProject.getProjectId());
+    public void setADD_EMPLOYEE_TO_SUB_PROJECT(Employee employee, SubProject subProject) {
+        jdbc.update(ADD_EMPLOYEE_TO_SUB_PROJECT, employeeMapper, employee.getEmployeeId(), subProject.getProjectId());
     }
 
-    public void setREMOVE_EMPLOYEE_FROM_SUB_PROJECT() {
-        jdbc.update(REMOVE_EMPLOYEE_FROM_SUB_PROJECT, employee.getEmployeeId(), subProject.getProjectId());
+    public void setREMOVE_EMPLOYEE_FROM_SUB_PROJECT(Employee employee, SubProject subProject) {
+        jdbc.update(REMOVE_EMPLOYEE_FROM_SUB_PROJECT, employeeMapper, employee.getEmployeeId(), subProject.getProjectId());
     }
 
 
