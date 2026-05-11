@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS project(
     );
 
 -- PROJECT_EMPLOYEE (Links to Project & Junction TABLE sub_project_emloyee)
-CREATE TABLE IF NOT EXISTS project_employee_junction(
+CREATE TABLE IF NOT EXISTS project_employee(
     project_employee_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT,
     project_id INT,
@@ -56,9 +56,11 @@ CREATE TABLE IF NOT EXISTS subproject(
 
 -- SUBPROJECT_EMPLOYEE (Junction TABLE and has PK FK (employee_id, sub_id))
 CREATE TABLE IF NOT EXISTS sub_project_employee_junction(
-    project_employee_id INT REFERENCES project_employee(project_employee_id),
-    sub_id INT REFERENCES subproject(sub_id),
-    PRIMARY KEY (project_employee_id, sub_id)
+    project_employee_id INT,
+    sub_id INT,
+    PRIMARY KEY (project_employee_id, sub_id),
+    CONSTRAINT fk_project_employee FOREIGN KEY (project_employee_id) REFERENCES project_employee(project_employee_id) ON DELETE CASCADE,
+    CONSTRAINT fk_subproject FOREIGN KEY (sub_id) REFERENCES subproject(sub_id) ON DELETE CASCADE
     );
 
 -- TASK (Part of project & subproject (Links to Junction TABLE ressource_task))
