@@ -31,8 +31,6 @@ public class Task {
 
     }
 
-
-
     public int getTaskId() {
         return taskId;
     }
