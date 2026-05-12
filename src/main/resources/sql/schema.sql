@@ -76,8 +76,10 @@ CREATE TABLE IF NOT EXISTS task(
     task_time INT,
     task_price INT,
     project_id INT,
+    subproject_id INT,
     ressource_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id),
+    FOREIGN KEY (subproject_id) REFERENCES subproject(sub_id),
     FOREIGN KEY (ressource_id) REFERENCES ressource(res_id)
     );
 

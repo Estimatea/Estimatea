@@ -8,23 +8,27 @@ public class Task {
     private int taskTime;
     private int taskPrice;
     private int projectId;
+    private int subprojectId;
     private int ressourceId;
     private LocalDate startDate;
     private LocalDate deadLine;
     private boolean completed;
 
-    public Task(int taskId, String taskName, int taskTime, int taskPrice, int projectId, int ressourceId,  LocalDate startDate, LocalDate deadLine, boolean completed) {
+    public Task(int taskId, String taskName, int taskTime, int taskPrice, int projectId, int subprojectId ,int ressourceId,  LocalDate startDate, LocalDate deadLine, boolean completed) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskTime = taskTime;
         this.taskPrice = taskPrice;
         this.projectId = projectId;
+        this.subprojectId = subprojectId;
         this.ressourceId = ressourceId;
         this.startDate = startDate;
         this.deadLine = deadLine;
+        this.completed = completed;
     }
 
     public Task () {
+
     }
 
     public int getTaskId() {
@@ -65,6 +69,14 @@ public class Task {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
+    }
+
+    public int getSubprojectId() {
+        return subprojectId;
+    }
+
+    public void setSubprojectId(int subprojectId) {
+        this.subprojectId = subprojectId;
     }
 
     public int getRessourceId() {
