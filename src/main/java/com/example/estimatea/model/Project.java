@@ -12,8 +12,7 @@ public class Project {
     private LocalDate deadLine;
     private int projectManager; // Foreign key from employee table
 
-    public Project(int projectId, String projectName, LocalDate startDate, boolean isCompleted, int sumTime, int sumPrice, LocalDate deadLine, int projectManager) {
-        this.projectId = projectId;
+    public Project(String projectName, LocalDate startDate, boolean isCompleted, int sumTime, int sumPrice, LocalDate deadLine, int projectManager) {
         this.projectName = projectName;
         this.startDate = startDate;
         this.isCompleted = isCompleted;

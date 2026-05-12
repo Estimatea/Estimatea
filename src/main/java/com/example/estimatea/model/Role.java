@@ -6,8 +6,7 @@ public class Role {
     private String roleType;
     private int roleRate;
 
-    public Role(int roleId, String roleType, int roleRate) {
-        this.roleId = roleId;
+    public Role(String roleType, int roleRate) {
         this.roleType = roleType;
         this.roleRate = roleRate;
     }
