@@ -15,7 +15,7 @@ public class ProjectRepository {
     private final String CREATE_NEW_PROJECT = "INSERT INTO project (project_name, start_date, completed, sum_time, sum_price, deadline, project_manager) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String FIND_PROJECT_BY_ID = "SELECT * FROM project WHERE project_id = ?";
     private final String GET_ALL_PROJECTS = "SELECT * FROM project";
-    private final String UPDATE_PROJECT = "UPDATE project SET project_name = ?, start_date = ?, completed = ?, sum_time = ?, sum_price = ?, deadline = ?, porject_manager = ? WHERE project_id = ?";
+    private final String UPDATE_PROJECT = "UPDATE project SET project_name = ?, start_date = ?, completed = ?, sum_time = ?, sum_price = ?, deadline = ?, project_manager = ? WHERE project_id = ?";
     private final String DELETE_PROJECT = "DELETE FROM project WHERE project_id = ?";
 
                     // SORTING statements for Project Overview Page
@@ -24,8 +24,8 @@ public class ProjectRepository {
      private final String SHOW_ALL_PROJECTS_IN_DESC_ORDER = "SELECT * FROM project ORDER BY deadline DESC";
 
      // {start_date}
-     private final String SORT_PROJECTS_BY_START_DATE_ASC = "SELECT * FROM project ORDER BY start_Date ASC";
-     private final String SORT_PROJECT_BY_START_DATE_DESC = "SELECT * FROM project ORDER BY start_Date DESC";
+     private final String SORT_PROJECTS_BY_START_DATE_ASC = "SELECT * FROM project ORDER BY start_date ASC";
+     private final String SORT_PROJECT_BY_START_DATE_DESC = "SELECT * FROM project ORDER BY start_date DESC";
 
     public ProjectRepository(JdbcTemplate jdbc, ProjectMapper projectMapper) {
         this.jdbc = jdbc;
