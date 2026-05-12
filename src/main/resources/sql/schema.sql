@@ -92,6 +92,7 @@ CREATE TABLE IF NOT EXISTS complexity(
 
 -- TASK_COMPLEXITY_JUNCTION (Junction TABLE and has PK FK (task_id, complexity_id)
 CREATE TABLE IF NOT EXISTS task_complexity(
+    task_complexity_id INT AUTO_INCREMENT NOT NULL,
     task_id INT REFERENCES task(task_id),
     complexity_id INT REFERENCES complexity(complexity_id),
     PRIMARY KEY (task_id, complexity_id)
