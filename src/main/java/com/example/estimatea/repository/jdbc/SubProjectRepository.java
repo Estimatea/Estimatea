@@ -71,7 +71,17 @@ public class SubProjectRepository {
         jdbc.update(EDIT_COMPLETED, Completed, subProjectId);
     }
 
+    //CRUD QUERY's for subproject employees
 
+    //returns EMPTY EMPLOYEES WITH ONLY ID
+    //FIND ACTUAL EMPLOYEES IN SERVICE
+    public List<Employee> getAllEmployeesForSubProject(int subProjectId) {
+        return jdbc.query(GET_ALL_EMPLOYEES_FOR_SUBPROJECT, subEmployeeMapper, subProjectId);
+    }
 
-
+    //assigns an employee to the subproject
+    //CHECK IN SERVICE THAT THEY ARE A PROJECT_EMPLOYEE
+    public void assignEmployeeToSubProject(Employee employee, int subProjectId) {
+        jdbc.update(ASSIGN_EMPLOYEE_TO_SUBPROJECT, employee.getEmployeeId(), subProjectId);
+    }
 }

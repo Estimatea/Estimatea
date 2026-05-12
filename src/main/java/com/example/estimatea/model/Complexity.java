@@ -4,12 +4,10 @@ public class Complexity {
 
     private int estimateId;
     private int taskComplexity;
-    private int taskId;
 
-    public Complexity(int estimateId, int taskComplexity, int taskId) {
+    public Complexity(int estimateId, int taskComplexity) {
         this.estimateId = estimateId;
         this.taskComplexity = taskComplexity;
-        this.taskId = taskId;
     }
 
     public Complexity() {}
@@ -28,13 +26,5 @@ public class Complexity {
 
     public void setEstimateId(int estimateId) {
         this.estimateId = estimateId;
-    }
-
-    public int getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
     }
 }
