@@ -13,11 +13,6 @@ public class TaskRepository {
     private final JdbcTemplate jdbc;
     private final TaskMapper taskMapper;
 
-    public TaskRepository(JdbcTemplate jdbc, TaskMapper taskMapper) {
-        this.jdbc = jdbc;
-        this.taskMapper = taskMapper;
-    }
-
     // SQL statements for creating a single Task in both Projects and Subprojects
     private final String CREATE_TASK_FOR_PROJECT = "INSERT INTO task (task_name, task_time, task_price, task_complexity_id, start_date, deadline, project_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (task_name, task_time, task_price, task_complexity_id, start_date, deadline, project_id, subproject_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -35,6 +30,10 @@ public class TaskRepository {
     private final String GET_TASKS_BY_PROJECT_ID = "SELECT * FROM task WHERE project_id = ?";
     private final String GET_TASKS_BY_SUBPROJECT_ID = "SELECT * FROM task WHERE subproject_id = ?";
 
+    public TaskRepository(JdbcTemplate jdbc, TaskMapper taskMapper) {
+        this.jdbc = jdbc;
+        this.taskMapper = taskMapper;
+    }
 
     // Creating Task for both Projects and Subprojects
     public void createTaskForProject(Task task) {
