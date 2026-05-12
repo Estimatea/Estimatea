@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS task(
     subproject_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id),
     FOREIGN KEY (subproject_id) REFERENCES subproject(sub_id),
-    FOREIGN KEY (complexity_score) REFERENCES complexity(complexity_id)
+    FOREIGN KEY (complexity_score) REFERENCES task_complexity(task_complexity_id)
     );
 
 -- ESTIMATES (Gives a complexity score to the given task, meant to estimate the difficulty of a task and)
