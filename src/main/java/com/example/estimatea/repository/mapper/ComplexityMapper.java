@@ -15,7 +15,6 @@ public class ComplexityMapper implements RowMapper<Complexity> {
         Complexity complexityScore = new Complexity();
         complexityScore.setEstimateId(rs.getInt("estimates_id"));
         complexityScore.setTaskComplexity(rs.getInt("complexity_score"));
-        complexityScore.setTaskId(rs.getInt("task_id"));
         return complexityScore;
     }
 }
