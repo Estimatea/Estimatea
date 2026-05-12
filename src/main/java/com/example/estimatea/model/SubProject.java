@@ -5,23 +5,20 @@ import java.time.LocalDate;
 public class SubProject {
     private int subId;
     private String subName;
-    private int projectId;
     private LocalDate startDate;
     private LocalDate deadLine;
     private boolean completed;
+    private int projectId;
 
-    public SubProject(int subId, String subName, int projectId, LocalDate startDate, LocalDate deadLine, boolean completed) {
-        this.subId = subId;
+    public SubProject(String subName, LocalDate startDate, LocalDate deadLine, boolean completed, int projectId) {
         this.subName = subName;
-        this.projectId = projectId;
         this.startDate = startDate;
         this.deadLine = deadLine;
         this.completed = completed;
+        this.projectId = projectId;
     }
 
-    public SubProject() {
-
-    }
+    public SubProject() {}
 
     public int getSubId() {
         return subId;
