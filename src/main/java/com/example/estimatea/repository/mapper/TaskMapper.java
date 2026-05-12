@@ -19,6 +19,8 @@ public class TaskMapper implements RowMapper<Task> {
         task.setTaskPrice(rs.getInt("task_price"));
         task.setProjectId(rs.getInt("project_id"));
         task.setRessourceId(rs.getInt("ressource_id"));
+        task.setStartDate(rs.getDate("start_date").toLocalDate());
+        task.setCompleted(rs.getBoolean("completed"));
         return task;
     }
 }
