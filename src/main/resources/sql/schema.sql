@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS subproject(
     );
 
 -- SUBPROJECT_EMPLOYEE (Junction TABLE and has PK FK (employee_id, sub_id))
-CREATE TABLE IF NOT EXISTS sub_project_employee_junction(
+CREATE TABLE IF NOT EXISTS sub_project_employee(
     project_employee_id INT,
     sub_id INT,
     PRIMARY KEY (project_employee_id, sub_id),
