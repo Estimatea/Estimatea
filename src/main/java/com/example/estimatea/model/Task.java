@@ -27,6 +27,10 @@ public class Task {
         this.completed = completed;
     }
 
+    public Task() {
+
+    }
+
 
 
     public int getTaskId() {
@@ -77,11 +81,11 @@ public class Task {
         this.startDate = startDate;
     }
 
-    public LocalDate getDeadline() {
+    public LocalDate getDeadLine() {
         return deadline;
     }
 
-    public void setDeadline(LocalDate deadline) {
+    public void setDeadLine(LocalDate deadline) {
         this.deadline = deadline;
     }
 
