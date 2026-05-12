@@ -51,9 +51,10 @@ CREATE TABLE IF NOT EXISTS project_employee(
 -- SUBPROJECT (Part of Project and links to task & Junction TABLE sub_project__employee)
 CREATE TABLE IF NOT EXISTS subproject(
     sub_id INT AUTO_INCREMENT PRIMARY KEY,
-    start_date DATE,
-    completed boolean,
     sub_name VARCHAR(60),
+    start_date DATE,
+    deadline DATE,
+    completed boolean,
     project_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id)
     );

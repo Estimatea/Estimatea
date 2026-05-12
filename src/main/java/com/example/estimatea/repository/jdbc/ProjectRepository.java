@@ -15,7 +15,7 @@ public class ProjectRepository {
     private final String CREATE_NEW_PROJECT = "INSERT INTO project (project_name, start_date, completed, sum_time, sum_price, deadline, project_manager) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String FIND_PROJECT_BY_ID = "SELECT * FROM project WHERE project_id = ?";
     private final String GET_ALL_PROJECTS = "SELECT * FROM project";
-    private final String UPDATE_PROJECT = "UPDATE project SET project_name = ?, start_date = ?, completed = ?, sum_time = ?, sum_price = ?, deadline = ?, project_manager = ? WHERE project_id = ?";
+    private final String UPDATE_PROJECT = "UPDATE project SET project_name = ?, completed = ?, sum_time = ?, sum_price = ?, deadline = ?, project_manager = ? WHERE project_id = ?";
     private final String DELETE_PROJECT = "DELETE FROM project WHERE project_id = ?";
 
     // SORTING statements for Project Overview Page
@@ -47,7 +47,7 @@ public class ProjectRepository {
     }
 
     public void updateProject(Project project) {
-        jdbc.update(UPDATE_PROJECT, project.getProjectName(), project.getStartDate(), project.getIsCompleted(),
+        jdbc.update(UPDATE_PROJECT, project.getProjectName(), project.getIsCompleted(),
                                     project.getSumTime(), project.getSumPrice(), project.getDeadLine(), project.getProjectManager());
     }
 
