@@ -27,11 +27,6 @@ public class SubProjectRepository {
     private final String EDIT_DEADLINE = "UPDATE sub_project SET deadline = ? WHERE sub_id = ?";
     private final String EDIT_COMPLETED = "UPDATE sub_project SET completed = ? WHERE sub_id = ?";
 
-    //SQL statements for subproject employees
-    private final String GET_ALL_EMPLOYEES_FOR_SUBPROJECT = "SELECT * FROM sub_project_employee WHERE sub_id = ?";
-    private final String ASSIGN_EMPLOYEE_TO_SUBPROJECT = "INSERT INTO sub_project_employee VALUES (?,?)";
-    private final String REMOVE_EMPLOYEE_FROM_SUBPROJECT = "DELETE FROM sub_project_employee WHERE project_employee_id = ? AND sub_id = ?";
-
 
 
     public SubProjectRepository(SubProjectMapper subMapper, JdbcTemplate jdbc, SubProjectEmployeeMapper subEmployeeMapper) {
@@ -89,11 +84,4 @@ public class SubProjectRepository {
     public void assignEmployeeToSubProject(Employee employee, int subProjectId) {
         jdbc.update(ASSIGN_EMPLOYEE_TO_SUBPROJECT, employee.getEmployeeId(), subProjectId);
     }
-
-    //Deletes a specific sub_project_employee from the subproject
-    public void removeEmployeeFromSubProject(Employee employee, int subProjectId) {
-        jdbc.update(REMOVE_EMPLOYEE_FROM_SUBPROJECT, employee.getEmployeeId(), subProjectId);
-    }
-
-
 }
