@@ -31,8 +31,8 @@ public class Project {
         return isCompleted;
     }
 
-    public void setCompleted() {
-        this.isCompleted = true;
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
     }
 
     public int getProjectId() {
