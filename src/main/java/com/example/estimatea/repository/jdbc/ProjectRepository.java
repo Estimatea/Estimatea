@@ -14,10 +14,10 @@ public class ProjectRepository {
     private final ProjectMapper projectMapper;
 
     // SQL statements for Project table
-    private final String SHOW_PROJECT_OVERVIEW = "SELECT * FROM project";
+    private final String CREATE_NEW_PROJECT = "INSERT INTO project (project_name, start_date, completed, sum_time, sum_price, deadline, project_manager) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     // SORTING statements for Project Overview Page
-    private final String SHOW_ALL_PROJECTS = "SELECT * FROM project ORDER BY deadline DESC";
+//    private final String SHOW_ALL_PROJECTS = "SELECT * FROM project ORDER BY deadline DESC";
 
 
     public ProjectRepository(JdbcTemplate jdbc, ProjectMapper projectMapper) {
@@ -26,7 +26,6 @@ public class ProjectRepository {
     }
 
     // CRUD QUERY's for Project table
-    public List<Project> showProjectOverview() {
-        return jdbc.query(SHOW_PROJECT_OVERVIEW, projectMapper);
-    }
+
+
 }

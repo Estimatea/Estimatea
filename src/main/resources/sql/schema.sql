@@ -30,6 +30,8 @@ CREATE TABLE IF NOT EXISTS employee(
 CREATE TABLE IF NOT EXISTS project(
     project_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     project_name VARCHAR(60) UNIQUE,
+    start_date DATE,
+    completed boolean,
     sum_time INT,
     sum_price INT,
     deadline DATE,
@@ -37,7 +39,7 @@ CREATE TABLE IF NOT EXISTS project(
     FOREIGN KEY (project_manager) REFERENCES employee(employee_id)
     );
 
--- PROJECT_EMPLOYEE (Links to Project & Junction TABLE sub_project_employee)
+-- PROJECT_EMPLOYEE (Links to Project & Junction TABLE sub_project_emloyee)
 CREATE TABLE IF NOT EXISTS project_employee(
     project_employee_id INT AUTO_INCREMENT PRIMARY KEY,
     employee_id INT,
@@ -49,6 +51,8 @@ CREATE TABLE IF NOT EXISTS project_employee(
 -- SUBPROJECT (Part of Project and links to task & Junction TABLE sub_project__employee)
 CREATE TABLE IF NOT EXISTS subproject(
     sub_id INT AUTO_INCREMENT PRIMARY KEY,
+    start_date DATE,
+    completed boolean,
     sub_name VARCHAR(60),
     project_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id)
@@ -66,6 +70,8 @@ CREATE TABLE IF NOT EXISTS sub_project_employee_junction(
 -- TASK (Part of project & subproject (Links to Junction TABLE ressource_task))
 CREATE TABLE IF NOT EXISTS task(
     task_id INT AUTO_INCREMENT PRIMARY KEY,
+    start_date DATE,
+    completed boolean,
     task_name VARCHAR(60),
     task_time INT,
     task_price INT,
@@ -76,11 +82,11 @@ CREATE TABLE IF NOT EXISTS task(
     );
 
 -- ESTIMATES (Gives a complexity score to the given task, meant to estimate the difficulty of a task and)
-    CREATE TABLE IF NOT EXISTS estimates(
-        estimate_id INT AUTO_INCREMENT PRIMARY KEY,
-        complexity_score INT,
-        task_id INT,
-        FOREIGN KEY (task_id) REFERENCES task(task_id)
+CREATE TABLE IF NOT EXISTS estimates(
+    estimate_id INT AUTO_INCREMENT PRIMARY KEY,
+    complexity_score INT,
+    task_id INT,
+    FOREIGN KEY (task_id) REFERENCES task(task_id)
     );
 
 -- RESSOURCE_TASK_JUNCTION (Junction TABLE and has PK FK (task_id, res_id))
@@ -89,5 +95,9 @@ CREATE TABLE IF NOT EXISTS ressource_task_junction(
     res_id INT REFERENCES ressource(res_id),
     PRIMARY KEY (task_id, res_id)
     );
+
+
+
+
 
 
