@@ -19,6 +19,8 @@ public class ComplexityRepository {
     private final String DELETE_COMPLEXITY_SCORE_FROM_TASK = "DELETE FROM estiamtes WHERE estimate_id = ? AND task_id = ?";
     private final String UPDATE_COMPLEXITY_SCORE_ON_TASK = "UPDATE estimates SET complexity_score = ? WHERE task_id = ?";
 
+    // SQL sorting statements for estimates in (GANTT Diagram)
+
     public ComplexityRepository(JdbcTemplate jdbc, ComplexityMapper complexityMapper) {
         this.jdbc = jdbc;
         this.complexityMapper = complexityMapper;
