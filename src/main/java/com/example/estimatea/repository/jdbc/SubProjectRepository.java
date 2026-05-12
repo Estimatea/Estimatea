@@ -1,9 +1,5 @@
 package com.example.estimatea.repository.jdbc;
-
-
-import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.SubProject;
-import com.example.estimatea.repository.mapper.SubProjectEmployeeMapper;
 import com.example.estimatea.repository.mapper.SubProjectMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,23 +12,19 @@ public class SubProjectRepository {
 
     private final SubProjectMapper subMapper;
     private final JdbcTemplate jdbc;
-    private final SubProjectEmployeeMapper subEmployeeMapper;
 
     //SQL statements for subproject table
-    private final String GET_ALL_SUBPROJECTS = "SELECT * FROM sub_project ORDER BY project_id ASC";
-    private final String GET_SUBPROJECT_BY_ID = "SELECT * FROM sub_project WHERE sub_id = ?";
-    private final String GET_SUBPROJECT_BY_PROJECT = "SELECT * FROM sub_project WHERE project_id = ?";
-    private final String CREATE_SUBPROJECT = "INSERT INTO sub_project(start_date, deadline, completed, sub_name, project_id) VALUES (?,?,?,?,?)";
-    private final String DELETE_SUBPROJECT = "DELETE FROM sub_project WHERE sub_id = ?";
-    private final String EDIT_DEADLINE = "UPDATE sub_project SET deadline = ? WHERE sub_id = ?";
-    private final String EDIT_COMPLETED = "UPDATE sub_project SET completed = ? WHERE sub_id = ?";
+    private final String GET_ALL_SUBPROJECTS = "SELECT * FROM subproject ORDER BY project_id ASC";
+    private final String GET_SUBPROJECT_BY_ID = "SELECT * FROM subproject WHERE sub_id = ?";
+    private final String GET_SUBPROJECT_BY_PROJECT = "SELECT * FROM subproject WHERE project_id = ?";
+    private final String CREATE_SUBPROJECT = "INSERT INTO subproject (sub_name, start_date, deadline, completed, project_id) VALUES (?,?,?,?,?)";
+    private final String DELETE_SUBPROJECT = "DELETE FROM subproject WHERE sub_id = ?";
+    private final String EDIT_DEADLINE = "UPDATE subproject SET deadline = ? WHERE sub_id = ?";
+    private final String EDIT_COMPLETED = "UPDATE subproject SET completed = ? WHERE sub_id = ?";
 
-
-
-    public SubProjectRepository(SubProjectMapper subMapper, JdbcTemplate jdbc, SubProjectEmployeeMapper subEmployeeMapper) {
+    public SubProjectRepository(SubProjectMapper subMapper, JdbcTemplate jdbc) {
         this.subMapper = subMapper;
         this.jdbc = jdbc;
-        this.subEmployeeMapper = subEmployeeMapper;
     }
 
     //CRUD Query for subprojects
@@ -53,7 +45,7 @@ public class SubProjectRepository {
 
     //creates a new subproject with information from thymeleaf
     public void createSubProject(SubProject subProject) {
-        jdbc.update(CREATE_SUBPROJECT, subProject.getStartDate(), subProject.getDeadLine(), subProject.isCompleted(), subProject.getSubName(), subProject.getProjectId());
+        jdbc.update(CREATE_SUBPROJECT, subProject.getSubName(), subProject.getStartDate(), subProject.getDeadLine(), subProject.isCompleted(), subProject.getProjectId());
     }
 
     //deletes a subproject from the db

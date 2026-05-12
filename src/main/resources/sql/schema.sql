@@ -10,11 +10,11 @@ CREATE TABLE IF NOT EXISTS role(
     );
 
 -- RESSOURCE (Links to Junction TABLE ressource_task)
-CREATE TABLE IF NOT EXISTS ressource(
+/*CREATE TABLE IF NOT EXISTS ressource(
     res_id INT AUTO_INCREMENT PRIMARY KEY,
     res_name VARCHAR(60),
     res_rate INT
-    );
+    );*/
 
 -- EMPLOYEE TABLE (Links to Project & Project_employee)
 CREATE TABLE IF NOT EXISTS employee(
@@ -51,9 +51,10 @@ CREATE TABLE IF NOT EXISTS project_employee(
 -- SUBPROJECT (Part of Project and links to task & Junction TABLE sub_project__employee)
 CREATE TABLE IF NOT EXISTS subproject(
     sub_id INT AUTO_INCREMENT PRIMARY KEY,
-    start_date DATE,
-    completed boolean,
     sub_name VARCHAR(60),
+    start_date DATE,
+    deadline DATE,
+    completed boolean,
     project_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id)
     );
@@ -99,10 +100,10 @@ CREATE TABLE IF NOT EXISTS task_complexity(
 );
 
 -- RESSOURCE_TASK_JUNCTION (Junction TABLE and has PK FK (task_id, res_id))
-CREATE TABLE IF NOT EXISTS ressource_task(
+/*CREATE TABLE IF NOT EXISTS ressource_task(
     task_id INT REFERENCES task(task_id),
     res_id INT REFERENCES ressource(res_id),
     PRIMARY KEY (task_id, res_id)
-    );
+    );*/
 
 
