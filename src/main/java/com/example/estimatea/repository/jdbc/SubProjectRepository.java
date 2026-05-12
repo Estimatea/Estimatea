@@ -22,7 +22,7 @@ public class SubProjectRepository {
     private final String GET_ALL_SUBPROJECTS = "SELECT * FROM sub_project ORDER BY project_id ASC";
     private final String GET_SUBPROJECT_BY_ID = "SELECT * FROM sub_project WHERE sub_id = ?";
     private final String GET_SUBPROJECT_BY_PROJECT = "SELECT * FROM sub_project WHERE project_id = ?";
-    private final String CREATE_SUBPROJECT = "INSERT INTO sub_project(start_date, ,deadline, completed, sub_name, project_id) VALUES (?,?,?,?,?,?)";
+    private final String CREATE_SUBPROJECT = "INSERT INTO sub_project(start_date, deadline, completed, sub_name, project_id) VALUES (?,?,?,?,?)";
     private final String DELETE_SUBPROJECT = "DELETE FROM sub_project WHERE sub_id = ?";
     private final String EDIT_DEADLINE = "UPDATE sub_project SET deadline = ? WHERE sub_id = ?";
     private final String EDIT_COMPLETED = "UPDATE sub_project SET completed = ? WHERE sub_id = ?";
@@ -30,7 +30,7 @@ public class SubProjectRepository {
     //SQL statements for subproject employees
     private final String GET_ALL_EMPLOYEES_FOR_SUBPROJECT = "SELECT * FROM sub_project_employee WHERE sub_id = ?";
     private final String ASSIGN_EMPLOYEE_TO_SUBPROJECT = "INSERT INTO sub_project_employee VALUES (?,?)";
-    private final String REMOVE_EMPLOYEE_FROM_SUBPROJECT = "DELETE FROM sub_project_employee WHERE project_employee_id = ? AND  sub_id = ?";
+    private final String REMOVE_EMPLOYEE_FROM_SUBPROJECT = "DELETE FROM sub_project_employee WHERE project_employee_id = ? AND sub_id = ?";
 
 
 
