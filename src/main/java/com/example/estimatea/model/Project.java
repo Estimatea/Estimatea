@@ -5,26 +5,34 @@ import java.time.LocalDate;
 public class Project {
     private int projectId;
     private String projectName;
+    private LocalDate startDate;
+    private boolean isCompleted;
     private int sumTime;
     private int sumPrice;
-    private LocalDate startDate;
     private LocalDate deadLine;
     private int projectManager; // Foreign key from employee table
-    private boolean completed;
 
-    public Project(int projectId, String projectName, int sumTime, int sumPrice, LocalDate startDate ,LocalDate deadLine, int projectManager,  boolean completed) {
+    public Project(int projectId, String projectName, LocalDate startDate, boolean isCompleted, int sumTime, int sumPrice, LocalDate deadLine, int projectManager) {
         this.projectId = projectId;
         this.projectName = projectName;
+        this.startDate = startDate;
+        this.isCompleted = isCompleted;
         this.sumTime = sumTime;
         this.sumPrice = sumPrice;
-        this.startDate = startDate;
         this.deadLine = deadLine;
         this.projectManager = projectManager;
-        this.completed = completed;
     }
 
     public Project() {
 
+    }
+
+    public boolean getIsCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted() {
+        this.isCompleted = true;
     }
 
     public int getProjectId() {
@@ -81,13 +89,5 @@ public class Project {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
     }
 }
