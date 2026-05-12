@@ -99,10 +99,10 @@ CREATE TABLE IF NOT EXISTS task_complexity(
 );
 
 -- RESSOURCE_TASK_JUNCTION (Junction TABLE and has PK FK (task_id, res_id))
-CREATE TABLE IF NOT EXISTS ressource_task(
+/*CREATE TABLE IF NOT EXISTS ressource_task(
     task_id INT REFERENCES task(task_id),
     res_id INT REFERENCES ressource(res_id),
     PRIMARY KEY (task_id, res_id)
-    );
+    );*/
 
 
