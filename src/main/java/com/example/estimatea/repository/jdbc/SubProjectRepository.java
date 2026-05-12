@@ -76,7 +76,7 @@ public class SubProjectRepository {
         jdbc.update(EDIT_COMPLETED, Completed, subProjectId);
     }
 
-    //CRUD Querys for subproject employees
+    //CRUD QUERY's for subproject employees
 
     //returns EMPTY EMPLOYEES WITH ONLY ID
     //FIND ACTUAL EMPLOYEES IN SERVICE
