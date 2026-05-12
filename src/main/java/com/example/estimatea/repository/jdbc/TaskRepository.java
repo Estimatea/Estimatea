@@ -32,16 +32,16 @@ public class TaskRepository {
     }
 
     public void createTaskForProject(Task task) {
-        jdbc.update(CREATE_TASK_FOR_PROJECT, task.getTaskName(), task.getTaskTime(), task.getTaskPrice(), task.getStartDate(), task.getDeadLine() ,task.getProjectId());
+        jdbc.update(CREATE_TASK_FOR_PROJECT, task.getTaskName(), task.getTaskTime(), task.getTaskPrice(), task.getStartDate(), task.getDeadline() ,task.getProjectId());
     }
 
     public void createTaskForSubproject(Task task) {
-        jdbc.update(CREATE_TASK_FOR_SUBPROJECT, task.getTaskName(), task.getTaskTime(), task.getTaskPrice(), task.getStartDate(), task.getDeadLine() ,task.getProjectId(),  task.getSubprojectId());
+        jdbc.update(CREATE_TASK_FOR_SUBPROJECT, task.getTaskName(), task.getTaskTime(), task.getTaskPrice(), task.getStartDate(), task.getDeadline() ,task.getProjectId(),  task.getSubprojectId());
     }
 
     // Editing a single Task, this works
     public void editTask(Task task) {
-        jdbc.update(EDIT_TASK, task.getTaskName(), task.getTaskTime(), task.getTaskPrice(), task.getStartDate(), task.getDeadLine() ,task.getProjectId(),task.getSubprojectId(), task.getTaskId());
+        jdbc.update(EDIT_TASK, task.getTaskName(), task.getTaskTime(), task.getTaskPrice(), task.getStartDate(), task.getDeadline() ,task.getProjectId(),task.getSubprojectId(), task.getTaskId());
     }
 
     public List<Task> getTasksByProjectId(int projectId) {
