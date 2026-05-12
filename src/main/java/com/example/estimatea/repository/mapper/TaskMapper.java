@@ -20,7 +20,7 @@ public class TaskMapper implements RowMapper<Task> {
         task.setProjectId(rs.getInt("project_id"));
         task.setSubprojectId(rs.getInt("subproject_id"));
         task.setStartDate(rs.getDate("start_date").toLocalDate());
-        task.setDeadline(rs.getDate("deadline").toLocalDate());
+        task.setDeadLine(rs.getDate("deadline").toLocalDate());
         task.setCompleted(rs.getBoolean("completed"));
         return task;
     }
