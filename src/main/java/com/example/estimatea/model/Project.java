@@ -7,19 +7,25 @@ public class Project {
     private String projectName;
     private int sumTime;
     private int sumPrice;
+    private LocalDate startDate;
     private LocalDate deadLine;
     private int projectManager; // Foreign key from employee table
+    private boolean completed;
 
-    public Project(int projectId, String projectName, int sumTime, int sumPrice, LocalDate deadLine, int projectManager) {
+    public Project(int projectId, String projectName, int sumTime, int sumPrice, LocalDate startDate ,LocalDate deadLine, int projectManager,  boolean completed) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.sumTime = sumTime;
         this.sumPrice = sumPrice;
+        this.startDate = startDate;
         this.deadLine = deadLine;
         this.projectManager = projectManager;
+        this.completed = completed;
     }
 
-    public Project() {}
+    public Project() {
+
+    }
 
     public int getProjectId() {
         return projectId;
@@ -67,5 +73,21 @@ public class Project {
 
     public void setProjectManager(int projectManager) {
         this.projectManager = projectManager;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }
