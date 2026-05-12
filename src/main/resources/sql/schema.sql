@@ -70,10 +70,13 @@ CREATE TABLE IF NOT EXISTS sub_project_employee(
 -- TASK (Part of project & subproject (Links to Junction TABLE ressource_task))
 CREATE TABLE IF NOT EXISTS task(
     task_id INT AUTO_INCREMENT PRIMARY KEY,
+    start_date DATE,
+    completed boolean,
     task_name VARCHAR(60),
+    deadline DATE,
     task_time INT,
     task_price INT,
-    project_id INT,
+    project_id INT NOT NULL,
     subproject_id INT,
     ressource_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id),
