@@ -10,11 +10,11 @@ CREATE TABLE IF NOT EXISTS role(
     );
 
 -- RESSOURCE (Links to Junction TABLE ressource_task)
-CREATE TABLE IF NOT EXISTS ressource(
+/*CREATE TABLE IF NOT EXISTS ressource(
     res_id INT AUTO_INCREMENT PRIMARY KEY,
     res_name VARCHAR(60),
     res_rate INT
-    );
+    );*/
 
 -- EMPLOYEE TABLE (Links to Project & Project_employee)
 CREATE TABLE IF NOT EXISTS employee(
