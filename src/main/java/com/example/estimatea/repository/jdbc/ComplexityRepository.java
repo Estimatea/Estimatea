@@ -21,6 +21,7 @@ public class ComplexityRepository {
 
     // SQL sorting statements for estimates in (GANTT Diagram)
 
+
     public ComplexityRepository(JdbcTemplate jdbc, ComplexityMapper complexityMapper) {
         this.jdbc = jdbc;
         this.complexityMapper = complexityMapper;
