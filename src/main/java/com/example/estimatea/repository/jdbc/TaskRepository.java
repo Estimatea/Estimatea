@@ -13,7 +13,7 @@ public class TaskRepository {
 
     // SQL statements for creating a single Task in both Projects and Subprojects
     private final String CREATE_TASK_FOR_PROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, subproject_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, subproject_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     //SQL statement for editing a task in both Projects and Subprojects
     private final String EDIT_TASK = "UPDATE task SET start_date = ?, completed = ?, task_name = ?, deadline = ?, task_time = ?, task_price = ?, current_complexity_id = ? WHERE task_id = ?";
@@ -39,7 +39,7 @@ public class TaskRepository {
     }
 
     public void createTaskForSubproject(Task subTask) {
-        jdbc.update(CREATE_TASK_FOR_SUBPROJECT, subTask.getStartDate(), subTask.getCompleted(), subTask.getTaskName(), subTask.getDeadLine(), subTask.getTaskTime(), subTask.getTaskPrice(), subTask.getSubprojectId(), subTask.getCurrentComplexityId());
+        jdbc.update(CREATE_TASK_FOR_SUBPROJECT, subTask.getStartDate(), subTask.getCompleted(), subTask.getTaskName(), subTask.getDeadLine(), subTask.getTaskTime(), subTask.getTaskPrice(), subTask.getProjectId(), subTask.getSubprojectId(), subTask.getCurrentComplexityId());
     }
 
     // Editing a single Task (works for both Project and Subproject)

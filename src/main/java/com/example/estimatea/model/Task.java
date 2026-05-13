@@ -13,8 +13,7 @@ public class Task {
     private int subprojectId;
     private int currentComplexityId;
 
-    public Task(int taskId, LocalDate startDate, boolean completed, String taskName, LocalDate deadline, int taskTime, int taskPrice, int projectId, int subprojectId, int currentComplexityId) {
-        this.taskId = taskId;
+    public Task(LocalDate startDate, boolean completed, String taskName, LocalDate deadline, int taskTime, int taskPrice, int projectId, int subprojectId, int currentComplexityId) {
         this.startDate = startDate;
         this.completed = completed;
         this.taskName = taskName;
