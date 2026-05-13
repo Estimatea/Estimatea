@@ -13,8 +13,10 @@ public class ComplexityMapper implements RowMapper<Complexity> {
     @Override
     public Complexity mapRow(ResultSet rs, int rowNum) throws SQLException {
         Complexity complexityScore = new Complexity();
-        complexityScore.setEstimateId(rs.getInt("estimates_id"));
-        complexityScore.setTaskComplexity(rs.getInt("complexity_score"));
+        complexityScore.setComplexityId(rs.getInt("complexity_id"));
+        complexityScore.setComplexityScore(rs.getInt("complexity_score"));
+        complexityScore.setLabelType(rs.getString("label_type"));
+        complexityScore.setRateMultiplier(rs.getDouble("rate_multiplier"));
         return complexityScore;
     }
 }
