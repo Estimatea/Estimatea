@@ -71,10 +71,4 @@ public class EmployeeRepository {
     public void removeEmployeeFromSubProject(Employee employee, int subProjectId) {
         jdbc.update(REMOVE_EMPLOYEE_FROM_SUBPROJECT, employee.getEmployeeId(), subProjectId);
     }
-
-
-
-
-
-
 }
