@@ -1,10 +1,7 @@
 package com.example.estimatea.repository;
 
-import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.Project;
-import com.example.estimatea.model.Role;
 import com.example.estimatea.repository.jdbc.ProjectRepository;
-import com.example.estimatea.repository.jdbc.RoleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @Transactional
 @ActiveProfiles("Test")
-public class ProjektRepositoryTest {
+public class ProjectRepositoryTest {
 
     @Autowired
     private ProjectRepository projectRepository;
@@ -42,13 +39,13 @@ public class ProjektRepositoryTest {
     @Test
     void checkCreateProject() {
         //Opretter Rolle først, da det skal bruges til employee
-        jdbc.update("INSERT INTO role(role_type,role_rate) VALUES ('Test Projekt Lead', 1500)");
+        jdbc.update("INSERT INTO role(role_type,role_rate) VALUES ('Test Project Lead', 1500)");
 
         //Opretter employee til at assigne til projekt manager
         jdbc.update("INSERT INTO employee(employee_name,employee_username,employee_password, role_id) VALUES ('Test Employee', 'testeGutten', '112JegBrugesTilTest', 1)");
 
         //Opretter projektet med vores medarbejder som projectManager
-        Project testProject = new Project("Test Projekt", LocalDate.now(), true, 100, 50, LocalDate.now().plusYears(1), 1);
+        Project testProject = new Project("Test Project", LocalDate.now(), true, 100, 50, LocalDate.now().plusYears(1), 1);
         projectRepository.createNewProject(testProject);
         //Den får auto assigned id = 1 af H2
         testProject.setProjectId(1);
