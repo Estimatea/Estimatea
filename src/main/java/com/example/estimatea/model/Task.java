@@ -7,19 +7,18 @@ public class Task {
     private String taskName;
     private int taskTime;
     private int taskPrice;
-    private int complexityId;
     private LocalDate startDate;
     private LocalDate deadline;
     private int projectId;
     private int subprojectId;
     private boolean completed;
+    //private Complexity complexity;
 
-    public Task(int taskId, String taskName, int taskTime, int taskPrice, int complexityId, LocalDate startDate, LocalDate deadLine, int projectId, int subprojectId, boolean completed) {
+    public Task(int taskId, String taskName, int taskTime, int taskPrice, LocalDate startDate, LocalDate deadLine, int projectId, int subprojectId, boolean completed) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskTime = taskTime;
         this.taskPrice = taskPrice;
-        this.complexityId = complexityId;
         this.startDate = startDate;
         this.deadline = deadLine;
         this.projectId = projectId;
@@ -63,13 +62,13 @@ public class Task {
         this.taskPrice = taskPrice;
     }
 
-    public int getComplexityId() {
-        return complexityId;
-    }
-
-    public void setComplexityId(int complexityId) {
-        this.complexityId = complexityId;
-    }
+//    public int getComplexityId() {
+//        return complexityId;
+//    }
+//
+//    public void setComplexityId(int complexityId) {
+//        this.complexityId = complexityId;
+//    }
 
     public LocalDate getStartDate() {
         return startDate;
