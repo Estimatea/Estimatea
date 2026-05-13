@@ -18,7 +18,7 @@ public class ProjectRepository {
     private final String UPDATE_PROJECT = "UPDATE project SET project_name = ?, completed = ?, sum_time = ?, sum_price = ?, deadline = ?, project_manager = ? WHERE project_id = ?";
     private final String DELETE_PROJECT = "DELETE FROM project WHERE project_id = ?";
 
-    // SORTING statements for Project Overview Page
+                    // SORTING statements for Project Overview Page
     // {Deadline}
      private final String SHOW_ALL_PROJECTS_IN_ASC_ORDER = "SELECT * FROM project ORDER BY deadline ASC";
      private final String SHOW_ALL_PROJECTS_IN_DESC_ORDER = "SELECT * FROM project ORDER BY deadline DESC";
