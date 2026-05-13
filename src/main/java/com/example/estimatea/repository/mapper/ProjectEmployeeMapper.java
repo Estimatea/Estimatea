@@ -12,7 +12,6 @@ public class ProjectEmployeeMapper implements RowMapper<Integer> {
     @Override
     public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
         int employeeId = rs.getInt("employee_id");
-
         return employeeId;
     }
 }
