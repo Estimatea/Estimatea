@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS project(
     project_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     project_name VARCHAR(60) UNIQUE,
     start_date DATE,
-    completed boolean,
+    completed BOOLEAN DEFAULT FALSE,
     sum_time INT,
     sum_price INT,
     deadline DATE,
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS subproject(
     sub_name VARCHAR(60),
     start_date DATE,
     deadline DATE,
-    completed boolean,
+    completed BOOLEAN DEFAULT FALSE,
     project_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id)
     );
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS complexity(
 CREATE TABLE IF NOT EXISTS task(
     task_id INT AUTO_INCREMENT PRIMARY KEY,
     start_date DATE NOT NULL,
-    completed boolean,
+    completed BOOLEAN DEFAULT FALSE,
     task_name VARCHAR(60),
     deadline DATE NOT NULL,
     task_time INT,

@@ -61,7 +61,7 @@ public class SubProject {
         this.deadLine = deadLine;
     }
 
-    public boolean isCompleted() {
+    public boolean completed() {
         return completed;
     }
 
