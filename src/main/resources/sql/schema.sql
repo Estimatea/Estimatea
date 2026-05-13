@@ -9,13 +9,6 @@ CREATE TABLE IF NOT EXISTS role(
     role_rate INT
     );
 
--- RESSOURCE (Links to Junction TABLE ressource_task)
-/*CREATE TABLE IF NOT EXISTS ressource(
-    res_id INT AUTO_INCREMENT PRIMARY KEY,
-    res_name VARCHAR(60),
-    res_rate INT
-    );*/
-
 -- EMPLOYEE TABLE (Links to Project & Project_employee)
 CREATE TABLE IF NOT EXISTS employee(
     employee_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -105,5 +98,13 @@ CREATE TABLE IF NOT EXISTS task_complexity(
     res_id INT REFERENCES ressource(res_id),
     PRIMARY KEY (task_id, res_id)
     );*/
+
+-- RESSOURCE (Links to Junction TABLE ressource_task)
+/*CREATE TABLE IF NOT EXISTS ressource(
+    res_id INT AUTO_INCREMENT PRIMARY KEY,
+    res_name VARCHAR(60),
+    res_rate INT
+    );*/
+
 
 

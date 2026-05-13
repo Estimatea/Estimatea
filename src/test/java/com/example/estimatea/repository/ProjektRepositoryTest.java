@@ -42,10 +42,10 @@ public class ProjektRepositoryTest {
     @Test
     void checkCreateProject() {
         //Opretter Rolle først, da det skal bruges til employee
-        jdbc.update("INSERT INTO role(role_type,role_rate) VALUES (\'Test Projekt Lead\', 1500)");
+        jdbc.update("INSERT INTO role(role_type,role_rate) VALUES ('Test Projekt Lead', 1500)");
 
         //Opretter employee til at assigne til projekt manager
-        jdbc.update("INSERT INTO employee(employee_name,employee_username,employee_password, role_id) VALUES (\'Test Employee\', \'testeGutten\', \'112JegBrugesTilTest\', 1)");
+        jdbc.update("INSERT INTO employee(employee_name,employee_username,employee_password, role_id) VALUES ('Test Employee', 'testeGutten', '112JegBrugesTilTest', 1)");
 
         //Opretter projektet med vores medarbejder som projectManager
         Project testProject = new Project("Test Projekt", LocalDate.now(), true, 100, 50, LocalDate.now().plusYears(1), 1);
