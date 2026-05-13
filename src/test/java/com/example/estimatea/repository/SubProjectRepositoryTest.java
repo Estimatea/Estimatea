@@ -1,8 +1,6 @@
 package com.example.estimatea.repository;
 import com.example.estimatea.model.SubProject;
 import com.example.estimatea.repository.jdbc.SubProjectRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
