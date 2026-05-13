@@ -1,5 +1,4 @@
 package com.example.estimatea.model;
-
 import java.time.LocalDate;
 
 public class Task {
@@ -12,9 +11,9 @@ public class Task {
     private int projectId;
     private int subprojectId;
     private boolean completed;
-    //private Complexity complexity;
+    private int currentComplexityId;
 
-    public Task(int taskId, String taskName, int taskTime, int taskPrice, LocalDate startDate, LocalDate deadLine, int projectId, int subprojectId, boolean completed) {
+    public Task(int taskId, String taskName, int taskTime, int taskPrice, LocalDate startDate, LocalDate deadLine, int projectId, int subprojectId, boolean completed, int currentComplexityId) {
         this.taskId = taskId;
         this.taskName = taskName;
         this.taskTime = taskTime;
@@ -24,11 +23,10 @@ public class Task {
         this.projectId = projectId;
         this.subprojectId = subprojectId;
         this.completed = completed;
+        this.currentComplexityId = currentComplexityId;
     }
 
-    public Task() {
-
-    }
+    public Task() {}
 
     public int getTaskId() {
         return taskId;
@@ -61,14 +59,6 @@ public class Task {
     public void setTaskPrice(int taskPrice) {
         this.taskPrice = taskPrice;
     }
-
-//    public int getComplexityId() {
-//        return complexityId;
-//    }
-//
-//    public void setComplexityId(int complexityId) {
-//        this.complexityId = complexityId;
-//    }
 
     public LocalDate getStartDate() {
         return startDate;
@@ -108,5 +98,13 @@ public class Task {
 
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    public int getCurrentComplexityId() {
+        return currentComplexityId;
+    }
+
+    public void setCurrentComplexityId(int currentComplexityId) {
+        this.currentComplexityId = currentComplexityId;
     }
 }
