@@ -35,20 +35,18 @@ public class SubProjectRepositoryTest {
     @Test
     void checkH2schemaFile() {
         URL url = getClass().getClassLoader().getResource("h2init.sql");
-<<<<<<< Updated upstream
         assertNotNull(url);
-=======
         System.out.println("URL= " + url);
     }
 
-    @BeforeEach
-    void setUp() {
-        jdbc.update("INSERT INTO role(role_type,role_rate) VALUES ('Test Project Lead', 1500)");
-        jdbc.update("INSERT INTO employee(employee_name,employee_username,employee_password, role_id) VALUES ('Test Employee', 'testeGutten', '112JegBrugesTilTest', 1)");
-        jdbc.update("INSERT INTO project (project_name, sum_time, sum_price, deadline, project_manager) VALUES ('Alpha Solutions Projekt Kalkulations Værktøj', 30, 25000, '2026-05-03', 1)");
-        jdbc.update("INSERT INTO subproject (sub_name, start_date, deadline, completed, project_id) VALUES ('Sub Project Test', '2026-02-02', '2026-02-28', false, 1)");
->>>>>>> Stashed changes
-    }
+//    @BeforeEach
+//    void setUp() {
+//        jdbc.update("INSERT INTO role(role_type,role_rate) VALUES ('Test Project Lead', 1500)");
+//        jdbc.update("INSERT INTO employee(employee_name,employee_username,employee_password, role_id) VALUES ('Test Employee', 'testeGutten', '112JegBrugesTilTest', 1)");
+//        jdbc.update("INSERT INTO project (project_name, sum_time, sum_price, deadline, project_manager) VALUES ('Alpha Solutions Projekt Kalkulations Værktøj', 30, 25000, '2026-05-03', 1)");
+//        jdbc.update("INSERT INTO subproject (sub_name, start_date, deadline, completed, project_id) VALUES ('Sub Project Test', '2026-02-02', '2026-02-28', false, 1)");
+//
+//    }
 
     @Test
     void shouldShowListOfSubProjects() {
