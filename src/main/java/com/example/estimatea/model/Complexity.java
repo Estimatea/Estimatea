@@ -4,10 +4,10 @@ public class Complexity {
 
     private int complexityId;
     private int complexityScore;
-    private int labelType;
+    private String labelType;
     private double rateMultiplier;
 
-    public Complexity(int complexityId, int complexityScore, int labelType, double rateMultiplier) {
+    public Complexity(int complexityId, int complexityScore, String labelType, double rateMultiplier) {
         this.complexityId = complexityId;
         this.complexityScore = complexityScore;
         this.labelType = labelType;
@@ -32,11 +32,11 @@ public class Complexity {
         this.complexityScore = complexityScore;
     }
 
-    public int getLabelType() {
+    public String getLabelType() {
         return labelType;
     }
 
-    public void setLabelType(int labelType) {
+    public void setLabelType(String labelType) {
         this.labelType = labelType;
     }
 
