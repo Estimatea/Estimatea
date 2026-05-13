@@ -92,7 +92,7 @@ public class Task {
         this.subprojectId = subprojectId;
     }
 
-    public boolean isCompleted() {
+    public boolean getCompleted() {
         return completed;
     }
 
