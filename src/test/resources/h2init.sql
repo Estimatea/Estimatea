@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS role(
 
 -- EMPLOYEE TABLE (Links to Project & Project_employee)
 CREATE TABLE IF NOT EXISTS employee(
-     employee_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-     employee_name VARCHAR(60) NOT NULL,
+    employee_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    employee_name VARCHAR(60) NOT NULL,
     employee_username VARCHAR(60) NOT NULL UNIQUE,
     employee_password VARCHAR(60) NOT NULL UNIQUE,
     role_id INT,
