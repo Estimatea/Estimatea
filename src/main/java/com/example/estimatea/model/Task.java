@@ -3,26 +3,26 @@ import java.time.LocalDate;
 
 public class Task {
     private int taskId;
+    private LocalDate startDate;
+    private boolean completed;
     private String taskName;
+    private LocalDate deadline;
     private int taskTime;
     private int taskPrice;
-    private LocalDate startDate;
-    private LocalDate deadline;
     private int projectId;
     private int subprojectId;
-    private boolean completed;
     private int currentComplexityId;
 
-    public Task(int taskId, String taskName, int taskTime, int taskPrice, LocalDate startDate, LocalDate deadLine, int projectId, int subprojectId, boolean completed, int currentComplexityId) {
+    public Task(int taskId, LocalDate startDate, boolean completed, String taskName, LocalDate deadline, int taskTime, int taskPrice, int projectId, int subprojectId, int currentComplexityId) {
         this.taskId = taskId;
+        this.startDate = startDate;
+        this.completed = completed;
         this.taskName = taskName;
+        this.deadline = deadline;
         this.taskTime = taskTime;
         this.taskPrice = taskPrice;
-        this.startDate = startDate;
-        this.deadline = deadLine;
         this.projectId = projectId;
         this.subprojectId = subprojectId;
-        this.completed = completed;
         this.currentComplexityId = currentComplexityId;
     }
 
