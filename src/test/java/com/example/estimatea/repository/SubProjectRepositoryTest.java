@@ -31,7 +31,6 @@ public class SubProjectRepositoryTest {
     void checkH2schemaFile() {
         URL url = getClass().getClassLoader().getResource("h2init.sql");
         assertNotNull(url);
-        System.out.println("URL= " + url);
     }
 
     @Test
@@ -41,7 +40,7 @@ public class SubProjectRepositoryTest {
         assertNotNull(subProjects);
         assertThat(subProjects.size()).isEqualTo(1);
         assertThat(subProjects.getFirst().getSubName()).isEqualTo("Project calculation tool");
-        assertThat(subProjects.getFirst().getDeadLine()).isEqualTo("2026-05-28");
+        assertThat(subProjects.getFirst().getDeadLine()).isEqualTo(LocalDate.of(2026,3,1));
     }
 
     @Test
@@ -53,22 +52,24 @@ public class SubProjectRepositoryTest {
 
         assertThat(subProject.getSubId()).isEqualTo(subProjectId);
         assertThat(subProject.completed()).isEqualTo(false);
+        assertThat(subProject.getDeadLine()).isEqualTo(LocalDate.of(2026,3,1));
     }
 
     @Test
     void shouldGetSubprojectByProjectId() {
-        jdbc.update("INSERT INTO subproject (sub_name, start_date, deadline, completed, project_id) VALUES ('Sub Project Test TWO', '2026-02-03', '2026-02-28', false, 1)");
+        jdbc.update("INSERT INTO subproject (sub_id, sub_name, start_date, deadline, completed, project_id) " +
+                "VALUES (2, 'Sub Project Test TWO', '2026-02-03', '2026-02-28', false, 1)");
 
-        List<SubProject> subProjects = subProjectRepo.getSubProjectsByProjectId(1); // GET_SUBPROJECTS_BY_PROJECT_ID
+        SubProject subprojectOne = subProjectRepo.getSubProjectById(1); // GET_SUB_PROJECT_BY_ID - Gets Subproject with ID 1
+        SubProject subProjectTwo = subProjectRepo.getSubProjectById(2);
 
-        assertThat(subProjects.size()).isEqualTo(2);
-        assertThat(subProjects.getFirst().getSubName()).isEqualTo("Sub Project Test");
-        assertThat(subProjects.get(1).getSubName()).isEqualTo("Sub Project Test TWO");
+        assertThat(subprojectOne.getSubName()).isEqualTo("Project calculation tool");
+        assertThat(subProjectTwo.getSubName()).isEqualTo("Sub Project Test TWO");
     }
 
     @Test
     void shouldCreateSubProject() {
-        SubProject subProject = new SubProject("Sub Project number TWO", /* Start_date */ LocalDate.of(2026, 2, 3), /* Deadline */ LocalDate.of(2026, 2, 8), false, 1);
+        SubProject subProject = new SubProject("Created sub project", /* Start_date */ LocalDate.of(2026, 2, 3), /* Deadline */ LocalDate.of(2026, 2, 8), false, 1);
 
         SubProject createdSubProject = subProjectRepo.createSubProject(subProject);
 
@@ -80,22 +81,30 @@ public class SubProjectRepositoryTest {
 
     @Test
     void shouldDeleteSubProject() {
-        List<SubProject> allSubProjects = subProjectRepo.getAllSubProjects();
-        int subProjectId = allSubProjects.getFirst().getSubId();
+        int subProjectId = subProjectRepo.getAllSubProjects().getFirst().getSubId();
 
         subProjectRepo.deleteSubProject(subProjectId);
 
         List<SubProject> seededSubProjectsAfterDeletion = subProjectRepo.getAllSubProjects();
+        assertThat(seededSubProjectsAfterDeletion.isEmpty());
+    }
 
-        assertThat(seededSubProjectsAfterDeletion.size()).isEqualTo(0);
+    @Test
+    void shouldEditDeadline() {
+        int subProjectId = subProjectRepo.getAllSubProjects().getFirst().getSubId();
+
+        // OLD DEADLINE : '2026-03-01'
+        subProjectRepo.editSubProjectDeadLine(LocalDate.of(2026, 3, 5), subProjectId);
+
+        assertThat(subProjectRepo.getAllSubProjects().getFirst().getDeadLine()).isEqualTo(LocalDate.of(2026, 3, 5));
     }
 
     @Test
     void shouldSetSubProjectCompleted() {
-        List<SubProject> allSubProjects = subProjectRepo.getAllSubProjects();
+        int subProjectId = subProjectRepo.getAllSubProjects().getFirst().getSubId();
 
-        subProjectRepo.editSubProjectCompleted(true, 1);
+        subProjectRepo.editSubProjectCompleted(true, subProjectId);
 
-        assertThat(allSubProjects.getFirst().completed()).isEqualTo(true);
+        assertThat(subProjectRepo.getAllSubProjects().getFirst().completed()).isTrue();
     }
 }
