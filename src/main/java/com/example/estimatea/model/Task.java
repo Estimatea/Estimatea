@@ -14,6 +14,22 @@ public class Task {
     private int employeeId;
     private int currentComplexityId;
 
+    // Used to load object from database (Row Mapper)
+    public Task(int taskId, LocalDate startDate, boolean completed, String taskName, LocalDate deadline, int taskTime, int taskPrice, int projectId, int subprojectId, int employeeId, int currentComplexityId) {
+        this.taskId = taskId;
+        this.startDate = startDate;
+        this.completed = completed;
+        this.taskName = taskName;
+        this.deadline = deadline;
+        this.taskTime = taskTime;
+        this.taskPrice = taskPrice;
+        this.projectId = projectId;
+        this.subprojectId = subprojectId;
+        this.employeeId = employeeId;
+        this.currentComplexityId = currentComplexityId;
+    }
+
+    // Used to create task objects
     public Task(LocalDate startDate, boolean completed, String taskName, LocalDate deadline, int taskTime, int taskPrice, int projectId, int subprojectId, int employeeId ,int currentComplexityId) {
         this.startDate = startDate;
         this.completed = completed;

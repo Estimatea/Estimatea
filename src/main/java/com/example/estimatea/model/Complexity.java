@@ -7,8 +7,16 @@ public class Complexity {
     private String labelType;
     private double rateMultiplier;
 
+    // Used to load object from database (Row mapper)
     public Complexity(int complexityId, int complexityScore, String labelType, double rateMultiplier) {
         this.complexityId = complexityId;
+        this.complexityScore = complexityScore;
+        this.labelType = labelType;
+        this.rateMultiplier = rateMultiplier;
+    }
+
+    // Used to created Complexity scores
+    public Complexity(int complexityScore, String labelType, double rateMultiplier) {
         this.complexityScore = complexityScore;
         this.labelType = labelType;
         this.rateMultiplier = rateMultiplier;

@@ -4,14 +4,13 @@ import com.example.estimatea.repository.jdbc.SubProjectRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -20,9 +19,6 @@ public class SubProjectRepositoryTest {
 
     @Autowired
     private SubProjectRepository subProjectRepo;
-
-    @Autowired
-    private JdbcTemplate jdbc;
 
     @Test
     void contextLoads() {}
@@ -69,22 +65,25 @@ public class SubProjectRepositoryTest {
     void shouldCreateSubProject() {
         SubProject subProject = new SubProject("Created sub project", /* Start_date */ LocalDate.of(2026, 2, 3), /* Deadline */ LocalDate.of(2026, 2, 8), false, 1);
 
-        SubProject createdSubProject = subProjectRepo.createSubProject(subProject);
-
+        subProjectRepo.createSubProject(subProject);
         List<SubProject> allSubProjects = subProjectRepo.getAllSubProjects();
 
-        assertThat(allSubProjects.get(1).getSubName()).isEqualTo(createdSubProject.getSubName());
-        assertThat(allSubProjects.get(0).getSubName()).isNotEqualTo(createdSubProject.getSubName());
+        assertThat(allSubProjects).hasSize(3);
+        assertThat(allSubProjects).extracting(SubProject::getSubName).contains("Created sub project");
     }
 
     @Test
     void shouldDeleteSubProject() {
-        int subProjectId = subProjectRepo.getAllSubProjects().getFirst().getSubId();
+        List<SubProject> allSubProjects = subProjectRepo.getAllSubProjects();
 
-        subProjectRepo.deleteSubProject(subProjectId);
+        int initialSize = allSubProjects.size();
+        int subProjectToDelete = allSubProjects.getFirst().getSubId();
+
+        subProjectRepo.deleteSubProject(subProjectToDelete);
 
         List<SubProject> seededSubProjectsAfterDeletion = subProjectRepo.getAllSubProjects();
-        assertThat(seededSubProjectsAfterDeletion.isEmpty());
+        assertThat(seededSubProjectsAfterDeletion).hasSize(initialSize - 1);
+        assertThat(seededSubProjectsAfterDeletion).extracting(SubProject::getSubId).doesNotContain(subProjectToDelete);
     }
 
     @Test

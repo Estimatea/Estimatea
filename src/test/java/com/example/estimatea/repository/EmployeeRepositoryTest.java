@@ -4,7 +4,6 @@ import com.example.estimatea.repository.jdbc.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,9 +18,6 @@ public class EmployeeRepositoryTest {
 
     @Autowired
     private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private JdbcTemplate jdbc;
 
     @Test
     void contextLoads() {}
@@ -44,7 +40,9 @@ public class EmployeeRepositoryTest {
         // Project Employees
     @Test
     void shouldGetAllProjectEmployeesById() {
-        List<Integer> projectEmployees = employeeRepository.getAllEmployeeIdsForProject(1);
+        int projectId = 1;
+
+        List<Integer> projectEmployees = employeeRepository.getAllEmployeeIdsForProject(projectId);
 
         assertThat(projectEmployees).isNotNull();
         assertThat(projectEmployees).hasSizeGreaterThan(0);
@@ -53,7 +51,9 @@ public class EmployeeRepositoryTest {
 
     @Test
     void shouldShowAllEmployeesForGivenProject() {
-        List<Employee> seededProjectEmployeeList = employeeRepository.getAllEmployeesForProject(1);
+        int projectId = 1;
+
+        List<Employee> seededProjectEmployeeList = employeeRepository.getAllEmployeesForProject(projectId);
 
         assertThat(seededProjectEmployeeList).isNotNull();
         assertThat(seededProjectEmployeeList).hasSizeGreaterThan(0);
