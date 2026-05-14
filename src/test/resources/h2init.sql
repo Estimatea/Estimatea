@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS task_complexity_history(
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     task_id INT,
     complexity_id INT NOT NULL,
-    assignet_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    assigned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     assigned_by INT,
     FOREIGN KEY (task_id) REFERENCES task(task_id),
     FOREIGN KEY (complexity_id) REFERENCES complexity(complexity_id),

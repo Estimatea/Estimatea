@@ -91,26 +91,12 @@ CREATE TABLE IF NOT EXISTS task_complexity_history(
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     task_id INT,
     complexity_id INT NOT NULL,
-    assignet_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    assigned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     assigned_by INT,
     FOREIGN KEY (task_id) REFERENCES task(task_id),
     FOREIGN KEY (complexity_id) REFERENCES complexity(complexity_id),
     FOREIGN KEY (assigned_by) REFERENCES employee(employee_id)
     );
-
--- RESSOURCE_TASK_JUNCTION (Junction TABLE and has PK FK (task_id, res_id))
-/*CREATE TABLE IF NOT EXISTS ressource_task(
-    task_id INT REFERENCES task(task_id),
-    res_id INT REFERENCES ressource(res_id),
-    PRIMARY KEY (task_id, res_id)
-    );*/
-
--- RESSOURCE (Links to Junction TABLE ressource_task)
-/*CREATE TABLE IF NOT EXISTS ressource(
-    res_id INT AUTO_INCREMENT PRIMARY KEY,
-    res_name VARCHAR(60),
-    res_rate INT
-    );*/
 
 
 
