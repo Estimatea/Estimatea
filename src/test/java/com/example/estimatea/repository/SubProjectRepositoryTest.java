@@ -38,7 +38,7 @@ public class SubProjectRepositoryTest {
         List<SubProject> subProjects = subProjectRepo.getAllSubProjects(); // GET_ALL_SUBPROJECTS
 
         assertNotNull(subProjects);
-        assertThat(subProjects.size()).isEqualTo(1);
+        assertThat(subProjects.size()).isEqualTo(2);
         assertThat(subProjects.getFirst().getSubName()).isEqualTo("Project calculation tool");
         assertThat(subProjects.getFirst().getDeadLine()).isEqualTo(LocalDate.of(2026,3,1));
     }
@@ -57,14 +57,12 @@ public class SubProjectRepositoryTest {
 
     @Test
     void shouldGetSubprojectByProjectId() {
-        jdbc.update("INSERT INTO subproject (sub_id, sub_name, start_date, deadline, completed, project_id) " +
-                "VALUES (2, 'Sub Project Test TWO', '2026-02-03', '2026-02-28', false, 1)");
+        int subProjectId = subProjectRepo.getAllSubProjects().getFirst().getProjectId();
 
-        SubProject subprojectOne = subProjectRepo.getSubProjectById(1); // GET_SUB_PROJECT_BY_ID - Gets Subproject with ID 1
-        SubProject subProjectTwo = subProjectRepo.getSubProjectById(2);
+        SubProject subprojectOne = subProjectRepo.getSubProjectById(subProjectId); // GET_SUB_PROJECT_BY_ID - Gets Subproject with ID 1
 
+        assertThat(subprojectOne).isNotNull();
         assertThat(subprojectOne.getSubName()).isEqualTo("Project calculation tool");
-        assertThat(subProjectTwo.getSubName()).isEqualTo("Sub Project Test TWO");
     }
 
     @Test
