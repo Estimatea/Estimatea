@@ -1,6 +1,4 @@
 package com.example.estimatea.repository.jdbc;
-
-
 import com.example.estimatea.model.Role;
 import com.example.estimatea.repository.mapper.RoleMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
