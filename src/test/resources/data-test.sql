@@ -1,4 +1,3 @@
-
 -- 1. Roles
 INSERT INTO role (role_type, role_rate)
 VALUES ('Project Manager', 2500),
@@ -13,11 +12,13 @@ VALUES ('Joakim', 'joakim_dev', 'password_123', 1),
 
 -- 3. Projects
 INSERT INTO project (project_name, start_date, deadline, project_manager)
-VALUES ('Alpha Solutions', '2026-01-01', '2026-12-31', 1);
+VALUES ('Alpha Solutions', '2026-01-01', '2026-12-31', 1),
+       ('AI Model', '2027-01-01', '2028-01-01', 2);
 
 -- 4. Subprojects
 INSERT INTO subproject (sub_name, start_date, deadline, completed, project_id)
-VALUES ('Project calculation tool', '2026-02-01', '2026-03-01', false, 1);
+VALUES ('Project calculation tool', '2026-02-01', '2026-03-01', false, 1),
+       ('AI integration', '2026-06-06', '2026-12-12', false, 2);
 
 -- 5. Complexity Scores
 INSERT INTO complexity (complexity_score, label_type, rate_multiplier)

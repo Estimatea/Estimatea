@@ -1,8 +1,10 @@
 package com.example.estimatea.repository.jdbc;
+
 import com.example.estimatea.model.Task;
 import com.example.estimatea.repository.mapper.TaskMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 @Repository
@@ -24,6 +26,9 @@ public class TaskRepository {
     //SQL statement for completing a single Task
     private final String COMPLETE_TASK = "UPDATE task SET completed = true WHERE task_id = ? ";
 
+    //SQL statement for getting a single task by ID
+    private final String GET_TASK_BY_ID = "SELECT * FROM task WHERE task_id= ?";
+
     // SQL statements for getting tasks in both Projects and Subprojects
     private final String GET_TASKS_BY_PROJECT_ID = "SELECT * FROM task WHERE project_id = ?";
     private final String GET_TASKS_BY_SUBPROJECT_ID = "SELECT * FROM task WHERE subproject_id = ?";
@@ -35,7 +40,7 @@ public class TaskRepository {
 
     // Creating Task for both Projects and Subprojects ----- (EVT: Mulighed for at kombinere de to Create metoder til en metode der laver en boolean forespørgsel på id inden man trækker data)
     public void createTaskForProject(Task projectTask) {
-        jdbc.update(CREATE_TASK_FOR_PROJECT, projectTask.getStartDate(), projectTask.getCompleted(), projectTask.getTaskName(), projectTask.getDeadLine(), projectTask.getTaskTime(), projectTask.getTaskPrice(), projectTask.getProjectId(), projectTask.getEmployeeId() ,projectTask.getCurrentComplexityId());
+        jdbc.update(CREATE_TASK_FOR_PROJECT, projectTask.getStartDate(), projectTask.getCompleted(), projectTask.getTaskName(), projectTask.getDeadLine(), projectTask.getTaskTime(), projectTask.getTaskPrice(), projectTask.getProjectId(), projectTask.getEmployeeId(), projectTask.getCurrentComplexityId());
     }
 
     public void createTaskForSubproject(Task subTask) {
@@ -55,6 +60,11 @@ public class TaskRepository {
     // Completing a single task (works for both a Project and Subproject)
     public void completeTask(Task task) {
         jdbc.update(COMPLETE_TASK, task.getTaskId());
+    }
+
+    // Get a single task by ID
+    public Task getTaskById(int taskId) {
+        return jdbc.queryForObject(GET_TASK_BY_ID, taskMapper, taskId);
     }
 
     // Get tasks within each Project and Subprojects
