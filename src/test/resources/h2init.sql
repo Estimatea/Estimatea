@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS task(
     current_complexity_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id),
     FOREIGN KEY (subproject_id) REFERENCES subproject(sub_id),
-    FOREIGN KEY (current_complexity_id) REFERENCES complexity(complexity_id),
+    FOREIGN KEY (current_complexity_id) REFERENCES complexity(complexity_id)
 );
 
 -- TASK_COMPLEXITY_HISTORY (Links to task and complexity tables. Keeps a history of complexity assigned)
