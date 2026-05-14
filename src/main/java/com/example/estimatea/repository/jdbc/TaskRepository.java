@@ -13,6 +13,11 @@ public class TaskRepository {
     private final JdbcTemplate jdbc;
     private final TaskMapper taskMapper;
 
+        // SQL STATEMENTS FOR COMPLEXITY SCORES COUPLED TO TASK
+    private final String UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK = "UPDATE task SET current_complexity_id = ? WHERE task_id = ?";
+//    private final String SHOW_ALL_CURRENT_COMPLEXITY_SCORES = "SELECT";
+
+        // SQL STATEMENTS FOR TASK MANIPULATION
     private final String SHOW_ALL_TASKS = "SELECT * FROM task";
 
     // SQL statements for creating a single Task in both Projects and Subprojects
@@ -42,6 +47,11 @@ public class TaskRepository {
 
     public List<Task> showAllTasks() {
         return jdbc.query(SHOW_ALL_TASKS, taskMapper);
+    }
+
+        // QUERY's to handle complexity_scores coupled to tasks
+    public void updateComplexityScoreOnTask(int taskId) {
+        jdbc.update(UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK, taskId);
     }
 
     // Creating Task for both Projects and Subprojects ----- (EVT: Mulighed for at kombinere de to Create metoder til en metode der laver en boolean forespørgsel på id inden man trækker data)
