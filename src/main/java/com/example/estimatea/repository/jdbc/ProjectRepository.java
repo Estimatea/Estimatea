@@ -32,7 +32,11 @@ public class ProjectRepository {
         this.projectMapper = projectMapper;
     }
 
-    // CRUD QUERY's for Project table
+        // CRUD QUERY's for Project table
+    public List<Project> getAllProjects() {
+        return jdbc.query(GET_ALL_PROJECTS, projectMapper);
+    }
+
     public void createNewProject(Project project) {
         jdbc.update(CREATE_NEW_PROJECT, project.getProjectName(), project.getStartDate(), project.getIsCompleted(),
                                         project.getSumTime(), project.getSumPrice(), project.getDeadLine(), project.getProjectManager());
@@ -40,10 +44,6 @@ public class ProjectRepository {
 
     public Project findProjectById(int projectId) {
         return jdbc.queryForObject(FIND_PROJECT_BY_ID, projectMapper, projectId);
-    }
-
-    public List<Project> getAllProjects() {
-        return jdbc.query(GET_ALL_PROJECTS, projectMapper);
     }
 
     public void updateProject(Project project) {
@@ -55,7 +55,7 @@ public class ProjectRepository {
         jdbc.update(DELETE_PROJECT, projectId);
     }
 
-    // QUREY's For SORTING
+        // CRUD QUREY's For SORTING
     public List<Project> sortProjectByAscendingOrder() {
         return jdbc.query(SHOW_ALL_PROJECTS_IN_ASC_ORDER, projectMapper); // ASCENDING
     }
