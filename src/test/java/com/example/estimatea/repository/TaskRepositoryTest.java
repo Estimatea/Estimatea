@@ -46,9 +46,8 @@ public class TaskRepositoryTest {
         // Act
         taskRepository.createTaskForProject(projectTask);
 
-        List<Task> projectTasks = taskRepository.getTasksByProjectId(1);
-
         // Assert
+        List<Task> projectTasks = taskRepository.getTasksByProjectId(1);
         assertThat(projectTasks.size()).isEqualTo(1);
         assertThat(projectTasks.getFirst().getStartDate()).isEqualTo(LocalDate.of(2027, 1, 1));
         assertThat(projectTasks.getFirst().getCompleted()).isEqualTo(false);
@@ -73,7 +72,6 @@ public class TaskRepositoryTest {
 
         //Assert
         List<Task> subprojectTasks = taskRepository.getTasksBySubprojectId(1);
-
         assertThat(subprojectTasks.size()).isEqualTo(1);
         assertThat(subprojectTasks.getFirst().getStartDate()).isEqualTo(LocalDate.of(2027, 1, 1));
         assertThat(subprojectTasks.getFirst().getCompleted()).isEqualTo(false);
@@ -93,13 +91,11 @@ public class TaskRepositoryTest {
         // Arrange
         Task projectTask = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 1, 0, 2, 5);
         taskRepository.createTaskForProject(projectTask);
-        int actualId = taskRepository.getTasksByProjectId(1).getFirst().getTaskId();
-
-
+        int taskId = taskRepository.getTasksByProjectId(1).getFirst().getTaskId();
 
         //Act
         Task editedTask = new Task(LocalDate.of(2027, 12, 12), true, "Edited Task", LocalDate.of(2028, 1, 1), 20, 200, 1, 0, 3, 5);
-        editedTask.setTaskId(actualId);
+        editedTask.setTaskId(taskId);
         taskRepository.editTask(editedTask);
 
         //Assert
@@ -117,5 +113,97 @@ public class TaskRepositoryTest {
         assertThat(editedTasks.getFirst().getCurrentComplexityId()).isEqualTo(5);
     }
 
+    @Test
+    void deleteTaskTest() {
+        //Arrange
+        Task task = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 1, 0, 2, 5);
+        taskRepository.createTaskForProject(task);
+        int taskId = taskRepository.getTasksByProjectId(1).getFirst().getTaskId();
+
+        //Act
+        Task taskToDelete = new Task();
+        taskToDelete.setTaskId(taskId);
+        taskRepository.deleteTask(taskToDelete);
+
+        //Assert
+        List<Task> tasks = taskRepository.getTasksByProjectId(1);
+        assertThat(tasks.size()).isEqualTo(0);
+    }
+
+    @Test
+    void completeTaskTest() {
+        //Arrange
+        Task task = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 1, 0, 2, 5);
+        taskRepository.createTaskForProject(task);
+        int taskId = taskRepository.getTasksByProjectId(1).getFirst().getTaskId();
+
+        //Act
+        Task taskToComplete = new Task();
+        taskToComplete.setTaskId(taskId);
+        taskRepository.completeTask(taskToComplete);
+
+        //Assert
+        List<Task> tasks = taskRepository.getTasksByProjectId(1);
+        assertThat(tasks.getFirst().getCompleted()).isEqualTo(true);
+    }
+
+    @Test
+    void getTaskByIdTest() {
+        //Arrange
+        jdbc.update("INSERT INTO task (task_id, start_date, completed, task_name, deadline, task_time, task_price, project_id, employee_id, current_complexity_id) " +
+                "VALUES (1, '2027-01-01', false, 'Task One', '2027-12-01', 10, 100, 1, 2, 5)");
+        jdbc.update("INSERT INTO task (task_id, start_date, completed, task_name, deadline, task_time, task_price, project_id, employee_id, current_complexity_id) " +
+                "VALUES (2, '2027-01-01', false, 'Task Two', '2027-12-01', 10, 100, 1, 2, 5)");
+
+        //Act
+        Task taskOne = taskRepository.getTaskById(1);
+        Task taskTwo = taskRepository.getTaskById(2);
+
+        //Assert
+        assertThat(taskOne.getTaskName()).isEqualTo("Task One");
+        assertThat(taskTwo.getTaskName()).isEqualTo("Task Two");
+    }
+
+    @Test
+    void getTasksByProjectIdTest() {
+        //Arrange
+        jdbc.update("INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, employee_id, current_complexity_id) " +
+                "VALUES ('2027-01-01', false, 'Task One', '2027-12-01', 10, 100, 1, 2, 5)");
+        jdbc.update("INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, employee_id, current_complexity_id) " +
+                "VALUES ('2027-01-01', false, 'Task Two', '2027-12-01', 10, 100, 1, 2, 5)");
+
+        // Task from another project to test if it gets task from right project
+        jdbc.update("INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, employee_id, current_complexity_id) " +
+                "VALUES ('2027-01-01', false, 'Task Two', '2027-12-01', 10, 100, 2, 2, 5)");
+
+        //Act
+        List<Task> projectTasks = taskRepository.getTasksByProjectId(1);
+
+        //Assert
+        assertThat(projectTasks.size()).isEqualTo(2);
+        assertThat(projectTasks.get(0).getTaskName()).isEqualTo("Task One");
+        assertThat(projectTasks.get(1).getTaskName()).isEqualTo("Task Two");
+    }
+
+    @Test
+    void getTasksBySubprojectId() {
+        //Arrange
+        jdbc.update("INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, subproject_id, employee_id, current_complexity_id) " +
+                "VALUES ('2027-01-01', false, 'Task One', '2027-12-01', 10, 100, 1, 1, 2, 5)");
+        jdbc.update("INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, subproject_id, employee_id, current_complexity_id) " +
+                "VALUES ('2027-01-01', false, 'Task Two', '2027-12-01', 10, 100, 1, 1, 2, 5)");
+
+        // Task from another project to test if it gets task from right project
+        jdbc.update("INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, subproject_id, employee_id, current_complexity_id) " +
+                "VALUES ('2027-01-01', false, 'Task Two', '2027-12-01', 10, 100, 2, 2, 2, 5)");
+
+        //Act
+        List<Task> subprojectTasks = taskRepository.getTasksBySubprojectId(1);
+
+        //Assert
+        assertThat(subprojectTasks.size()).isEqualTo(2);
+        assertThat(subprojectTasks.get(0).getTaskName()).isEqualTo("Task One");
+        assertThat(subprojectTasks.get(1).getTaskName()).isEqualTo("Task Two");
+    }
 
 }
