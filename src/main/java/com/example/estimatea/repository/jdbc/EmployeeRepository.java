@@ -15,20 +15,22 @@ public class EmployeeRepository {
     private final EmployeeMapper employeeMapper;
 
         // SQL STATEMENTS FOR project_employee Linked to a Project
+
+    // RETRIEVE BY ID's
     private final String GET_ALL_PROJECT_EMPLOYEES_BY_ID_FOR_PROJECT = "SELECT * FROM project_employee WHERE project_id = ?";
     private final String GET_ALL_EMPLOYEES_FOR_PROJECT = "SELECT * FROM project_employee WHERE project_id = ?";
 
-    // RETRIEVE BY ID's
+    // ADD & REMOVE employees to/from project
     private final String ADD_EMPLOYEE_TO_PROJECT = "INSERT INTO project_employee (employee_id, project_id) VALUES (?, ?)";
     private final String REMOVE_EMPLOYEE_FROM_PROJECT = "DELETE FROM project_employee WHERE project_employee_id = ? AND project_id = ?";
-
 
         // SQL statements for subproject employees
 
     // CHECK IN SERVICE THAT THEY ARE PROJECT EMPLOYEES
-    private final String GET_ALL_EMPLOYEES_BY_ID_FOR_SUBPROJECT = "SELECT * FROM sub_project_employee WHERE sub_id = ?";
+    private final String GET_ALL_EMPLOYEES_BY_ID_FOR_SUBPROJECT = "SELECT * FROM sub_project_employee WHERE sub_id = ?"; // RETRIEVE Sub-project employee ID's
     //private final String GET_ALL_EMPLOYEE_INFO_FOR_SUBPROJECT =;
 
+    // ADD & REMOVE employees to/from Sub-project
     private final String ASSIGN_EMPLOYEE_TO_SUBPROJECT = "INSERT INTO sub_project_employee VALUES (?,?)";
     private final String REMOVE_EMPLOYEE_FROM_SUBPROJECT = "DELETE FROM sub_project_employee WHERE project_employee_id = ? AND sub_id = ?";
 
