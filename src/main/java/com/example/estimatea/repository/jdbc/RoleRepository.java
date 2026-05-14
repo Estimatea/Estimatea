@@ -14,21 +14,19 @@ public class RoleRepository {
 
     private final String GET_ALL_ROLES = "SELECT * FROM role";
     private final String GET_ROLE_BY_ID = "SELECT * FROM role WHERE role_id = ?";
-    private final String SET_EMPLOYEE_ROLE = "";
 
     public RoleRepository(JdbcTemplate jdbc,  RoleMapper roleMapper) {
         this.jdbc = jdbc;
         this.roleMapper = roleMapper;
     }
 
-    //Gets all roles
+    // Gets all roles
     public List<Role> getAllRoles() {
         return jdbc.query(GET_ALL_ROLES, roleMapper);
     }
 
-    //returns specific role
+    // Returns specific role
     public Role getRoleById(int roleId) {
         return jdbc.queryForObject(GET_ROLE_BY_ID, roleMapper, roleId);
     }
-
 }
