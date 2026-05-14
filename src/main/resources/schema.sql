@@ -82,7 +82,6 @@ CREATE TABLE IF NOT EXISTS task(
     subproject_id INT,
     employee_id INT,
     current_complexity_id INT,
-    FOREIGN KEY (current_complexity_id) REFERENCES complexity(complexity_id),
     FOREIGN KEY (project_id) REFERENCES project(project_id),
     FOREIGN KEY (subproject_id) REFERENCES subproject(sub_id),
     FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
