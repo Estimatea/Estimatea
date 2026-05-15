@@ -13,13 +13,6 @@ public class TaskRepository {
     private final JdbcTemplate jdbc;
     private final TaskMapper taskMapper;
 
-        // SQL STATEMENTS FOR COMPLEXITY SCORES COUPLED TO TASK
-    private final String UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK = "UPDATE task SET current_complexity_id = ? WHERE task_id = ?";
-//    private final String SHOW_ALL_CURRENT_COMPLEXITY_SCORES = "SELECT";
-
-        // SQL STATEMENTS FOR TASK MANIPULATION
-    private final String SHOW_ALL_TASKS = "SELECT * FROM task";
-
     // SQL statements for creating a single Task in both Projects and Subprojects
     private final String CREATE_TASK_FOR_PROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id,  employee_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, subproject_id, employee_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -40,18 +33,13 @@ public class TaskRepository {
     private final String GET_TASKS_BY_PROJECT_ID = "SELECT * FROM task WHERE project_id = ?";
     private final String GET_TASKS_BY_SUBPROJECT_ID = "SELECT * FROM task WHERE subproject_id = ?";
 
+    // SQL STATEMENTS FOR COMPLEXITY SCORES COUPLED TO TASK
+    private final String UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK = "UPDATE task SET current_complexity_id = ? WHERE task_id = ?";
+
+
     public TaskRepository(JdbcTemplate jdbc, TaskMapper taskMapper) {
         this.jdbc = jdbc;
         this.taskMapper = taskMapper;
-    }
-
-    public List<Task> showAllTasks() {
-        return jdbc.query(SHOW_ALL_TASKS, taskMapper);
-    }
-
-        // QUERY's to handle complexity_scores coupled to tasks
-    public void updateComplexityScoreOnTask(int taskId) {
-        jdbc.update(UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK, taskId);
     }
 
     // Creating Task for both Projects and Subprojects ----- (EVT: Mulighed for at kombinere de to Create metoder til en metode der laver en boolean forespørgsel på id inden man trækker data)
@@ -83,13 +71,19 @@ public class TaskRepository {
         return jdbc.queryForObject(GET_TASK_BY_ID, taskMapper, taskId);
     }
 
-    // Get tasks within each Project and Subprojects
+            // Get tasks within each Project and Subprojects
+    //GET Tasks for a project by ID
     public List<Task> getTasksByProjectId(int projectId) {
         return jdbc.query(GET_TASKS_BY_PROJECT_ID, taskMapper, projectId);
     }
-
+    //GET Tasks for a subproject by ID
     public List<Task> getTasksBySubprojectId(int subprojectId) {
         return jdbc.query(GET_TASKS_BY_SUBPROJECT_ID, taskMapper, subprojectId);
+    }
+
+    // Update the complexity score on a single task
+    public void updateComplexityScore(int complexityId, int taskId) {
+        jdbc.update(UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK, complexityId, taskId);
     }
 
 

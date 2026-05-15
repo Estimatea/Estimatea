@@ -26,14 +26,6 @@ public class Project {
 
     }
 
-    public boolean getIsCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
     public int getProjectId() {
         return projectId;
     }
@@ -88,5 +80,13 @@ public class Project {
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }
