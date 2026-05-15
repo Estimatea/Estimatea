@@ -66,8 +66,8 @@ public class EmployeeRepository {
         jdbc.update(ADD_EMPLOYEE_TO_PROJECT, employeeId, projectId);
     }
 
-    public void removeEmployeeFromProject(int employeeId, int projectId) {  // Removes an employee from project
-        jdbc.update(REMOVE_EMPLOYEE_FROM_PROJECT, employeeId, projectId);
+    public void removeEmployeeFromProject(int projectEmployeeId, int projectId) {  // Removes an employee from project
+        jdbc.update(REMOVE_EMPLOYEE_FROM_PROJECT, projectEmployeeId, projectId);
     }
 
         // CRUD QUREY's for SUB-PROJECT-Employees
