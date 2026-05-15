@@ -37,3 +37,7 @@ VALUES (1,1), -- Joakim
 INSERT INTO sub_project_employee (project_employee_id, sub_id)
 VALUES (1,1), -- Joakim
        (2,1); -- Emil
+
+INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, subproject_id, employee_id, current_complexity_id)
+VALUES ('2027-01-01', false, 'Alpha Task One', '2027-12-01', 10, 100, 1, 1, 1, 1),
+       ('2027-02-01', false, 'Alpha Task Two', '2027-12-01', 20, 200, 1, 1, 2, 5);

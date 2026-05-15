@@ -38,7 +38,7 @@ public class ProjectRepository {
     }
 
     public void createNewProject(Project project) {
-        jdbc.update(CREATE_NEW_PROJECT, project.getProjectName(), project.getStartDate(), project.getIsCompleted(),
+        jdbc.update(CREATE_NEW_PROJECT, project.getProjectName(), project.getStartDate(), project.isCompleted(),
                                         project.getSumTime(), project.getSumPrice(), project.getDeadLine(), project.getProjectManager());
     }
 
@@ -47,7 +47,7 @@ public class ProjectRepository {
     }
 
     public void updateProject(Project project) {
-        jdbc.update(UPDATE_PROJECT, project.getProjectName(), project.getIsCompleted(),
+        jdbc.update(UPDATE_PROJECT, project.getProjectName(), project.isCompleted(),
                                     project.getSumTime(), project.getSumPrice(), project.getDeadLine(), project.getProjectManager());
     }
 

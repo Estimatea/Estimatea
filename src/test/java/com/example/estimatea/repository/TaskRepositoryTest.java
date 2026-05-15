@@ -205,4 +205,18 @@ public class TaskRepositoryTest {
         assertThat(subprojectTasks.get(1).getTaskName()).isEqualTo("Task Two");
     }
 
+    @Test
+    void updateComplexityScoreTest() {
+        //Arrange
+        Task task = taskRepository.getTasksByProjectId(1).getFirst();
+        int taskId = task.getTaskId();
+
+        //Act
+        taskRepository.updateComplexityScore(10, taskId);
+
+        //Assert
+        Task updatedTask = taskRepository.getTaskById(taskId);
+        assertThat(updatedTask.getCurrentComplexityId()).isEqualTo(10);
+    }
+
 }
