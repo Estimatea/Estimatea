@@ -15,8 +15,8 @@ public class ComplexityRepository {
 
         // SQL statements for complexity table Links to task
     private final String SHOW_ALL_COMPLEXITY_SCORES = "SELECT * FROM complexity";
-    private final String SHOW_COMPLEXITY_SCORE_BY_ID = "SELECT complexity_id, complexity_score, label_type, rate_multiplier FROM complexity WHERE complexity_id = ?";
-    private final String CREATE_COMPLEXITY_SCORE = "INSERT INTO complexity (complexity_score, label_type, rate_multiplier) VALUES (?, ?, ?)";
+//    private final String SHOW_COMPLEXITY_SCORE_BY_ID = "SELECT complexity_id, complexity_score, label_type, rate_multiplier FROM complexity WHERE complexity_id = ?";
+//    private final String CREATE_COMPLEXITY_SCORE = "INSERT INTO complexity (complexity_score, label_type, rate_multiplier) VALUES (?, ?, ?)";
 //    private final String DELETE_COMPLEXITY_SCORE_FROM_TASK = "DELETE FROM task WHERE task_id = ? AND current_complexity_id = ?";
 //    private final String UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK = "UPDATE task SET current_complexity_id = ? WHERE task_id = ?";
 
@@ -32,13 +32,13 @@ public class ComplexityRepository {
         return jdbc.query(SHOW_ALL_COMPLEXITY_SCORES, complexityMapper);
     }
 
-    public Complexity showComplexityScoreById(int currentComplexityId) {
-        return jdbc.queryForObject(SHOW_COMPLEXITY_SCORE_BY_ID, complexityMapper, currentComplexityId);
-    }
-
-    public void createComplexityScore(Complexity complexity) {
-        jdbc.update(CREATE_COMPLEXITY_SCORE, complexity.getComplexityScore(), complexity.getLabelType(), complexity.getRateMultiplier());
-    }
+//    public Complexity showComplexityScoreById(int currentComplexityId) {
+//        return jdbc.queryForObject(SHOW_COMPLEXITY_SCORE_BY_ID, complexityMapper, currentComplexityId);
+//    }
+//
+//    public void createComplexityScore(Complexity complexity) {
+//        jdbc.update(CREATE_COMPLEXITY_SCORE, complexity.getComplexityScore(), complexity.getLabelType(), complexity.getRateMultiplier());
+//    }
 
 //    public void deleteComplexityScore(int taskId, int currentComplexityId) {
 //        jdbc.update(DELETE_COMPLEXITY_SCORE_FROM_TASK, taskId, currentComplexityId);
