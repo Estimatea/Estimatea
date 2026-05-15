@@ -18,7 +18,6 @@ public class TaskRepository {
 //    private final String SHOW_ALL_CURRENT_COMPLEXITY_SCORES = "SELECT";
 
         // SQL STATEMENTS FOR TASK MANIPULATION
-    private final String SHOW_ALL_TASKS = "SELECT * FROM task";
 
     // SQL statements for creating a single Task in both Projects and Subprojects
     private final String CREATE_TASK_FOR_PROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id,  employee_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -43,10 +42,6 @@ public class TaskRepository {
     public TaskRepository(JdbcTemplate jdbc, TaskMapper taskMapper) {
         this.jdbc = jdbc;
         this.taskMapper = taskMapper;
-    }
-
-    public List<Task> showAllTasks() {
-        return jdbc.query(SHOW_ALL_TASKS, taskMapper);
     }
 
         // QUERY's to handle complexity_scores coupled to tasks
