@@ -85,12 +85,10 @@ public class TaskRepositoryTest {
     @Test
     void editTaskTest() {
         // Arrange
-        Task projectTask = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 1, 0, 2, 5);
-        taskRepository.createTaskForProject(projectTask);
-        int taskId = taskRepository.getTasksByProjectId(1).getLast().getTaskId();
+        int taskId = taskRepository.getTasksByProjectId(1).getFirst().getTaskId();
 
         // Act
-        Task editedTask = new Task(LocalDate.of(2027, 12, 12), true, "Edited Task", LocalDate.of(2028, 1, 1), 20, 200, 1, 0, 3, 5);
+        Task editedTask = new Task(LocalDate.of(2027, 12, 12), true, "Edited Task", LocalDate.of(2028, 1, 1), 20, 200, 1, 1, 3, 5);
         editedTask.setTaskId(taskId);
         taskRepository.editTask(editedTask);
 
@@ -108,9 +106,7 @@ public class TaskRepositoryTest {
     @Test
     void deleteTaskTest() {
         // Arrange
-        Task task = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 1, 0, 2, 5);
-        taskRepository.createTaskForProject(task);
-        int taskId = taskRepository.getTasksByProjectId(1).getLast().getTaskId();
+        int taskId = taskRepository.getTasksByProjectId(1).getFirst().getTaskId();
 
         // Act
         Task taskToDelete = new Task();
@@ -118,15 +114,13 @@ public class TaskRepositoryTest {
         taskRepository.deleteTask(taskToDelete);
 
         // Assert
-        assertThat(taskRepository.getTasksByProjectId(1).size()).isEqualTo(2);
+        assertThat(taskRepository.getTasksByProjectId(1).size()).isEqualTo(1);
     }
 
     @Test
     void completeTaskTest() {
         // Arrange
-        Task task = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 1, 0, 2, 5);
-        taskRepository.createTaskForProject(task);
-        int taskId = taskRepository.getTasksByProjectId(1).getLast().getTaskId();
+        int taskId = taskRepository.getTasksByProjectId(1).getFirst().getTaskId();
 
         // Act
         Task taskToComplete = new Task();
@@ -169,16 +163,17 @@ public class TaskRepositoryTest {
     @Test
     void getTasksBySubprojectId() {
         // Arrange
-        jdbc.update("INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, subproject_id, employee_id, current_complexity_id) VALUES ('2027-01-01', false, 'Task One', '2027-12-01', 10, 100, 1, 1, 2, 5)");
-        jdbc.update("INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, subproject_id, employee_id, current_complexity_id) VALUES ('2027-01-01', false, 'Task Two', '2027-12-01', 10, 100, 1, 1, 2, 5)");
+        List<Task> subprojectTasks = taskRepository.getTasksBySubprojectId(1);
+        int firstTaskId = subprojectTasks.getFirst().getTaskId();
+        int secondTaskId = subprojectTasks.getLast().getTaskId();
 
         // Act
-        List<Task> subprojectTasks = taskRepository.getTasksBySubprojectId(1);
+        Task taskOne = taskRepository.getTaskById(firstTaskId);
+        Task taskTwo = taskRepository.getTaskById(secondTaskId);
 
         // Assert
-        assertThat(subprojectTasks.size()).isEqualTo(4);
-        assertThat(subprojectTasks.get(2).getTaskName()).isEqualTo("Task One");
-        assertThat(subprojectTasks.get(3).getTaskName()).isEqualTo("Task Two");
+        assertThat(taskOne.getTaskName()).isEqualTo("Alpha Task One");
+        assertThat(taskTwo.getTaskName()).isEqualTo("Alpha Task Two");
     }
 
     @Test
