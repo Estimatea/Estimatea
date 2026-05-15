@@ -4,18 +4,18 @@ import java.time.LocalDate;
 
 public class Project {
     private int projectId;
-    private String projectName;
     private LocalDate startDate;
     private boolean completed;
+    private String projectName;
     private int sumTime;
     private int sumPrice;
     private LocalDate deadLine;
     private int projectManager; // Foreign key from employee table
 
-    public Project(String projectName, LocalDate startDate, boolean completed, int sumTime, int sumPrice, LocalDate deadLine, int projectManager) {
-        this.projectName = projectName;
+    public Project(LocalDate startDate, boolean completed, String projectName, int sumTime, int sumPrice, LocalDate deadLine, int projectManager) {
         this.startDate = startDate;
         this.completed = completed;
+        this.projectName = projectName;
         this.sumTime = sumTime;
         this.sumPrice = sumPrice;
         this.deadLine = deadLine;
