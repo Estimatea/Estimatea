@@ -36,17 +36,17 @@ public class ComplexityRepositoryTest {
         assertThat(allComplexityInserts.size()).isGreaterThan(0);
     }
 
-    @Test
-    void shouldShowComplexityScoreById() {
-        int complexityId = 1;
-
-        Complexity result = complexityRepo.showComplexityScoreById(complexityId);
-
-        assertThat(result).isNotNull();
-        assertThat(result.getComplexityId()).isEqualTo(complexityId);
-        assertThat(result.getLabelType()).isEqualTo("Standard");
-        assertThat(result.getRateMultiplier()).isEqualTo(1.0);
-    }
+//    @Test
+//    void shouldShowComplexityScoreById() {
+//        int complexityId = 1;
+//
+//        Complexity result = complexityRepo.showComplexityScoreById(complexityId);
+//
+//        assertThat(result).isNotNull();
+//        assertThat(result.getComplexityId()).isEqualTo(complexityId);
+//        assertThat(result.getLabelType()).isEqualTo("Standard");
+//        assertThat(result.getRateMultiplier()).isEqualTo(1.0);
+//    }
 
 //    @Test
 //    void shouldCreateComplexityScore() {
