@@ -15,7 +15,12 @@ public class EmployeeService {
     }
 
     public List<Employee> getAllEmployeeInCompany() { // Retrieve all employees in organization
-        return employeeRepository.getAllEmployeesInCompany();
+        List<Employee> employees = employeeRepository.getAllEmployeesInCompany();
+
+        if (employees.isEmpty()) {
+            throw new NotFoundException("No employees exists");
+        }
+        return employees;
     }
 
         // MAIN PROJECT EMPLOYEES
@@ -25,7 +30,6 @@ public class EmployeeService {
             if (projectEmployees.isEmpty()) {
                 throw new NotFoundException("No employees found on given project: " + projectId);
             }
-
             return projectEmployees;
     }
 
@@ -54,6 +58,21 @@ public class EmployeeService {
     }
 
     public void removeEmployeeFromProject(int employeeId, int projectId) { // Removes employee from project and checks if ID exists in database
+        List<Employee> employeesOnProject = employeeRepository.getAllEmployeesForProject(projectId);
+        boolean employeeFound = false;
+
+        for (Employee e : employeesOnProject) {
+
+            if (e.getEmployeeId() == employeeId) {
+                employeeFound = true;
+                break;
+            }
+        }
+
+        if (!employeeFound) {
+            throw new NotFoundException("No employee with given id exists on project " + projectId);
+        }
+
         int rowsAffected = employeeRepository.removeEmployeeFromProject(employeeId, projectId);
 
         if (rowsAffected == 0) {

@@ -46,13 +46,13 @@ public class ProjectRepository {
         return jdbc.queryForObject(FIND_PROJECT_BY_ID, projectMapper, projectId);
     }
 
-    public void updateProject(Project project) {
-        jdbc.update(UPDATE_PROJECT, project.getProjectName(), project.isCompleted(),
+    public int updateProject(Project project) {
+        return jdbc.update(UPDATE_PROJECT, project.getProjectName(), project.isCompleted(),
                                     project.getSumTime(), project.getSumPrice(), project.getDeadLine(), project.getProjectManager());
     }
 
-    public void deleteProject(int projectId) {
-        jdbc.update(DELETE_PROJECT, projectId);
+    public int deleteProject(int projectId) {
+        return jdbc.update(DELETE_PROJECT, projectId);
     }
 
         // CRUD QUREY's For SORTING
