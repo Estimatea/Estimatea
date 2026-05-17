@@ -21,6 +21,7 @@ public class SubProjectRepository {
     private final String DELETE_SUBPROJECT = "DELETE FROM subproject WHERE sub_id = ?";
     private final String EDIT_DEADLINE = "UPDATE subproject SET deadline = ? WHERE sub_id = ?";
     private final String EDIT_COMPLETED = "UPDATE subproject SET completed = ? WHERE sub_id = ?";
+    private final String UPDATE_SUBPROJECT = "UPDATE subproject SET sub_name = ?, deadline = ?, completed = ? WHERE sub_id = ?";
 
     public SubProjectRepository(SubProjectMapper subMapper, JdbcTemplate jdbc) {
         this.subMapper = subMapper;
@@ -35,18 +36,19 @@ public class SubProjectRepository {
     }
 
     //returns individual subproject
-    public SubProject getSubProjectById(int subProjectId) {
+    public SubProject findSubProjectById(int subProjectId) {
         return jdbc.queryForObject(GET_SUBPROJECT_BY_ID, subMapper, subProjectId);
     }
 
     //returns list of subprojects attributed to a project
-    public List<SubProject> getSubProjectsByProjectId(int projectId) {
+    public List<SubProject> findSubProjectsByProjectId(int projectId) {
         return jdbc.query(GET_SUBPROJECTS_BY_PROJECT, subMapper, projectId);
     }
 
     //creates a new subproject with information from thymeleaf
-    public void createSubProject(SubProject subProject) {
-        jdbc.update(CREATE_SUBPROJECT, subProject.getSubName(), subProject.getStartDate(), subProject.getDeadLine(), subProject.completed(), subProject.getProjectId());
+    public int createSubProject(SubProject subProject) {
+        return jdbc.update(CREATE_SUBPROJECT, subProject.getSubName(), subProject.getStartDate(),
+                subProject.getDeadLine(), subProject.completed(), subProject.getProjectId());
     }
 
     //deletes a subproject from the db
@@ -62,6 +64,11 @@ public class SubProjectRepository {
     //changes whether a subproject is set as completed
     public void editSubProjectCompleted(boolean Completed, int subProjectId) {
         jdbc.update(EDIT_COMPLETED, Completed, subProjectId);
+    }
+
+    //UPDATE SUBPROJECT
+    public int updateSubProject(SubProject subProject) {
+        return jdbc.update(UPDATE_SUBPROJECT, subProject.getSubName(), subProject.getDeadLine(), subProject.completed(), subProject.getSubId());
     }
 
 }
