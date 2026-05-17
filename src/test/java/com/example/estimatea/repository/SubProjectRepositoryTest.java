@@ -82,6 +82,7 @@ public class SubProjectRepositoryTest {
         subProjectRepo.deleteSubProject(subProjectToDelete);
 
         List<SubProject> seededSubProjectsAfterDeletion = subProjectRepo.getAllSubProjects();
+
         assertThat(seededSubProjectsAfterDeletion).hasSize(initialSize - 1);
         assertThat(seededSubProjectsAfterDeletion).extracting(SubProject::getSubId).doesNotContain(subProjectToDelete);
     }

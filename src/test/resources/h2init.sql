@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS task(
     task_time INT,
     task_price INT,
     project_id INT NOT NULL,
-    subproject_id INT,
+    sub_id INT,
     employee_id INT,
     current_complexity_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE,

@@ -52,8 +52,8 @@ public class ProjectRepository {
                 project.getProjectManager(), project.getProjectId());
     }
 
-    public void deleteProject(int projectId) {
-        jdbc.update(DELETE_PROJECT, projectId);
+    public int deleteProject(int projectId) {
+        return jdbc.update(DELETE_PROJECT, projectId);
     }
 
         // CRUD QUREY's For SORTING

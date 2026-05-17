@@ -39,19 +39,8 @@ public class EmployeeRepositoryTest {
 
         // Project Employees
     @Test
-    void shouldGetAllProjectEmployeesById() {
-        int projectId = 1;
-
-        List<Integer> projectEmployees = employeeRepository.getAllEmployeeIdsForProject(projectId);
-
-        assertThat(projectEmployees).isNotNull();
-        assertThat(projectEmployees).hasSizeGreaterThan(0);
-        assertThat(projectEmployees.size()).isEqualTo(3);
-    }
-
-    @Test
     void shouldShowAllEmployeesForGivenProject() {
-        int projectId = 1;
+        int projectId = 1; // Alpha Solutions
 
         List<Employee> seededProjectEmployeeList = employeeRepository.getAllEmployeesForProject(projectId);
 
@@ -61,55 +50,44 @@ public class EmployeeRepositoryTest {
 
     @Test
     void shouldAddEmployeeToProject() {
-        int jackieId = 4; // Employee Nr. 4
-        int projectId = 1;
+        int testEmployeeId = 4;  // Employee Nr. 4 Jackie
+        int projectId = 1; // Alpha Solutions
 
-        List<Integer> employeesBeforeAdding = employeeRepository.getAllEmployeeIdsForProject(projectId);
-        assertThat(employeesBeforeAdding).doesNotContain(jackieId);
+        List<Employee> employeesBeforeAdding = employeeRepository.getAllEmployeesForProject(projectId);
+        assertThat(employeesBeforeAdding).extracting(Employee::getEmployeeId).doesNotContain(testEmployeeId);
 
         int initialSize = employeesBeforeAdding.size();
 
-        employeeRepository.addEmployeeToProject(jackieId, projectId); // Adds Jackie to ProjectId 1
+        employeeRepository.addEmployeeToProject(testEmployeeId, projectId); // Adds TestEmployee to ProjectId 1
 
-        List<Integer> afterAddingNewEmployee = employeeRepository.getAllEmployeeIdsForProject(projectId);
+        List<Employee> afterAddingNewEmployee = employeeRepository.getAllEmployeesForProject(projectId);
 
         assertThat(afterAddingNewEmployee).hasSize(initialSize + 1);
-        assertThat(afterAddingNewEmployee).contains(jackieId);
+        assertThat(afterAddingNewEmployee).extracting(Employee::getEmployeeId).contains(testEmployeeId);
     }
 
     @Test
     void shouldRemoveEmployeeFromProject() {
-        int joakimId = 1;
-        int projectId = 1;
+        int testEmployee = 1; // Employee Nr. 1 Joakim
+        int projectId = 1; // Alpha Solutions
 
-        List<Integer> employeesBeforeRemoval = employeeRepository.getAllEmployeeIdsForProject(projectId);
-        assertThat(employeesBeforeRemoval).contains(joakimId);
+        List<Employee> employeesBeforeRemoval = employeeRepository.getAllEmployeesForProject(projectId);
+        assertThat(employeesBeforeRemoval).extracting(Employee::getEmployeeId).contains(testEmployee);
 
         int initialSize = employeesBeforeRemoval.size();
 
-        employeeRepository.removeEmployeeFromProject(joakimId, projectId);
+        employeeRepository.removeEmployeeFromProject(testEmployee, projectId);
 
-        List<Integer> employeesAfterRemoval = employeeRepository.getAllEmployeeIdsForProject(projectId);
+        List<Employee> employeesAfterRemoval = employeeRepository.getAllEmployeesForProject(projectId);
 
         assertThat(employeesAfterRemoval).hasSize(initialSize - 1);
-        assertThat(employeesAfterRemoval).doesNotContain(joakimId);
+        assertThat(employeesAfterRemoval).extracting(Employee::getEmployeeId).doesNotContain(testEmployee);
     }
 
         // Sub-Project Employees
     @Test
-    void shouldRetrieveAllEmployeesFromSubProjectById() {
-        int subProjectId = 1;
-
-        List<Integer> subProjectEmployeesById = employeeRepository.getAllEmployeesByIdForSubProject(subProjectId);
-
-        assertThat(subProjectEmployeesById).isNotNull();
-        assertThat(subProjectEmployeesById).hasSizeGreaterThan(0);
-        assertThat(subProjectEmployeesById.size()).isEqualTo(2);
-    }
-
-    @Test
     void shouldRetrieveAllEmployeesFromSubProject() {
-        int subProjectId = 1;
+        int subProjectId = 1; // Project calculation tool
 
         List<Employee> subProjectEmployees = employeeRepository.getAllEmployeesForSubProject(subProjectId);
 
@@ -119,39 +97,60 @@ public class EmployeeRepositoryTest {
 
     @Test
     void shouldAssignEmployeeToSubProject() {
-        int simonId = 3;
-        int subProjectId = 1;
+        int testEmployeeId = 3; // Employee Nr.3 Simon
+        int subProjectId = 1; // Project calculation tool
 
-        List<Integer> employeesBeforeAdding = employeeRepository.getAllEmployeesByIdForSubProject(subProjectId);
+        List<Employee> employeesBeforeAdding = employeeRepository.getAllEmployeesForSubProject(subProjectId);
 
-        assertThat(employeesBeforeAdding).doesNotContain(simonId);
+        assertThat(employeesBeforeAdding).extracting(Employee::getEmployeeId).doesNotContain(testEmployeeId);
 
         int initialSize = employeesBeforeAdding.size();
 
-        employeeRepository.assignEmployeeToSubProject(simonId, subProjectId); // Assigns Simon with EmployeeId 3
+        employeeRepository.assignEmployeeToSubProject(testEmployeeId, subProjectId); // Assigns Simon with EmployeeId 3
 
-        List<Integer> afterAddingEmployeeToSubProject = employeeRepository.getAllEmployeesByIdForSubProject(subProjectId);
+        List<Employee> afterAddingEmployeeToSubProject = employeeRepository.getAllEmployeesForSubProject(subProjectId);
 
         assertThat(afterAddingEmployeeToSubProject).hasSize(initialSize + 1);
-        assertThat(afterAddingEmployeeToSubProject).contains(simonId);
+        assertThat(afterAddingEmployeeToSubProject).extracting(Employee::getEmployeeId).contains(testEmployeeId);
     }
 
     @Test
     void shouldRemoveEmployeeFromSubProject() {
-        int joakimId = 1;
-        int subProjectId = 1;
+        int testEmployee = 1; // Employee nr. 1 Joakim
+        int subProjectId = 1; // Project calculation tool
 
-        List<Integer> employeesBeforeRemoval = employeeRepository.getAllEmployeesByIdForSubProject(subProjectId);
+        List<Employee> employeesBeforeRemoval = employeeRepository.getAllEmployeesForSubProject(subProjectId);
 
-        assertThat(employeesBeforeRemoval).contains(joakimId);
+        assertThat(employeesBeforeRemoval).extracting(Employee::getEmployeeId).contains(testEmployee);
 
         int initialSize = employeesBeforeRemoval.size();
 
-        employeeRepository.removeEmployeeFromSubProject(joakimId,subProjectId); // Removes Joakim from subprojectId 1
+        employeeRepository.removeEmployeeFromSubProject(testEmployee,subProjectId); // Removes Joakim from subprojectId 1
 
-        List<Integer> employeesAfterRemoval = employeeRepository.getAllEmployeesByIdForSubProject(subProjectId);
+        List<Employee> employeesAfterRemoval = employeeRepository.getAllEmployeesForSubProject(subProjectId);
 
         assertThat(employeesAfterRemoval).hasSize(initialSize - 1);
-        assertThat(employeesAfterRemoval).doesNotContain(joakimId);
+        assertThat(employeesAfterRemoval).extracting(Employee::getEmployeeId).doesNotContain(testEmployee);
     }
 }
+
+//    @Test
+//    void shouldGetAllProjectEmployeesById() {
+//        int projectId = 1;
+//
+//        List<Integer> projectEmployees = employeeRepository.getAllEmployeeIdsForProject(projectId);
+//
+//        assertThat(projectEmployees).isNotNull();
+//        assertThat(projectEmployees).hasSizeGreaterThan(0);
+//        assertThat(projectEmployees.size()).isEqualTo(3);
+//    }
+
+//    void shouldRetrieveAllEmployeesIdsFromSubProject() {
+//        int subProjectId = 1;
+//
+//        List<Integer> subProjectEmployeesById = employeeRepository.getAllEmployeesIdsForSubProject(subProjectId);
+//
+//        assertThat(subProjectEmployeesById).isNotNull();
+//        assertThat(subProjectEmployeesById).hasSizeGreaterThan(0);
+//        assertThat(subProjectEmployeesById.size()).isEqualTo(2);
+//    }
