@@ -37,8 +37,8 @@ public class ProjectRepository {
         return jdbc.query(GET_ALL_PROJECTS, projectMapper);
     }
 
-    public void createNewProject(Project project) {
-        jdbc.update(CREATE_NEW_PROJECT, project.getProjectName(), project.getStartDate(), project.isCompleted(),
+    public int createNewProject(Project project) {
+        return jdbc.update(CREATE_NEW_PROJECT, project.getProjectName(), project.getStartDate(), project.isCompleted(),
                                         project.getSumTime(), project.getSumPrice(), project.getDeadLine(), project.getProjectManager());
     }
 
