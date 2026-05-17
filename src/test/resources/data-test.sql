@@ -12,9 +12,9 @@ VALUES ('Joakim', 'joakim_dev', 'password_123', 1),
        ('Jackie', 'jackie_dev', 'password_777', 3);
 
 -- 3. projects
-INSERT INTO project (project_name, start_date, deadline, project_manager)
-VALUES ('Alpha Solutions', '2026-01-01', '2026-12-31', 1),
-       ('AI Model', '2027-01-01', '2028-01-01', 2);
+INSERT INTO project (start_date, completed, project_name, sum_time, sum_price, deadline, project_manager)
+VALUES ('2026-01-01', false, 'Alpha Solutions', 120, 1500, '2026-12-31', 1),
+       ('2027-01-01', false, 'AI Model', 300, 4500, '2028-01-01', 2);
 
 -- 4. subprojects
 INSERT INTO subproject (sub_name, start_date, deadline, completed, project_id)

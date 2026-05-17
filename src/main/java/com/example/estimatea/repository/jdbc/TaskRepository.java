@@ -57,8 +57,8 @@ public class TaskRepository {
     }
 
     // Delete a single Task
-    public void deleteTask(Task task) {
-        jdbc.update(DELETE_TASK, task.getTaskId());
+    public void deleteTask(int taskId) {
+        jdbc.update(DELETE_TASK, taskId);
     }
 
     // Completing a single task (works for both a Project and Subproject)
