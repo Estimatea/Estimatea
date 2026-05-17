@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SubProjectRepositoryTest {
 
     @Autowired
-    private SubProjectRepository subProjectRepo;
+    private SubProjectRepository subProjectRepository;
 
     @Test
     void contextLoads() {}
@@ -31,7 +31,7 @@ public class SubProjectRepositoryTest {
 
     @Test
     void shouldShowListOfSubProjects() {
-        List<SubProject> subProjects = subProjectRepo.getAllSubProjects(); // GET_ALL_SUBPROJECTS
+        List<SubProject> subProjects = subProjectRepository.getAllSubProjects(); // GET_ALL_SUBPROJECTS
 
         assertNotNull(subProjects);
         assertThat(subProjects.size()).isEqualTo(2);
@@ -41,10 +41,10 @@ public class SubProjectRepositoryTest {
 
     @Test
     void shouldGetSubprojectsById() {
-        List<SubProject> allSubProjects = subProjectRepo.getAllSubProjects();
+        List<SubProject> allSubProjects = subProjectRepository.getAllSubProjects();
         int subProjectId = allSubProjects.getFirst().getSubId();
 
-        SubProject subProject = subProjectRepo.getSubProjectById(subProjectId); // GET_SUBPROJECT_BY_ID
+        SubProject subProject = subProjectRepository.findSubProjectById(subProjectId); // GET_SUBPROJECT_BY_ID
 
         assertThat(subProject.getSubId()).isEqualTo(subProjectId);
         assertThat(subProject.completed()).isEqualTo(false);
@@ -53,9 +53,9 @@ public class SubProjectRepositoryTest {
 
     @Test
     void shouldGetSubprojectByProjectId() {
-        int subProjectId = subProjectRepo.getAllSubProjects().getFirst().getProjectId();
+        int subProjectId = subProjectRepository.getAllSubProjects().getFirst().getProjectId();
 
-        SubProject subprojectOne = subProjectRepo.getSubProjectById(subProjectId); // GET_SUB_PROJECT_BY_ID - Gets Subproject with ID 1
+        SubProject subprojectOne = subProjectRepository.findSubProjectById(subProjectId); // GET_SUB_PROJECT_BY_ID - Gets Subproject with ID 1
 
         assertThat(subprojectOne).isNotNull();
         assertThat(subprojectOne.getSubName()).isEqualTo("Project calculation tool");
@@ -65,8 +65,8 @@ public class SubProjectRepositoryTest {
     void shouldCreateSubProject() {
         SubProject subProject = new SubProject("Created sub project", /* Start_date */ LocalDate.of(2026, 2, 3), /* Deadline */ LocalDate.of(2026, 2, 8), false, 1);
 
-        subProjectRepo.createSubProject(subProject);
-        List<SubProject> allSubProjects = subProjectRepo.getAllSubProjects();
+        subProjectRepository.createSubProject(subProject);
+        List<SubProject> allSubProjects = subProjectRepository.getAllSubProjects();
 
         assertThat(allSubProjects).hasSize(3);
         assertThat(allSubProjects).extracting(SubProject::getSubName).contains("Created sub project");
@@ -74,14 +74,14 @@ public class SubProjectRepositoryTest {
 
     @Test
     void shouldDeleteSubProject() {
-        List<SubProject> allSubProjects = subProjectRepo.getAllSubProjects();
+        List<SubProject> allSubProjects = subProjectRepository.getAllSubProjects();
 
         int initialSize = allSubProjects.size();
         int subProjectToDelete = allSubProjects.getFirst().getSubId();
 
-        subProjectRepo.deleteSubProject(subProjectToDelete);
+        subProjectRepository.deleteSubProject(subProjectToDelete);
 
-        List<SubProject> seededSubProjectsAfterDeletion = subProjectRepo.getAllSubProjects();
+        List<SubProject> seededSubProjectsAfterDeletion = subProjectRepository.getAllSubProjects();
 
         assertThat(seededSubProjectsAfterDeletion).hasSize(initialSize - 1);
         assertThat(seededSubProjectsAfterDeletion).extracting(SubProject::getSubId).doesNotContain(subProjectToDelete);
@@ -89,20 +89,20 @@ public class SubProjectRepositoryTest {
 
     @Test
     void shouldEditDeadline() {
-        int subProjectId = subProjectRepo.getAllSubProjects().getFirst().getSubId();
+        int subProjectId = subProjectRepository.getAllSubProjects().getFirst().getSubId();
 
         // OLD DEADLINE : '2026-03-01'
-        subProjectRepo.editSubProjectDeadLine(LocalDate.of(2026, 3, 5), subProjectId);
+        subProjectRepository.editSubProjectDeadLine(LocalDate.of(2026, 3, 5), subProjectId);
 
-        assertThat(subProjectRepo.getAllSubProjects().getFirst().getDeadLine()).isEqualTo(LocalDate.of(2026, 3, 5));
+        assertThat(subProjectRepository.getAllSubProjects().getFirst().getDeadLine()).isEqualTo(LocalDate.of(2026, 3, 5));
     }
 
     @Test
     void shouldSetSubProjectCompleted() {
-        int subProjectId = subProjectRepo.getAllSubProjects().getFirst().getSubId();
+        int subProjectId = subProjectRepository.getAllSubProjects().getFirst().getSubId();
 
-        subProjectRepo.editSubProjectCompleted(true, subProjectId);
+        subProjectRepository.editSubProjectCompleted(true, subProjectId);
 
-        assertThat(subProjectRepo.getAllSubProjects().getFirst().completed()).isTrue();
+        assertThat(subProjectRepository.getAllSubProjects().getFirst().completed()).isTrue();
     }
 }

@@ -15,7 +15,7 @@ public class TaskRepository {
 
     // SQL statements for creating a single Task in both Projects and Subprojects
     private final String CREATE_TASK_FOR_PROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id,  employee_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, subproject_id, employee_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, sub_id, employee_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     //SQL statement for editing a task in both Projects and Subprojects
     private final String EDIT_TASK = "UPDATE task SET start_date = ?, completed = ?, task_name = ?, deadline = ?, task_time = ?, task_price = ?, employee_id = ?, current_complexity_id = ? WHERE task_id = ?";
@@ -31,7 +31,7 @@ public class TaskRepository {
 
     // SQL statements for getting tasks in both Projects and Subprojects
     private final String GET_TASKS_BY_PROJECT_ID = "SELECT * FROM task WHERE project_id = ?";
-    private final String GET_TASKS_BY_SUBPROJECT_ID = "SELECT * FROM task WHERE subproject_id = ?";
+    private final String GET_TASKS_BY_SUB_ID = "SELECT * FROM task WHERE sub_id = ?";
 
     // SQL STATEMENTS FOR COMPLEXITY SCORES COUPLED TO TASK
     private final String UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK = "UPDATE task SET current_complexity_id = ? WHERE task_id = ?";
@@ -78,7 +78,7 @@ public class TaskRepository {
     }
     //GET Tasks for a subproject by ID
     public List<Task> getTasksBySubprojectId(int subprojectId) {
-        return jdbc.query(GET_TASKS_BY_SUBPROJECT_ID, taskMapper, subprojectId);
+        return jdbc.query(GET_TASKS_BY_SUB_ID, taskMapper, subprojectId);
     }
 
     // Update the complexity score on a single task

@@ -46,7 +46,7 @@ public class ProjectRepositoryTest {
         Project project = new Project(LocalDate.of(2027, 1, 1), false, "Test Project", 0, 0, LocalDate.of(2027, 12, 31), 1);
 
         //Act
-        projectRepository.createProject(project);
+        projectRepository.createNewProject(project);
 
         //Assert
         List<Project> allProjects = projectRepository.getAllProjects();
