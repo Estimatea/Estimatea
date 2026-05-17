@@ -26,7 +26,6 @@ public class EmployeeRepository {
     private final String REMOVE_EMPLOYEE_FROM_PROJECT = "DELETE FROM project_employee WHERE project_employee_id = ? AND project_id = ?";
 
         // SQL statements for subproject employees
-    // CHECK IN SERVICE THAT THEY ARE PROJECT EMPLOYEES
     private final String GET_ALL_EMPLOYEES_FOR_SUBPROJECT = "SELECT e.* FROM employee e " +
                                                             "JOIN project_employee pe ON e.employee_id = pe.employee_id " +
                                                             "JOIN sub_project_employee spe ON pe.project_employee_id = spe.project_employee_id " +

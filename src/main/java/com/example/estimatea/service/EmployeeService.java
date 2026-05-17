@@ -1,6 +1,4 @@
 package com.example.estimatea.service;
-import com.example.estimatea.exception.DataAccessException;
-import com.example.estimatea.exception.DuplicateKeyException;
 import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.Employee;
 import com.example.estimatea.repository.jdbc.EmployeeRepository;
@@ -50,6 +48,8 @@ public class EmployeeService {
 
         // SUBPROJECT EMPLOYEES
     public void addEmployeeToSubProject(int employeeId, int subProject) {
+       // boolean isProjectEmployee = employeeRepository.getAllEmployeesForProject()
+
         int rowsAffected = employeeRepository.assignEmployeeToSubProject(employeeId, subProject);
 
         if (rowsAffected == 0) {

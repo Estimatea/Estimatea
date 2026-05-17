@@ -27,7 +27,8 @@ public class SubProjectRepository {
         this.jdbc = jdbc;
     }
 
-    //CRUD Query for subprojects
+        //CRUD Query for subprojects
+
     //returns all subprojects, sorted by projectId, ascending
     public List<SubProject> getAllSubProjects() {
         return jdbc.query(GET_ALL_SUBPROJECTS, subMapper);
@@ -44,9 +45,8 @@ public class SubProjectRepository {
     }
 
     //creates a new subproject with information from thymeleaf
-    public SubProject createSubProject(SubProject subProject) {
+    public void createSubProject(SubProject subProject) {
         jdbc.update(CREATE_SUBPROJECT, subProject.getSubName(), subProject.getStartDate(), subProject.getDeadLine(), subProject.completed(), subProject.getProjectId());
-        return subProject;
     }
 
     //deletes a subproject from the db
