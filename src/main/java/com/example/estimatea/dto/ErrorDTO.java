@@ -1,7 +1,10 @@
 package com.example.estimatea.dto;
 
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 
+@Getter
 public class ErrorDTO {
 
     private final int status;
@@ -13,15 +16,5 @@ public class ErrorDTO {
         this.message = message;
         this.timeStamp = LocalDateTime.now();
     }
-    public int getStatus() {
-        return status;
-    }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
-    }
 }

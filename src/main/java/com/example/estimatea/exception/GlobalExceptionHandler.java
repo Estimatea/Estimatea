@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-//    NotFoundException        → 404 Not Found
-//    DuplicateKeyException    → 409 Conflict
-//    IllegalArgumentException → 400 Bad Request
-//    DataAccessException      → 500 Internal Server Error
+        //    NotFoundException        → 404 Not Found
+        //    DuplicateKeyException    → 409 Conflict
+        //    IllegalArgumentException → 400 Bad Request
+        //    DataAccessException      → 500 Internal Server Error
 
-    @ExceptionHandler(ClassNotFoundException.class) // --> Handles 404 Not Found
-    public ResponseEntity<ErrorDTO> handlesNotFoundException(ClassNotFoundException e) {
+    @ExceptionHandler(NotFoundException.class) // --> Handles 404 Not Found
+    public ResponseEntity<ErrorDTO> handlesNotFoundException(NotFoundException e) {
         ErrorDTO error = new ErrorDTO(404, e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
@@ -27,6 +27,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+        // Thrown by Spring/Jdbc automatically
     @ExceptionHandler(DuplicateKeyException.class) // --> Handles 409 Conflict
     public ResponseEntity<ErrorDTO> handlesDuplicateKeyException(DuplicateKeyException e) {
         ErrorDTO error = new ErrorDTO(409, e.getMessage());

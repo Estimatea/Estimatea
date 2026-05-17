@@ -3,7 +3,6 @@ import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.Employee;
 import com.example.estimatea.repository.jdbc.EmployeeRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -31,6 +30,22 @@ public class EmployeeService {
     }
 
     public void addEmployeeToProject(int employeeId, int projectId) { // Adds employee to project and check if ID exists in database
+        List<Employee> employeesInCompany = employeeRepository.getAllEmployeesInCompany();
+        boolean isEmpInCompanyDatabase = false;
+
+        for (Employee e : employeesInCompany) {
+
+            if (e.getEmployeeId() == employeeId) {
+                isEmpInCompanyDatabase = true;
+                break;
+            }
+        }
+
+        if (!isEmpInCompanyDatabase) {
+            throw new IllegalArgumentException("Employee not found in company database " + employeeId);
+        }
+
+        // Adds employee to Main project
         int rowsAffected = employeeRepository.addEmployeeToProject(employeeId, projectId);
 
         if (rowsAffected == 0) {
@@ -47,13 +62,27 @@ public class EmployeeService {
     }
 
         // SUBPROJECT EMPLOYEES
-    public void addEmployeeToSubProject(int employeeId, int subProject) {
-       // boolean isProjectEmployee = employeeRepository.getAllEmployeesForProject()
+    public void addEmployeeToSubProject(int projectId, int employeeId, int subProject) {
+        List<Employee> currentProject = employeeRepository.getAllEmployeesForProject(projectId);
+        boolean isEmpOnMainProject = false;
 
+        for (Employee e : currentProject) {
+
+            if (e.getEmployeeId() == employeeId) {
+                isEmpOnMainProject = true;
+                break;
+            }
+        }
+
+        if (!isEmpOnMainProject) {
+            throw new IllegalArgumentException("Invalid assignment - employee not found on MAIN project " + projectId);
+        }
+
+        // Adds employee to subProject
         int rowsAffected = employeeRepository.assignEmployeeToSubProject(employeeId, subProject);
 
         if (rowsAffected == 0) {
-            throw new NotFoundException("Employee not found " + subProject + " EMP: " + employeeId);
+            throw new NotFoundException("Employee not found " + projectId + " EMP: " + employeeId);
         }
     }
 
