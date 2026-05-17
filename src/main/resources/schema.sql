@@ -1,6 +1,5 @@
 DROP SCHEMA IF EXISTS estimatea;
 CREATE SCHEMA estimatea;
-USE estimatea;
 
 -- ROLE
 CREATE TABLE IF NOT EXISTS role(
@@ -79,11 +78,11 @@ CREATE TABLE IF NOT EXISTS task(
     task_time INT,
     task_price INT,
     project_id INT NOT NULL,
-    subproject_id INT,
+    sub_id INT,
     employee_id INT,
     current_complexity_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id),
-    FOREIGN KEY (subproject_id) REFERENCES subproject(sub_id),
+    FOREIGN KEY (sub_id) REFERENCES subproject(sub_id),
     FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
     );
 
