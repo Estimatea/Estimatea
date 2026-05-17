@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS subproject(
     deadline DATE,
     completed BOOLEAN DEFAULT FALSE,
     project_id INT,
-    FOREIGN KEY (project_id) REFERENCES project(project_id)
+    FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE
     );
 
 -- SUBPROJECT_EMPLOYEE (Junction TABLE and has PK FK (employee_id, sub_id))
@@ -78,8 +78,8 @@ CREATE TABLE IF NOT EXISTS task(
     subproject_id INT,
     employee_id INT,
     current_complexity_id INT,
-    FOREIGN KEY (project_id) REFERENCES project(project_id),
-    FOREIGN KEY (subproject_id) REFERENCES subproject(sub_id),
+    FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE,
+    FOREIGN KEY (subproject_id) REFERENCES subproject(sub_id) ON DELETE CASCADE,
     FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
     );
 
