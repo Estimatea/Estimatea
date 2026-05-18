@@ -1,4 +1,5 @@
 package com.example.estimatea.model;
+
 import java.time.LocalDate;
 
 public class Task {
@@ -30,7 +31,7 @@ public class Task {
     }
 
     // Used to create task objects
-    public Task(LocalDate startDate, boolean completed, String taskName, LocalDate deadline, int taskTime, int taskPrice, int projectId, int subprojectId, int employeeId ,int currentComplexityId) {
+    public Task(LocalDate startDate, boolean completed, String taskName, LocalDate deadline, int taskTime, int taskPrice, int projectId, int subprojectId, int employeeId, int currentComplexityId) {
         this.startDate = startDate;
         this.completed = completed;
         this.taskName = taskName;
@@ -43,7 +44,8 @@ public class Task {
         this.currentComplexityId = currentComplexityId;
     }
 
-    public Task() {}
+    public Task() {
+    }
 
     public int getTaskId() {
         return taskId;

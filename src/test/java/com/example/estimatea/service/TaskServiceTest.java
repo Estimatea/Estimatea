@@ -13,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -86,6 +85,7 @@ public class TaskServiceTest {
     //
     @Test
     void editTask_shouldEditTask() {
+
         when(taskRepository.editTask(taskMock)).thenReturn(1);
 
         assertDoesNotThrow(() -> taskService.editTask(taskMock));
@@ -158,7 +158,8 @@ public class TaskServiceTest {
     @Test
     void getTaskById_shouldThrowWhenNotFound() {
 
-        when(taskRepository.getTaskById(1)).thenThrow(org.springframework.dao.EmptyResultDataAccessException.class);;
+        when(taskRepository.getTaskById(1)).thenThrow(org.springframework.dao.EmptyResultDataAccessException.class);
+        ;
 
         assertThrows(NotFoundException.class, () -> taskService.getTaskById(1));
     }
@@ -199,14 +200,30 @@ public class TaskServiceTest {
         assertEquals(taskMock, result.getFirst());
     }
 
-//    @Test
-//    void getTasksBy
+    @Test
+    void getTasksBySubprojectId_shouldThrowWhenEmpty() {
+
+        when(taskRepository.getTasksBySubprojectId(1)).thenReturn(List.of());
+
+        assertThrows(NotFoundException.class, () -> taskService.getTasksForSubprojectId(1));
+    }
 
 
+    //Unit test on updateComplexityScore
+    //
+    @Test
+    void updateComplexityScore_shouldUpdateComplexityScore() {
 
+        when(taskRepository.updateComplexityScore(2, 1)).thenReturn(1);
 
+        assertDoesNotThrow(() -> taskService.updateComplexityScore(2, 1));
+    }
 
+    @Test
+    void updateComlexityScore_shouldThrowWhenNoRowsAffected() {
 
+        when(taskRepository.updateComplexityScore(2, 1)).thenReturn(0);
 
-
+        assertThrows(NotFoundException.class, () -> taskService.updateComplexityScore(2, 1));
+    }
 }
