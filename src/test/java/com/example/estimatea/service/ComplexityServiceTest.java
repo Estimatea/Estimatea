@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
@@ -20,8 +19,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class ComplexityServiceTest {
 
-    @Mock
-    private ComplexityRepository complexityRepository;
+   @Mock
+   private ComplexityRepository complexityRepository;
 
    @InjectMocks
    private ComplexityService complexityService;

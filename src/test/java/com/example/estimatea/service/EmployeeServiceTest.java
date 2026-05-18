@@ -68,6 +68,11 @@ public class EmployeeServiceTest {
         verify(employeeRepository).getAllEmployeesForProject(1);
     }
 
+            @Test
+            void shouldHitNotFoundExceptionErrorForEmpByProjectId() { // "No employees found on given project: " + projectId
+                assertThrows(NotFoundException.class, () -> employeeService.getAllEmployeesByProjectId(1));
+            }
+
     @Test
     void shouldAddEmployeeToProject() {
         when(employeeRepository.getAllEmployeesInCompany()).thenReturn(List.of(employeeMock));
@@ -169,14 +174,14 @@ public class EmployeeServiceTest {
     }
 
             @Test
-            void shouldHitIllegalArgumentExceptionWhenRemovingFromSubproject() { //
+            void shouldHitIllegalArgumentExceptionWhenRemovingFromSubproject() { // "Invalid removal - employee not to be found on Subproject with ID: " + subProjectId
                 when(employeeRepository.getAllEmployeesForSubProject(1)).thenReturn(Collections.emptyList());
 
                 assertThrows(IllegalArgumentException.class, () -> employeeService.removeEmployeeFromSubProject(1, 1));
             }
 
             @Test
-            void shouldHitNotFoundExceptionWhenRemovingFromSubProject() { //
+            void shouldHitNotFoundExceptionWhenRemovingFromSubProject() { // "Employee not found " + subProjectId + " EMP: " + employeeId
                 when(employeeRepository.getAllEmployeesForSubProject(1)).thenReturn(List.of(employeeMock));
                 when(employeeRepository.removeEmployeeFromSubProject(1, 1)).thenReturn(0);
 
