@@ -45,7 +45,7 @@ public class ProjectService {
         return project;
     }
 
-    public void updateProject(Project project) {
+    public void editProject(Project project) {
         if (project == null) {
             throw new IllegalArgumentException("No project object received");
         }
@@ -61,7 +61,7 @@ public class ProjectService {
         int rowsAffected = projectRepository.deleteProject(projectId);
 
         if (rowsAffected == 0) {
-            throw new NotFoundException("No project was updated " + projectId);
+            throw new NotFoundException("No project was deleted " + projectId);
         }
     }
 }

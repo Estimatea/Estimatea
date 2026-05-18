@@ -43,27 +43,27 @@ public class TaskRepository {
     }
 
     // Creating Task for both Projects and Subprojects ----- (EVT: Mulighed for at kombinere de to Create metoder til en metode der laver en boolean forespørgsel på id inden man trækker data)
-    public void createTaskForProject(Task projectTask) {
-        jdbc.update(CREATE_TASK_FOR_PROJECT, projectTask.getStartDate(), projectTask.getCompleted(), projectTask.getTaskName(), projectTask.getDeadLine(), projectTask.getTaskTime(), projectTask.getTaskPrice(), projectTask.getProjectId(), projectTask.getEmployeeId(), projectTask.getCurrentComplexityId());
+    public int createTaskForProject(Task projectTask) {
+        return jdbc.update(CREATE_TASK_FOR_PROJECT, projectTask.getStartDate(), projectTask.getCompleted(), projectTask.getTaskName(), projectTask.getDeadLine(), projectTask.getTaskTime(), projectTask.getTaskPrice(), projectTask.getProjectId(), projectTask.getEmployeeId(), projectTask.getCurrentComplexityId());
     }
 
-    public void createTaskForSubproject(Task subTask) {
-        jdbc.update(CREATE_TASK_FOR_SUBPROJECT, subTask.getStartDate(), subTask.getCompleted(), subTask.getTaskName(), subTask.getDeadLine(), subTask.getTaskTime(), subTask.getTaskPrice(), subTask.getProjectId(), subTask.getSubprojectId(), subTask.getEmployeeId(), subTask.getCurrentComplexityId());
+    public int createTaskForSubproject(Task subTask) {
+        return jdbc.update(CREATE_TASK_FOR_SUBPROJECT, subTask.getStartDate(), subTask.getCompleted(), subTask.getTaskName(), subTask.getDeadLine(), subTask.getTaskTime(), subTask.getTaskPrice(), subTask.getProjectId(), subTask.getSubprojectId(), subTask.getEmployeeId(), subTask.getCurrentComplexityId());
     }
 
     // Editing a single Task (works for both Project and Subproject)
-    public void editTask(Task task) {
-        jdbc.update(EDIT_TASK, task.getStartDate(), task.getCompleted(), task.getTaskName(), task.getDeadLine(), task.getTaskTime(), task.getTaskPrice(), task.getEmployeeId(), task.getCurrentComplexityId(), task.getTaskId());
+    public int editTask(Task task) {
+        return jdbc.update(EDIT_TASK, task.getStartDate(), task.getCompleted(), task.getTaskName(), task.getDeadLine(), task.getTaskTime(), task.getTaskPrice(), task.getEmployeeId(), task.getCurrentComplexityId(), task.getTaskId());
     }
 
     // Delete a single Task
-    public void deleteTask(int taskId) {
-        jdbc.update(DELETE_TASK, taskId);
+    public int deleteTask(int taskId) {
+        return jdbc.update(DELETE_TASK, taskId);
     }
 
     // Completing a single task (works for both a Project and Subproject)
-    public void completeTask(Task task) {
-        jdbc.update(COMPLETE_TASK, task.getTaskId());
+    public int completeTask(int taskId) {
+        return jdbc.update(COMPLETE_TASK, taskId);
     }
 
     // Get a single task by ID
@@ -82,8 +82,8 @@ public class TaskRepository {
     }
 
     // Update the complexity score on a single task
-    public void updateComplexityScore(int complexityId, int taskId) {
-        jdbc.update(UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK, complexityId, taskId);
+    public int updateComplexityScore(int complexityId, int taskId) {
+        return jdbc.update(UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK, complexityId, taskId);
     }
 
 
