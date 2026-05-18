@@ -3,6 +3,13 @@ package com.example.estimatea.model;
 public class Role {
 
     private int roleId;
+
+    public Role(int roleId, String roleType, int roleRate) {
+        this.roleId = roleId;
+        this.roleType = roleType;
+        this.roleRate = roleRate;
+    }
+
     private String roleType;
     private int roleRate;
 

@@ -10,7 +10,6 @@ public class SubProject {
     private boolean completed;
     private int projectId;
 
-    // Used to load object from database (Row mapper)
     public SubProject(int subId, String subName, LocalDate startDate, LocalDate deadLine, boolean completed, int projectId) {
         this.subId = subId;
         this.subName = subName;
@@ -20,7 +19,6 @@ public class SubProject {
         this.projectId = projectId;
     }
 
-    // Used to create subprojects
     public SubProject(String subName, LocalDate startDate, LocalDate deadLine, boolean completed, int projectId) {
         this.subName = subName;
         this.startDate = startDate;
