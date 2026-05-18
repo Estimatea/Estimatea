@@ -4,6 +4,15 @@ public class Employee {
 
     private int employeeId;
     private String employeeName;
+
+    public Employee(int employeeId, String employeeName, String employeeUsername, String employeePassword, int roleId) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.employeeUsername = employeeUsername;
+        this.employeePassword = employeePassword;
+        this.roleId = roleId;
+    }
+
     private String employeeUsername;
     private String employeePassword;
     private int roleId; // Foreign key from role table (role_id)

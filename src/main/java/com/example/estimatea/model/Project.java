@@ -3,6 +3,7 @@ package com.example.estimatea.model;
 import java.time.LocalDate;
 
 public class Project {
+
     private int projectId;
     private LocalDate startDate;
     private boolean completed;
@@ -11,6 +12,17 @@ public class Project {
     private int sumPrice;
     private LocalDate deadLine;
     private int projectManager; // Foreign key from employee table
+
+    public Project(int projectId, LocalDate startDate, boolean completed, String projectName, int sumTime, int sumPrice, LocalDate deadLine, int projectManager) {
+        this.projectId = projectId;
+        this.startDate = startDate;
+        this.completed = completed;
+        this.projectName = projectName;
+        this.sumTime = sumTime;
+        this.sumPrice = sumPrice;
+        this.deadLine = deadLine;
+        this.projectManager = projectManager;
+    }
 
     public Project(LocalDate startDate, boolean completed, String projectName, int sumTime, int sumPrice, LocalDate deadLine, int projectManager) {
         this.startDate = startDate;
