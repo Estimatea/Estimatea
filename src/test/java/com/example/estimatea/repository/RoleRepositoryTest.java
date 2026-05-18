@@ -1,6 +1,8 @@
 package com.example.estimatea.repository;
 
+import com.example.estimatea.model.Role;
 import com.example.estimatea.model.Task;
+import com.example.estimatea.repository.jdbc.RoleRepository;
 import com.example.estimatea.repository.jdbc.TaskRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ import java.util.List;
 public class RoleRepositoryTest {
 
     @Autowired
-    private TaskRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
     private JdbcTemplate jdbc;
@@ -38,9 +40,13 @@ public class RoleRepositoryTest {
         assertNotNull(url);
     }
 
-//    @Test
-//    void getAllRolesTest() {
-//        Role role = roleRepository.ge
-//    }
+    @Test
+    void getAllRolesTest() {
+
+        List<Role> roles = roleRepository.getAllRoles();
+
+        assertThat(roles).isNotNull();
+        assertThat(roles.size()).isGreaterThan(0);
+    }
 
 }
