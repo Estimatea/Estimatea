@@ -19,9 +19,9 @@ public class SubProjectRepository {
     private final String GET_SUBPROJECTS_BY_PROJECT = "SELECT * FROM subproject WHERE project_id = ?";
     private final String CREATE_SUBPROJECT = "INSERT INTO subproject (sub_name, start_date, deadline, completed, project_id) VALUES (?,?,?,?,?)";
     private final String DELETE_SUBPROJECT = "DELETE FROM subproject WHERE sub_id = ?";
+    private final String UPDATE_SUBPROJECT = "UPDATE subproject SET sub_name = ?, deadline = ?, completed = ? WHERE sub_id = ?";
     private final String EDIT_DEADLINE = "UPDATE subproject SET deadline = ? WHERE sub_id = ?";
     private final String EDIT_COMPLETED = "UPDATE subproject SET completed = ? WHERE sub_id = ?";
-    private final String UPDATE_SUBPROJECT = "UPDATE subproject SET sub_name = ?, deadline = ?, completed = ? WHERE sub_id = ?";
 
     public SubProjectRepository(SubProjectMapper subMapper, JdbcTemplate jdbc) {
         this.subMapper = subMapper;

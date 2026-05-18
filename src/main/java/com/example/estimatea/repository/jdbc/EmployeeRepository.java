@@ -13,10 +13,15 @@ public class EmployeeRepository {
     private final JdbcTemplate jdbc;
     private final EmployeeMapper employeeMapper;
 
+        // SQL STATEMENTS for Employee Login Handling
+
+    private final String EMPLOYEE_LOGIN = "SELECT * FROM employees WHERE email = ? AND password = ?";
+
         //SQL STATEMENTS FOR employees
+
     private final String GET_COMPANY_EMPLOYEE_LIST = "SELECT * FROM employee";
 
-        // SQL STATEMENTS FOR project_employee Linked to a Project
+    // SQL STATEMENTS FOR project_employee Linked to a Project
     private final String GET_ALL_EMPLOYEES_FOR_PROJECT = "SELECT e.* FROM employee e " +
                                                          "JOIN project_employee pe ON e.employee_id = pe.employee_id " +
                                                          "WHERE pe.project_id = ?";
@@ -25,7 +30,7 @@ public class EmployeeRepository {
     private final String ADD_EMPLOYEE_TO_PROJECT = "INSERT INTO project_employee (employee_id, project_id) VALUES (?, ?)";
     private final String REMOVE_EMPLOYEE_FROM_PROJECT = "DELETE FROM project_employee WHERE project_employee_id = ? AND project_id = ?";
 
-        // SQL statements for subproject employees
+    // SQL statements for subproject employees
     private final String GET_ALL_EMPLOYEES_FOR_SUBPROJECT = "SELECT e.* FROM employee e " +
                                                             "JOIN project_employee pe ON e.employee_id = pe.employee_id " +
                                                             "JOIN sub_project_employee spe ON pe.project_employee_id = spe.project_employee_id " +
@@ -38,6 +43,11 @@ public class EmployeeRepository {
     public EmployeeRepository(JdbcTemplate jdbc, EmployeeMapper employeeMapper) {
         this.jdbc = jdbc;
         this.employeeMapper = employeeMapper;
+    }
+
+    public Employee employeeLogin(String email, String password) {
+        List<Employee> employeeList = jdbc.query(EMPLOYEE_LOGIN, employeeMapper, email, password);
+        return employeeList.getFirst();
     }
 
     public List<Employee> getAllEmployeesInCompany() {
