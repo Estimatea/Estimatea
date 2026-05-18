@@ -98,12 +98,12 @@ public class ProjectServiceTest {
     }
 
             @Test
-            void shouldHitIllegalArgumentExceptionError() {
+            void shouldHitIllegalArgumentExceptionError() { // "No project object received"
                 assertThrows(IllegalArgumentException.class, () -> projectService.editProject(null));
             }
 
             @Test
-            void shouldHitNotFoundExceptionError() {
+            void shouldHitNotFoundExceptionError() { // "No project was updated " + project.getProjectId()
                 when(projectRepository.editProject(projectMock)).thenReturn(0);
                 assertThrows(NotFoundException.class, () -> projectService.editProject(projectMock));
             }
@@ -118,7 +118,7 @@ public class ProjectServiceTest {
     }
 
             @Test
-            void shouldHitNotFoundExceptionWhenDeletingError() {
+            void shouldHitNotFoundExceptionWhenDeletingError() { // "No project was deleted " + projectId
                 when(projectRepository.deleteProject(1)).thenReturn(0);
                 assertThrows(NotFoundException.class, () -> projectService.deleteProject(1));
             }
