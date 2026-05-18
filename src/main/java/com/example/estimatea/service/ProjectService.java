@@ -37,13 +37,12 @@ public class ProjectService {
         }
     }
 
-    public Project findProjectById(int projectId) {
+    public void findProjectById(int projectId) {
         Project project = projectRepository.getProjectById(projectId);
 
         if (project == null) {
             throw new NotFoundException("No project with given ID found " + projectId);
         }
-        return project;
     }
 
     public void editProject(Project project) {
