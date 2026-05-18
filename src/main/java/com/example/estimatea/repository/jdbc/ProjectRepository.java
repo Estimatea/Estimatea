@@ -39,16 +39,17 @@ public class ProjectRepository {
 
     public int createNewProject(Project project) {
         return jdbc.update(CREATE_NEW_PROJECT, project.getProjectName(), project.getStartDate(), project.isCompleted(),
-                                        project.getSumTime(), project.getSumPrice(), project.getDeadLine(), project.getProjectManager());
+                project.getSumTime(), project.getSumPrice(), project.getDeadLine(), project.getProjectManager());
     }
 
-    public Project findProjectById(int projectId) {
+    public Project getProjectById(int projectId) {
         return jdbc.queryForObject(FIND_PROJECT_BY_ID, projectMapper, projectId);
     }
 
-    public int updateProject(Project project) {
-        return jdbc.update(UPDATE_PROJECT, project.getProjectName(), project.isCompleted(),
-                                    project.getSumTime(), project.getSumPrice(), project.getDeadLine(), project.getProjectManager());
+    public int editProject(Project project) {
+       return jdbc.update(UPDATE_PROJECT, project.getProjectName(), project.isCompleted(),
+                project.getSumTime(), project.getSumPrice(), project.getDeadLine(),
+                project.getProjectManager(), project.getProjectId());
     }
 
     public int deleteProject(int projectId) {

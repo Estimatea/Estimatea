@@ -109,9 +109,7 @@ public class TaskRepositoryTest {
         int taskId = taskRepository.getTasksByProjectId(1).getFirst().getTaskId();
 
         // Act
-        Task taskToDelete = new Task();
-        taskToDelete.setTaskId(taskId);
-        taskRepository.deleteTask(taskToDelete);
+       taskRepository.deleteTask(taskId);
 
         // Assert
         assertThat(taskRepository.getTasksByProjectId(1).size()).isEqualTo(1);

@@ -37,7 +37,7 @@ public class ProjectService {
     }
 
     public Project findProjectById(int projectId) {
-        Project project = projectRepository.findProjectById(projectId);
+        Project project = projectRepository.getProjectById(projectId);
 
         if (project == null) {
             throw new NotFoundException("No project with given ID found " + projectId);
@@ -50,7 +50,7 @@ public class ProjectService {
             throw new IllegalArgumentException("No project object received");
         }
 
-        int rowsAffected = projectRepository.updateProject(project);
+        int rowsAffected = projectRepository.editProject(project);
 
         if (rowsAffected == 0) {
             throw new NotFoundException("No project was updated " + project.getProjectId());
