@@ -14,6 +14,16 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
+    // Employee Login
+    public Employee employeeLogin(String email, String password) {
+        Employee employee = employeeRepository.employeeLogin(email, password);
+
+        if (employee == null) {
+            throw new NotFoundException("Invalid email or password");
+        }
+        return employee;
+    }
+
     // Employees in database
     public List<Employee> getAllEmployeeInCompany() { // Retrieve all employees in organization
         List<Employee> employees = employeeRepository.getAllEmployeesInCompany();
