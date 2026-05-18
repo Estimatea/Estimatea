@@ -123,7 +123,7 @@ public class TaskRepositoryTest {
         // Act
         Task taskToComplete = new Task();
         taskToComplete.setTaskId(taskId);
-        taskRepository.completeTask(taskToComplete);
+        taskRepository.completeTask(taskId);
 
         // Assert
         assertThat(taskRepository.getTaskById(taskId).getCompleted()).isEqualTo(true);
