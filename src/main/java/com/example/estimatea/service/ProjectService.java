@@ -29,6 +29,7 @@ public class ProjectService {
         if (project == null) {
             throw new NotFoundException("No project object received");
         }
+
         int rowsAffected = projectRepository.createNewProject(project);
 
         if (rowsAffected == 0) {
