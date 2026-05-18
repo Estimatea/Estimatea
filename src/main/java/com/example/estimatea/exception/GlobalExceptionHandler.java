@@ -1,4 +1,5 @@
 package com.example.estimatea.exception;
+import org.springframework.ui.Model;
 import com.example.estimatea.dto.ErrorDTO;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
@@ -16,27 +17,28 @@ public class GlobalExceptionHandler {
         //    DataAccessException      → 500 Internal Server Error
 
     @ExceptionHandler(NotFoundException.class) // --> Handles 404 Not Found
-    public ResponseEntity<ErrorDTO> handlesNotFoundException(NotFoundException e) {
-        ErrorDTO error = new ErrorDTO(404, e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    public String handlesNotFoundException(NotFoundException e, Model model) {
+        model.addAttribute("error", new ErrorDTO(404, e.getMessage()));
+        return "error";
     }
 
     @ExceptionHandler(IllegalArgumentException.class) // --> Handles 400 Bad Request
-    public ResponseEntity<ErrorDTO> handlesIllegalArgumentException(IllegalArgumentException e) {
-        ErrorDTO error = new ErrorDTO(400, e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    public String handlesIllegalArgumentException(IllegalArgumentException e, Model model) {
+        model.addAttribute("error", new ErrorDTO(400, e.getMessage()));
+        return "error";
     }
 
         // Thrown by Spring/Jdbc automatically
+
     @ExceptionHandler(DuplicateKeyException.class) // --> Handles 409 Conflict
-    public ResponseEntity<ErrorDTO> handlesDuplicateKeyException(DuplicateKeyException e) {
-        ErrorDTO error = new ErrorDTO(409, e.getMessage());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    public String handlesDuplicateKeyException(DuplicateKeyException e, Model model) {
+        model.addAttribute("error", new ErrorDTO(409, e.getMessage()));
+        return "error";
     }
 
     @ExceptionHandler(DataAccessException.class) // --> Handles 500 Internal Server Error
-    public ResponseEntity<ErrorDTO> handlesDataAccessException(DataAccessException e) {
-        ErrorDTO error = new ErrorDTO(500, e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    public String handlesDataAccessException(DataAccessException e, Model model) {
+        model.addAttribute("error", new ErrorDTO(500, e.getMessage()));
+        return "error";
     }
 }
