@@ -16,5 +16,4 @@ public class ErrorDTO {
         this.message = message;
         this.timeStamp = LocalDateTime.now();
     }
-
 }
