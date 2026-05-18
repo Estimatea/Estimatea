@@ -44,7 +44,7 @@ public class SubProjectRepositoryTest {
         List<SubProject> allSubProjects = subProjectRepository.getAllSubProjects();
         int subProjectId = allSubProjects.getFirst().getSubId();
 
-        SubProject subProject = subProjectRepo.findSubProjectById(subProjectId); // GET_SUBPROJECT_BY_ID
+        SubProject subProject = subProjectRepository.findSubProjectById(subProjectId); // GET_SUBPROJECT_BY_ID
 
         assertThat(subProject.getSubId()).isEqualTo(subProjectId);
         assertThat(subProject.completed()).isEqualTo(false);
@@ -55,7 +55,7 @@ public class SubProjectRepositoryTest {
     void shouldGetSubprojectByProjectId() {
         int subProjectId = subProjectRepository.getAllSubProjects().getFirst().getProjectId();
 
-        SubProject subprojectOne = subProjectRepo.findSubProjectById(subProjectId); // GET_SUB_PROJECT_BY_ID - Gets Subproject with ID 1
+        SubProject subprojectOne = subProjectRepository.findSubProjectById(subProjectId); // GET_SUB_PROJECT_BY_ID - Gets Subproject with ID 1
 
         assertThat(subprojectOne).isNotNull();
         assertThat(subprojectOne.getSubName()).isEqualTo("Project calculation tool");
