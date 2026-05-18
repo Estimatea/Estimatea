@@ -34,7 +34,7 @@ public class SubProjectService {
         return subProject;
     }
 
-    public List<SubProject> findSubProjectByProjectId(int projectId) {
+    public List<SubProject> findSubProjectsByProjectId(int projectId) {
         List<SubProject> subprojects = subProjectRepository.findSubProjectsByProjectId(projectId);
 
         if (subprojects.isEmpty()) {
@@ -51,16 +51,24 @@ public class SubProjectService {
         int rowsAffected = subProjectRepository.createSubProject(subProject);
 
         if (rowsAffected == 0) {
-            throw new NotFoundException("No subproject was created " + subProject);
+            throw new NotFoundException("No subproject was created (ID)" + subProject);
         }
     }
 
-    public void updateSubProject(SubProject subProject) {
+    public void shouldDeleteSubproject(int subprojectId) {
+        int rowsAffected = subProjectRepository.deleteSubProject(subprojectId);
+
+        if (rowsAffected == 0) {
+            throw new NotFoundException("No subproject was deleted (ID)" + subprojectId);
+        }
+    }
+
+    public void editSubProject(SubProject subProject) {
         if (subProject == null) {
             throw new IllegalArgumentException("No subproject object received");
         }
 
-        int rowsAffected = subProjectRepository.updateSubProject(subProject);
+        int rowsAffected = subProjectRepository.editSubProject(subProject);
 
         if (rowsAffected == 0) {
             throw new NotFoundException("No project was updated " + subProject.getProjectId());

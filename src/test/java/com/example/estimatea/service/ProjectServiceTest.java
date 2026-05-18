@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -42,15 +43,13 @@ public class ProjectServiceTest {
 
         assertNotNull(currentProjects);
         assertThat(currentProjects.size() == 1);
-        assertThat(currentProjects.getFirst().getProjectId()).isEqualTo(1);
-        assertThat(currentProjects.getFirst().getStartDate()).isEqualTo(LocalDate.of(2026, 1, 1));
-        assertFalse(currentProjects.getFirst().isCompleted());
-        assertThat(currentProjects.getFirst().getProjectName()).isEqualTo("Alpha Solutions");
-        assertThat(currentProjects.getFirst().getSumTime()).isEqualTo(120);
-        assertThat(currentProjects.getFirst().getSumPrice()).isEqualTo(1500);
-        assertThat(currentProjects.getFirst().getDeadLine()).isEqualTo(LocalDate.of(2026,12,31));
-        assertThat(currentProjects.getFirst().getProjectManager()).isEqualTo(1);
+        assertThat(currentProjects.getFirst()).isEqualTo(projectMock);
     }
+            @Test
+            void shouldHitNotFoundExceptionIfEmpty() {
+                when(projectRepository.getAllProjects()).thenReturn(Collections.emptyList());
+                assertThrows(NotFoundException.class, () -> projectService.listAllProjects());
+            }
 
     @Test
     void shouldReturnProjectById() {

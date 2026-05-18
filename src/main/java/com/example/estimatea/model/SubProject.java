@@ -1,7 +1,10 @@
 package com.example.estimatea.model;
 
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Setter
 public class SubProject {
     private int subId;
     private String subName;
@@ -33,16 +36,8 @@ public class SubProject {
         return subId;
     }
 
-    public void setSubId(int subId) {
-        this.subId = subId;
-    }
-
     public String getSubName() {
         return subName;
-    }
-
-    public void setSubName(String subName) {
-        this.subName = subName;
     }
 
 
@@ -50,31 +45,16 @@ public class SubProject {
         return projectId;
     }
 
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
-    }
-
     public LocalDate getStartDate() {
         return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
     }
 
     public LocalDate getDeadLine() {
         return deadLine;
     }
 
-    public void setDeadLine(LocalDate deadLine) {
-        this.deadLine = deadLine;
-    }
-
     public boolean completed() {
         return completed;
     }
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
 }

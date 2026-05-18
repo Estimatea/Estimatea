@@ -52,23 +52,22 @@ public class SubProjectRepository {
     }
 
     //deletes a subproject from the db
-    public void deleteSubProject(int subProjectId) {
-        jdbc.update(DELETE_SUBPROJECT, subProjectId);
-    }
-
-    //edits a subprojects deadline
-    public void editSubProjectDeadLine(LocalDate newDeadLine, int subProjectId) {
-        jdbc.update(EDIT_DEADLINE, newDeadLine, subProjectId);
-    }
-
-    //changes whether a subproject is set as completed
-    public void editSubProjectCompleted(boolean Completed, int subProjectId) {
-        jdbc.update(EDIT_COMPLETED, Completed, subProjectId);
+    public int deleteSubProject(int subProjectId) {
+        return jdbc.update(DELETE_SUBPROJECT, subProjectId);
     }
 
     //UPDATE SUBPROJECT
-    public int updateSubProject(SubProject subProject) {
+    public int editSubProject(SubProject subProject) {
         return jdbc.update(UPDATE_SUBPROJECT, subProject.getSubName(), subProject.getDeadLine(), subProject.completed(), subProject.getSubId());
     }
 
+//    //edits a subprojects deadline
+//    public void editSubProjectDeadLine(LocalDate newDeadLine, int subProjectId) {
+//        jdbc.update(EDIT_DEADLINE, newDeadLine, subProjectId);
+//    }
+//
+//    //changes whether a subproject is set as completed
+//    public void editSubProjectCompleted(boolean Completed, int subProjectId) {
+//        jdbc.update(EDIT_COMPLETED, Completed, subProjectId);
+//    }
 }
