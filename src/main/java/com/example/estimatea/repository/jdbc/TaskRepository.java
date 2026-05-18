@@ -71,11 +71,12 @@ public class TaskRepository {
         return jdbc.queryForObject(GET_TASK_BY_ID, taskMapper, taskId);
     }
 
-            // Get tasks within each Project and Subprojects
+    // Get tasks within each Project and Subprojects
     //GET Tasks for a project by ID
     public List<Task> getTasksByProjectId(int projectId) {
         return jdbc.query(GET_TASKS_BY_PROJECT_ID, taskMapper, projectId);
     }
+
     //GET Tasks for a subproject by ID
     public List<Task> getTasksBySubprojectId(int subprojectId) {
         return jdbc.query(GET_TASKS_BY_SUB_ID, taskMapper, subprojectId);

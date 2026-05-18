@@ -13,7 +13,7 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
 
-    public TaskService (TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
 
@@ -30,7 +30,7 @@ public class TaskService {
         }
     }
 
-    public void createTaskForSubproject (Task subTask) {
+    public void createTaskForSubproject(Task subTask) {
 
         if (subTask == null) {
             throw new NotFoundException("No task object received");
@@ -74,7 +74,7 @@ public class TaskService {
         }
     }
 
-    public Task getTaskById (int taskId) {
+    public Task getTaskById(int taskId) {
 
         Task task = taskRepository.getTaskById(taskId);
 
@@ -114,12 +114,6 @@ public class TaskService {
             throw new NotFoundException("No task found with ID: " + taskId);
         }
     }
-
-
-
-
-
-
 
 
 }

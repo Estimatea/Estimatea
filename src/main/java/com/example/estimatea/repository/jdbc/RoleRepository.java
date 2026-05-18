@@ -1,4 +1,5 @@
 package com.example.estimatea.repository.jdbc;
+
 import com.example.estimatea.model.Role;
 import com.example.estimatea.repository.mapper.RoleMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,7 +16,7 @@ public class RoleRepository {
     private final String GET_ALL_ROLES = "SELECT * FROM role";
 //    private final String GET_ROLE_BY_ID = "SELECT * FROM role WHERE role_id = ?";
 
-    public RoleRepository(JdbcTemplate jdbc,  RoleMapper roleMapper) {
+    public RoleRepository(JdbcTemplate jdbc, RoleMapper roleMapper) {
         this.jdbc = jdbc;
         this.roleMapper = roleMapper;
     }
