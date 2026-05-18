@@ -1,6 +1,5 @@
 package com.example.estimatea.service;
 
-import com.example.estimatea.exception.IllegalArgumentException;
 import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.Task;
 import com.example.estimatea.repository.jdbc.TaskRepository;
@@ -75,14 +74,12 @@ public class TaskService {
     }
 
     public Task getTaskById(int taskId) {
+        try {
+            return taskRepository.getTaskById(taskId);
 
-        Task task = taskRepository.getTaskById(taskId);
-
-        if (task == null) {
+        } catch (org.springframework.dao.EmptyResultDataAccessException e) {
             throw new NotFoundException("No task with given ID found " + taskId);
         }
-
-        return task;
     }
 
     public List<Task> getTasksByProjectId(int projectId) {
