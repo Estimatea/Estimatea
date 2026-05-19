@@ -82,7 +82,34 @@ public class EmployeeControllerTest {
 
         // Employee handling Subproject
 
+    @Test
+    void controllerAddEmployeeToSubProjectForm() throws Exception {
+        when(employeeService.getAllEmployeesByProjectId(1)).thenReturn(List.of(employeeMock));
+
+        mockMvc.perform(get("/employee/subproject/add").param("projectId", "1"))
+                                                        .andExpect(status().isOk())
+                                                        .andExpect(view().name("add-employee-to-subproject"))
+                                                        .andExpect(model().attributeExists("subProjectEmployeeList"));
+
+        verify(employeeService).getAllEmployeesByProjectId(1);
+    }
+
+            @Test
+            void controllerEmployeeAddedToSubProject() throws Exception {
+                mockMvc.perform(post("/employee/subproject/add").param("employeeId", "1").param("subProjectId", "1").param("projectId", "1"))
+                                                                .andExpect(status().is3xxRedirection())
+                                                                .andExpect(redirectedUrl("/subprojects"));
+
+                verify(employeeService).addEmployeeToSubProject(1, 1, 1);
+            }
 
 
+    @Test
+    void controllerRemoveEmployeeFromSubProject() throws Exception {
+        mockMvc.perform(post("/employee/subproject/remove").param("employeeId", "1").param("subProjectId", "1"))
+                                                           .andExpect(status().is3xxRedirection())
+                                                           .andExpect(redirectedUrl("/subprojects"));
 
+        verify(employeeService).removeEmployeeFromSubProject(1, 1);
+    }
 }
