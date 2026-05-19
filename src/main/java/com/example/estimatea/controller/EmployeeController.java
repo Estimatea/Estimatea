@@ -47,67 +47,69 @@ public class EmployeeController {
     @GetMapping("/all")
     public String getAllEmployees(Model model) {
         List<Employee> employeeList = employeeService.getAllEmployeeInCompany();
-        model.addAttribute("employees", employeeList);
+        model.addAttribute("employeeList", employeeList);
         return "employee-list";
     }
 
         // Employee handling on Main project
 
-    // Add Employee to Main project
-    @GetMapping("/add/project")
-    public String addToProjectForm(Model model) {
-        List<Employee> employeeList = employeeService.getAllEmployeeInCompany();
-        model.addAttribute("employeeList", employeeList);
-        return "add-employee-to-project";
-    }
+// Add Employee to Main project
+@GetMapping("/add/project")
+public String addEmployeeToProjectForm(Model model) {
+    List<Employee> employeeList = employeeService.getAllEmployeeInCompany();
+    model.addAttribute("employeeList", employeeList);
+    return "add-employee-to-project";
+}
+        @PostMapping("/add/project")
+           public String employeeAddedToProject(@RequestParam int employeeId, @RequestParam int projectId) {
+               employeeService.addEmployeeToProject(employeeId, projectId);
+               return "redirect:/project";
+           }
 
-            @PostMapping("/add/project")
-            public String employeeAddedToProject(@RequestParam int employeeId, @RequestParam int projectId) {
-                employeeService.addEmployeeToProject(employeeId, projectId);
-                return "redirect:/projects";
-            }
-
-    // Remove employee from Main project
-    @GetMapping("/project/remove")
-    public String removeEmployeeFromProjectForm(@RequestParam int projectId, Model model) {
-        List<Employee> projectEmpList = employeeService.getAllEmployeesByProjectId(projectId);
-        model.addAttribute("projectEmployeeList", projectEmpList);
-        return "remove-employee-from-project";
-    }
-
-            @PostMapping("/project/remove")
-            public String removeEmployeeFromProject(@RequestParam int employeeId, @RequestParam int projectId) {
-                employeeService.removeEmployeeFromProject(employeeId, projectId);
-                return "redirect:/project";
-            }
+// Remove employee from Main project
+@PostMapping("/project/remove")
+public String removeEmployeeFromProject(@RequestParam int employeeId, @RequestParam int projectId) {
+    employeeService.removeEmployeeFromProject(employeeId, projectId);
+    return "redirect:/project";
+}
 
         // Employee handling on Subproject
 
-    // Add employee to Subproject
-    @GetMapping("/add/subproject")
-    public String addToSubProjectForm(@RequestParam int projectId, Model model) {
-        List<Employee> subProjectEmpList = employeeService.getAllEmployeesByProjectId(projectId);
-        model.addAttribute("subProjectEmpList", subProjectEmpList);
-        return "add-employee-to-subproject";
-    }
-
-            @PostMapping("/add/subproject")
-            public String employeeAddToSubProject(@RequestParam int employeeId, @RequestParam int subProjectId, @RequestParam int projectId) {
-                employeeService.addEmployeeToSubProject(employeeId, subProjectId, projectId);
-                return "redirect:/subprojects";
-            }
-
-    // Remove employee from Subproject
-    @GetMapping("/subproject/remove")
-    public String removeEmployeeFromSubProjectForm(@RequestParam int employeeId, @RequestParam int subProjectId, Model model) {
-        List<Employee> subProjectEmployeeList = employeeService.getAllEmployeesForSubproject(subProjectId);
-        model.addAttribute("subProjectEmployeeList", subProjectEmployeeList);
-        return "remove-employee-from-subproject";
-    }
-
-            @PostMapping("/subproject/remove")
-            public String removeEmployeeFromSubProject(@RequestParam int employeeId, @RequestParam int subProjectId) {
-                employeeService.removeEmployeeFromSubProject(employeeId, subProjectId);
-                return "redirect:/subprojects";
-            }
+// Add employee to Subproject
+@PostMapping("/add/subproject")
+public String employeeAddToSubProject(@RequestParam int employeeId, @RequestParam int subProjectId, @RequestParam int projectId) {
+    employeeService.addEmployeeToSubProject(employeeId, subProjectId, projectId);
+    return "redirect:/subprojects";
 }
+
+// Remove employee from Subproject
+@PostMapping("/subproject/remove")
+public String removeEmployeeFromSubProject(@RequestParam int employeeId, @RequestParam int subProjectId) {
+    employeeService.removeEmployeeFromSubProject(employeeId, subProjectId);
+    return "redirect:/subprojects";
+}
+
+
+
+
+
+//    @GetMapping("/subproject/remove")
+//    public String removeEmployeeFromSubProjectForm(@RequestParam int employeeId, @RequestParam int subProjectId, Model model) {
+//        List<Employee> subProjectEmployeeList = employeeService.getAllEmployeesForSubproject(subProjectId);
+//        model.addAttribute("subProjectEmployeeList", subProjectEmployeeList);
+//        return "remove-employee-from-subproject";
+//    }
+
+//    @GetMapping("/add/subproject")
+//    public String addToSubProjectForm(@RequestParam int projectId, Model model) {
+//        List<Employee> subProjectEmpList = employeeService.getAllEmployeesByProjectId(projectId);
+//        model.addAttribute("subProjectEmpList", subProjectEmpList);
+//        return "add-employee-to-subproject";
+//    }
+}
+//@GetMapping("/project/remove")
+//public String removeEmployeeFromProjectForm(@RequestParam int projectId, Model model) {
+//    List<Employee> projectEmpList = employeeService.getAllEmployeesByProjectId(projectId);
+//    model.addAttribute("projectEmployeeList", projectEmpList);
+//    return "remove-employee-from-project";
+//}
