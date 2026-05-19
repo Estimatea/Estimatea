@@ -6,9 +6,11 @@ import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.Project;
 import com.example.estimatea.model.SubProject;
+import com.example.estimatea.model.Task;
 import com.example.estimatea.service.EmployeeService;
 import com.example.estimatea.service.ProjectService;
 import com.example.estimatea.service.SubProjectService;
+import com.example.estimatea.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +24,10 @@ public class ProjectController {
     private final ProjectService projectService;
     private final EmployeeService employeeService;
     private final SubProjectService subProjectService;
+    private final TaskService taskService;
 
-    public ProjectController(ProjectService projectService,  EmployeeService employeeService, SubProjectService subProjectService) {
+    public ProjectController(ProjectService projectService,  EmployeeService employeeService, SubProjectService subProjectService,  TaskService taskService) {
+        this.taskService = taskService;
         this.projectService = projectService;
         this.employeeService = employeeService;
         this.subProjectService = subProjectService;
@@ -54,6 +58,9 @@ public class ProjectController {
 
             List<SubProject> subProjectList = subProjectService.findSubProjectsByProjectId(Integer.parseInt(projectId));
             model.addAttribute("subProjectList", subProjectList);
+
+            List<Task> taskList = taskService.getTasksByProjectId(Integer.parseInt(projectId));
+            model.addAttribute("taskList", taskList);
 
             return "viewproject";
         } catch (NotFoundException e) {
