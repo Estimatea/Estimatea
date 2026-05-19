@@ -37,7 +37,7 @@ public class TaskController {
     @PostMapping("/createTaskForProject")
     public String createTaskForProject(@ModelAttribute Task task) {
         taskService.createTaskForProject(task);
-        return "redirect:/project/" + task.getProjectId();
+        return "redirect:/projects/" + task.getProjectId();
     }
 
     //
@@ -67,7 +67,7 @@ public class TaskController {
     @PostMapping("/edit/project")
     public String editTaskInProject(@ModelAttribute Task task) {
         taskService.editTask(task);
-        return "redirect:/project/" + task.getProjectId();
+        return "redirect:/projects/" + task.getProjectId();
     }
 
     //Edit Task in Subproject
@@ -81,7 +81,7 @@ public class TaskController {
     @PostMapping("/edit/subproject")
     public String editTaskInSubproject(@ModelAttribute Task task) {
         taskService.editTask(task);
-        return "redirect:/subproject" + task.getSubprojectId();
+        return "redirect:/subproject/" + task.getSubprojectId();
     }
 
     //
@@ -89,7 +89,7 @@ public class TaskController {
     @PostMapping("/complete/project")
     public String completeTaskInProject(@ModelAttribute Task task) {
         taskService.completeTask(task.getTaskId());
-        return "redirect:/project/" + task.getProjectId();
+        return "redirect:/projects/" + task.getProjectId();
     }
 
     //Complete Task in Subproject
@@ -104,7 +104,7 @@ public class TaskController {
     @PostMapping("/delete/project")
     public String deleteTaskInProject(@ModelAttribute Task task) {
         taskService.deleteTask(task.getTaskId());
-        return "redirect:/project/" + task.getProjectId();
+        return "redirect:/projects/" + task.getProjectId();
     }
 
     @PostMapping("/delete/subproject")
