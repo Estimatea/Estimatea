@@ -55,7 +55,7 @@ public class SubProjectService {
         }
     }
 
-    public void shouldDeleteSubproject(int subprojectId) {
+    public void DeleteSubproject(int subprojectId) {
         int rowsAffected = subProjectRepository.deleteSubProject(subprojectId);
 
         if (rowsAffected == 0) {
