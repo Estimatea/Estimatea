@@ -3,8 +3,10 @@ package com.example.estimatea.controller;
 
 import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.SubProject;
+import com.example.estimatea.model.Task;
 import com.example.estimatea.service.EmployeeService;
 import com.example.estimatea.service.SubProjectService;
+import com.example.estimatea.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +19,12 @@ public class SubProjectController {
 
     private final SubProjectService subProjectService;
     private final EmployeeService employeeService;
+    private final TaskService taskService;
 
-    public SubProjectController(SubProjectService subProjectService, EmployeeService employeeService) {
+    public SubProjectController(SubProjectService subProjectService, EmployeeService employeeService,  TaskService taskService) {
         this.subProjectService = subProjectService;
         this.employeeService = employeeService;
+        this.taskService = taskService;
     }
 
     //SPECIFIC SUBPROJECT VIEW
@@ -31,6 +35,9 @@ public class SubProjectController {
 
         List<Employee> employeeList = employeeService.getAllEmployeesForSubproject(Integer.parseInt(subProjectId));
         model.addAttribute("employeeList", employeeList);
+
+        List<Task> taskList = taskService.getTasksForSubprojectId(Integer.parseInt(subProjectId));
+        model.addAttribute("taskList", taskList);
 
         return "viewsubproject";
     }
