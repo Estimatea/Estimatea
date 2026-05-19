@@ -34,8 +34,7 @@ public class EmployeeService {
         return employees;
     }
 
-        // MAIN PROJECT EMPLOYEES
-
+    // MAIN PROJECT EMPLOYEES
     public List<Employee> getAllEmployeesByProjectId(int projectId) { // Retrieve all employees and their info assigned to a given project (id)
         List<Employee> projectEmployees = employeeRepository.getAllEmployeesForProject(projectId);
 
