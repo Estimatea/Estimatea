@@ -102,7 +102,7 @@ public class SubprojectServiceTest {
     void shouldDeleteSubProject() {
         when(subProjectRepository.deleteSubProject(1)).thenReturn(1);
 
-        subProjectService.shouldDeleteSubproject(1);
+        subProjectService.DeleteSubproject(1);
 
         verify(subProjectRepository).deleteSubProject(1);
     }
@@ -110,7 +110,7 @@ public class SubprojectServiceTest {
             @Test
             void shouldHitNotFoundExceptionIfNoSubProjectWasDeleted() { // "No subproject was deleted (ID)" + subprojectId
                 when(subProjectRepository.deleteSubProject(1)).thenReturn(0);
-                assertThrows(NotFoundException.class, () -> subProjectService.shouldDeleteSubproject(1));
+                assertThrows(NotFoundException.class, () -> subProjectService.DeleteSubproject(1));
             }
 
    @Test

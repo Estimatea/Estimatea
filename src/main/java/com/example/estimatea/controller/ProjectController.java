@@ -3,8 +3,12 @@ package com.example.estimatea.controller;
 
 import com.example.estimatea.exception.IllegalArgumentException;
 import com.example.estimatea.exception.NotFoundException;
+import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.Project;
+import com.example.estimatea.model.SubProject;
+import com.example.estimatea.service.EmployeeService;
 import com.example.estimatea.service.ProjectService;
+import com.example.estimatea.service.SubProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +20,13 @@ import java.util.List;
 public class ProjectController {
 
     private final ProjectService projectService;
+    private final EmployeeService employeeService;
+    private final SubProjectService subProjectService;
 
-    public ProjectController(ProjectService projectService) {
+    public ProjectController(ProjectService projectService,  EmployeeService employeeService, SubProjectService subProjectService) {
         this.projectService = projectService;
+        this.employeeService = employeeService;
+        this.subProjectService = subProjectService;
     }
 
     // ALL PROJECTS VIEW
@@ -40,6 +48,13 @@ public class ProjectController {
         try {
             Project project = projectService.findProjectById(Integer.parseInt(projectId));
             model.addAttribute("project", project);
+
+            List<Employee> employeeList = employeeService.getAllEmployeesByProjectId(Integer.parseInt(projectId));
+            model.addAttribute("employeeList", employeeList);
+
+            List<SubProject> subProjectList = subProjectService.findSubProjectsByProjectId(Integer.parseInt(projectId));
+            model.addAttribute("subProjectList", subProjectList);
+
             return "viewproject";
         } catch (NotFoundException e) {
             model.addAttribute("error", e);
@@ -64,7 +79,7 @@ public class ProjectController {
         public String saveProjectChanges(@ModelAttribute("project") Project project, Model model) {
             try {
                 projectService.editProject(project);
-                return "redirect:/projects/{projectId}";
+                return "redirect:/projects/" + project.getProjectId();
             } catch (IllegalArgumentException | NotFoundException e) {
                 model.addAttribute("error", e);
                 return "error";
@@ -92,10 +107,10 @@ public class ProjectController {
 
 
     //DELETE PROJECT
-    @PostMapping
-    public String deleteProject(@ModelAttribute("project") Project project, Model model) {
+    @PostMapping("/{projectId}/delete")
+    public String deleteProject(@PathVariable int projectId, Model model) {
         try {
-            projectService.deleteProject(project.getProjectId());
+            projectService.deleteProject(projectId);
             return "redirect:/projects/all";
         } catch (NotFoundException e) {
             model.addAttribute("error", e);
