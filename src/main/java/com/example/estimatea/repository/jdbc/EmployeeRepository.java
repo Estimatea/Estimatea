@@ -2,7 +2,6 @@ package com.example.estimatea.repository.jdbc;
 import com.example.estimatea.model.Employee;
 import com.example.estimatea.repository.mapper.EmployeeMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
