@@ -16,7 +16,7 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public void creatTaskForProject(Task projectTask) {
+    public void createTaskForProject(Task projectTask) {
 
         if (projectTask == null) {
             throw new NotFoundException("No task object received");
