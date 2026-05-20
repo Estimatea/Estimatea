@@ -1,13 +1,11 @@
 package com.example.estimatea.controller;
 
-import com.example.estimatea.dto.ErrorDTO;
 import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.Employee;
 import com.example.estimatea.service.EmployeeService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,18 +96,3 @@ public class EmployeeController {
         return "redirect:/subprojects";
     }
 }
-
-
-//@GetMapping("/project/remove")
-//public String removeEmployeeFromProjectForm(@RequestParam int projectId, Model model) {
-//    List<Employee> projectEmpList = employeeService.getAllEmployeesByProjectId(projectId);
-//    model.addAttribute("projectEmployeeList", projectEmpList);
-//    return "remove-employee-from-project";
-//}
-
-//    @GetMapping("/subproject/remove")
-//    public String removeEmployeeFromSubProjectForm(@RequestParam int employeeId, @RequestParam int subProjectId, Model model) {
-//        List<Employee> subProjectEmployeeList = employeeService.getAllEmployeesForSubproject(subProjectId);
-//        model.addAttribute("subProjectEmployeeList", subProjectEmployeeList);
-//        return "remove-employee-from-subproject";
-//    }
