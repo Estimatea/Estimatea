@@ -97,7 +97,7 @@ public class ProjectControllerTest {
          mockMvc.perform(get("/projects/1/edit").param("projectId", "1"))
                                                  .andExpect(status().isOk())
                                                  .andExpect(view().name("edit-project"))
-                                                 .andExpect(model().attributeExists("projectId"));
+                                                 .andExpect(model().attributeExists("project"));
 
          verify(projectService).findProjectById(1);
     }
