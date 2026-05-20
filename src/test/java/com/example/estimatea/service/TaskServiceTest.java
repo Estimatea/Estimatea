@@ -42,19 +42,19 @@ public class TaskServiceTest {
         assertDoesNotThrow(() -> taskService.createTaskForProject(taskMock));
     }
 
-    @Test
-    void createTaskForProject_shouldThrowWhenTaskIsNull() {
+            @Test
+            void createTaskForProject_shouldThrowWhenTaskIsNull() {
 
-        assertThrows(NotFoundException.class, () -> taskService.createTaskForProject(null));
-    }
+                assertThrows(NotFoundException.class, () -> taskService.createTaskForProject(null));
+            }
 
-    @Test
-    void createTaskForProject_shouldThrowWhenNoRowsAffected() {
+                    @Test
+                    void createTaskForProject_shouldThrowWhenNoRowsAffected() {
 
-        when(taskRepository.createTaskForProject(taskMock)).thenReturn(0);
+                        when(taskRepository.createTaskForProject(taskMock)).thenReturn(0);
 
-        assertThrows(NotFoundException.class, () -> taskService.createTaskForProject(taskMock));
-    }
+                        assertThrows(NotFoundException.class, () -> taskService.createTaskForProject(taskMock));
+                    }
 
 
     //Unit test on createTaskForSubproject
@@ -66,19 +66,19 @@ public class TaskServiceTest {
         assertDoesNotThrow(() -> taskService.createTaskForSubproject(taskMock));
     }
 
-    @Test
-    void createTaskForSubproject_shouldThrowWhenTaskIsNull() {
+            @Test
+            void createTaskForSubproject_shouldThrowWhenTaskIsNull() {
 
-        assertThrows(NotFoundException.class, () -> taskService.createTaskForSubproject(null));
-    }
+                assertThrows(NotFoundException.class, () -> taskService.createTaskForSubproject(null));
+            }
 
-    @Test
-    void createTaskForSubproject_shouldThrowWhenNoRowsAffected() {
+                    @Test
+                    void createTaskForSubproject_shouldThrowWhenNoRowsAffected() {
 
-        when(taskRepository.createTaskForSubproject(taskMock)).thenReturn(0);
+                        when(taskRepository.createTaskForSubproject(taskMock)).thenReturn(0);
 
-        assertThrows(NotFoundException.class, () -> taskService.createTaskForSubproject(taskMock));
-    }
+                        assertThrows(NotFoundException.class, () -> taskService.createTaskForSubproject(taskMock));
+                    }
 
 
     //Unit test on editTask
@@ -91,18 +91,18 @@ public class TaskServiceTest {
         assertDoesNotThrow(() -> taskService.editTask(taskMock));
     }
 
-    @Test
-    void editTask_shouldThrowWhenTaskIsNull() {
+            @Test
+            void editTask_shouldThrowWhenTaskIsNull() {
 
-        assertThrows(IllegalArgumentException.class, () -> taskService.editTask(null));
-    }
+                assertThrows(IllegalArgumentException.class, () -> taskService.editTask(null));
+            }
 
-    @Test
-    void editTask_shouldThrowWhenNoRowsAffected() {
-        when(taskRepository.editTask(taskMock)).thenReturn(0);
+                    @Test
+                    void editTask_shouldThrowWhenNoRowsAffected() {
+                        when(taskRepository.editTask(taskMock)).thenReturn(0);
 
-        assertThrows(NotFoundException.class, () -> taskService.editTask(taskMock));
-    }
+                        assertThrows(NotFoundException.class, () -> taskService.editTask(taskMock));
+                    }
 
 
     //Unit test on deleteTask
@@ -115,13 +115,13 @@ public class TaskServiceTest {
         assertDoesNotThrow(() -> taskService.deleteTask(1));
     }
 
-    @Test
-    void deleteTask_shouldThrowWhenNoRowsAffected() {
+            @Test
+            void deleteTask_shouldThrowWhenNoRowsAffected() {
 
-        when(taskRepository.deleteTask(1)).thenReturn(0);
+                when(taskRepository.deleteTask(1)).thenReturn(0);
 
-        assertThrows(NotFoundException.class, () -> taskService.deleteTask(1));
-    }
+                assertThrows(NotFoundException.class, () -> taskService.deleteTask(1));
+            }
 
 
     //Unit test on completeTask
@@ -134,13 +134,13 @@ public class TaskServiceTest {
         assertDoesNotThrow(() -> taskService.completeTask(1));
     }
 
-    @Test
-    void completeTask_shouldThrowWhenNoRowsAffected() {
+            @Test
+            void completeTask_shouldThrowWhenNoRowsAffected() {
 
-        when(taskRepository.completeTask(1)).thenReturn(0);
+                when(taskRepository.completeTask(1)).thenReturn(0);
 
-        assertThrows(NotFoundException.class, () -> taskService.completeTask(1));
-    }
+                assertThrows(NotFoundException.class, () -> taskService.completeTask(1));
+            }
 
 
     //Unit test on getTaskById
@@ -155,14 +155,14 @@ public class TaskServiceTest {
         assertEquals(taskMock, result);
     }
 
-    @Test
-    void getTaskById_shouldThrowWhenNotFound() {
+            @Test
+            void getTaskById_shouldThrowWhenNotFound() {
 
-        when(taskRepository.getTaskById(1)).thenThrow(org.springframework.dao.EmptyResultDataAccessException.class);
-        ;
+                when(taskRepository.getTaskById(1)).thenThrow(org.springframework.dao.EmptyResultDataAccessException.class);
+                ;
 
-        assertThrows(NotFoundException.class, () -> taskService.getTaskById(1));
-    }
+                assertThrows(NotFoundException.class, () -> taskService.getTaskById(1));
+            }
 
 
     //Unit test on getTasksByProjectId
@@ -178,13 +178,13 @@ public class TaskServiceTest {
         assertEquals(taskMock, result.getFirst());
     }
 
-    @Test
-    void getTasksByProjectId_shouldThrowWhenEmpty() {
+            @Test
+            void getTasksByProjectId_shouldThrowWhenEmpty() {
 
-        when(taskRepository.getTasksByProjectId(1)).thenReturn(List.of());
+                when(taskRepository.getTasksByProjectId(1)).thenReturn(List.of());
 
-        assertThrows(NotFoundException.class, () -> taskService.getTasksByProjectId(1));
-    }
+                assertThrows(NotFoundException.class, () -> taskService.getTasksByProjectId(1));
+            }
 
 
     //Unit test on getTasksBySubprojectId
@@ -200,13 +200,13 @@ public class TaskServiceTest {
         assertEquals(taskMock, result.getFirst());
     }
 
-    @Test
-    void getTasksBySubprojectId_shouldThrowWhenEmpty() {
+            @Test
+            void getTasksBySubprojectId_shouldThrowWhenEmpty() {
 
-        when(taskRepository.getTasksBySubprojectId(1)).thenReturn(List.of());
+                when(taskRepository.getTasksBySubprojectId(1)).thenReturn(List.of());
 
-        assertThrows(NotFoundException.class, () -> taskService.getTasksForSubprojectId(1));
-    }
+                assertThrows(NotFoundException.class, () -> taskService.getTasksForSubprojectId(1));
+            }
 
 
     //Unit test on updateComplexityScore
@@ -219,11 +219,11 @@ public class TaskServiceTest {
         assertDoesNotThrow(() -> taskService.updateComplexityScore(2, 1));
     }
 
-    @Test
-    void updateComlexityScore_shouldThrowWhenNoRowsAffected() {
+            @Test
+            void updateComlexityScore_shouldThrowWhenNoRowsAffected() {
 
-        when(taskRepository.updateComplexityScore(2, 1)).thenReturn(0);
+                when(taskRepository.updateComplexityScore(2, 1)).thenReturn(0);
 
-        assertThrows(NotFoundException.class, () -> taskService.updateComplexityScore(2, 1));
-    }
+                assertThrows(NotFoundException.class, () -> taskService.updateComplexityScore(2, 1));
+            }
 }

@@ -57,17 +57,17 @@ public class TaskControllerTest {
         verify(projectService).findProjectById(1);
     }
 
-    // Create Task for Project
-    @Test
-    void controllerCreateTaskForProject() throws Exception {
-        mockMvc.perform(post("/task/createTaskForProject")
-                        .param("taskId", "2")
-                        .param("projectId", "1"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/projects/1"));
+            // Create Task for Project
+            @Test
+            void controllerCreateTaskForProject() throws Exception {
+                mockMvc.perform(post("/task/createTaskForProject")
+                                .param("taskId", "2")
+                                .param("projectId", "1"))
+                        .andExpect(status().is3xxRedirection())
+                        .andExpect(redirectedUrl("/projects/1"));
 
-        verify(taskService).createTaskForProject(any(Task.class));
-    }
+                verify(taskService).createTaskForProject(any(Task.class));
+            }
 
     // Add Task to Subproject Form
     @Test
@@ -82,17 +82,17 @@ public class TaskControllerTest {
         verify(subProjectService).findSubProjectById(1);
     }
 
-    // Create Task for Subproject
-    @Test
-    void controllerCreateTaskForSubproject() throws Exception {
-        mockMvc.perform(post("/task/createTaskForSubproject")
-                        .param("taskId", "2")
-                        .param("subprojectId", "1"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/subproject/1"));
+            // Create Task for Subproject
+            @Test
+            void controllerCreateTaskForSubproject() throws Exception {
+                mockMvc.perform(post("/task/createTaskForSubproject")
+                                .param("taskId", "2")
+                                .param("subprojectId", "1"))
+                        .andExpect(status().is3xxRedirection())
+                        .andExpect(redirectedUrl("/subproject/1"));
 
-        verify(taskService).createTaskForSubproject(any(Task.class));
-    }
+                verify(taskService).createTaskForSubproject(any(Task.class));
+            }
 
     // Edit Task in Project Form
     @Test
@@ -107,17 +107,17 @@ public class TaskControllerTest {
         verify(taskService).getTaskById(2);
     }
 
-    // Edit Task in Project
-    @Test
-    void controllerEditTaskInProject() throws Exception {
-        mockMvc.perform(post("/task/edit/project")
-                        .param("taskId", "2")
-                        .param("projectId", "1"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/projects/1"));
+            // Edit Task in Project
+            @Test
+            void controllerEditTaskInProject() throws Exception {
+                mockMvc.perform(post("/task/edit/project")
+                                .param("taskId", "2")
+                                .param("projectId", "1"))
+                        .andExpect(status().is3xxRedirection())
+                        .andExpect(redirectedUrl("/projects/1"));
 
-        verify(taskService).editTask(any(Task.class));
-    }
+                verify(taskService).editTask(any(Task.class));
+            }
 
     // Edit Task in Subproject Form
     @Test
@@ -132,17 +132,17 @@ public class TaskControllerTest {
         verify(taskService).getTaskById(2);
     }
 
-    // Edit Task in Subproject
-    @Test
-    void controllerEditTaskInSubproject() throws Exception {
-        mockMvc.perform(post("/task/edit/subproject")
-                        .param("taskId", "2")
-                        .param("subprojectId", "1"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/subproject/1"));
+            // Edit Task in Subproject
+            @Test
+            void controllerEditTaskInSubproject() throws Exception {
+                mockMvc.perform(post("/task/edit/subproject")
+                                .param("taskId", "2")
+                                .param("subprojectId", "1"))
+                        .andExpect(status().is3xxRedirection())
+                        .andExpect(redirectedUrl("/subproject/1"));
 
-        verify(taskService).editTask(any(Task.class));
-    }
+                verify(taskService).editTask(any(Task.class));
+            }
 
     // Complete Task in Project
     @Test
