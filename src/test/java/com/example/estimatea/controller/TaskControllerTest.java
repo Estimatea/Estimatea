@@ -49,7 +49,7 @@ public class TaskControllerTest {
     void controllerCreateTaskToProjectForm() throws Exception {
         when(projectService.findProjectById(1)).thenReturn(new Project());
 
-        mockMvc.perform(get("/task/1/add/project"))
+        mockMvc.perform(get("/project/task/1/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("task-form"))
                 .andExpect(model().attributeExists("project"));
@@ -74,7 +74,7 @@ public class TaskControllerTest {
     void controllerAddTaskToSubprojectForm() throws Exception {
         when(subProjectService.findSubProjectById(1)).thenReturn(new SubProject());
 
-        mockMvc.perform(get("/task/1/add/subproject"))
+        mockMvc.perform(get("/subproject/task/1/add"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("task-form"))
                 .andExpect(model().attributeExists("subproject"));
@@ -99,7 +99,7 @@ public class TaskControllerTest {
     void controllerEditTaskInProjectForm() throws Exception {
         when(taskService.getTaskById(2)).thenReturn(taskMock);
 
-        mockMvc.perform(get("/task/1/2/edit/project"))
+        mockMvc.perform(get("/project/task/1/2/edit"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("task-form"))
                 .andExpect(model().attributeExists("task"));
@@ -124,7 +124,7 @@ public class TaskControllerTest {
     void controllerEditTaskInSubprojectForm() throws Exception {
         when(taskService.getTaskById(2)).thenReturn(taskMock);
 
-        mockMvc.perform(get("/task/1/2/edit/subproject"))
+        mockMvc.perform(get("/subproject/task/1/2/edit"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("task-form"))
                 .andExpect(model().attributeExists("task"));
