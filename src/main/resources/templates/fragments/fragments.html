@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header th:fragment="header">
+
+  <style>
+    .navbar {
+      display: flex;
+      align-items: center;
+      background-color: #f4f4f4;
+      padding: 0 20px;
+      height: 80px;
+      gap: 12px;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #1e2a2a;
+      color: white;
+      width: 80px;
+      height: 64px;
+      flex-shrink: 0;
+    }
+
+    .navbar-logo img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+    }
+
+    .navbar-btn {
+      background-color: #d6d6d6;
+      border: none;
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .navbar-btn:hover {
+      background-color: #c0c0c0;
+    }
+
+    .navbar-spacer {
+      flex: 1;
+    }
+
+    .navbar-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #555;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  </style>
+
+  <nav class="navbar">
+
+    <div class="navbar-logo">
+      <img th:src="@{/images/estimatea-logo.png}" alt="Estimatea Logo">
+    </div>
+
+    <a class="navbar-btn" href="/projects/completed">Completed Projects</a>
+
+    <div class="navbar-spacer"></div>
+
+    <a class="navbar-btn" href="/employees">Employees</a>
+    <a class="navbar-btn" href="/logout">Logout</a>
+    <div class="navbar-avatar">EA</div>
+
+  </nav>
+</header>
+
+<footer th:fragment="footer">
+  <style>
+    .footer {
+      text-align: center;
+      padding: 16px;
+      font-family: 'Segoe UI', sans-serif;
+      font-size: 12px;
+      color: #999;
+      background-color: #f4f4f4;
+      border-top: 1px solid #e0e0e0;
+    }
+  </style>
+
+  <div class="footer">
+    <p>Estimatea &copy; 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>

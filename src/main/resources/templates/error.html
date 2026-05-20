@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Error</title>
 </head>
 <body>
 
-<h1 th:text="${error.status}"></h1>
-<p th:text="${error.message}"></p>
-<p th:text="${error.timeStamp}"></p>
-
+    <div>
+        <h1 th:text="${error.status}"></h1>
+        <p th:text="${error.message}"></p>
+        <p th:text="${error.timeStamp}"></p>
+    </div>
 </body>
 </html>
