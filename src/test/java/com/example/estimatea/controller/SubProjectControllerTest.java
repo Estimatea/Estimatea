@@ -58,7 +58,7 @@ public class SubProjectControllerTest {
         when(taskService.getTasksForSubprojectId(subProjectMock.getSubId())).thenReturn(List.of());
 
         mockMvc.perform(get("/subproject/{subProjectId}", subProjectMock.getSubId())).andExpect(status().isOk())
-                                                    .andExpect(view().name("viewsubproject"))
+                                                    .andExpect(view().name("view-subproject"))
                                                     .andExpect(model().attribute("subProject", subProjectMock));
 
         verify(subProjectService).findSubProjectById(subProjectMock.getSubId());
@@ -70,7 +70,7 @@ public class SubProjectControllerTest {
 
         mockMvc.perform(get("/subproject/create"))
                                         .andExpect(status().isOk())
-                                        .andExpect(view().name("createsubproject"))
+                                        .andExpect(view().name("create-subproject"))
                                         .andExpect(model().attributeExists("subProject"));
 
     }
@@ -91,7 +91,7 @@ public class SubProjectControllerTest {
 
         mockMvc.perform(get("/subproject/{subProjectId}/edit", subProjectMock.getSubId()))
                 .andExpect(status().isOk())
-                .andExpect(view().name("editsubproject"))
+                .andExpect(view().name("edit-subproject"))
                 .andExpect(model().attribute("subProject", subProjectMock));
 
         verify(subProjectService).findSubProjectById(subProjectMock.getSubId());
