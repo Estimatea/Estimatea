@@ -35,21 +35,15 @@ public class ProjectController {
 
     // ALL PROJECTS VIEW
     @GetMapping("/all")
-    public String allProjects(Model model) {
-        try {
+    public String getAllProjectsForm(Model model) {
             List<Project> projectList = projectService.listAllProjects();
             model.addAttribute("projectList", projectList);
-            return "allprojects";
-        } catch (NotFoundException e) {
-            model.addAttribute("error", e);
-            return "error";
-        }
+            return "all-projects";
     }
 
     //SPECIFIC PROJECT VIEW
     @GetMapping("/{projectId}")
-    public String project(@PathVariable String projectId, Model model) {
-        try {
+    public String getProjectOverview(@PathVariable String projectId, Model model) {
             Project project = projectService.findProjectById(Integer.parseInt(projectId));
             model.addAttribute("project", project);
 
@@ -62,66 +56,42 @@ public class ProjectController {
             List<Task> taskList = taskService.getTasksByProjectId(Integer.parseInt(projectId));
             model.addAttribute("taskList", taskList);
 
-            return "viewproject";
-        } catch (NotFoundException e) {
-            model.addAttribute("error", e);
-            return "error";
-        }
+            return "view-project";
     }
 
     //EDIT SPECIFIC PROJECT
     @GetMapping("/{projectId}/edit")
-    public String editProject(@PathVariable String projectId, Model model) {
-        try {
+    public String editProjectForm(@PathVariable String projectId, Model model) {
             Project project = projectService.findProjectById(Integer.parseInt(projectId));
-            model.addAttribute("project", project);
-            return "editproject";
-        } catch (NotFoundException e) {
-            model.addAttribute("error", e);
-            return "error";
-        }
+            model.addAttribute("projectId", project);
+            return "edit-project";
     }
 
         @PostMapping("/{projectId}/edit/save")
-        public String saveProjectChanges(@ModelAttribute("project") Project project, Model model) {
-            try {
+        public String saveProjectChanges(@ModelAttribute("project") Project project) {
                 projectService.editProject(project);
                 return "redirect:/projects/" + project.getProjectId();
-            } catch (IllegalArgumentException | NotFoundException e) {
-                model.addAttribute("error", e);
-                return "error";
-            }
         }
 
 
     //CREATE NEW PROJECT
     @GetMapping("/create")
-    public String createProject(Model model) {
+    public String createProjectForm(Model model) {
         model.addAttribute("project", new Project());
-        return "createproject";
+        return "create-project";
     }
 
         @PostMapping("/create/save")
-        public String saveNewProject(@ModelAttribute("project") Project project, Model model) {
-            try {
+        public String saveNewProject(@ModelAttribute("project") Project project) {
                 projectService.createNewProject(project);
                 return "redirect:/projects/all";
-            } catch (NotFoundException e) {
-                model.addAttribute("error", e);
-                return "error";
-            }
         }
 
 
     //DELETE PROJECT
     @PostMapping("/{projectId}/delete")
-    public String deleteProject(@PathVariable int projectId, Model model) {
-        try {
+    public String deleteProject(@PathVariable int projectId) {
             projectService.deleteProject(projectId);
             return "redirect:/projects/all";
-        } catch (NotFoundException e) {
-            model.addAttribute("error", e);
-            return "error";
-        }
     }
 }

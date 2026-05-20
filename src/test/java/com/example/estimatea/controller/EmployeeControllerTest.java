@@ -1,9 +1,7 @@
 package com.example.estimatea.controller;
 
 import com.example.estimatea.model.Employee;
-import com.example.estimatea.model.Project;
 import com.example.estimatea.service.EmployeeService;
-import com.example.estimatea.service.ProjectService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

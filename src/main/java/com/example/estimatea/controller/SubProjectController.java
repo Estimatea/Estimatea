@@ -39,7 +39,7 @@ public class SubProjectController {
         List<Task> taskList = taskService.getTasksForSubprojectId(subProjectId);
         model.addAttribute("taskList", taskList);
 
-        return "viewsubproject";
+        return "view-subproject";
     }
 
     //CREATE SUBPROJECT
@@ -47,7 +47,7 @@ public class SubProjectController {
     public String createSubProject(Model model) {
         SubProject subProject = new SubProject();
         model.addAttribute("subProject", subProject);
-        return "createsubproject";
+        return "create-subproject";
     }
 
         @PostMapping("/create/save")
@@ -62,7 +62,7 @@ public class SubProjectController {
     public String editSubProject(@PathVariable String subProjectId, Model model) {
         SubProject subProject = subProjectService.findSubProjectById(Integer.parseInt(subProjectId));
         model.addAttribute("subProject", subProject);
-        return "editsubproject";
+        return "edit-subproject";
     }
 
         @PostMapping("/save")
