@@ -28,7 +28,7 @@ public class TaskController {
     //
     //Create task for Project
     @GetMapping("/{projectId}/add/project")
-    public String addTaskToProjectForm(@PathVariable int projectId, Model model) {
+    public String createTaskForProjectForm(@PathVariable int projectId, Model model) {
         Project currentProject = projectService.findProjectById(projectId);
         model.addAttribute("project", currentProject);
         return "task-form";
@@ -43,7 +43,7 @@ public class TaskController {
     //
     //Create task for Subproject
     @GetMapping("/{subprojectId}/add/subproject")
-    public String addTaskToSubprojectForm(@PathVariable int subprojectId, Model model) {
+    public String createTaskToSubprojectForm(@PathVariable int subprojectId, Model model) {
         SubProject currentSubproject = subProjectService.findSubProjectById(subprojectId);
         model.addAttribute("subproject", currentSubproject);
         return "task-form";
@@ -57,7 +57,7 @@ public class TaskController {
 
     //
     //Edit Task in Project
-    @GetMapping("/{projectId}/{taskId}/edit")
+    @GetMapping("/{projectId}/{taskId}/edit/project")
     public String editTaskInProjectForm(@PathVariable int taskId, Model model) {
         Task currentTask = taskService.getTaskById(taskId);
         model.addAttribute("task", currentTask);
@@ -71,7 +71,7 @@ public class TaskController {
     }
 
     //Edit Task in Subproject
-    @GetMapping("/{subprojectId}/{taskId}/edit")
+    @GetMapping("/{subprojectId}/{taskId}/edit/subproject")
     public String editTaskInSubprojectForm(@PathVariable int taskId, Model model) {
         Task currenTask = taskService.getTaskById(taskId);
         model.addAttribute("task", currenTask);
