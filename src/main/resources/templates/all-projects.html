@@ -20,7 +20,7 @@
                 <div>
                     <div class="project-name" th:text="${project.projectName}">Project Name</div>
                     <div style="margin-top:4px;">
-                        <span class="label">Estimeret Pris:&nbsp;</span>
+                        <span class="label">Estimated Price:&nbsp;</span>
                         <span class="value" th:text="${project.sumPrice != 0 ? project.sumPrice + ' kr.' : '–'}">–</span>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
 
             <div class="card-info-row">
                 <div class="info-pair">
-                    <span class="label">Start-Dato</span>
+                    <span class="label">Start-Date</span>
                     <span class="value" th:text="${#temporals.format(project.startDate, 'dd/MM/yyyy')}">–</span>
                 </div>
                 <div class="info-pair" style="text-align:right;">
