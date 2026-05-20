@@ -2,15 +2,55 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EstimateA – Active Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/all-projects.css}">
 </head>
 <body>
 
-<header th:replace="~{fragments/header :: header}"></header>
+<div class="board-label">Board</div>
 
+<main>
+    <h1 class="section-title">Active Projects</h1>
 
+    <div th:if="${projectList != null and !#lists.isEmpty(projectList)}">
+        <div class="project-card" th:each="project : ${projectList}" th:if="${!project.completed}">
+            <div class="card-top">
+                <div>
+                    <div class="project-name" th:text="${project.projectName}">Project Name</div>
+                    <div style="margin-top:4px;">
+                        <span class="label">Estimated Price:&nbsp;</span>
+                        <span class="value" th:text="${project.sumPrice != 0 ? project.sumPrice + ' kr.' : '–'}">–</span>
+                    </div>
+                </div>
+                <div class="project-meta-right">
+                    <div>Projekt</div>
+                    <div>Lead</div>
+                </div>
+            </div>
 
-<footer th:replace="~{fragments/footer :: footer}"></footer>
+            <div class="card-info-row">
+                <div class="info-pair">
+                    <span class="label">Start-Date</span>
+                    <span class="value" th:text="${#temporals.format(project.startDate, 'dd/MM/yyyy')}">–</span>
+                </div>
+                <div class="info-pair" style="text-align:right;">
+                    <span class="label">Deadline</span>
+                    <span class="value" th:text="${project.deadLine != null ? #temporals.format(project.deadLine, 'dd/MM/yyyy') : '–'}">–</span>
+                </div>
+            </div>
+
+            <div class="progress-bar-wrap">
+                <div class="progress-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="empty-state" th:if="${projectList == null or #lists.isEmpty(projectList)}">
+        No active projects found.
+    </div>
+</main>
 
 </body>
 </html>
