@@ -27,11 +27,16 @@ public class TaskController {
 
     //
     //Create task for Project
-    @GetMapping("/{projectId}/add/project")
+    @GetMapping("/project/{projectId}/add")
     public String createTaskForProjectForm(@PathVariable int projectId, Model model) {
         Project currentProject = projectService.findProjectById(projectId);
         model.addAttribute("project", currentProject);
-        return "task-form";
+
+        Task task = new Task();
+        task.setProjectId(projectId);
+        model.addAttribute("task", task);
+
+        return "create-task";
     }
 
     @PostMapping("/createTaskForProject")
@@ -42,11 +47,16 @@ public class TaskController {
 
     //
     //Create task for Subproject
-    @GetMapping("/{subprojectId}/add/subproject")
+    @GetMapping("/subproject/{subprojectId}/add")
     public String createTaskToSubprojectForm(@PathVariable int subprojectId, Model model) {
         SubProject currentSubproject = subProjectService.findSubProjectById(subprojectId);
         model.addAttribute("subproject", currentSubproject);
-        return "task-form";
+
+        Task task = new Task();
+        task.setSubprojectId(subprojectId);
+        model.addAttribute("task", task);
+
+        return "create-task";
     }
 
     @PostMapping("/createTaskForSubproject")
@@ -57,11 +67,11 @@ public class TaskController {
 
     //
     //Edit Task in Project
-    @GetMapping("/{projectId}/{taskId}/edit/project")
+    @GetMapping("/project/{projectId}/{taskId}/edit")
     public String editTaskInProjectForm(@PathVariable int taskId, Model model) {
         Task currentTask = taskService.getTaskById(taskId);
         model.addAttribute("task", currentTask);
-        return "task-form";
+        return "create-task";
     }
 
     @PostMapping("/edit/project")
@@ -71,11 +81,11 @@ public class TaskController {
     }
 
     //Edit Task in Subproject
-    @GetMapping("/{subprojectId}/{taskId}/edit/subproject")
+    @GetMapping("/subproject/{subprojectId}/{taskId}/edit")
     public String editTaskInSubprojectForm(@PathVariable int taskId, Model model) {
         Task currenTask = taskService.getTaskById(taskId);
         model.addAttribute("task", currenTask);
-        return "task-form";
+        return "create-task";
     }
 
     @PostMapping("/edit/subproject")

@@ -9,9 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/styles.css}" href="../static/css/styles.css">
 </head>
+
+
 <body>
 
 <header th:replace="~{fragments/header :: header}"></header>
+
+<main>
 
 <div class="page-content">
     <h1>Create Project</h1>
@@ -29,13 +33,6 @@
             <label for="projectName">Name</label>
             <div class="input-wrapper">
                 <input type="text" id="projectName" th:field="*{projectName}" placeholder="Project name" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="completed">Completed</label>
-            <div class="input-wrapper checkbox-wrapper">
-                <input type="checkbox" id="completed" th:field="*{completed}" />
             </div>
         </div>
 
@@ -72,5 +69,10 @@
     </form>
 </div>
 
+
+</main>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
 </body>
+
 </html>

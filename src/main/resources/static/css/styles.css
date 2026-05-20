@@ -141,7 +141,7 @@ main {
 
 /* ---- FORM ----- */
 
-/* ── FORM ── */
+
 .form-group {
     display: flex;
     flex-direction: column;
@@ -190,4 +190,16 @@ main {
 
 .btn-save:hover {
     opacity: 0.85;
+}
+
+.input-wrapper select {
+    background: var(--bar-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 8px 10px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    color: var(--text-dark);
+    width: 260px;
+    outline: none;
 }
