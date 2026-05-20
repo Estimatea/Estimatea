@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<header th:replace="~{fragments/fragments :: header}"></header>
 
-<p>hej</p>
+<header th:replace="~{fragments/header :: header}"></header>
 
-<footer th:replace="~{fragments/fragments :: footer}"></footer>
+
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
 </body>
 </html>
