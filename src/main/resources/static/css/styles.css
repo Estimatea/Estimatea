@@ -19,15 +19,6 @@ body {
     min-height: 100vh;
 }
 
-/* ── BOARD LABEL ── */
-.board-label {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--text-light);
-    padding: 10px 24px 0;
-}
-
 /* ── MAIN ── */
 main {
     padding: 24px 32px 40px;
