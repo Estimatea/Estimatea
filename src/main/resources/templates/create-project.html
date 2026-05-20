@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
 </head>
 <body>
+
+<!-- <div th:replace="~{fragments/header :: header}"></div> -->
+
+<div class="page-content">
+    <h1 th:text="${project != null} ? 'Edit Project' : 'Create Project'">Create Project</h1>
+
+    <form th:action="${project != null} ? @{/project/edit} : @{/project/create}"
+          th:object="${project}"
+          method="post">
+
+        <!-- Hidden field for ID (needed on edit) -->
+        <input type="hidden" th:field="*{projectId}" />
+
+        <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <div class="input-wrapper">
+                <input type="date" id="startDate" th:field="*{startDate}" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="projectName">Name</label>
+            <div class="input-wrapper">
+                <input type="text" id="projectName" th:field="*{projectName}" placeholder="Project name" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="completed">Completed</label>
+            <div class="input-wrapper checkbox-wrapper">
+                <input type="checkbox" id="completed" th:field="*{completed}" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="sumTime">Sum Time</label>
+            <div class="input-wrapper">
+                <input type="number" id="sumTime" th:field="*{sumTime}" placeholder="Total hours" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="sumPrice">Sum Price</label>
+            <div class="input-wrapper">
+                <input type="number" id="sumPrice" th:field="*{sumPrice}" placeholder="Total price" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="deadLine">Deadline</label>
+            <div class="input-wrapper">
+                <input type="date" id="deadLine" th:field="*{deadLine}" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="projectManager">Project Manager ID</label>
+            <div class="input-wrapper">
+                <input type="number" id="projectManager" th:field="*{projectManager}" placeholder="Employee ID" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn-save">Save</button>
+
+    </form>
+</div>
 
 </body>
 </html>
