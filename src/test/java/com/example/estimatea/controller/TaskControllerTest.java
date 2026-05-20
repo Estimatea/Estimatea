@@ -49,9 +49,9 @@ public class TaskControllerTest {
     void controllerCreateTaskToProjectForm() throws Exception {
         when(projectService.findProjectById(1)).thenReturn(new Project());
 
-        mockMvc.perform(get("/project/task/1/add"))
+        mockMvc.perform(get("/task/project/1/add"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("task-form"))
+                .andExpect(view().name("create-task"))
                 .andExpect(model().attributeExists("project"));
 
         verify(projectService).findProjectById(1);
@@ -74,9 +74,9 @@ public class TaskControllerTest {
     void controllerAddTaskToSubprojectForm() throws Exception {
         when(subProjectService.findSubProjectById(1)).thenReturn(new SubProject());
 
-        mockMvc.perform(get("/subproject/task/1/add"))
+        mockMvc.perform(get("/task/subproject/1/add"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("task-form"))
+                .andExpect(view().name("create-task"))
                 .andExpect(model().attributeExists("subproject"));
 
         verify(subProjectService).findSubProjectById(1);
@@ -99,9 +99,9 @@ public class TaskControllerTest {
     void controllerEditTaskInProjectForm() throws Exception {
         when(taskService.getTaskById(2)).thenReturn(taskMock);
 
-        mockMvc.perform(get("/project/task/1/2/edit"))
+        mockMvc.perform(get("/task/project/1/2/edit"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("task-form"))
+                .andExpect(view().name("create-task"))
                 .andExpect(model().attributeExists("task"));
 
         verify(taskService).getTaskById(2);
@@ -124,9 +124,9 @@ public class TaskControllerTest {
     void controllerEditTaskInSubprojectForm() throws Exception {
         when(taskService.getTaskById(2)).thenReturn(taskMock);
 
-        mockMvc.perform(get("/subproject/task/1/2/edit"))
+        mockMvc.perform(get("/task/subproject/1/2/edit"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("task-form"))
+                .andExpect(view().name("create-task"))
                 .andExpect(model().attributeExists("task"));
 
         verify(taskService).getTaskById(2);
