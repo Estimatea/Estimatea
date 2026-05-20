@@ -22,8 +22,10 @@
                     </div>
                 </div>
                 <div class="project-meta-right">
-                    <div>Projekt</div>
-                    <div>Lead</div>
+                    <div>Project Lead</div>
+                    <div th:each="employee : ${employeeList}"
+                         th:if="${employee.employeeId == project.projectManager}"
+                         th:text="${employee.getEmployeeName()}">–</div>
                 </div>
             </div>
 

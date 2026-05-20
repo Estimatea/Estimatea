@@ -38,6 +38,10 @@ public class ProjectController {
     public String getAllProjectsForm(Model model) {
             List<Project> projectList = projectService.listAllProjects();
             model.addAttribute("projectList", projectList);
+
+            List<Employee> employeeList = employeeService.getAllEmployeeInCompany();
+            model.addAttribute("employeeList", employeeList);
+
             return "all-projects";
     }
 
