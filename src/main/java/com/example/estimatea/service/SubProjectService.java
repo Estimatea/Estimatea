@@ -35,12 +35,7 @@ public class SubProjectService {
     }
 
     public List<SubProject> findSubProjectsByProjectId(int projectId) {
-        List<SubProject> subprojects = subProjectRepository.findSubProjectsByProjectId(projectId);
-
-        if (subprojects.isEmpty()) {
-            throw new NotFoundException("No subprojects exists for Main project " + projectId);
-        }
-        return subprojects;
+        return subProjectRepository.findSubProjectsByProjectId(projectId);
     }
 
     public void createSubproject(SubProject subProject) {

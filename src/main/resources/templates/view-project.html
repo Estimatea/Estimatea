@@ -6,5 +6,16 @@
 </head>
 <body>
 
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <h1 class="section-title">Project</h1>
+
+    <div th:text="${project.getProjectName()}"></div>
+
+    <div th:each="subProject : ${subProjectList}"></div>
+
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+
 </body>
 </html>

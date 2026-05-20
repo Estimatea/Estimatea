@@ -83,14 +83,7 @@ public class TaskService {
     }
 
     public List<Task> getTasksByProjectId(int projectId) {
-
-        List<Task> tasks = taskRepository.getTasksByProjectId(projectId);
-
-        if (tasks.isEmpty()) {
-            throw new NotFoundException("No tasks exists for project: " + projectId);
-        }
-
-        return tasks;
+        return taskRepository.getTasksByProjectId(projectId);
     }
 
     public List<Task> getTasksForSubprojectId(int subprojectId) {
