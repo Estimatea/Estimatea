@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${project.projectName}">Project</title>
 </head>
 <body>
 
-    <header th:replace="~{fragments/header :: header}"></header>
-
-    <h1 class="section-title">Project</h1>
-
-    <div th:text="${project.getProjectName()}"></div>
-
-    <div th:each="subProject : ${subProjectList}"></div>
+<div th:replace="~{fragments/header :: header}"></div>
 
 
-    <footer th:replace="~{fragments/footer :: footer}"></footer>
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>

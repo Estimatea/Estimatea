@@ -64,7 +64,9 @@
             </div>
         </div>
 
-        <button type="submit" class="btn-save">Save</button>
+            <div th:action="@{/projects/create/save}" th:object="${project}" method="post">
+                <button type="submit" class="btn-save">Save</button>
+            </div>
 
     </form>
 </div>
