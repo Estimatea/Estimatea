@@ -29,14 +29,14 @@ public class SubProjectController {
 
     //SPECIFIC SUBPROJECT VIEW
     @GetMapping("/{subProjectId}")
-    public String viewSubProject(@PathVariable String subProjectId, Model model) {
-        SubProject subProject = subProjectService.findSubProjectById(Integer.parseInt(subProjectId));
+    public String viewSubProject(@PathVariable int subProjectId, Model model) {
+        SubProject subProject = subProjectService.findSubProjectById(subProjectId);
         model.addAttribute("subProject", subProject);
 
-        List<Employee> employeeList = employeeService.getAllEmployeesForSubproject(Integer.parseInt(subProjectId));
+        List<Employee> employeeList = employeeService.getAllEmployeesForSubproject(subProjectId);
         model.addAttribute("employeeList", employeeList);
 
-        List<Task> taskList = taskService.getTasksForSubprojectId(Integer.parseInt(subProjectId));
+        List<Task> taskList = taskService.getTasksForSubprojectId(subProjectId);
         model.addAttribute("taskList", taskList);
 
         return "viewsubproject";
