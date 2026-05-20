@@ -135,3 +135,59 @@ main {
     font-size: 14px;
     letter-spacing: 0.5px;
 }
+
+
+
+
+/* ---- FORM ----- */
+
+/* ── FORM ── */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"] {
+    background: var(--bar-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 8px 10px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    color: var(--text-dark);
+    width: 260px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: var(--accent);
+}
+
+.btn-save {
+    margin-top: 20px;
+    width: 260px;
+    background-color: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-save:hover {
+    opacity: 0.85;
+}

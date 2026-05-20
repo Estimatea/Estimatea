@@ -3,25 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Form</title>
+    <title>Create Project</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css}" href="../static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" href="../static/css/styles.css">
 </head>
 <body>
 
-<!-- <div th:replace="~{fragments/header :: header}"></div> -->
+
 
 <div class="page-content">
-    <h1 th:text="${project != null} ? 'Edit Project' : 'Create Project'">Create Project</h1>
+    <h1>Create Project</h1>
 
-    <form th:action="${project != null} ? @{/project/edit} : @{/project/create}"
-          th:object="${project}"
-          method="post">
-
-        <!-- Hidden field for ID (needed on edit) -->
-        <input type="hidden" th:field="*{projectId}" />
+    <form th:action="@{/projects/create/save}" th:object="${project}" method="post">
 
         <div class="form-group">
             <label for="startDate">Start Date</label>
@@ -66,7 +61,7 @@
         </div>
 
         <div class="form-group">
-            <label for="projectManager">Project Manager ID</label>
+            <label for="projectManager">Project Manager</label>
             <div class="input-wrapper">
                 <input type="number" id="projectManager" th:field="*{projectManager}" placeholder="Employee ID" />
             </div>

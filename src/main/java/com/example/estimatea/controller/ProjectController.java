@@ -67,7 +67,7 @@ public class ProjectController {
     @GetMapping("/{projectId}/edit")
     public String editProjectForm(@PathVariable String projectId, Model model) {
             Project project = projectService.findProjectById(Integer.parseInt(projectId));
-            model.addAttribute("projectId", project);
+            model.addAttribute("project", project);
             return "edit-project";
     }
 
