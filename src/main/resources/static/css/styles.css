@@ -1,8 +1,8 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-    min-height: calc(100vh - 160px);
-    margin: 0 auto;
+/* ── SYSTEM RESETS & VARIABLES ── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 :root {
@@ -17,19 +17,36 @@ body {
     --radius:      6px;
 }
 
+/* ── LAYOUT ROOT (Sticky Footer Magic) ── */
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: 'Barlow', sans-serif;
     background: var(--bg);
     color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
-/* --- MAIN --- */
+/* --- MAIN APPS WRAPPER --- */
 main {
-    padding: 24px 32px 40px;
+    flex: 1 0 auto;             /* Forces the main container to consume extra whitespace, pushing footer down */
+    margin: 0 auto;             /* Centers page contents perfectly on wide viewports */
+    width: 100%;
     max-width: 960px;
+    padding: 24px 20px 40px;    /* 20px sides provide safe padding fallback for smaller screens */
 }
 
+/* Target both global semantic footers or thymeleaf replaced templates */
+footer, [th\:replace*="footer"] {
+    flex-shrink: 0;             /* Prevents footer from collapsing into nothingness */
+    width: 100%;
+}
+
+/* --- TYPOGRAPHY & SECTIONS --- */
 .section-title {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 22px;
@@ -40,7 +57,27 @@ main {
     margin-bottom: 20px;
 }
 
-/* --- UNIVERSAL BUTTON STYLING --- */
+.label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-mid);
+}
+
+.value {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.info-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+/* --- UNIVERSAL BUTTONS & NAVIGATION --- */
 .action-bar {
     padding: 20px 40px;
     display: flex;
@@ -64,24 +101,14 @@ main {
     transition: background-color 0.2s;
 }
 
-.label {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--text-mid);
+.btn-action:hover {
+    background-color: #2d3e3e;
 }
 
-.value {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-dark);
-}
-
-.info-pair {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
+.btn-action .icon {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
 }
 
 /* ── PROGRESS BAR ── */
@@ -109,7 +136,7 @@ main {
     letter-spacing: 0.5px;
 }
 
-/* ---- FORM ----- */
+/* ---- FORMS & REUSABLE INPUTS ----- */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -123,7 +150,8 @@ main {
 
 .form-group input[type="text"],
 .form-group input[type="number"],
-.form-group input[type="date"] {
+.form-group input[type="date"],
+.input-wrapper select {
     background: var(--bar-bg);
     border: 1px solid var(--card-border);
     border-radius: var(--radius);
@@ -135,7 +163,8 @@ main {
     outline: none;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.input-wrapper select:focus {
     border-color: var(--accent);
 }
 
@@ -158,27 +187,4 @@ main {
 
 .btn-save:hover {
     opacity: 0.85;
-}
-
-.input-wrapper select {
-    background: var(--bar-bg);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 8px 10px;
-    font-family: 'Barlow', sans-serif;
-    font-size: 13px;
-    color: var(--text-dark);
-    width: 260px;
-    outline: none;
-
-    .btn-action:hover {
-        background-color: #2d3e3e;
-    }
-
-
-    .btn-action .icon {
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 1;
-    }
 }
