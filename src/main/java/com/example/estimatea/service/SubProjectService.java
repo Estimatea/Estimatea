@@ -88,8 +88,10 @@ public class SubProjectService {
 //         PRICE AND TIME ESTIMATION FOR SUBPROJECT
 
     public void updateSubProjectScope(SubProject subProject) {
-        updateSubProjectPrice(subProject.getSubId());
-        updateSubProjectTime(subProject.getSubId());
+        if(!taskService.getTasksForSubprojectId(subProject.getSubId()).isEmpty()) {
+            updateSubProjectPrice(subProject.getSubId());
+            updateSubProjectTime(subProject.getSubId());
+        }
 
     }
 
