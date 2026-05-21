@@ -1,6 +1,7 @@
 package com.example.estimatea.service;
 
 import com.example.estimatea.exception.NotFoundException;
+import com.example.estimatea.model.Complexity;
 import com.example.estimatea.model.Task;
 import com.example.estimatea.repository.jdbc.TaskRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,12 +24,22 @@ public class TaskServiceTest {
     @Mock
     private TaskRepository taskRepository;
 
+    @Mock
+    private EmployeeService employeeService;
+
+    @Mock
+    private ComplexityService complexityService;
+
     @InjectMocks
     private TaskService taskService;
+
     private Task taskMock;
+
+    private Complexity complexityMock;
 
     @BeforeEach
     public void setUp() {
+        complexityMock = new Complexity(1, 4, "TestComp", 1.2);
         taskMock = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 1, 0, 2, 1);
     }
 
@@ -37,7 +49,14 @@ public class TaskServiceTest {
     @Test
     void createTaskForProject_shouldCreateTask() {
 
-        when(taskRepository.createTaskForProject(taskMock)).thenReturn(1);
+        when(employeeService.getAllEmployeesByProjectId(1))
+                .thenReturn(List.of());
+
+        when(complexityService.getComplexityFromId(anyInt()))
+                .thenReturn(complexityMock);
+
+        when(taskRepository.createTaskForProject(taskMock))
+                .thenReturn(1);
 
         assertDoesNotThrow(() -> taskService.createTaskForProject(taskMock));
     }
@@ -61,6 +80,11 @@ public class TaskServiceTest {
     //
     @Test
     void createTaskForSubproject_shouldCreateTask() {
+
+        when(complexityService.getComplexityFromId(anyInt()))
+                .thenReturn(complexityMock);
+
+
         when(taskRepository.createTaskForSubproject(taskMock)).thenReturn(1);
 
         assertDoesNotThrow(() -> taskService.createTaskForSubproject(taskMock));

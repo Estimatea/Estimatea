@@ -2,6 +2,7 @@ package com.example.estimatea.service;
 
 import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.Project;
+import com.example.estimatea.model.SubProject;
 import com.example.estimatea.repository.jdbc.ProjectRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -11,14 +12,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ProjectServiceTest {
@@ -26,23 +28,40 @@ public class ProjectServiceTest {
     @Mock
     private ProjectRepository projectRepository;
 
+    @Mock
+    private SubProjectService subProjectService;
+
+    @Mock
+    private TaskService taskService;
+
+
     @InjectMocks
     private ProjectService projectService;
     private Project projectMock;
+    private SubProject subProjectMock;
 
     @BeforeEach()
     public void setUp() {
         projectMock = new Project(1, LocalDate.of(2026,1,1), false, "Alpha Solutions", 120, 1500, LocalDate.of(2026,12,31), 1);
+        subProjectMock = new SubProject(1, "Project calculation tool", LocalDate.of(2026, 2, 1), LocalDate.of(202, 3, 1), 10, 20, false, 1);
+    }
+
+    private void stubUpdateProjectScope() {
+        when(projectRepository.getProjectById(1)).thenReturn(projectMock);
+        when(subProjectService.findSubProjectsByProjectId(1)).thenReturn(Collections.emptyList());
+        when(taskService.getTasksByProjectId(1)).thenReturn(Collections.emptyList());
+        when(projectRepository.editProject(any(Project.class))).thenReturn(1);
     }
 
     @Test
     void shouldReturnAllProjects() {
         when(projectRepository.getAllProjects()).thenReturn(List.of(projectMock));
+        stubUpdateProjectScope();
 
         List<Project> currentProjects = projectService.listAllProjects();
 
         assertNotNull(currentProjects);
-        assertThat(currentProjects.size() == 1);
+        assertThat(currentProjects.size()).isEqualTo(1);
         assertThat(currentProjects.getFirst()).isEqualTo(projectMock);
     }
             @Test
@@ -53,13 +72,13 @@ public class ProjectServiceTest {
 
     @Test
     void shouldReturnProjectById() {
-        when(projectRepository.getProjectById(1)).thenReturn(projectMock);
+        stubUpdateProjectScope();
 
-        projectService.findProjectById(1);
+        Project result = projectService.findProjectById(1);
 
-        assertNotNull(projectMock);
-
-        verify(projectRepository).getProjectById(1);
+        assertNotNull(result);
+        assertThat(result).isEqualTo(projectMock);
+        verify(projectRepository, times(3)).getProjectById(1);
     }
 
             @Test
