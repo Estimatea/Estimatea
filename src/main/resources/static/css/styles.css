@@ -180,14 +180,15 @@ main {
     color: var(--text-dark);
     width: 260px;
     outline: none;
-    .btn-action:hover {
-    background-color: #2d3e3e;
-}
-  
-  
 
-.btn-action .icon {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 1;
+    .btn-action:hover {
+        background-color: #2d3e3e;
+    }
+
+
+    .btn-action .icon {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1;
+    }
 }
