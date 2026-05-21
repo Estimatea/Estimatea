@@ -85,8 +85,9 @@ CREATE TABLE IF NOT EXISTS task(
     current_complexity_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE,
     FOREIGN KEY (sub_id) REFERENCES subproject(sub_id),
-    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
-    );
+    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
+    FOREIGN KEY (current_complexity_id) REFERENCES complexity(complexity_id)
+);
 
 -- TASK_COMPLEXITY_HISTORY (Links to task and complexity tables. Keeps a history of complexity assigned)
 CREATE TABLE IF NOT EXISTS task_complexity_history(

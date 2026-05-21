@@ -36,12 +36,7 @@ public class EmployeeService {
 
     // MAIN PROJECT EMPLOYEES
     public List<Employee> getAllEmployeesByProjectId(int projectId) { // Retrieve all employees and their info assigned to a given project (id)
-        List<Employee> projectEmployees = employeeRepository.getAllEmployeesForProject(projectId);
-
-            if (projectEmployees.isEmpty()) {
-                throw new NotFoundException("No employees found on given project: " + projectId);
-            }
-            return projectEmployees;
+        return employeeRepository.getAllEmployeesForProject(projectId);
     }
 
     public void addEmployeeToProject(int employeeId, int projectId) { // Adds employee to project and check if ID exists in database
