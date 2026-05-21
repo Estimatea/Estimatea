@@ -2,6 +2,7 @@ package com.example.estimatea.service;
 
 import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.SubProject;
+import com.example.estimatea.model.Task;
 import com.example.estimatea.repository.jdbc.SubProjectRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,11 @@ import java.util.List;
 public class SubProjectService {
 
     private final SubProjectRepository subProjectRepository;
+    private final TaskService taskService;
 
-    public SubProjectService(SubProjectRepository subProjectRepository) {
+    public SubProjectService(SubProjectRepository subProjectRepository, TaskService taskService) {
         this.subProjectRepository = subProjectRepository;
+        this.taskService = taskService;
     }
 
     public List<SubProject> listAllSubProjects() {
@@ -21,6 +24,9 @@ public class SubProjectService {
 
         if (subprojects.isEmpty()) {
             throw new NotFoundException("No subprojects exists");
+        }
+        for (SubProject subproject : subprojects) {
+            updateSubProjectScope(subproject.getSubId());
         }
         return subprojects;
     }
@@ -31,6 +37,8 @@ public class SubProjectService {
         if (subProject == null) {
             throw new NotFoundException("No subproject with given id exists " + subProjectId);
         }
+        updateSubProjectScope(subProjectId);
+
         return subProject;
     }
 
@@ -68,5 +76,44 @@ public class SubProjectService {
         if (rowsAffected == 0) {
             throw new NotFoundException("No project was updated " + subProject.getProjectId());
         }
+    }
+
+    public void updateSubProjectScope(int subProjectId) {
+        updateSubProjectPrice(subProjectId);
+        updateSubProjectTime(subProjectId);
+    }
+
+    public void updateSubProjectPrice(int subProjectId) {
+        if (subProjectRepository.findSubProjectById(subProjectId) == null ) {
+            throw new NotFoundException("No subproject with given id exists " + subProjectId);
+        }
+
+        SubProject subProject = subProjectRepository.findSubProjectById(subProjectId);
+        subProject.setSumPrice(0);
+
+        List<Task> taskList = taskService.getTasksForSubprojectId(subProjectId);
+        for (Task task : taskList) {
+            subProject.setSumPrice(subProject.getSumPrice() + task.getTaskPrice());
+        }
+
+        editSubProject(subProject);
+
+    }
+
+    public void updateSubProjectTime(int subProjectId) {
+        if (subProjectRepository.findSubProjectById(subProjectId) == null ) {
+            throw new NotFoundException("No subproject with given id exists " + subProjectId);
+        }
+
+        SubProject subProject = subProjectRepository.findSubProjectById(subProjectId);
+        subProject.setSumTime(0);
+
+        List<Task> taskList = taskService.getTasksForSubprojectId(subProjectId);
+        for (Task task : taskList) {
+            subProject.setSumTime(subProject.getSumTime() + task.getTaskTime());
+        }
+
+        editSubProject(subProject);
+
     }
 }
