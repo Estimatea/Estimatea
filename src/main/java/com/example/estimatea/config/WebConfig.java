@@ -19,9 +19,11 @@ public class WebConfig implements WebMvcConfigurer {
                         "/project/all")
 
                 .excludePathPatterns( // And these to be excluded
-                        "/employee/login-page", // Need to see this to log in!
-                        "/**/css/**",           // Static files must be public
-                        "/**/images/**"
+                        "/employee/login",     // Exclude GET login page & POST form submission
+                        "/css/**",             // Exclude styling
+                        "/images/**",          // Exclude logo images
+                        "/js/**",              // Exclude javascript
+                        "/error"               // Exclude default error path
                 );
     }
 }
