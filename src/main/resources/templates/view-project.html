@@ -74,12 +74,18 @@
                 <span class="card-subtitle">Task view</span>
             </h2>
 
+            <div th:if="${taskList != null and !#lists.isEmpty(taskList)}">
+
             <div class="task-list">
                 <div class="tasks-styling" th:each="task : ${taskList}"></div>
                 <h3 th:text="${task.getTaskName()}">Task Name Placeholder</h3>
                 <p th:text="${task.description}">Task Description Placeholder</p>
             </div>
         </div>
+
+            <div class="empty-state" th:if="${taskList == null or #lists.isEmpty(taskList)}">
+                No active tasks found.
+            </div>
 
         <div class="detail-card">
             <h2 class="card-header-row" style="border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 24px;">
