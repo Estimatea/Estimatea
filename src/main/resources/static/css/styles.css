@@ -79,9 +79,10 @@ footer, [th\:replace*="footer"] {
 
 /* --- UNIVERSAL BUTTONS & NAVIGATION --- */
 .action-bar {
-    padding: 20px 0;            /* Aligns cleanly with content grid boundaries */
+    padding: 20px 0px;            /* Aligns cleanly with content grid boundaries */
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .btn-action {

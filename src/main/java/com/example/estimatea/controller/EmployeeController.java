@@ -32,9 +32,14 @@ public class EmployeeController {
 
     @PostMapping("/login")
     public String login(@RequestParam String employeeUsername, @RequestParam String employeePassword, HttpSession session, Model model) {
-            Employee employee = employeeService.employeeLogin(employeeUsername, employeePassword);
-            session.setAttribute("currentEmployee", employee);
-            return "redirect:/projects/all";
+           try {
+               Employee employee = employeeService.employeeLogin(employeeUsername, employeePassword);
+               session.setAttribute("currentEmployee", employee);
+               return "redirect:/projects/all";
+           }  catch (NotFoundException e) {
+               model.addAttribute("loginError", "Invalid email or password");
+               return "login-page";
+           }
     }
 
     @GetMapping("/logout")
