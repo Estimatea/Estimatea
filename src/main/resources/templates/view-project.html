@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${project.projectName}">Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${project.projectName}">Project Overview</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 </head>
@@ -17,10 +18,10 @@
 
     <h1 class="section-title" th:text="${project.projectName}">Project name placeholder</h1>
 
+    <!-- MAIN PROJECT DASHBOARD -->
     <div class="project-dashboard-grid">
 
         <div class="detail-card">
-
             <div class="card-header-row">
                 <h2 class="card-subtitle">Project Overview</h2>
                 <a th:href="@{/projects/{projectId}/edit(projectId=${project.projectId})}" class="btn-action-small">
@@ -60,33 +61,57 @@
             </div>
         </div>
 
+        <!-- ADD TASK OR SUBPROJECT BUTTONS -->
         <div class="action-bar">
-            <a th:href="@{/project/task/add}" class="btn-action">
-                + Add Task
-            </a>
+            <a th:href="@{/task/project/{projectId}/add(projectId=${project.projectId})}" class="btn-action">+ Add Task</a>
+
             <a th:href="@{/subproject/project/{projectId}/create(projectId=${project.projectId})}" class="btn-action">
                 + Add Subproject
             </a>
         </div>
 
+        <!-- TASK LIST FOR MAIN PROJECT -->
         <div class="detail-card">
             <h2 class="card-header-row" style="border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 24px;">
-                <span class="card-subtitle">Task view</span>
+                <span class="card-subtitle">Task View</span>
             </h2>
 
             <div th:if="${taskList != null and !#lists.isEmpty(taskList)}">
-
-            <div class="task-list">
-                <div class="tasks-styling" th:each="Task : ${taskList}"></div>
-                <h3 th:text="${task.taskName}">Task Name Placeholder</h3>
-                <p th:text="${task.description}">Task Description Placeholder</p>
+                <div class="task-list">
+                    <div class="tasks-styling" th:each="task : ${taskList}">
+                        <h3 th:text="${task.taskName}">Task Name Placeholder</h3>
+                        <p th:text="${task.description}">Task Description Placeholder</p>
+                    </div>
+                </div>
             </div>
-        </div>
 
             <div class="empty-state" th:if="${taskList == null or #lists.isEmpty(taskList)}">
                 No active tasks found.
             </div>
+        </div>
 
+        <!-- SUBPROJECTS ON MAIN PROJECT -->
+        <div class="detail-card">
+            <h2 class="card-header-row" style="border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 24px;">
+                <span class="card-subtitle">Subprojects</span>
+            </h2>
+
+            <div th:if="${subProjectList != null and !#lists.isEmpty(subProjectList)}">
+                <div class="sub-list">
+                    <div class="sub-styling" th:each="subproject : ${subProjectList}">
+                        <h3 th:text="${subproject.subName}">Sub name placeholder</h3>
+                        <p><strong>Start:</strong> <span th:text="${subproject.startDate}">–</span></p>
+                        <p><strong>Deadline:</strong> <span th:text="${subproject.deadLine}">–</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="empty-state" th:if="${subProjectList == null or #lists.isEmpty(subProjectList)}">
+                No active subprojects found.
+            </div>
+        </div>
+
+        <!-- FULL EMPLOYEE LIST ASSIGNED TO PROJECT -->
         <div class="detail-card">
             <h2 class="card-header-row" style="border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 24px;">
                 <span class="card-subtitle">All Employees On Project</span>

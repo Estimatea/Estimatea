@@ -12,7 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +32,6 @@ public class ProjectServiceTest {
 
     @Mock
     private TaskService taskService;
-
 
     @InjectMocks
     private ProjectService projectService;
@@ -69,7 +67,6 @@ public class ProjectServiceTest {
     @Test
     void shouldReturnProjectById() {
         stubUpdateProjectScope();
-
 
         Project result = projectService.findProjectById(1);
 

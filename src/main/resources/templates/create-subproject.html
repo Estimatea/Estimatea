@@ -4,55 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Subproject</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/styles.css}" href="../static/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-
 <body>
 
 <header th:replace="~{fragments/header :: header}"></header>
 
 <main>
-
-    <div class="page-content">
-        <h1>Create Subproject</h1>
-
-        <form th:action="@{/subproject/create/save}" th:object="${subProject}" method="post">
-
-            <input type="hidden" th:field="*{projectId}" />
-
-            <div class="form-group">
-                <label for="subName">Name</label>
-                <div class="input-wrapper">
-                    <input type="text" id="subName" th:field="*{subName}" placeholder="Subproject name" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="startDate">Start Date</label>
-                <div class="input-wrapper">
-                    <input type="date" id="startDate" th:field="*{startDate}" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="deadLine">Deadline</label>
-                <div class="input-wrapper">
-                    <input type="date" id="deadLine" th:field="*{deadLine}" />
-                </div>
-            </div>
-
-            <button type="submit" class="btn-save">Save</button>
-
-        </form>
+    <div class="action-bar-nav">
+        <a th:href="@{/projects/{id}(id=${subProject.projectId})}" class="btn-back">← Cancel & Return to Project</a>
     </div>
 
+    <h1 class="section-title">Create Subproject</h1>
 
+    <form th:action="@{/subproject/create/save}" th:object="${subProject}" method="post">
+
+        <input type="hidden" th:field="*{projectId}" />
+
+        <div class="form-group">
+            <label for="subName" class="label">Subproject Name</label>
+            <div class="input-wrapper">
+                <input type="text" id="subName" th:field="*{subName}" placeholder="e.g., Database Architecture Design" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="startDate" class="label">Start Date</label>
+            <div class="input-wrapper">
+                <input type="date" id="startDate" th:field="*{startDate}" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="deadLine" class="label">Deadline</label>
+            <div class="input-wrapper">
+                <input type="date" id="deadLine" th:field="*{deadLine}" required />
+            </div>
+        </div>
+
+        <button type="submit" class="btn-save">Save Subproject</button>
+
+    </form>
 </main>
+
 <footer th:replace="~{fragments/footer :: footer}"></footer>
 
 </body>
-
 </html>

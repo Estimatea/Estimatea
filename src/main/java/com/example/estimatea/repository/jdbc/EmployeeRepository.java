@@ -18,7 +18,6 @@ public class EmployeeRepository {
     private final String EMPLOYEE_LOGIN = "SELECT * FROM employee WHERE employee_username = ? AND employee_password = ?";
 
         //SQL STATEMENTS FOR employees
-
     private final String GET_COMPANY_EMPLOYEE_LIST = "SELECT * FROM employee";
 
     // SQL STATEMENTS FOR project_employee Linked to a Project
