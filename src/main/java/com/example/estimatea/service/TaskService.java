@@ -35,6 +35,8 @@ public class TaskService {
             throw new NotFoundException("No task was created " + projectTask.getTaskId());
         }
 
+        taskPriceCalculatorForTaskInProject(projectTask);
+
     }
 
     public void createTaskForSubproject(Task subTask) {
@@ -49,6 +51,7 @@ public class TaskService {
             throw new NotFoundException("No task was created " + subTask.getTaskId());
         }
 
+        taskPriceCalculatorForTaskInSubProject(subTask);
 
     }
 
@@ -115,16 +118,32 @@ public class TaskService {
         }
     }
 
+
+    // Calculates the price for the Task, which cascades through the entire program
     public void taskPriceCalculatorForTaskInProject(Task task) {
         double price = 0;
-        double multiplier = complexityService.getComplexityFromId(task.getTaskId()).getRateMultiplier();
+
         List <Employee> empList = employeeService.getAllEmployeesByProjectId(task.getProjectId());
         for (Employee e : empList) {
             double rate = roleService.getRoleById(e.getRoleId()).getRoleRate();
-            price += (rate * task.getTaskTime()) * multiplier;
+            price += ( rate * task.getTaskTime() ) / empList.size();
         }
+        double multiplier = complexityService.getComplexityFromId(task.getTaskId()).getRateMultiplier();
 
-        task.setTaskPrice((int)Math.round(price));
+        task.setTaskPrice((int)Math.round(price * multiplier));
+    }
+
+    public void taskPriceCalculatorForTaskInSubProject(Task task) {
+        double price = 0;
+
+        List <Employee> empList = employeeService.getAllEmployeesForSubproject(task.getSubprojectId());
+        for (Employee e : empList) {
+            double rate = roleService.getRoleById(e.getRoleId()).getRoleRate();
+            price += ( rate * task.getTaskTime() ) / empList.size();
+        }
+        double multiplier = complexityService.getComplexityFromId(task.getTaskId()).getRateMultiplier();
+
+        task.setTaskPrice((int)Math.round(price * multiplier));
     }
 
 

@@ -2,6 +2,8 @@ package com.example.estimatea.service;
 
 import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.SubProject;
+import com.example.estimatea.repository.jdbc.EmployeeRepository;
+import com.example.estimatea.repository.jdbc.RoleRepository;
 import com.example.estimatea.repository.jdbc.SubProjectRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,9 +16,9 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -24,6 +26,19 @@ public class SubprojectServiceTest {
 
     @Mock
     private SubProjectRepository subProjectRepository;
+
+    @Mock
+    private TaskService taskService;          // <-- this was missing
+
+    @Mock
+    private EmployeeRepository employeeRepository;
+
+    @Mock
+    private RoleRepository roleRepository;
+
+    @Mock
+    private ComplexityService complexityService;
+
 
     @InjectMocks
     private SubProjectService subProjectService;
@@ -34,12 +49,20 @@ public class SubprojectServiceTest {
         subProjectMock = new SubProject(1, "Project calculation tool", LocalDate.of(2026, 2, 1), LocalDate.of(202, 3, 1), 10, 20, false, 1);
     }
 
+    private void stubScopeUpdate(int subId) {
+        when(subProjectRepository.findSubProjectById(subId)).thenReturn(subProjectMock);
+        when(taskService.getTasksForSubprojectId(subId)).thenReturn(List.of());
+        when(subProjectRepository.editSubProject(any(SubProject.class))).thenReturn(1);
+    }
+
     @Test
     void shouldReturnAllSubProjects() {
         when(subProjectRepository.getAllSubProjects()).thenReturn(List.of(subProjectMock));
+        stubScopeUpdate(1);
 
-        subProjectService.listAllSubProjects();
+        List<SubProject> result = subProjectService.listAllSubProjects();
 
+        assertNotNull(result);
         verify(subProjectRepository).getAllSubProjects();
     }
 
@@ -51,11 +74,12 @@ public class SubprojectServiceTest {
 
     @Test
     void shouldReturnSubProjectById() {
-        when(subProjectRepository.findSubProjectById(1)).thenReturn(subProjectMock);
+        stubScopeUpdate(1);
 
-        subProjectService.findSubProjectById(1);
+        SubProject result = subProjectService.findSubProjectById(1);
 
-        verify(subProjectRepository).findSubProjectById(1);
+        assertNotNull(result);
+        verify(subProjectRepository, atLeastOnce()).findSubProjectById(1);
     }
 
             @Test

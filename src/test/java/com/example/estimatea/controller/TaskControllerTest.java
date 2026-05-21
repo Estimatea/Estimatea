@@ -51,7 +51,7 @@ public class TaskControllerTest {
 
         mockMvc.perform(get("/task/project/1/add"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("create-task"))
+                .andExpect(view().name("create-task-project"))
                 .andExpect(model().attributeExists("project"));
 
         verify(projectService).findProjectById(1);
@@ -76,7 +76,7 @@ public class TaskControllerTest {
 
         mockMvc.perform(get("/task/subproject/1/add"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("create-task"))
+                .andExpect(view().name("create-task-subproject"))
                 .andExpect(model().attributeExists("subproject"));
 
         verify(subProjectService).findSubProjectById(1);
@@ -101,7 +101,7 @@ public class TaskControllerTest {
 
         mockMvc.perform(get("/task/project/1/2/edit"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("create-task"))
+                .andExpect(view().name("create-task-project"))
                 .andExpect(model().attributeExists("task"));
 
         verify(taskService).getTaskById(2);
@@ -126,7 +126,7 @@ public class TaskControllerTest {
 
         mockMvc.perform(get("/task/subproject/1/2/edit"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("create-task"))
+                .andExpect(view().name("create-task-project"))
                 .andExpect(model().attributeExists("task"));
 
         verify(taskService).getTaskById(2);

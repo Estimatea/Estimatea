@@ -139,4 +139,63 @@ public class ProjectService {
 //        editProject(project);
 //
 //    }
+    public void updateProjectScope(Project project) {
+        if (project == null) {
+            throw new IllegalArgumentException("No project object received");
+        }
+        updateProjectPrice(project.getProjectId());
+        updateProjectTime(project.getProjectId());
+    }
+
+    public void updateProjectPrice(int projectId) {
+        Project project = projectRepository.getProjectById(projectId);
+        if (project == null) {
+            throw new NotFoundException("No project with given ID found " + projectId);
+        }
+        project.setSumPrice(0);
+
+        List<SubProject> subProjects = subProjectService.findSubProjectsByProjectId(projectId);
+        if (!subProjects.isEmpty()) {
+            for (SubProject s : subProjects) {
+                subProjectService.updateSubProjectScope(s);
+                project.setSumPrice(project.getSumPrice() + s.getSumPrice());
+            }
+        }
+
+        List<Task> tasks = taskService.getTasksByProjectId(projectId);
+        if (!tasks.isEmpty()) {
+            for (Task t : tasks) {
+                project.setSumPrice(project.getSumPrice() + t.getTaskPrice());
+            }
+        }
+
+        editProject(project);
+
+    }
+
+    public void updateProjectTime(int projectId) {
+        Project project = projectRepository.getProjectById(projectId);
+        if (project == null) {
+            throw new NotFoundException("No project with given ID found " + projectId);
+        }
+        project.setSumTime(0);
+
+        List<SubProject> subProjects = subProjectService.findSubProjectsByProjectId(projectId);
+        if (!subProjects.isEmpty()) {
+            for (SubProject s : subProjects) {
+                subProjectService.updateSubProjectScope(s);
+                project.setSumTime(project.getSumTime() + s.getSumTime());
+            }
+        }
+
+        List<Task> tasks = taskService.getTasksByProjectId(projectId);
+        if (!tasks.isEmpty()) {
+            for (Task t : tasks) {
+                project.setSumTime(project.getSumTime() + t.getTaskTime());
+            }
+        }
+
+        editProject(project);
+
+    }
 }
