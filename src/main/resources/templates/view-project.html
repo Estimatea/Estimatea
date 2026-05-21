@@ -3,23 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${project.projectName}">Project</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 </head>
+<style>
+    <style>
+            /* ── CORRECTION TO FORCE FOOTER DOWN ── */
+            html, body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+            }
 
+            body {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+            }
 
+            main {
+                flex: 1 0 auto;  /* Tells main to expand and eat up all empty vertical space */
+                margin: 0 auto;  /* Centers your 960px container content layout */
+                width: 100%;
+                max-width: 960px;
+                padding: 24px 20px 40px; /* Safe padding for mobile and desktop screens */
+                box-sizing: border-box;
+            }
+
+            /* Stops the footer element from collapsing or shifting upwards */
+            footer, [th\:replace*="footer"] {
+                flex-shrink: 0;
+                width: 100%;
+            }
+
+            /* ── NAVIGATION ── */
+            .action-bar-nav {
+                margin-bottom: 24px;
+                margin-top: 10px;
+            }
+
+            .btn-back {
+                text-decoration: none;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 14px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: var(--text-light);
+                transition: color 0.2s;
+            }
+
+            .btn-back:hover {
+                color: var(--text-dark);
+            }
+
+            /* ── DASHBOARD GRID CONTAINER ── */
+            .project-dashboard-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 28px;
+                margin-top: 24px;
+                width: 100%;
+            }
+
+            /* ── MODERN SHADOW CARDS ── */
+            .detail-card {
+                background: var(--card-bg, #b5afaa);
+                border: 1px solid var(--card-border, #a09a94);
+                border-radius: var(--radius, 6px);
+                padding: 30px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+
+            .card-subtitle {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 18px;
+                font-weight: 700;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                color: var(--text-dark);
+                margin-bottom: 24px;
+                border-bottom: 1px solid var(--card-border, #a09a94);
+                padding-bottom: 10px;
+            }
+
+            /* ── INFO CONTAINER ── */
+            .info-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 24px;
+            }
+
+            .info-pair {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .price-tag {
+                font-size: 16px !important;
+                font-weight: 700 !important;
+                color: #1e2a2a;
+            }
+
+            /* ── CLEAN TEAM ROSTER LAYOUT ── */
+            .team-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 16px;
+            }
+
+            .team-member {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                background: var(--bar-bg, #ffffff);
+                padding: 12px 16px;
+                border-radius: var(--radius, 6px);
+                border: 1px solid var(--card-border, #a09a94);
+            }
+
+            .member-avatar {
+                width: 32px;
+                height: 32px;
+                background-color: #1e2a2a;
+                color: #fff;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 700;
+                font-size: 13px;
+                text-transform: uppercase;
+            }
+
+            .member-name {
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--text-dark);
+            }
+</style>
+</style>
 <body>
 
 <div th:replace="~{fragments/header :: header}"></div>
 
 <main>
+        <div class="action-bar-nav">
+            <a th:href="@{/projects/all}" class="btn-back">← Back to Projects</a>
+        </div>
 
-    <h1 class="section-title" th:text="${project.projectName}">Project name placeholder</h1>
+        <h1 class="section-title" th:text="${project.projectName}">Project name placeholder</h1>
 
+        <div class="project-dashboard-grid">
 
+            <div class="detail-card">
+                <h2 class="card-subtitle">Project Overview</h2>
 
-</main>
+                <div class="info-grid">
+                    <div class="info-pair">
+                        <span class="label">Estimated Price</span>
+                        <span class="value price-tag" th:text="${project.sumPrice != 0 ? project.sumPrice + ' kr.' : '–'}">–</span>
+                    </div>
 
+                    <div class="info-pair">
+                        <span class="label">Project Lead</span>
+                        <span class="value lead-name"
+                              th:each="employee : ${employeeList}"
+                              th:if="${employee.employeeId == project.projectManager}"
+                              th:text="${employee.getEmployeeName()}">–</span>
+                    </div>
+
+                    <div class="info-pair">
+                        <span class="label">Start-Date</span>
+                        <span class="value" th:text="${#temporals.format(project.startDate, 'dd/MM/yyyy')}">–</span>
+                    </div>
+
+                    <div class="info-pair">
+                        <span class="label">Deadline</span>
+                        <span class="value" th:text="${project.deadLine != null ? #temporals.format(project.deadLine, 'dd/MM/yyyy') : '–'}">–</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-card">
+                <h2 class="card-subtitle">All Employees On Project</h2>
+                <div class="team-list">
+                    <div class="team-member" th:each="employee : ${employeeList}">
+                        <div class="member-avatar" th:text="${#strings.substring(employee.getEmployeeName(),0,1)}">E</div>
+                        <span class="member-name" th:text="${employee.getEmployeeName()}">Employee Name</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>
+
+<!--    <h1 class="section-title" th:text="${project.projectName}">Project name placeholder</h1>-->
+
+<!--    <div>-->
+<!--        <span class="label">Estimated Price:&nbsp;</span>-->
+<!--        <span class="value" th:text="${project.sumPrice != 0 ? project.sumPrice + ' kr.' : '–'}">–</span>-->
+<!--    </div>-->
+
+<!--    <div>Project Lead</div>-->
+<!--    <div th:each="employee : ${employeeList}"-->
+<!--         th:if="${employee.employeeId == project.projectManager}"-->
+<!--         th:text="${employee.getEmployeeName()}">–</div>-->
+
+<!--    <div>-->
+<!--        <span class="label">Start-Date</span>-->
+<!--        <span class="value" th:text="${#temporals.format(project.startDate, 'dd/MM/yyyy')}">–</span>-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--        <span class="label">Deadline</span>-->
+<!--        <span class="value" th:text="${project.deadLine != null ? #temporals.format(project.deadLine, 'dd/MM/yyyy') : '–'}">–</span>-->
+<!--    </div>-->
+
+<!--    <div>All Employees On Project</div>-->
+<!--    <div th:each="employee : ${employeeList}"-->
+<!--         th:text="${employee.getEmployeeName()}">-->
+<!--    </div>-->

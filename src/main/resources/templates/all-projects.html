@@ -16,12 +16,19 @@
 
     .project-card {
         background: var(--card-bg);
-        border: 1px solid var(--card-border);
         border-radius: var(--radius);
         padding: 18px 22px 14px;
         margin-bottom: 16px;
         position: relative;
+        display: block;
+        text-decoration: none;
+        color: inherit;
     }
+
+    a.project-card:hover {
+    cursor: pointer;
+    opacity: 0.95;
+}
 
     .card-top {
         display: flex;
@@ -170,6 +177,12 @@
     <h1 class="section-title">Active Projects</h1>
 
     <div th:if="${projectList != null and !#lists.isEmpty(projectList)}">
+
+        <a th:href="@{/projects/{id}(id=${project.projectId})}"
+           th:each="project : ${projectList}"
+           th:if="${!project.completed}"
+           class="project-card">
+
         <div class="project-card" th:each="project : ${projectList}" th:if="${!project.completed}">
             <div class="card-top">
                 <div>
@@ -202,8 +215,8 @@
                 <div class="progress-bar-fill"></div>
             </div>
         </div>
+         </a>
     </div>
-
     <div class="empty-state" th:if="${projectList == null or #lists.isEmpty(projectList)}">
         No active projects found.
     </div>
