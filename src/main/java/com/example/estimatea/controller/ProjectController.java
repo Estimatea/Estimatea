@@ -23,7 +23,7 @@ public class ProjectController {
     private final SubProjectService subProjectService;
     private final TaskService taskService;
 
-    public ProjectController(ProjectService projectService,  EmployeeService employeeService, SubProjectService subProjectService,  TaskService taskService) {
+    public ProjectController(ProjectService projectService, EmployeeService employeeService, SubProjectService subProjectService, TaskService taskService) {
         this.taskService = taskService;
         this.projectService = projectService;
         this.employeeService = employeeService;
@@ -32,46 +32,58 @@ public class ProjectController {
 
     // ALL PROJECTS VIEW
     @GetMapping("/all")
-    public String getAllProjectsForm(Model model) {
-            List<Project> projectList = projectService.listAllProjects();
-            model.addAttribute("projectList", projectList);
+    public String getAllActiveProjectsForm(Model model) {
+        List<Project> projectList = projectService.listAllActiveProjects();
+        model.addAttribute("projectList", projectList);
 
-            List<Employee> employeeList = employeeService.getAllEmployeeInCompany();
-            model.addAttribute("employeeList", employeeList);
+        List<Employee> employeeList = employeeService.getAllEmployeeInCompany();
+        model.addAttribute("employeeList", employeeList);
 
-            return "all-projects";
+        return "all-projects";
+    }
+
+    // COMPLETED PROJECTS VIEW
+    @GetMapping("/completed")
+    public String getCompletedProjectsForm(Model model) {
+        List<Project>  projectList = projectService.listAllCompletedProjects();
+        model.addAttribute("projectList", projectList);
+
+        List<Employee> employeeList = employeeService.getAllEmployeeInCompany();
+        model.addAttribute("employeeList", employeeList);
+
+        return "completed-projects";
     }
 
     //SPECIFIC PROJECT VIEW
     @GetMapping("/{projectId}")
     public String getProjectOverview(@PathVariable int projectId, Model model) {
-            Project project = projectService.findProjectById(projectId);
-            model.addAttribute("project", project);
+        Project project = projectService.findProjectById(projectId);
+        model.addAttribute("project", project);
 
-            List<Employee> employeeList = employeeService.getAllEmployeesByProjectId(projectId);
-            model.addAttribute("employeeList", employeeList);
+        List<Employee> employeeList = employeeService.getAllEmployeesByProjectId(projectId);
+        model.addAttribute("employeeList", employeeList);
 
-            List<SubProject> subProjectList = subProjectService.findSubProjectsByProjectId(projectId);
-            model.addAttribute("subProjectList", subProjectList);
+        List<SubProject> subProjectList = subProjectService.findSubProjectsByProjectId(projectId);
+        model.addAttribute("subProjectList", subProjectList);
 
-            List<Task> taskList = taskService.getTasksByProjectId(projectId);
-            model.addAttribute("taskList", taskList);
+        List<Task> taskList = taskService.getTasksByProjectId(projectId);
+        model.addAttribute("taskList", taskList);
 
-            return "view-project";
+        return "view-project";
     }
 
     //EDIT SPECIFIC PROJECT
     @GetMapping("/{projectId}/edit")
     public String editProjectForm(@PathVariable int projectId, Model model) {
-            Project project = projectService.findProjectById(projectId);
-            model.addAttribute("project", project);
-            return "edit-project";
+        Project project = projectService.findProjectById(projectId);
+        model.addAttribute("project", project);
+        return "edit-project";
     }
 
         @PostMapping("/{projectId}/edit/save")
         public String saveProjectChanges(@ModelAttribute("project") Project project) {
-                projectService.editProject(project);
-                return "redirect:/projects/" + project.getProjectId();
+            projectService.editProject(project);
+            return "redirect:/projects/" + project.getProjectId();
         }
 
 
@@ -84,15 +96,15 @@ public class ProjectController {
 
         @PostMapping("/create/save")
         public String saveNewProject(@ModelAttribute("project") Project project) {
-                projectService.createNewProject(project);
-                return "redirect:/projects/all";
+            projectService.createNewProject(project);
+            return "redirect:/projects/all";
         }
 
 
     //DELETE PROJECT
     @PostMapping("/{projectId}/delete")
     public String deleteProject(@PathVariable int projectId) {
-            projectService.deleteProject(projectId);
-            return "redirect:/projects/all";
+        projectService.deleteProject(projectId);
+        return "redirect:/projects/all";
     }
 }

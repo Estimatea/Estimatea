@@ -4,7 +4,6 @@ import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.Project;
 import com.example.estimatea.model.SubProject;
 import com.example.estimatea.model.Task;
-import com.example.estimatea.repository.jdbc.ProjectRepository;
 import com.example.estimatea.service.EmployeeService;
 import com.example.estimatea.service.ProjectService;
 import com.example.estimatea.service.SubProjectService;
@@ -54,13 +53,13 @@ public class ProjectControllerTest {
     
     @Test
     void controllerGetAllProjectForm() throws Exception { // GET
-        when(projectService.listAllProjects()).thenReturn(List.of(projectMock));
+        when(projectService.listAllActiveProjects()).thenReturn(List.of(projectMock));
 
         mockMvc.perform(get("/projects/all")).andExpect(status().isOk())
                                              .andExpect(view().name("all-projects"))
                                              .andExpect(model().attributeExists("projectList"));
 
-        verify(projectService).listAllProjects();
+        verify(projectService).listAllActiveProjects();
     }
 
     // Project Overview

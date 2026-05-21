@@ -24,7 +24,6 @@
 
         <a th:href="@{/projects/{id}(id=${project.projectId})}"
            th:each="project : ${projectList}"
-           th:if="${!project.completed}"
            class="project-card">
 
             <div class="card-top">
