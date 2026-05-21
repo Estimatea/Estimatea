@@ -47,7 +47,7 @@ public class SubProjectRepositoryTest {
         SubProject subProject = subProjectRepository.findSubProjectById(subProjectId); // GET_SUBPROJECT_BY_ID
 
         assertThat(subProject.getSubId()).isEqualTo(subProjectId);
-        assertThat(subProject.completed()).isEqualTo(false);
+        assertThat(subProject.isCompleted()).isEqualTo(false);
         assertThat(subProject.getDeadLine()).isEqualTo(LocalDate.of(2026,3,1));
     }
 
@@ -63,7 +63,7 @@ public class SubProjectRepositoryTest {
 
     @Test
     void shouldCreateSubProject() {
-        SubProject subProject = new SubProject("Created sub project", /* Start_date */ LocalDate.of(2026, 2, 3), /* Deadline */ LocalDate.of(2026, 2, 8), false, 1);
+        SubProject subProject = new SubProject("Created sub project", /* Start_date */ LocalDate.of(2026, 2, 3), /* Deadline */ LocalDate.of(2026, 2, 8), /*sumTime*/10 ,/*sumPrice*/20 ,/*completed*/false, 1);
 
         subProjectRepository.createSubProject(subProject);
         List<SubProject> allSubProjects = subProjectRepository.getAllSubProjects();
@@ -103,6 +103,6 @@ public class SubProjectRepositoryTest {
 //
 //        subProjectRepository.editSubProjectCompleted(true, subProjectId);
 //
-//        assertThat(subProjectRepository.getAllSubProjects().getFirst().completed()).isTrue();
+//        assertThat(subProjectRepository.getAllSubProjects().getFirst().isCompleted()).isTrue();
 //    }
 }

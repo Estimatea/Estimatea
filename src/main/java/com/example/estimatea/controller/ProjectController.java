@@ -47,17 +47,17 @@ public class ProjectController {
 
     //SPECIFIC PROJECT VIEW
     @GetMapping("/{projectId}")
-    public String getProjectOverview(@PathVariable String projectId, Model model) {
-            Project project = projectService.findProjectById(Integer.parseInt(projectId));
+    public String getProjectOverview(@PathVariable int projectId, Model model) {
+            Project project = projectService.findProjectById(projectId);
             model.addAttribute("project", project);
 
-            List<Employee> employeeList = employeeService.getAllEmployeesByProjectId(Integer.parseInt(projectId));
+            List<Employee> employeeList = employeeService.getAllEmployeesByProjectId(projectId);
             model.addAttribute("employeeList", employeeList);
 
-            List<SubProject> subProjectList = subProjectService.findSubProjectsByProjectId(Integer.parseInt(projectId));
+            List<SubProject> subProjectList = subProjectService.findSubProjectsByProjectId(projectId);
             model.addAttribute("subProjectList", subProjectList);
 
-            List<Task> taskList = taskService.getTasksByProjectId(Integer.parseInt(projectId));
+            List<Task> taskList = taskService.getTasksByProjectId(projectId);
             model.addAttribute("taskList", taskList);
 
             return "view-project";
