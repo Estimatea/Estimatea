@@ -126,7 +126,7 @@ public class TaskControllerTest {
 
         mockMvc.perform(get("/task/subproject/1/2/edit"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("edit-task-project"))
+                .andExpect(view().name("edit-task-subproject"))
                 .andExpect(model().attributeExists("task"));
 
         verify(taskService).getTaskById(2);

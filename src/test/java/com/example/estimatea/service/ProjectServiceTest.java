@@ -46,17 +46,11 @@ public class ProjectServiceTest {
         subProjectMock = new SubProject(1, "Project calculation tool", LocalDate.of(2026, 2, 1), LocalDate.of(202, 3, 1), 10, 20, false, 1);
     }
 
-    private void stubUpdateProjectScope() {
-        when(projectRepository.getProjectById(1)).thenReturn(projectMock);
-        when(subProjectService.findSubProjectsByProjectId(1)).thenReturn(Collections.emptyList());
-        when(taskService.getTasksByProjectId(1)).thenReturn(Collections.emptyList());
-        when(projectRepository.editProject(any(Project.class))).thenReturn(1);
-    }
 
     @Test
     void shouldReturnAllProjects() {
         when(projectRepository.getAllProjects()).thenReturn(List.of(projectMock));
-        stubUpdateProjectScope();
+
 
         List<Project> currentProjects = projectService.listAllProjects();
 
@@ -72,13 +66,14 @@ public class ProjectServiceTest {
 
     @Test
     void shouldReturnProjectById() {
-        stubUpdateProjectScope();
+        when(projectRepository.getProjectById(1)).thenReturn(projectMock);
+
 
         Project result = projectService.findProjectById(1);
 
         assertNotNull(result);
         assertThat(result).isEqualTo(projectMock);
-        verify(projectRepository, times(3)).getProjectById(1);
+        verify(projectRepository).getProjectById(1);
     }
 
             @Test
