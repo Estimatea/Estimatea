@@ -23,26 +23,33 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    // EMPLOYEE LOGIN
+        // EMPLOYEE LOGIN
+
     @GetMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
+    public String loginForm() {
+        return "login-page";
+    }
+
+    @PostMapping("/login")
+    public String login(@RequestParam String employeeUsername, @RequestParam String password, HttpSession session, Model model) {
         try {
-            Employee employee = employeeService.employeeLogin(email, password);
+            Employee employee = employeeService.employeeLogin(employeeUsername, password);
             session.setAttribute("currentEmployee", employee);
-            return "redirect:/homepage";
+            return "redirect:/projects/all";
         } catch (NotFoundException e) {
             model.addAttribute("error", "Invalid email or password");
-            return "login";
+            return "login-page";
         }
     }
 
-            @PostMapping("/logout")
-            public String logout(HttpSession session) {
-                session.invalidate();
-                return "redirect:/login";
-            }
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/employee/login";
+    }
 
-    // Full list of employees in organization
+        // Full list of employees in organization
+
     @GetMapping("/all")
     public String getAllEmployees(Model model) {
         List<Employee> employeeList = employeeService.getAllEmployeeInCompany();

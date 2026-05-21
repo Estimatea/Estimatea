@@ -15,8 +15,8 @@ public class EmployeeService {
     }
 
     // Employee Login
-    public Employee employeeLogin(String email, String password) {
-        Employee employee = employeeRepository.employeeLogin(email, password);
+    public Employee employeeLogin(String employeeUsername, String password) {
+        Employee employee = employeeRepository.employeeLogin(employeeUsername, password);
 
         if (employee == null) {
             throw new NotFoundException("Invalid email or password");

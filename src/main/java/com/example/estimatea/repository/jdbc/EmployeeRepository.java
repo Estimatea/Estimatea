@@ -14,7 +14,7 @@ public class EmployeeRepository {
 
         // SQL STATEMENTS for Employee Login Handling
 
-    private final String EMPLOYEE_LOGIN = "SELECT * FROM employees WHERE email = ? AND password = ?";
+    private final String EMPLOYEE_LOGIN = "SELECT * FROM employees WHERE employee_username = ? AND password = ?";
 
         //SQL STATEMENTS FOR employees
 
@@ -44,8 +44,8 @@ public class EmployeeRepository {
         this.employeeMapper = employeeMapper;
     }
 
-    public Employee employeeLogin(String email, String password) {
-        List<Employee> employeeList = jdbc.query(EMPLOYEE_LOGIN, employeeMapper, email, password);
+    public Employee employeeLogin(String employeeUsername, String password) {
+        List<Employee> employeeList = jdbc.query(EMPLOYEE_LOGIN, employeeMapper, employeeUsername, password);
         return employeeList.getFirst();
     }
 
