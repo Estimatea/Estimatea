@@ -17,9 +17,9 @@ VALUES ('2026-01-01', false, 'Alpha Solutions', 120, 1500, '2026-12-31', 1),
        ('2027-01-01', false, 'AI Model', 300, 4500, '2028-01-01', 2);
 
 -- 4. subprojects
-INSERT INTO subproject (sub_name, start_date, deadline, completed, project_id)
-VALUES ('Project calculation tool', '2026-02-01', '2026-03-01', false, 1),
-       ('AI integration', '2026-06-06', '2026-12-12', false, 2);
+INSERT INTO subproject (sub_name, start_date, deadline, sum_time,  sum_price, completed, project_id)
+VALUES ('Project calculation tool', '2026-02-01', '2026-03-01', 10 , 20,false, 1),
+       ('AI integration', '2026-06-06', '2026-12-12', 40, 100, false, 2);
 
 -- 5. complexity
 INSERT INTO complexity (complexity_score, label_type, rate_multiplier)

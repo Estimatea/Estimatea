@@ -10,22 +10,28 @@ public class SubProject {
     private String subName;
     private LocalDate startDate;
     private LocalDate deadLine;
+    private int sumTime;
+    private int sumPrice;
     private boolean completed;
     private int projectId;
 
-    public SubProject(int subId, String subName, LocalDate startDate, LocalDate deadLine, boolean completed, int projectId) {
+    public SubProject(int subId, String subName, LocalDate startDate, LocalDate deadLine, int sumTime, int sumPrice ,boolean completed, int projectId) {
         this.subId = subId;
         this.subName = subName;
         this.startDate = startDate;
         this.deadLine = deadLine;
+        this.sumTime = sumTime;
+        this.sumPrice = sumPrice;
         this.completed = completed;
         this.projectId = projectId;
     }
 
-    public SubProject(String subName, LocalDate startDate, LocalDate deadLine, boolean completed, int projectId) {
+    public SubProject(String subName, LocalDate startDate, LocalDate deadLine, int sumTime, int sumPrice, boolean completed, int projectId) {
         this.subName = subName;
         this.startDate = startDate;
         this.deadLine = deadLine;
+        this.sumTime = sumTime;
+        this.sumPrice = sumPrice;
         this.completed = completed;
         this.projectId = projectId;
     }
@@ -53,7 +59,23 @@ public class SubProject {
         return deadLine;
     }
 
-    public boolean completed() {
+    public int getSumPrice() {
+        return sumPrice;
+    }
+
+    public void setSumPrice(int sumPrice) {
+        this.sumPrice = sumPrice;
+    }
+
+    public int getSumTime() {
+        return sumTime;
+    }
+
+    public void setSumTime(int sumTime) {
+        this.sumTime = sumTime;
+    }
+
+    public boolean isCompleted() {
         return completed;
     }
 

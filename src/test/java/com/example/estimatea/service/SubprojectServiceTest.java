@@ -31,7 +31,7 @@ public class SubprojectServiceTest {
 
     @BeforeEach()
     public void setUp() {
-        subProjectMock = new SubProject(1, "Project calculation tool", LocalDate.of(2026, 2, 1), LocalDate.of(202, 3, 1), false, 1);
+        subProjectMock = new SubProject(1, "Project calculation tool", LocalDate.of(2026, 2, 1), LocalDate.of(202, 3, 1), 10, 20, false, 1);
     }
 
     @Test

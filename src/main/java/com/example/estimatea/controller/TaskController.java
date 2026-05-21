@@ -36,7 +36,7 @@ public class TaskController {
         task.setProjectId(projectId);
         model.addAttribute("task", task);
 
-        return "create-task";
+        return "create-task-project";
     }
 
     @PostMapping("/createTaskForProject")
@@ -56,7 +56,7 @@ public class TaskController {
         task.setSubprojectId(subprojectId);
         model.addAttribute("task", task);
 
-        return "create-task";
+        return "create-task-subproject";
     }
 
     @PostMapping("/createTaskForSubproject")
@@ -71,7 +71,7 @@ public class TaskController {
     public String editTaskInProjectForm(@PathVariable int taskId, Model model) {
         Task currentTask = taskService.getTaskById(taskId);
         model.addAttribute("task", currentTask);
-        return "create-task";
+        return "create-task-project";
     }
 
     @PostMapping("/edit/project")
@@ -85,7 +85,7 @@ public class TaskController {
     public String editTaskInSubprojectForm(@PathVariable int taskId, Model model) {
         Task currenTask = taskService.getTaskById(taskId);
         model.addAttribute("task", currenTask);
-        return "create-task";
+        return "create-task-project";
     }
 
     @PostMapping("/edit/subproject")

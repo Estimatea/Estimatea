@@ -43,9 +43,10 @@ public class SubProjectController {
     }
 
     //CREATE SUBPROJECT
-    @GetMapping("/create")
-    public String createSubProject(Model model) {
+    @GetMapping("/project/{projectId}/create")
+    public String createSubProject(@PathVariable int projectId, Model model) {
         SubProject subProject = new SubProject();
+        subProject.setProjectId(projectId);
         model.addAttribute("subProject", subProject);
         return "create-subproject";
     }
@@ -59,8 +60,8 @@ public class SubProjectController {
 
     //EDIT SUBPROJECT
     @GetMapping("/{subProjectId}/edit")
-    public String editSubProject(@PathVariable String subProjectId, Model model) {
-        SubProject subProject = subProjectService.findSubProjectById(Integer.parseInt(subProjectId));
+    public String editSubProject(@PathVariable int subProjectId, Model model) {
+        SubProject subProject = subProjectService.findSubProjectById(subProjectId);
         model.addAttribute("subProject", subProject);
         return "edit-subproject";
     }

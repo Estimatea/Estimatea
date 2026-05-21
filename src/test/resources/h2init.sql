@@ -43,6 +43,8 @@ CREATE TABLE IF NOT EXISTS subproject(
     sub_name VARCHAR(60),
     start_date DATE,
     deadline DATE,
+    sum_time INT,
+    sum_price INT,
     completed BOOLEAN DEFAULT FALSE,
     project_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE

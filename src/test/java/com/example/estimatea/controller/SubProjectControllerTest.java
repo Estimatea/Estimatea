@@ -48,7 +48,7 @@ public class SubProjectControllerTest {
     public void setup() {
         employeeMock = new Employee(1, "Jonathan Test", "jonathantestemand", "112testmodtaget", 1);
         projectMock = new Project(1, LocalDate.now(), false, "Test Project", 1000, 1000000, LocalDate.now().plusYears(2), 1);
-        subProjectMock = new SubProject(1, "Test SubProject", LocalDate.now(), LocalDate.now().plusYears(1), false, 1);
+        subProjectMock = new SubProject(1, "Test SubProject", LocalDate.now(), LocalDate.now().plusYears(1), 10, 20, false, 1);
     }
 
     @Test

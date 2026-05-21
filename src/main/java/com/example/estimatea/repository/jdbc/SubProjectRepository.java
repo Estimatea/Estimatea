@@ -17,9 +17,9 @@ public class SubProjectRepository {
     private final String GET_ALL_SUBPROJECTS = "SELECT * FROM subproject ORDER BY project_id ASC";
     private final String GET_SUBPROJECT_BY_ID = "SELECT * FROM subproject WHERE sub_id = ?";
     private final String GET_SUBPROJECTS_BY_PROJECT = "SELECT * FROM subproject WHERE project_id = ?";
-    private final String CREATE_SUBPROJECT = "INSERT INTO subproject (sub_name, start_date, deadline, completed, project_id) VALUES (?,?,?,?,?)";
+    private final String CREATE_SUBPROJECT = "INSERT INTO subproject (sub_name, start_date, deadline, sum_time, sum_price, completed, project_id) VALUES (?,?,?,?,?,?,?)";
     private final String DELETE_SUBPROJECT = "DELETE FROM subproject WHERE sub_id = ?";
-    private final String UPDATE_SUBPROJECT = "UPDATE subproject SET sub_name = ?, deadline = ?, completed = ? WHERE sub_id = ?";
+    private final String UPDATE_SUBPROJECT = "UPDATE subproject SET sub_name = ?, deadline = ?, sum_time = ?, sum_price = ?, completed = ? WHERE sub_id = ?";
     private final String EDIT_DEADLINE = "UPDATE subproject SET deadline = ? WHERE sub_id = ?";
     private final String EDIT_COMPLETED = "UPDATE subproject SET completed = ? WHERE sub_id = ?";
 
@@ -48,7 +48,8 @@ public class SubProjectRepository {
     //creates a new subproject with information from thymeleaf
     public int createSubProject(SubProject subProject) {
         return jdbc.update(CREATE_SUBPROJECT, subProject.getSubName(), subProject.getStartDate(),
-                subProject.getDeadLine(), subProject.completed(), subProject.getProjectId());
+                subProject.getDeadLine(), subProject.getSumTime(), subProject.getSumPrice(),
+                subProject.isCompleted(), subProject.getProjectId());
     }
 
     //deletes a subproject from the db
@@ -58,7 +59,8 @@ public class SubProjectRepository {
 
     //UPDATE SUBPROJECT
     public int editSubProject(SubProject subProject) {
-        return jdbc.update(UPDATE_SUBPROJECT, subProject.getSubName(), subProject.getDeadLine(), subProject.completed(), subProject.getSubId());
+        return jdbc.update(UPDATE_SUBPROJECT, subProject.getSubName(), subProject.getDeadLine(), subProject.getSumTime(), subProject.getSumPrice(),
+                subProject.isCompleted(), subProject.getSubId());
     }
 
 //    //edits a subprojects deadline
