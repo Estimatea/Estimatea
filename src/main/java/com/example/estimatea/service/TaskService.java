@@ -6,6 +6,7 @@ import com.example.estimatea.model.Task;
 import com.example.estimatea.repository.jdbc.TaskRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -104,7 +105,7 @@ public class TaskService {
         List<Task> tasks = taskRepository.getTasksBySubprojectId(subprojectId);
 
         if (tasks.isEmpty()) {
-            throw new NotFoundException("No tasks exists for subproject: " + subprojectId);
+            return Collections.emptyList();
         }
 
         return tasks;

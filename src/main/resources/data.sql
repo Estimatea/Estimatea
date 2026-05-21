@@ -36,6 +36,9 @@ VALUES ('Emil', 'Eman', '010', 3);
 INSERT INTO project (project_name, start_date, completed, sum_time, sum_price, deadline, project_manager)
 VALUES ('Project calculation tool', '2026-01-01', false, 1000, 25000, '2026-05-28', 1);
 
+INSERT INTO subproject (sub_name, start_date, deadline, sum_time,  sum_price, completed, project_id)
+VALUES ('Project calculation tool', '2026-02-01', '2026-03-01', 10 , 20,false, 1);
+
 INSERT INTO project_employee (employee_id, project_id) VALUES (1,1), (2,1), (3,1);
 
 INSERT INTO complexity (complexity_score, label_type, rate_multiplier) VALUES
