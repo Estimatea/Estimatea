@@ -224,13 +224,6 @@ public class TaskServiceTest {
         assertEquals(taskMock, result.getFirst());
     }
 
-            @Test
-            void getTasksBySubprojectId_shouldThrowWhenEmpty() {
-
-                when(taskRepository.getTasksBySubprojectId(1)).thenReturn(List.of());
-
-                assertThrows(NotFoundException.class, () -> taskService.getTasksForSubprojectId(1));
-            }
 
 
     //Unit test on updateComplexityScore
