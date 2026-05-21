@@ -59,7 +59,7 @@ public class ProjectServiceTest {
         when(projectRepository.getAllProjects()).thenReturn(List.of(projectMock));
         stubUpdateProjectScope(1);
 
-        List<Project> currentProjects = projectService.listAllProjects();
+        List<Project> currentProjects = projectService.listAllActiveProjects();
 
         assertNotNull(currentProjects);
         assertThat(currentProjects.size()).isEqualTo(1);
@@ -68,7 +68,7 @@ public class ProjectServiceTest {
             @Test
             void shouldHitNotFoundExceptionIfEmpty() {
                 when(projectRepository.getAllProjects()).thenReturn(Collections.emptyList());
-                assertThrows(NotFoundException.class, () -> projectService.listAllProjects());
+                assertThrows(NotFoundException.class, () -> projectService.listAllActiveProjects());
             }
 
     @Test

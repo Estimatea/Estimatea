@@ -7,6 +7,7 @@ import com.example.estimatea.model.Task;
 import com.example.estimatea.repository.jdbc.ProjectRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,11 +23,28 @@ public class ProjectService {
         this.taskService = taskService;
     }
 
-    public List<Project> listAllProjects() {
-        List<Project> projects = projectRepository.getAllProjects();
+    public List<Project> listAllActiveProjects() {
+        List<Project> projects = new ArrayList<>();
 
-        if (projects.isEmpty()) {
-            throw new NotFoundException("No projects exists");
+        for (Project p :  projectRepository.getAllProjects()) {
+            if (!p.isCompleted()) {
+                projects.add(p);
+            }
+        }
+
+        for (Project project : projects) {
+            updateProjectScope(project);
+        }
+        return projects;
+    }
+
+    public List<Project> listAllCompletedProjects() {
+        List<Project> projects = new ArrayList<>();
+
+        for (Project p :  projectRepository.getAllProjects()) {
+            if (p.isCompleted()) {
+                projects.add(p);
+            }
         }
 
         for (Project project : projects) {
