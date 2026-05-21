@@ -32,9 +32,9 @@ public class SubProjectService {
         if (subprojects.isEmpty()) {
             throw new NotFoundException("No subprojects exists");
         }
-        for (SubProject subproject : subprojects) {
-            updateSubProjectScope(subproject);
-        }
+//        for (SubProject subproject : subprojects) {
+//            updateSubProjectScope(subproject);
+//        }
         return subprojects;
     }
 
@@ -44,7 +44,7 @@ public class SubProjectService {
         if (subProject == null) {
             throw new NotFoundException("No subproject with given id exists " + subProjectId);
         }
-        updateSubProjectScope(subProject);
+//        updateSubProjectScope(subProject);
 
         return subProject;
     }
@@ -87,6 +87,12 @@ public class SubProjectService {
 
         // PRICE AND TIME ESTIMATION FOR SUBPROJECT
 
+//    public void updateSubProjectScope(SubProject subProject) {
+//        updateSubProjectPrice(subProject.getSubId());
+//        updateSubProjectTime(subProject.getSubId());
+//
+//
+//    }
     public void updateSubProjectScope(SubProject subProject) {
         updateSubProjectPrice(subProject.getSubId());
         updateSubProjectTime(subProject.getSubId());

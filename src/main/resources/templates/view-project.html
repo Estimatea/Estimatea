@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <title th:text="${project.projectName}">Project</title>
 </head>
+
+
 <body>
 
 <div th:replace="~{fragments/header :: header}"></div>
+
+<main>
+
+    <h1 class="section-title" th:text="${project.projecName}">Project name placeholder</h1>
+
+
+
+</main>
 
 
 <div th:replace="~{fragments/footer :: footer}"></div>
