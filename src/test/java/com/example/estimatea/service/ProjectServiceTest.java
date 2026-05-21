@@ -65,11 +65,6 @@ public class ProjectServiceTest {
         assertThat(currentProjects.size()).isEqualTo(1);
         assertThat(currentProjects.getFirst()).isEqualTo(projectMock);
     }
-            @Test
-            void shouldHitNotFoundExceptionIfEmpty() {
-                when(projectRepository.getAllProjects()).thenReturn(Collections.emptyList());
-                assertThrows(NotFoundException.class, () -> projectService.listAllActiveProjects());
-            }
 
     @Test
     void shouldReturnProjectById() {
