@@ -303,6 +303,7 @@ a.project-card:hover {
 
 /* ── TEAM ROSTER SYSTEM ── */
 .team-list {
+    padding: 12px 16px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
