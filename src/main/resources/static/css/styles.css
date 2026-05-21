@@ -33,11 +33,11 @@ body {
 
 /* --- MAIN APPS WRAPPER --- */
 main {
-    flex: 1 0 auto;             /* Forces the main container to consume extra whitespace, pushing footer down */
+    flex: 1 0 auto;             /* Forces main container to consume extra whitespace, pushing footer down */
     margin: 0 auto;             /* Centers page contents perfectly on wide viewports */
     width: 100%;
     max-width: 960px;
-    padding: 24px 20px 40px;    /* 20px sides provide safe padding fallback for smaller screens */
+    padding: 24px 20px 40px;    /* Safe padding fallback for smaller screens */
 }
 
 /* Target both global semantic footers or thymeleaf replaced templates */
@@ -46,7 +46,7 @@ footer, [th\:replace*="footer"] {
     width: 100%;
 }
 
-/* --- TYPOGRAPHY & SECTIONS --- */
+/* --- TYPOGRAPHY & REUSABLE UTILITIES --- */
 .section-title {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 22px;
@@ -79,7 +79,7 @@ footer, [th\:replace*="footer"] {
 
 /* --- UNIVERSAL BUTTONS & NAVIGATION --- */
 .action-bar {
-    padding: 20px 40px;
+    padding: 20px 0;            /* Aligns cleanly with content grid boundaries */
     display: flex;
     align-items: center;
 }
@@ -111,6 +111,171 @@ footer, [th\:replace*="footer"] {
     line-height: 1;
 }
 
+/* Mini Action Button Variant (Inline Layout Placement) */
+.btn-action-small {
+    display: inline-flex;
+    align-items: center;
+    background-color: #1e2a2a;
+    color: white;
+    text-decoration: none;
+    padding: 6px 12px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.btn-action-small:hover {
+    background-color: #2d3e3e;
+}
+
+.action-bar-nav {
+    margin-bottom: 24px;
+    margin-top: 10px;
+}
+
+.btn-back {
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-light);
+    transition: color 0.2s;
+}
+
+.btn-back:hover {
+    color: var(--text-dark);
+}
+
+/* ── APPLICATION CARDS & DASHBOARD GRIDS ── */
+.project-dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 24px;
+    width: 100%;
+}
+
+.project-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 18px 22px 14px;
+    margin-bottom: 16px;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s ease;
+}
+
+a.project-card:hover {
+    cursor: pointer;
+    opacity: 0.90;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+}
+
+.project-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: 0.5px;
+}
+
+.project-meta-right {
+    text-align: right;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    line-height: 1.5;
+}
+
+.card-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+/* Detailed Dashboard Layout Card */
+.detail-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.card-header-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+}
+
+.card-subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+}
+
+.price-tag {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #1e2a2a;
+}
+
+/* ── CONTEXT BADGES ── */
+.completed-status {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+.status-green {
+    background-color: #e6f4ea;
+    color: #137333;
+}
+
+.status-red {
+    background-color: #fce8e6;
+    color: #c5221f;
+}
+
 /* ── PROGRESS BAR ── */
 .progress-bar-wrap {
     margin-top: 14px;
@@ -134,6 +299,43 @@ footer, [th\:replace*="footer"] {
     color: var(--text-light);
     font-size: 14px;
     letter-spacing: 0.5px;
+}
+
+/* ── TEAM ROSTER SYSTEM ── */
+.team-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.team-member {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bar-bg);
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--card-border);
+}
+
+.member-avatar {
+    width: 32px;
+    height: 32px;
+    background-color: #1e2a2a;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.member-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
 }
 
 /* ---- FORMS & REUSABLE INPUTS ----- */
