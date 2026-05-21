@@ -49,16 +49,10 @@ public class SubprojectServiceTest {
         subProjectMock = new SubProject(1, "Project calculation tool", LocalDate.of(2026, 2, 1), LocalDate.of(202, 3, 1), 10, 20, false, 1);
     }
 
-    private void stubScopeUpdate(int subId) {
-        when(subProjectRepository.findSubProjectById(subId)).thenReturn(subProjectMock);
-        when(taskService.getTasksForSubprojectId(subId)).thenReturn(List.of());
-        when(subProjectRepository.editSubProject(any(SubProject.class))).thenReturn(1);
-    }
 
     @Test
     void shouldReturnAllSubProjects() {
         when(subProjectRepository.getAllSubProjects()).thenReturn(List.of(subProjectMock));
-        stubScopeUpdate(1);
 
         List<SubProject> result = subProjectService.listAllSubProjects();
 
@@ -74,7 +68,7 @@ public class SubprojectServiceTest {
 
     @Test
     void shouldReturnSubProjectById() {
-        stubScopeUpdate(1);
+        when(subProjectRepository.findSubProjectById(1)).thenReturn(subProjectMock);
 
         SubProject result = subProjectService.findSubProjectById(1);
 
@@ -97,11 +91,6 @@ public class SubprojectServiceTest {
         verify(subProjectRepository).findSubProjectsByProjectId(1);
     }
 
-//            @Test
-//            void shouldHitNotFoundExceptionIfNoSubProjectsExistsByProjectId() { // "No subprojects exists for Main project " + projectId
-//                when(subProjectRepository.findSubProjectsByProjectId(1)).thenReturn(Collections.emptyList());
-//                assertThrows(NotFoundException.class, () -> subProjectService.findSubProjectsByProjectId(1));
-//            }
     @Test
     void shouldCreateSubProject() {
         when(subProjectRepository.createSubProject(subProjectMock)).thenReturn(1);
