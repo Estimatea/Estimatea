@@ -310,7 +310,7 @@ a.project-card:hover {
     letter-spacing: 0.5px;
 }
 
-/* ── TASK LIST & SUBPROJECT PIPELINES (NEW CLEAN MERGE) ── */
+/* ── TASK LIST & SUBPROJECT PIPELINES  ── */
 .task-list, .sub-list {
     display: flex;
     flex-direction: column;
@@ -326,6 +326,18 @@ a.project-card:hover {
     border-right: 1px solid var(--card-border);
     border-bottom: 1px solid var(--card-border);
     text-decoration: none;
+}
+
+.tasks-styling {
+    position: relative;
+}
+
+.completed-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.75em;
+    color: gray;
 }
 
 .tasks-styling h3, .sub-styling h3 {

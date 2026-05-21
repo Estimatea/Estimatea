@@ -38,15 +38,14 @@ public class TaskController {
         task.setProjectId(projectId);
         model.addAttribute("task", task);
 
-
         return "create-task-project";
     }
 
-    @PostMapping("/createTaskForProject")
-    public String createTaskForProject(@ModelAttribute Task task) {
-        taskService.createTaskForProject(task);
-        return "redirect:/projects/" + task.getProjectId();
-    }
+            @PostMapping("/createTaskForProject")
+            public String createTaskForProject(@ModelAttribute Task task) {
+                taskService.createTaskForProject(task);
+                return "redirect:/projects/" + task.getProjectId();
+            }
 
     //
     //Create task for Subproject
@@ -62,11 +61,11 @@ public class TaskController {
         return "create-task-subproject";
     }
 
-    @PostMapping("/createTaskForSubproject")
-    public String createTaskForSubproject(@ModelAttribute Task task) {
-        taskService.createTaskForSubproject(task);
-        return "redirect:/subproject/" + task.getSubprojectId();
-    }
+            @PostMapping("/createTaskForSubproject")
+            public String createTaskForSubproject(@ModelAttribute Task task) {
+                taskService.createTaskForSubproject(task);
+                return "redirect:/subproject/" + task.getSubprojectId();
+            }
 
     //
     //Edit Task in Project
@@ -77,11 +76,11 @@ public class TaskController {
         return "edit-task-project";
     }
 
-    @PostMapping("/edit/project")
-    public String editTaskInProject(@ModelAttribute("task") Task task) {
-        taskService.editTask(task);
-        return "redirect:/projects/" + task.getProjectId();
-    }
+            @PostMapping("/edit/project")
+            public String editTaskInProject(@ModelAttribute("task") Task task) {
+                taskService.editTask(task);
+                return "redirect:/projects/" + task.getProjectId();
+            }
 
     //Edit Task in Subproject
     @GetMapping("/subproject/{subprojectId}/{taskId}/edit")
@@ -91,11 +90,11 @@ public class TaskController {
         return "edit-task-subproject";
     }
 
-    @PostMapping("/edit/subproject")
-    public String editTaskInSubproject(@ModelAttribute("task") Task task) {
-        taskService.editTask(task);
-        return "redirect:/subproject/" + task.getSubprojectId();
-    }
+            @PostMapping("/edit/subproject")
+            public String editTaskInSubproject(@ModelAttribute("task") Task task) {
+                taskService.editTask(task);
+                return "redirect:/subproject/" + task.getSubprojectId();
+            }
 
     //
     //Complete Task in Project
