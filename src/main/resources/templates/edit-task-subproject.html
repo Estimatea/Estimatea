@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task in Subproject</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}" href="../static/css/styles.css">
+</head>
+<body>
+
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main>
+    <div class="page-content">
+        <h1>Edit Task in Subproject</h1>
+
+        <form th:action="@{/task/edit/subproject}" th:object="${task}" method="post">
+
+            <input type="hidden" th:field="*{subprojectId}" />
+            <input type="hidden" th:field="*{projectId}"/>
+            <input type="hidden" th:field="*{taskId}">
+
+            <div class="form-group">
+                <label for="taskName">Name</label>
+                <div class="input-wrapper">
+                    <input type="text" id="taskName" th:field="*{taskName}" placeholder="Task name" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="startDate">Start Date</label>
+                <div class="input-wrapper">
+                    <input type="date" id="startDate" th:field="*{startDate}" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="deadLine">Deadline</label>
+                <div class="input-wrapper">
+                    <input type="date" id="deadLine" th:field="*{deadLine}" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="taskTime">Task Time</label>
+                <div class="input-wrapper">
+                    <input type="number" id="taskTime" th:field="*{taskTime}" placeholder="Hours" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="taskPrice">Task Price</label>
+                <div class="input-wrapper">
+                    <input type="number" id="taskPrice" th:field="*{taskPrice}" placeholder="Price" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="employeeId">Employee ID</label>
+                <div class="input-wrapper">
+                    <input type="number" id="employeeId" th:field="*{employeeId}" placeholder="Employee ID" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="currentComplexityId">Complexity</label>
+                <div class="input-wrapper">
+                    <select id="currentComplexityId" th:field="*{currentComplexityId}">
+                        <option value="1">Standard</option>
+                        <option value="2">Elevated</option>
+                        <option value="3">Enterprise Grade</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-save">Save</button>
+
+        </form>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+</body>
+
+</html>
