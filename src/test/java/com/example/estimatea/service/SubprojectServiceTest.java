@@ -49,17 +49,11 @@ public class SubprojectServiceTest {
         subProjectMock = new SubProject(1, "Project calculation tool", LocalDate.of(2026, 2, 1), LocalDate.of(2026, 3, 1), 10, 20, false, 1);
     }
 
-    private void stubUpdateSubProjectScope(int subProjectId) {
-        when(subProjectRepository.findSubProjectById(subProjectId)).thenReturn(subProjectMock);
-        when(taskService.getTasksForSubprojectId(subProjectId)).thenReturn(Collections.emptyList());
-        when(subProjectRepository.editSubProject(any(SubProject.class))).thenReturn(1);
-    }
 
 
     @Test
     void shouldReturnAllSubProjects() {
         when(subProjectRepository.getAllSubProjects()).thenReturn(List.of(subProjectMock));
-        stubUpdateSubProjectScope(1);
 
         List<SubProject> result = subProjectService.listAllSubProjects();
 
@@ -76,7 +70,6 @@ public class SubprojectServiceTest {
     @Test
     void shouldReturnSubProjectById() {
         when(subProjectRepository.findSubProjectById(1)).thenReturn(subProjectMock);
-        stubUpdateSubProjectScope(1);
 
         SubProject result = subProjectService.findSubProjectById(1);
 
