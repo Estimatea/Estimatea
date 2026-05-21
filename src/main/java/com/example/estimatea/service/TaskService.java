@@ -1,7 +1,10 @@
 package com.example.estimatea.service;
 
 import com.example.estimatea.exception.NotFoundException;
+import com.example.estimatea.model.Project;
 import com.example.estimatea.model.Task;
+import com.example.estimatea.repository.jdbc.ProjectRepository;
+import com.example.estimatea.repository.jdbc.SubProjectRepository;
 import com.example.estimatea.repository.jdbc.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +14,13 @@ import java.util.List;
 public class TaskService {
 
     private final TaskRepository taskRepository;
+    private final ProjectRepository projectRepository;
+    private final SubProjectRepository subProjectRepository;
 
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, ProjectRepository projectRepository, SubProjectRepository subProjectRepository) {
         this.taskRepository = taskRepository;
+        this.projectRepository = projectRepository;
+        this.subProjectRepository = subProjectRepository;
     }
 
     public void createTaskForProject(Task projectTask) {
@@ -27,6 +34,7 @@ public class TaskService {
         if (rowsAffected == 0) {
             throw new NotFoundException("No task was created " + projectTask.getTaskId());
         }
+
     }
 
     public void createTaskForSubproject(Task subTask) {
@@ -40,6 +48,8 @@ public class TaskService {
         if (rowsAffected == 0) {
             throw new NotFoundException("No task was created " + subTask.getTaskId());
         }
+
+
     }
 
     public void editTask(Task task) {
