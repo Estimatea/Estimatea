@@ -5,8 +5,8 @@
     <title>Error</title>
 </head>
 <body>
-        <h1 th:text="${errorDto.status}"></h1>
-        <p th:text="${errorDto.message}"></p>
+        <h1 th:text="${errorDto != null ? errorDto.status : 'Error'}"></h1>
+        <p th:text="${errorDto!= null ? errorDto.message : 'Something went wrong'}"></p>
         <p th:text="${errorDto.timeStamp}"></p>
 </body>
 </html>

@@ -79,8 +79,10 @@
             <div th:if="${taskList != null and !#lists.isEmpty(taskList)}">
                 <div class="task-list">
                     <div class="tasks-styling" th:each="task : ${taskList}">
-                        <h3 th:text="${task.taskName}">Task Name Placeholder</h3>
-                        <p th:text="${task.description}">Task Description Placeholder</p>
+                        <h3><span th:text="${task.taskName}"></span></h3>
+                        <p><span class="completed-visual" th:text="${task.completed} ? 'Completed' : 'In Progress'"></span></p>
+                        <p><span class="label">Complexity:</span> <span th:text="${task.currentComplexityId}"></span></p>
+                        <p><span class="label">Deadline:</span> <span th:text="${task.deadLine}"></span></p>
                     </div>
                 </div>
             </div>

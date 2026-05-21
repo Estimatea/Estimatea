@@ -129,7 +129,7 @@ public class TaskService {
             double rate = roleService.getRoleById(e.getRoleId()).getRoleRate();
             price += ( rate * task.getTaskTime() ) / empList.size();
         }
-        double multiplier = complexityService.getComplexityFromId(task.getTaskId()).getRateMultiplier();
+        double multiplier = complexityService.getComplexityFromId(task.getCurrentComplexityId()).getRateMultiplier();
 
         task.setTaskPrice((int)Math.round(price * multiplier));
     }
@@ -142,7 +142,7 @@ public class TaskService {
             double rate = roleService.getRoleById(e.getRoleId()).getRoleRate();
             price += ( rate * task.getTaskTime() ) / empList.size();
         }
-        double multiplier = complexityService.getComplexityFromId(task.getTaskId()).getRateMultiplier();
+        double multiplier = complexityService.getComplexityFromId(task.getCurrentComplexityId()).getRateMultiplier();
 
         task.setTaskPrice((int)Math.round(price * multiplier));
     }
