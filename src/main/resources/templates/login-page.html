@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/styles.css}">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-
 <style>
+    main {
+        display: flex;
+        align-items: center;     /* Centers form vertically */
+        justify-content: center;    /* Centers form horizontally */
+        margin: 0 auto;             /* Centers the 960px container box on widescreens */
+        padding: 0 20px;            /* Adds safe breathing room on small mobile devices */
+        min-height: calc(100vh - 80px); /* Forces full view height minus footer scale */
+    }
+
     .login-wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 24px;
         width: 100%;
+        max-width: 420px;
     }
 
     .login-logo {
@@ -22,13 +31,14 @@
         justify-content: center;
         background-color: #1e2a2a;
         color: white;
-        width: 90px;
+        width: 110px;
         height: 90px;
+        border-radius: var(--radius, 4px);
     }
 
     .login-logo img {
-        width: 60px;
-        height: 60px;
+        width: 90px;
+        height: 120px;
         object-fit: contain;
     }
 
@@ -42,10 +52,10 @@
     .login-container {
         background-color: white;
         padding: 40px;
-        border-radius: 4px;
+        border-radius: var(--radius, 6px);
         box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         width: 100%;
-        max-width: 420px;
+        box-sizing: border-box;
     }
 
     .login-container h1 {
@@ -63,6 +73,7 @@
         display: flex;
         flex-direction: column;
         margin-bottom: 20px;
+        width: 100%;
     }
 
     .form-group label {
@@ -76,15 +87,16 @@
     }
 
     .form-group input {
-        width: 100%;
+        width: 100% !important;
         padding: 10px 14px;
         font-family: 'Barlow', sans-serif;
         font-size: 14px;
         border: 1px solid #d6d6d6;
-        border-radius: 2px;
+        border-radius: var(--radius, 4px);
         background-color: #f9f9f9;
         color: #333;
         outline: none;
+        box-sizing: border-box;
         transition: border-color 0.2s;
     }
 
@@ -101,12 +113,15 @@
         border-radius: 2px;
         margin-bottom: 20px;
         text-align: center;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .form-actions {
         display: flex;
         justify-content: center;
         margin-top: 10px;
+        width: 100%;
     }
 
     .btn-save {
@@ -116,13 +131,14 @@
         background-color: #1e2a2a;
         color: white;
         border: none;
+        width: 100% !important;
         padding: 12px 48px;
         font-family: 'Barlow Condensed', sans-serif;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 700;
         letter-spacing: 1px;
         text-transform: uppercase;
-        border-radius: 2px;
+        border-radius: var(--radius, 4px);
         cursor: pointer;
         transition: background-color 0.2s;
     }
@@ -131,6 +147,7 @@
         background-color: #2d3e3e;
     }
 </style>
+<body>
 
 <main>
 <div class="login-wrapper">
@@ -139,25 +156,27 @@
             <img th:src="@{/images/estimatea-logo.png}" alt="Estimatea Logo"/>
         </div>
 
-        <div class="error-message" th:if="${error}" th:text="${error}"></div>
+        <div class="error-message" th:if="${loginError}" th:text="${loginError}"></div>
 
         <form th:action="@{/employee/login}" method="post">
             <div class="form-group">
                 <label for="employeeUsername">Username</label>
-                <input type="username" id="employeeUsername" name="email" placeholder="Employee_username" />
+                <input type="text" id="employeeUsername" name="employeeUsername" placeholder="Employee_username"/>
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="••••••••" />
+                <label for="employeePassword">Password</label>
+                <input type="password" id="employeePassword" name="employeePassword" placeholder="••••••••"/>
             </div>
 
             <div class="form-actions">
                 <button type="submit" class="btn-save">Login</button>
             </div>
         </form>
-</div>
+    </div>
 </main>
+
     <footer th:replace="~{fragments/footer :: footer}"></footer>
+
 </body>
 </html>

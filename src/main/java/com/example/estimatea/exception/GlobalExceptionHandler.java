@@ -16,13 +16,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class) // --> Handles 404 Not Found
     public String handlesNotFoundException(NotFoundException e, Model model) {
-        model.addAttribute("error", new ErrorDTO(404, e.getMessage()));
+        model.addAttribute("errorDto", new ErrorDTO(404, e.getMessage()));
         return "error";
     }
 
     @ExceptionHandler(IllegalArgumentException.class) // --> Handles 400 Bad Request
     public String handlesIllegalArgumentException(IllegalArgumentException e, Model model) {
-        model.addAttribute("error", new ErrorDTO(400, e.getMessage()));
+        model.addAttribute("errorDto", new ErrorDTO(400, e.getMessage()));
         return "error";
     }
 
@@ -30,13 +30,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DuplicateKeyException.class) // --> Handles 409 Conflict
     public String handlesDuplicateKeyException(DuplicateKeyException e, Model model) {
-        model.addAttribute("error", new ErrorDTO(409, e.getMessage()));
+        model.addAttribute("errorDto", new ErrorDTO(409, e.getMessage()));
         return "error";
     }
 
     @ExceptionHandler(DataAccessException.class) // --> Handles 500 Internal Server Error
     public String handlesDataAccessException(DataAccessException e, Model model) {
-        model.addAttribute("error", new ErrorDTO(500, e.getMessage()));
+        model.addAttribute("errorDto", new ErrorDTO(500, e.getMessage()));
         return "error";
     }
 }

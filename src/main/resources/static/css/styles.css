@@ -1,13 +1,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-main {
-    flex: 1;
+    min-height: calc(100vh - 160px);
+    margin: 0 auto;
 }
 
 :root {
@@ -114,12 +109,7 @@ main {
     letter-spacing: 0.5px;
 }
 
-
-
-
 /* ---- FORM ----- */
-
-
 .form-group {
     display: flex;
     flex-direction: column;

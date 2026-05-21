@@ -5,10 +5,8 @@
     <title>Error</title>
 </head>
 <body>
-    <div>
-        <h1 th:text="${status}"></h1>
-        <p th:text="${message}"></p>
-        <p th:text="${timeStamp}"></p>
-    </div>
+        <h1 th:text="${errorDto.status}"></h1>
+        <p th:text="${errorDto.message}"></p>
+        <p th:text="${errorDto.timeStamp}"></p>
 </body>
 </html>

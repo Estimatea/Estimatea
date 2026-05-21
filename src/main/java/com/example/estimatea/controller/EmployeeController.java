@@ -31,13 +31,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String employeeUsername, @RequestParam String password, HttpSession session, Model model) {
+    public String login(@RequestParam String employeeUsername, @RequestParam String employeePassword, HttpSession session, Model model) {
         try {
-            Employee employee = employeeService.employeeLogin(employeeUsername, password);
+            Employee employee = employeeService.employeeLogin(employeeUsername, employeePassword);
             session.setAttribute("currentEmployee", employee);
             return "redirect:/projects/all";
         } catch (NotFoundException e) {
-            model.addAttribute("error", "Invalid email or password");
+            model.addAttribute("loginError", "Invalid email or password");
             return "login-page";
         }
     }
