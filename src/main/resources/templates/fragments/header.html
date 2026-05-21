@@ -71,15 +71,17 @@
     <nav class="navbar">
 
         <div class="navbar-logo">
-            <img th:src="@{/images/estimatea-logo.png}" alt="Estimatea Logo">
+            <a href="/projects/all" style="display:inline-block; text-decoration:none; outline:none;">
+                <img th:src="@{/images/estimatea-logo.png}" alt="Estimatea Logo">
+            </a>
         </div>
 
         <a class="navbar-btn" href="/projects/completed">Completed Projects</a>
 
         <div class="navbar-spacer"></div>
 
-        <a class="navbar-btn" href="/employees">Employees</a>
-        <a class="navbar-btn" href="/logout">Logout</a>
+        <a class="navbar-btn" href="/employee/all">Employees</a>
+        <a class="navbar-btn" href="/employee/logout">Logout</a>
         <div class="navbar-avatar">EA</div>
 
     </nav>
