@@ -89,16 +89,16 @@ public class ProjectService {
     }
 
     public void updateProjectPrice(int projectId) {
-        if (findProjectById(projectId) == null) {
+        Project project = projectRepository.getProjectById(projectId);
+        if (project == null) {
             throw new NotFoundException("No project with given ID found " + projectId);
         }
-        Project project = projectRepository.getProjectById(projectId);
         project.setSumPrice(0);
 
         List<SubProject> subProjects = subProjectService.findSubProjectsByProjectId(projectId);
         if (!subProjects.isEmpty()) {
             for (SubProject s : subProjects) {
-                subProjectService.updateSubProjectScope(s.getSubId());
+                subProjectService.updateSubProjectScope(s);
                 project.setSumPrice(project.getSumPrice() + s.getSumPrice());
             }
         }
@@ -115,16 +115,16 @@ public class ProjectService {
     }
 
     public void updateProjectTime(int projectId) {
-        if (findProjectById(projectId) == null) {
+        Project project = projectRepository.getProjectById(projectId);
+        if (project == null) {
             throw new NotFoundException("No project with given ID found " + projectId);
         }
-        Project project = projectRepository.getProjectById(projectId);
         project.setSumTime(0);
 
         List<SubProject> subProjects = subProjectService.findSubProjectsByProjectId(projectId);
         if (!subProjects.isEmpty()) {
             for (SubProject s : subProjects) {
-                subProjectService.updateSubProjectScope(s.getSubId());
+                subProjectService.updateSubProjectScope(s);
                 project.setSumTime(project.getSumTime() + s.getSumTime());
             }
         }

@@ -65,14 +65,12 @@ public class SubProjectControllerTest {
     }
 
     @Test
-    void controllerCreateSubProjectTest() throws Exception { // GET
-        when(subProjectService.findSubProjectsByProjectId(projectMock.getProjectId())).thenReturn(List.of(subProjectMock));
+    void controllerCreateSubProjectTest() throws Exception {
 
-        mockMvc.perform(get("/subproject/create"))
-                                        .andExpect(status().isOk())
-                                        .andExpect(view().name("create-subproject"))
-                                        .andExpect(model().attributeExists("subProject"));
-
+        mockMvc.perform(get("/subproject/project/1/create"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("create-subproject"))
+                .andExpect(model().attributeExists("subProject"));
     }
 
     @Test

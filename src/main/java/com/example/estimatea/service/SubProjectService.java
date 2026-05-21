@@ -91,36 +91,24 @@ public class SubProjectService {
         updateSubProjectPrice(subProject.getSubId());
         updateSubProjectTime(subProject.getSubId());
 
-
     }
 
-//    public void updateSubProjectPrice(int subProjectId) {
-//        if (subProjectRepository.findSubProjectById(subProjectId) == null ) {
-//            throw new NotFoundException("No subproject with given id exists " + subProjectId);
-//        }
-//
-//        SubProject subProject = subProjectRepository.findSubProjectById(subProjectId);
-//        subProject.setSumPrice(0);
-//
-//        List<Task> taskList = taskService.getTasksForSubprojectId(subProjectId);
-//        for (Task task : taskList) {
-//            Complexity taskComplexity = complexityService.getFromId(task.getTaskId());
-//            double rate = taskComplexity.getRateMultiplier();
-//            subProject.setSumPrice(subProject.getPrice + (rate * task.getTaskPrice()));
-//        }
-//
-//        int roleMultiplier = 0;
-//
-//
-//        List<Employee> subEmployeeList = employeeRepository.getAllEmployeesForSubProject(subProject.getSubId());
-//        for (Employee e : subEmployeeList) {
-//            roleMultiplier += roleRepository.getRoleById(e.getRoleId()).getRoleRate();
-//        }
-//
-//
-//        editSubProject(subProject);
-//
-//    }
+    public void updateSubProjectPrice(int subProjectId) {
+        if (subProjectRepository.findSubProjectById(subProjectId) == null ) {
+            throw new NotFoundException("No subproject with given id exists " + subProjectId);
+        }
+
+        SubProject subProject = subProjectRepository.findSubProjectById(subProjectId);
+        subProject.setSumPrice(0);
+
+        List<Task> taskList = taskService.getTasksForSubprojectId(subProjectId);
+        for (Task t : taskList) {
+            subProject.setSumPrice(subProject.getSumPrice() + t.getTaskPrice());
+        }
+
+        editSubProject(subProject);
+    }
+
 
     public void updateSubProjectTime(int subProjectId) {
         if (subProjectRepository.findSubProjectById(subProjectId) == null ) {
