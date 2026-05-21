@@ -17,6 +17,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -65,14 +66,11 @@ public class ProjectControllerTest {
     // Project Overview
     @Test
     void controllerGetProjectOverview() throws Exception { // GET
-        Employee employeeMock = new Employee();
-        SubProject subprojectMock = new SubProject();
-        Task taskMock = new Task();
 
         when(projectService.findProjectById(1)).thenReturn(projectMock);
-        when(employeeService.getAllEmployeesByProjectId(1)).thenReturn(List.of(employeeMock));
-        when(subProjectService.findSubProjectsByProjectId(1)).thenReturn(List.of(subprojectMock));
-        when(taskService.getTasksByProjectId(1)).thenReturn(List.of(taskMock));
+        when(employeeService.getAllEmployeesByProjectId(1)).thenReturn(Collections.emptyList());
+        when(subProjectService.findSubProjectsByProjectId(1)).thenReturn(Collections.emptyList());
+        when(taskService.getTasksByProjectId(1)).thenReturn(Collections.emptyList());
 
         mockMvc.perform(get("/projects/1").param("projectId", "1"))
                 .andExpect(status().isOk())
