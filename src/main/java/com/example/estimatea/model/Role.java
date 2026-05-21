@@ -45,4 +45,5 @@ public class Role {
     public void setRoleRate(int roleRate) {
         this.roleRate = roleRate;
     }
+
 }

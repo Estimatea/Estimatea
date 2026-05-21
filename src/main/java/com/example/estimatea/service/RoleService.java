@@ -28,4 +28,12 @@ public class RoleService {
         return roles;
     }
 
+    public Role getRoleById(int id) {
+        Role role = roleRepository.getRoleById(id);
+        if (role == null) {
+            throw new NotFoundException("No role exists");
+        }
+        return role;
+    }
+
 }
