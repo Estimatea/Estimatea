@@ -1,10 +1,8 @@
 package com.example.estimatea.service;
 
 import com.example.estimatea.exception.NotFoundException;
-import com.example.estimatea.model.Project;
+import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.Task;
-import com.example.estimatea.repository.jdbc.ProjectRepository;
-import com.example.estimatea.repository.jdbc.SubProjectRepository;
 import com.example.estimatea.repository.jdbc.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +12,15 @@ import java.util.List;
 public class TaskService {
 
     private final TaskRepository taskRepository;
-    private final ProjectRepository projectRepository;
-    private final SubProjectRepository subProjectRepository;
+    private final EmployeeService employeeService;
+    private final RoleService roleService;
+    private final ComplexityService complexityService;
 
-    public TaskService(TaskRepository taskRepository, ProjectRepository projectRepository, SubProjectRepository subProjectRepository) {
+    public TaskService(TaskRepository taskRepository, EmployeeService employeeService, RoleService roleService,  ComplexityService complexityService) {
         this.taskRepository = taskRepository;
-        this.projectRepository = projectRepository;
-        this.subProjectRepository = subProjectRepository;
+        this.employeeService = employeeService;
+        this.roleService = roleService;
+        this.complexityService = complexityService;
     }
 
     public void createTaskForProject(Task projectTask) {
@@ -113,6 +113,18 @@ public class TaskService {
         if (complexityScore == 0) {
             throw new NotFoundException("No task found with ID: " + taskId);
         }
+    }
+
+    public void taskPriceCalculatorForTaskInProject(Task task) {
+        double price = 0;
+        double multiplier = complexityService.getComplexityFromId(task.getTaskId()).getRateMultiplier();
+        List <Employee> empList = employeeService.getAllEmployeesByProjectId(task.getProjectId());
+        for (Employee e : empList) {
+            double rate = roleService.getRoleById(e.getRoleId()).getRoleRate();
+            price += (rate * task.getTaskTime()) * multiplier;
+        }
+
+        task.setTaskPrice((int)Math.round(price));
     }
 
 

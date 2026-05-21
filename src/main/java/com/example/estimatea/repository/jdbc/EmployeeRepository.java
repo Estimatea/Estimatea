@@ -44,10 +44,6 @@ public class EmployeeRepository {
     private final String GET_ALL_EMPLOYEES_BY_ID_FOR_SUBPROJECT = "SELECT project_employee_id FROM sub_project_employee WHERE sub_id = ?"; // RETRIEVE Sub-project employees ID's
     private final String GET_ALL_PROJECT_EMPLOYEES_IDS_FOR_PROJECT = "SELECT project_employee_id FROM project_employee WHERE project_id = ?"; // RETRIEVE Project employees ID's
 
-    // ROW-MAPPERS for retrieving ID's
-    private final static RowMapper<Integer> ProjectEmpIdMapper = (rs, rowNum) -> rs.getInt("project_employee_id"); // MAIN Project
-    private final static RowMapper<Integer> SubProjectEmpIdMapper = (rs, rowNum) -> rs.getInt("project_employee_id"); // SUB - Project
-
     public EmployeeRepository(JdbcTemplate jdbc, EmployeeMapper employeeMapper) {
         this.jdbc = jdbc;
         this.employeeMapper = employeeMapper;
@@ -92,16 +88,6 @@ public class EmployeeRepository {
 
     public int removeEmployeeFromSubProject(int employeeId, int subProjectId) { // Deletes a specific sub_project_employee from the subproject
         return jdbc.update(REMOVE_EMPLOYEE_FROM_SUBPROJECT, employeeId, subProjectId);
-    }
-
-        // RETRIEVING BY ID'S
-
-   public List<Integer> getAllEmployeesIdsForSubProject(int subProjectId) { // Returns a list of employee ID's connected to a Sub-Project
-        return jdbc.query(GET_ALL_EMPLOYEES_BY_ID_FOR_SUBPROJECT, SubProjectEmpIdMapper, subProjectId);
-    }
-
-    public List<Integer> getAllEmployeeIdsForProject(int projectId) { // Returns a list of employee ID's connected to a project
-        return jdbc.query(GET_ALL_PROJECT_EMPLOYEES_IDS_FOR_PROJECT, ProjectEmpIdMapper, projectId);
     }
 }
 

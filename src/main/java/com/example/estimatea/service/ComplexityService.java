@@ -1,5 +1,6 @@
 package com.example.estimatea.service;
 
+import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.Complexity;
 import com.example.estimatea.repository.jdbc.ComplexityRepository;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,12 @@ public class ComplexityService {
 
     public List<Complexity> showAllComplexityScores() {
         return complexityRepository.showAllComplexityScores();
+    }
+
+    public Complexity getComplexityFromId(int id) {
+        if (complexityRepository.showComplexityScoreById(id) == null) {
+            throw new NotFoundException("Complexity not found");
+        }
+        return complexityRepository.showComplexityScoreById(id);
     }
 }
