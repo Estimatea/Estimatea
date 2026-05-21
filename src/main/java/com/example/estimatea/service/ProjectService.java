@@ -5,7 +5,6 @@ import com.example.estimatea.model.Project;
 import com.example.estimatea.model.SubProject;
 import com.example.estimatea.model.Task;
 import com.example.estimatea.repository.jdbc.ProjectRepository;
-import com.example.estimatea.repository.jdbc.SubProjectRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -78,6 +77,8 @@ public class ProjectService {
             throw new NotFoundException("No project was deleted " + projectId);
         }
     }
+
+    // PRICE AND TIME ESTIMATION FOR PROJECT
 
     public void updateProjectScope(Project project) {
         if (project == null) {

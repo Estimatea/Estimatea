@@ -78,6 +78,8 @@ public class SubProjectService {
         }
     }
 
+        // PRICE AND TIME ESTIMATION FOR SUBPROJECT
+
     public void updateSubProjectScope(int subProjectId) {
         updateSubProjectPrice(subProjectId);
         updateSubProjectTime(subProjectId);
