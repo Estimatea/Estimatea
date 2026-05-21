@@ -29,9 +29,9 @@ public class ProjectService {
             throw new NotFoundException("No projects exists");
         }
 
-//        for (Project project : projects) {
-//            updateProjectScope(project);
-//        }
+        for (Project project : projects) {
+            updateProjectScope(project);
+        }
         return projects;
     }
 
@@ -54,7 +54,7 @@ public class ProjectService {
             throw new NotFoundException("No project with given ID found " + projectId);
         }
 
-//        updateProjectScope(project);
+        updateProjectScope(project);
         return project;
     }
 

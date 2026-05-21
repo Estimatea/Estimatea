@@ -43,14 +43,21 @@ public class ProjectServiceTest {
     @BeforeEach()
     public void setUp() {
         projectMock = new Project(1, LocalDate.of(2026,1,1), false, "Alpha Solutions", 120, 1500, LocalDate.of(2026,12,31), 1);
-        subProjectMock = new SubProject(1, "Project calculation tool", LocalDate.of(2026, 2, 1), LocalDate.of(202, 3, 1), 10, 20, false, 1);
+        subProjectMock = new SubProject(1, "Project calculation tool", LocalDate.of(2026, 2, 1), LocalDate.of(2026, 3, 1), 10, 20, false, 1);
+    }
+
+    private void stubUpdateProjectScope(int projectId) {
+        when(projectRepository.getProjectById(projectId)).thenReturn(projectMock);
+        when(subProjectService.findSubProjectsByProjectId(projectId)).thenReturn(Collections.emptyList());
+        when(taskService.getTasksByProjectId(projectId)).thenReturn(Collections.emptyList());
+        when(projectRepository.editProject(any(Project.class))).thenReturn(1);
     }
 
 
     @Test
     void shouldReturnAllProjects() {
         when(projectRepository.getAllProjects()).thenReturn(List.of(projectMock));
-
+        stubUpdateProjectScope(1);
 
         List<Project> currentProjects = projectService.listAllProjects();
 
@@ -66,14 +73,14 @@ public class ProjectServiceTest {
 
     @Test
     void shouldReturnProjectById() {
-        when(projectRepository.getProjectById(1)).thenReturn(projectMock);
+        stubUpdateProjectScope(1);
 
 
         Project result = projectService.findProjectById(1);
 
         assertNotNull(result);
         assertThat(result).isEqualTo(projectMock);
-        verify(projectRepository).getProjectById(1);
+        verify(projectRepository, times(3)).getProjectById(1);
     }
 
             @Test

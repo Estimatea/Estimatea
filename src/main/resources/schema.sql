@@ -45,6 +45,8 @@ CREATE TABLE IF NOT EXISTS subproject(
     sub_id INT AUTO_INCREMENT PRIMARY KEY,
     sub_name VARCHAR(60),
     start_date DATE,
+    awsum_time INT,
+    sum_price INT,
     deadline DATE,
     completed boolean,
     project_id INT,
