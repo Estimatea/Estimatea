@@ -72,9 +72,9 @@ public class EmployeeControllerTest {
     // Removing employee from Main Project
     @Test
     void controllerRemoveEmployeeFromProject() throws Exception {
-        mockMvc.perform(post("/employee/project/remove").param("employeeId", "1").param("projectId", "1"))
+        mockMvc.perform(post("/employee/remove/project").param("employeeId", "1").param("projectId", "1"))
                                                         .andExpect(status().is3xxRedirection())
-                                                        .andExpect(redirectedUrl("/project"));
+                                                        .andExpect(redirectedUrl("/projects/1"));
 
         verify(employeeService).removeEmployeeFromProject(1, 1);
     }
@@ -108,9 +108,9 @@ public class EmployeeControllerTest {
 
     @Test
     void controllerRemoveEmployeeFromSubProject() throws Exception {
-        mockMvc.perform(post("/employee/subproject/remove").param("employeeId", "1").param("subProjectId", "1"))
+        mockMvc.perform(post("/employee/remove/subproject").param("employeeId", "1").param("subProjectId", "1"))
                                                            .andExpect(status().is3xxRedirection())
-                                                           .andExpect(redirectedUrl("/subprojects"));
+                                                           .andExpect(redirectedUrl("/subproject/1"));
 
         verify(employeeService).removeEmployeeFromSubProject(1, 1);
     }
