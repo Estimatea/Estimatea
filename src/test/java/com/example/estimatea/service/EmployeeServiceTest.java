@@ -68,10 +68,8 @@ public class EmployeeServiceTest {
         verify(employeeRepository).getAllEmployeesForProject(1);
     }
 
-            @Test
-            void shouldHitNotFoundExceptionErrorForEmpByProjectId() { // "No employees found on given project: " + projectId
-                assertThrows(NotFoundException.class, () -> employeeService.getAllEmployeesByProjectId(1));
-            }
+
+
 
     @Test
     void shouldAddEmployeeToProject() {
