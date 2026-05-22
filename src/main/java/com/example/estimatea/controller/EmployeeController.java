@@ -31,7 +31,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String employeeUsername, @RequestParam String employeePassword, HttpSession session, Model model) {
+    public String login(@RequestParam String employeeUsername, @RequestParam String employeePassword, HttpSession session) {
             Employee employee = employeeService.employeeLogin(employeeUsername, employeePassword);
             session.setAttribute("currentEmployee", employee);
             return "redirect:/projects/all";
