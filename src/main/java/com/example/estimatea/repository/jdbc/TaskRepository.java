@@ -14,8 +14,8 @@ public class TaskRepository {
     private final TaskMapper taskMapper;
 
     // SQL statements for creating a single Task in both Projects and Subprojects
-    private final String CREATE_TASK_FOR_PROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, project_id,current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, sub_id,current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final String CREATE_TASK_FOR_PROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, project_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, sub_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String CREATE_TASK_FOR_TEST = "INSERT INTO task (start_date, completed, task_name, deadline, task_time,project_id, sub_id,current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     //SQL statement for editing a task in both Projects and Subprojects
