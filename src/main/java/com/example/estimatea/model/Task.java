@@ -29,17 +29,18 @@ public class Task {
     }
 
     // Used to create task objects
-    public Task(LocalDate startDate, boolean completed, String taskName, LocalDate deadLine, int taskTime, int taskPrice, int projectId, int subprojectId, int currentComplexityId) {
+    public Task(LocalDate startDate, boolean completed, String taskName, LocalDate deadLine, int taskTime, int projectId, int subprojectId, int currentComplexityId) {
         this.startDate = startDate;
         this.completed = completed;
         this.taskName = taskName;
         this.deadLine = deadLine;
         this.taskTime = taskTime;
-        this.taskPrice = taskPrice;
         this.projectId = projectId;
         this.subprojectId = subprojectId;
         this.currentComplexityId = currentComplexityId;
     }
+
+
 
     public Task() {
     }

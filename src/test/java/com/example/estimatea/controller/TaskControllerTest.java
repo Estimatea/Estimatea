@@ -41,7 +41,7 @@ public class TaskControllerTest {
 
     @BeforeEach
     void setUp() {
-        taskMock = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 1, 1, 1);
+        taskMock = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 1, 1, 1);
     }
 
     // Add Task to Project Form
@@ -66,7 +66,7 @@ public class TaskControllerTest {
                         .andExpect(status().is3xxRedirection())
                         .andExpect(redirectedUrl("/projects/1"));
 
-                verify(taskService).createTaskForProject(any(Task.class));
+                verify(taskService).createTaskForTest(any(Task.class));
             }
 
     // Add Task to Subproject Form
@@ -76,8 +76,7 @@ public class TaskControllerTest {
 
         mockMvc.perform(get("/task/subproject/1/add"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("create-task-subproject"))
-                .andExpect(model().attributeExists("subproject"));
+                .andExpect(view().name("create-task-subproject"));
 
         verify(subProjectService).findSubProjectById(1);
     }

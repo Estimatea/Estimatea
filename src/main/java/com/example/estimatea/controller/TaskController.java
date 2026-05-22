@@ -1,6 +1,5 @@
 package com.example.estimatea.controller;
 
-import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.Project;
 import com.example.estimatea.model.SubProject;
 import com.example.estimatea.service.ProjectService;
@@ -10,8 +9,6 @@ import com.example.estimatea.model.Task;
 import com.example.estimatea.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @Controller
@@ -43,7 +40,7 @@ public class TaskController {
 
             @PostMapping("/createTaskForProject")
             public String createTaskForProject(@ModelAttribute Task task) {
-                taskService.createTaskForProject(task);
+                taskService.createTaskForTest(task);
                 return "redirect:/projects/" + task.getProjectId();
             }
 

@@ -24,7 +24,7 @@ public class TaskService {
         this.complexityService = complexityService;
     }
 
-    public void createTaskForProject(Task projectTask) {
+    public void createTaskForTest(Task projectTask) {
 
         if (projectTask == null) {
             throw new NotFoundException("No task object received");
