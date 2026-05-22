@@ -4,6 +4,7 @@ import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.Project;
 import com.example.estimatea.model.SubProject;
 import com.example.estimatea.service.EmployeeService;
+import com.example.estimatea.service.ProjectService;
 import com.example.estimatea.service.SubProjectService;
 import com.example.estimatea.service.TaskService;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -34,11 +36,13 @@ public class SubProjectControllerTest {
     private SubProjectService subProjectService;
 
     @MockitoBean
+    private ProjectService projectService;
+
+    @MockitoBean
     private EmployeeService employeeService;
 
     @MockitoBean
     private TaskService taskService;
-
 
     private Employee employeeMock;
     private SubProject subProjectMock;
@@ -54,8 +58,10 @@ public class SubProjectControllerTest {
     @Test
     void controllerGetSpecificSubProjectTest() throws Exception { // GET
         when(subProjectService.findSubProjectById(subProjectMock.getSubId())).thenReturn(subProjectMock);
-        when(employeeService.getAllEmployeesForSubproject(subProjectMock.getSubId())).thenReturn(List.of());
+        when(employeeService.getAllEmployeesForSubproject(subProjectMock.getSubId())).thenReturn(List.of(employeeMock));
+        when(projectService.findProjectById(projectMock.getProjectId())).thenReturn(projectMock);
         when(taskService.getTasksForSubprojectId(subProjectMock.getSubId())).thenReturn(List.of());
+
 
         mockMvc.perform(get("/subproject/{subProjectId}", subProjectMock.getSubId())).andExpect(status().isOk())
                                                     .andExpect(view().name("view-subproject"))
