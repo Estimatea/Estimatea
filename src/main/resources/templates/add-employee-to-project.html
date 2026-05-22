@@ -21,6 +21,8 @@
 
         <form th:action="@{/employee/add/project}" method="post">
 
+            <input type="hidden" name="projectId" th:value="${projectId}" />
+
             <div class="form-group">
                 <label for="employeeId">Select Employee</label>
                 <div class="input-wrapper">
@@ -31,13 +33,6 @@
                                 th:text="${emp.employeeName + ' (ID: ' + emp.employeeId + ')'}">
                         </option>
                     </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="projectId">Project ID</label>
-                <div class="input-wrapper">
-                    <input type="number" id="projectId" name="projectId" placeholder="Enter Project ID" required />
                 </div>
             </div>
 

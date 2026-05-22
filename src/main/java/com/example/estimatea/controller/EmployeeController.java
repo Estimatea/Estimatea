@@ -55,9 +55,10 @@ public class EmployeeController {
 
     // Add Employee to Main project
     @GetMapping("/add/project")
-    public String addEmployeeToProjectForm(Model model) { // GET
+    public String addEmployeeToProjectForm(@RequestParam int projectId, Model model) { // GET
         List<Employee> employeeList = employeeService.getAllEmployeeInCompany();
         model.addAttribute("employeeList", employeeList);
+        model.addAttribute("projectId", projectId);
         return "add-employee-to-project";
     }
 
@@ -99,7 +100,7 @@ public class EmployeeController {
             @PostMapping("/add/subproject") // POST
             public String employeeAddedToSubProject(@RequestParam int employeeId, @RequestParam int subProjectId, @RequestParam int projectId) {
                 employeeService.addEmployeeToSubProject(employeeId, subProjectId, projectId);
-                return "redirect:/subprojects/" + subProjectId;
+                return "redirect:/subproject/" + subProjectId;
             }
 
 
@@ -111,11 +112,11 @@ public class EmployeeController {
         model.addAttribute("projectId", projectId);
         model.addAttribute("subProjectId", subProjectId);
 
-        return "remove-employee-from-project";
+        return "remove-employee-from-subproject";
     }
 
             @PostMapping("/remove/subproject") // POST
-            public String removeEmployeeFromSubProject(@RequestParam int employeeId,@RequestParam int subProjectId) {
+            public String removeEmployeeFromSubProject(@RequestParam int employeeId,@RequestParam int subProjectId, @RequestParam int projectId) {
                 employeeService.removeEmployeeFromSubProject(employeeId, subProjectId);
                 return "redirect:/subproject/" + subProjectId;
             }
