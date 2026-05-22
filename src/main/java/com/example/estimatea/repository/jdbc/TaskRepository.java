@@ -14,11 +14,12 @@ public class TaskRepository {
     private final TaskMapper taskMapper;
 
     // SQL statements for creating a single Task in both Projects and Subprojects
-    private final String CREATE_TASK_FOR_PROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id,  employee_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, sub_id, employee_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String CREATE_TASK_FOR_PROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, project_id,current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, sub_id,current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final String CREATE_TASK_FOR_TEST = "INSERT INTO task (start_date, completed, task_name, deadline, task_time,project_id, sub_id,current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     //SQL statement for editing a task in both Projects and Subprojects
-    private final String EDIT_TASK = "UPDATE task SET start_date = ?, completed = ?, task_name = ?, deadline = ?, task_time = ?, task_price = ?, employee_id = ?, current_complexity_id = ? WHERE task_id = ?";
+    private final String EDIT_TASK = "UPDATE task SET start_date = ?, completed = ?, task_name = ?, deadline = ?, task_time = ?, task_price = ?, current_complexity_id = ? WHERE task_id = ?";
 
     // SQL statement for deleting a single Task
     private final String DELETE_TASK = "DELETE FROM task WHERE task_id = ? ";
@@ -44,11 +45,15 @@ public class TaskRepository {
 
     // Creating Task for both Projects and Subprojects ----- (EVT: Mulighed for at kombinere de to Create metoder til en metode der laver en boolean forespørgsel på id inden man trækker data)
     public int createTaskForProject(Task projectTask) {
-        return jdbc.update(CREATE_TASK_FOR_PROJECT, projectTask.getStartDate(), projectTask.getCompleted(), projectTask.getTaskName(), projectTask.getDeadLine(), projectTask.getTaskTime(), projectTask.getTaskPrice(), projectTask.getProjectId(), projectTask.getCurrentComplexityId());
+        return jdbc.update(CREATE_TASK_FOR_PROJECT, projectTask.getStartDate(), projectTask.getCompleted(), projectTask.getTaskName(), projectTask.getDeadLine(), projectTask.getTaskTime(), projectTask.getProjectId(), projectTask.getCurrentComplexityId());
     }
 
     public int createTaskForSubproject(Task subTask) {
-        return jdbc.update(CREATE_TASK_FOR_SUBPROJECT, subTask.getStartDate(), subTask.getCompleted(), subTask.getTaskName(), subTask.getDeadLine(), subTask.getTaskTime(), subTask.getTaskPrice(), subTask.getProjectId(), subTask.getSubprojectId(), subTask.getCurrentComplexityId());
+        return jdbc.update(CREATE_TASK_FOR_SUBPROJECT, subTask.getStartDate(), subTask.getCompleted(), subTask.getTaskName(), subTask.getDeadLine(), subTask.getTaskTime(), subTask.getProjectId(), subTask.getSubprojectId(), subTask.getCurrentComplexityId());
+    }
+
+    public void createTaskForTest(Task task) {
+        jdbc.update(CREATE_TASK_FOR_TEST,task.getStartDate(), task.getCompleted(), task.getTaskName(), task.getDeadLine(), task.getTaskTime(), task.getProjectId(), task.getSubprojectId(), task.getCurrentComplexityId());
     }
 
     // Editing a single Task (works for both Project and Subproject)

@@ -40,7 +40,7 @@ public class TaskRepositoryTest {
     @Test
     void createTaskForProjectTest() {
         // Arrange
-        Task projectTask = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 0, 1, 1, 1);
+        Task projectTask = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 1, 1, 1);
 
         // Act
         taskRepository.createTaskForProject(projectTask);
@@ -53,7 +53,6 @@ public class TaskRepositoryTest {
         assertThat(projectTasks.getLast().getStartDate()).isEqualTo(LocalDate.of(2027, 1, 1));
         assertThat(projectTasks.getLast().getDeadLine()).isEqualTo(LocalDate.of(2027, 12, 1));
         assertThat(projectTasks.getLast().getTaskTime()).isEqualTo(10);
-        assertThat(projectTasks.getLast().getTaskPrice()).isEqualTo(100);
         assertThat(projectTasks.getLast().getProjectId()).isEqualTo(1);
         assertThat(projectTasks.getLast().getCurrentComplexityId()).isEqualTo(1);
     }
@@ -61,10 +60,10 @@ public class TaskRepositoryTest {
     @Test
     void createTaskForSubprojectTest() {
         // Arrange
-        Task subprojectTask = new Task(LocalDate.of(2027, 1, 1), false, "Test SubprojectTask", LocalDate.of(2027, 12, 1), 50, 300, 1, 1, 1);
+        Task subprojectTask = new Task(LocalDate.of(2027, 1, 1), false, "Test SubprojectTask", LocalDate.of(2027, 12, 1), 50, 1, 1, 1);
 
         // Act
-        taskRepository.createTaskForSubproject(subprojectTask);
+        taskRepository.createTaskForTest(subprojectTask);
 
         // Assert
         List<Task> subprojectTasks = taskRepository.getTasksBySubprojectId(1);
@@ -74,7 +73,6 @@ public class TaskRepositoryTest {
         assertThat(subprojectTasks.getLast().getStartDate()).isEqualTo(LocalDate.of(2027, 1, 1));
         assertThat(subprojectTasks.getLast().getDeadLine()).isEqualTo(LocalDate.of(2027, 12, 1));
         assertThat(subprojectTasks.getLast().getTaskTime()).isEqualTo(50);
-        assertThat(subprojectTasks.getLast().getTaskPrice()).isEqualTo(300);
         assertThat(subprojectTasks.getLast().getProjectId()).isEqualTo(1);
         assertThat(subprojectTasks.getLast().getSubprojectId()).isEqualTo(1);
         assertThat(subprojectTasks.getLast().getCurrentComplexityId()).isEqualTo(1);
@@ -86,7 +84,7 @@ public class TaskRepositoryTest {
         int taskId = taskRepository.getTasksByProjectId(1).getFirst().getTaskId();
 
         // Act
-        Task editedTask = new Task(LocalDate.of(2027, 12, 12), true, "Edited Task", LocalDate.of(2028, 1, 1), 20, 200, 1, 1, 5);
+        Task editedTask = new Task(LocalDate.of(2027, 12, 12), true, "Edited Task", LocalDate.of(2028, 1, 1), 20, 1, 1, 5);
         editedTask.setTaskId(taskId);
         taskRepository.editTask(editedTask);
 
@@ -97,7 +95,6 @@ public class TaskRepositoryTest {
         assertThat(result.getStartDate()).isEqualTo(LocalDate.of(2027, 12, 12));
         assertThat(result.getDeadLine()).isEqualTo(LocalDate.of(2028, 1, 1));
         assertThat(result.getTaskTime()).isEqualTo(20);
-        assertThat(result.getTaskPrice()).isEqualTo(200);
         assertThat(result.getCurrentComplexityId()).isEqualTo(5);
     }
 

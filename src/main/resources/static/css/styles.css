@@ -224,6 +224,7 @@ a.project-card:hover {
     padding: 30px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     margin-bottom: 16px;
+    margin-top: 25px;
     text-decoration: none;
 }
 

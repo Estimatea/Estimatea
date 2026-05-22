@@ -64,7 +64,7 @@ public class EmployeeControllerTest {
             void controllerEmployeeAddedToProject() throws Exception { // POST
                 mockMvc.perform(post("/employee/add/project").param("employeeId", "1").param("projectId", "1"))
                                                              .andExpect(status().is3xxRedirection())
-                                                             .andExpect(redirectedUrl("/project"));
+                                                             .andExpect(redirectedUrl("/projects/1"));
 
                 verify(employeeService).addEmployeeToProject(1, 1);
             }
@@ -85,19 +85,22 @@ public class EmployeeControllerTest {
     void controllerAddEmployeeToSubProjectForm() throws Exception {
         when(employeeService.getAllEmployeesByProjectId(1)).thenReturn(List.of(employeeMock));
 
-        mockMvc.perform(get("/employee/subproject/add").param("projectId", "1"))
-                                                        .andExpect(status().isOk())
-                                                        .andExpect(view().name("add-employee-to-subproject"))
-                                                        .andExpect(model().attributeExists("subProjectEmployeeList"));
+        mockMvc.perform(get("/employee/add/subproject")
+                        .param("projectId", "1")
+                        .param("subProjectId", "1"))
+                .andExpect(status().isOk());
 
         verify(employeeService).getAllEmployeesByProjectId(1);
     }
 
             @Test
             void controllerEmployeeAddedToSubProject() throws Exception {
-                mockMvc.perform(post("/employee/subproject/add").param("employeeId", "1").param("subProjectId", "1").param("projectId", "1"))
-                                                                .andExpect(status().is3xxRedirection())
-                                                                .andExpect(redirectedUrl("/subprojects"));
+                mockMvc.perform(post("/employee/add/subproject")
+                                .param("employeeId", "1")
+                                .param("subProjectId", "1")
+                                .param("projectId", "1"))
+                        .andExpect(status().is3xxRedirection())
+                        .andExpect(redirectedUrl("/subprojects/1"));
 
                 verify(employeeService).addEmployeeToSubProject(1, 1, 1);
             }

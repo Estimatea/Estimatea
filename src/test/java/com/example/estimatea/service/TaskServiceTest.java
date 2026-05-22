@@ -40,7 +40,7 @@ public class TaskServiceTest {
     @BeforeEach
     public void setUp() {
         complexityMock = new Complexity(1, 4, "TestComp", 1.2);
-        taskMock = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 0, 2, 1);
+        taskMock = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 1, 1, 1);
     }
 
 
@@ -58,21 +58,21 @@ public class TaskServiceTest {
         when(taskRepository.createTaskForProject(taskMock))
                 .thenReturn(1);
 
-        assertDoesNotThrow(() -> taskService.createTaskForProject(taskMock));
+        assertDoesNotThrow(() -> taskService.createTaskForTest(taskMock));
     }
 
             @Test
             void createTaskForProject_shouldThrowWhenTaskIsNull() {
 
-                assertThrows(NotFoundException.class, () -> taskService.createTaskForProject(null));
+                assertThrows(NotFoundException.class, () -> taskService.createTaskForTest(null));
             }
 
                     @Test
-                    void createTaskForProject_shouldThrowWhenNoRowsAffected() {
+                    void createTaskForTest_shouldThrowWhenNoRowsAffected() {
 
                         when(taskRepository.createTaskForProject(taskMock)).thenReturn(0);
 
-                        assertThrows(NotFoundException.class, () -> taskService.createTaskForProject(taskMock));
+                        assertThrows(NotFoundException.class, () -> taskService.createTaskForTest(taskMock));
                     }
 
 

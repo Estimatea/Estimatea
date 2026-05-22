@@ -96,7 +96,7 @@ public class EmployeeController {
         return "add-employee-to-subproject";
     }
 
-            @PostMapping("add/subproject") // POST
+            @PostMapping("/add/subproject") // POST
             public String employeeAddedToSubProject(@RequestParam int employeeId, @RequestParam int subProjectId, @RequestParam int projectId) {
                 employeeService.addEmployeeToSubProject(employeeId, subProjectId, projectId);
                 return "redirect:/subprojects/" + subProjectId;
