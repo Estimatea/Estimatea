@@ -55,8 +55,8 @@ public class TaskRepository {
         return jdbc.update(CREATE_TASK_FOR_SUBPROJECT, subTask.getStartDate(), subTask.getCompleted(), subTask.getTaskName(), subTask.getDeadLine(), subTask.getTaskTime(), subTask.getSubprojectId(), subTask.getCurrentComplexityId());
     }
 
-    public void createTaskForTest(Task task) {
-        jdbc.update(CREATE_TASK_FOR_TEST,task.getStartDate(), task.getCompleted(), task.getTaskName(), task.getDeadLine(), task.getTaskTime(), task.getProjectId(), task.getSubprojectId(), task.getCurrentComplexityId());
+    public int createTaskForTest(Task task) {
+        return jdbc.update(CREATE_TASK_FOR_TEST,task.getStartDate(), task.getCompleted(), task.getTaskName(), task.getDeadLine(), task.getTaskTime(), task.getProjectId(), task.getSubprojectId(), task.getCurrentComplexityId());
     }
 
     // Editing a single Task (works for both Project and Subproject)
