@@ -19,7 +19,7 @@
     <div class="page-content">
         <h1>Add Employee to Project</h1>
 
-        <form th:action="@{/employee/add/project}" method="post">
+        <form th:action="@{/employee/add/{projectId}(projectId=${projectId})}" method="post">
 
             <input type="hidden" name="projectId" th:value="${projectId}" />
 

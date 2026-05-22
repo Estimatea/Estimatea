@@ -5,10 +5,7 @@ import com.example.estimatea.service.EmployeeService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -54,30 +51,31 @@ public class EmployeeController {
         // Employee handling on Main project
 
     // Add Employee to Main project
-    @GetMapping("/add/project")
-    public String addEmployeeToProjectForm(@RequestParam int projectId, Model model) { // GET
-        List<Employee> employeeList = employeeService.getAllEmployeeInCompany();
+    @GetMapping("/add/{projectId}")
+    public String addEmployeeToProjectForm(@PathVariable int projectId, Model model) { // GET
+        List<Employee> employeeList = employeeService.employeesNotInProject(projectId);
         model.addAttribute("employeeList", employeeList);
         model.addAttribute("projectId", projectId);
         return "add-employee-to-project";
     }
 
-            @PostMapping("/add/project") // POST
-            public String employeeAddedToProject(@RequestParam int employeeId, @RequestParam int projectId) {
+            @PostMapping("/add/{projectId}") // POST
+            public String employeeAddedToProject(@PathVariable int projectId, @RequestParam int employeeId) {
                 employeeService.addEmployeeToProject(employeeId, projectId);
                 return "redirect:/projects/" + projectId;
             }
 
     // Remove employee from Main project
-    @GetMapping("/remove/project")
-    public String removeEmployeeFromProjectFrom(Model model) {
-        List<Employee> employeeList = employeeService.getAllEmployeeInCompany();
+    @GetMapping("/remove/{projectId}")
+    public String removeEmployeeFromProjectFrom(Model model,  @PathVariable int projectId) {
+        List<Employee> employeeList = employeeService.getAllEmployeesByProjectId(projectId);
+        model.addAttribute("projectId", projectId);
         model.addAttribute("employeeList", employeeList);
         return "remove-employee-from-project";
     }
 
-            @PostMapping("/remove/project") // POST
-            public String removeEmployeeFromProject(@RequestParam int employeeId, @RequestParam int projectId) {
+            @PostMapping("/remove/{projectId}") // POST
+            public String removeEmployeeFromProject(@RequestParam int employeeId, @PathVariable int projectId) {
                 employeeService.removeEmployeeFromProject(employeeId, projectId);
                 return "redirect:/projects/" + projectId;
             }
