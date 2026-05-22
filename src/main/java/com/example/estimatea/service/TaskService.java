@@ -22,7 +22,7 @@ public class TaskService {
         this.complexityService = complexityService;
     }
 
-    public void createTaskForTest(Task projectTask) {
+    public void createTaskForProject(Task projectTask) {
 
         if (projectTask == null) {
             throw new NotFoundException("No task object received");
@@ -34,7 +34,8 @@ public class TaskService {
             throw new NotFoundException("No task was created " + projectTask.getTaskId());
         }
 
-        taskPriceCalculatorForTaskInProject(projectTask);
+        Task retrievedTaskForPriceCalc = taskRepository.getLatestTask();
+        taskPriceCalculatorForTaskInProject(retrievedTaskForPriceCalc);
 
     }
 
@@ -50,8 +51,8 @@ public class TaskService {
             throw new NotFoundException("No task was created " + subTask.getTaskId());
         }
 
-        taskPriceCalculatorForTaskInSubProject(subTask);
-
+        Task retrievedTaskForPriceCalc = taskRepository.getLatestTask();
+        taskPriceCalculatorForTaskInProject(retrievedTaskForPriceCalc);
     }
 
     public void editTask(Task task) {
