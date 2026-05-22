@@ -1,6 +1,7 @@
 package com.example.estimatea.controller;
 
 import com.example.estimatea.model.Employee;
+import com.example.estimatea.model.Role;
 import com.example.estimatea.service.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ public class EmployeeControllerTest {
 
     @BeforeEach
     void setUp() {
-        employeeMock = new Employee(1, "Jackie", "jackie_dev", "password_777", 3);
+        employeeMock = new Employee(1, "Jackie", "jackie_dev", "password_777", new Role("Test Role", 200));
     }
 
     @Test

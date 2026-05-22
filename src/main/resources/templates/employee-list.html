@@ -19,7 +19,12 @@
 <div class="team-list">
     <div class="team-member" th:each="employee : ${employeeList}">
         <div class="member-avatar" th:text="${#strings.substring(employee.getEmployeeName(),0,1)}">E</div>
-        <span class="member-name" th:text="${employee.getEmployeeName()}">Employee Name</span>
+
+        <div class="member-info">
+            <span class="member-name" th:text="${employee.getEmployeeName()}">Employee Name</span>
+            <span class="member-role" th:text="${employee.getRole().getRoleType()}">Role</span>
+            <span class="member-id" th:text="|Employee ID: ${employee.getEmployeeId()}|">Employee ID</span>
+        </div>
     </div>
 </div>
 

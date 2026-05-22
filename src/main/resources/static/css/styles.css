@@ -374,6 +374,7 @@ a.project-card:hover {
 
 .team-member {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 12px;
     background: var(--bar-bg);
@@ -394,12 +395,24 @@ a.project-card:hover {
     font-weight: 700;
     font-size: 13px;
     text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.member-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .member-name {
     font-size: 14px;
     font-weight: 600;
-    color: var(--text-dark);
+}
+
+.member-role,
+.member-id {
+    font-size: 12px;
+    opacity: 0.7;
 }
 
 /* ---- FORMS & REUSABLE INPUTS ----- */

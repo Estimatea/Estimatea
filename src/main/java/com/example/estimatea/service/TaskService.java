@@ -126,7 +126,7 @@ public class TaskService {
 
         List <Employee> empList = employeeService.getAllEmployeesByProjectId(task.getProjectId());
         for (Employee e : empList) {
-            double rate = roleService.getRoleById(e.getRoleId()).getRoleRate();
+            double rate = e.getRole().getRoleRate();
             price += ( rate * task.getTaskTime() ) / empList.size();
         }
         double multiplier = complexityService.getComplexityFromId(task.getCurrentComplexityId()).getRateMultiplier();
@@ -139,7 +139,7 @@ public class TaskService {
 
         List <Employee> empList = employeeService.getAllEmployeesForSubproject(task.getSubprojectId());
         for (Employee e : empList) {
-            double rate = roleService.getRoleById(e.getRoleId()).getRoleRate();
+            double rate = e.getRole().getRoleRate();
             price += ( rate * task.getTaskTime() ) / empList.size();
         }
         double multiplier = complexityService.getComplexityFromId(task.getCurrentComplexityId()).getRateMultiplier();

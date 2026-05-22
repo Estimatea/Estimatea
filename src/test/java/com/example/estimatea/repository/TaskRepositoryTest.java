@@ -40,7 +40,7 @@ public class TaskRepositoryTest {
     @Test
     void createTaskForProjectTest() {
         // Arrange
-        Task projectTask = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 1, 0, 2, 1);
+        Task projectTask = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 0, 1, 1, 1);
 
         // Act
         taskRepository.createTaskForProject(projectTask);
@@ -55,14 +55,13 @@ public class TaskRepositoryTest {
         assertThat(projectTasks.getLast().getTaskTime()).isEqualTo(10);
         assertThat(projectTasks.getLast().getTaskPrice()).isEqualTo(100);
         assertThat(projectTasks.getLast().getProjectId()).isEqualTo(1);
-        assertThat(projectTasks.getLast().getEmployeeId()).isEqualTo(2);
         assertThat(projectTasks.getLast().getCurrentComplexityId()).isEqualTo(1);
     }
 
     @Test
     void createTaskForSubprojectTest() {
         // Arrange
-        Task subprojectTask = new Task(LocalDate.of(2027, 1, 1), false, "Test SubprojectTask", LocalDate.of(2027, 12, 1), 50, 300, 1, 1, 2, 1);
+        Task subprojectTask = new Task(LocalDate.of(2027, 1, 1), false, "Test SubprojectTask", LocalDate.of(2027, 12, 1), 50, 300, 1, 1, 1);
 
         // Act
         taskRepository.createTaskForSubproject(subprojectTask);
@@ -78,7 +77,6 @@ public class TaskRepositoryTest {
         assertThat(subprojectTasks.getLast().getTaskPrice()).isEqualTo(300);
         assertThat(subprojectTasks.getLast().getProjectId()).isEqualTo(1);
         assertThat(subprojectTasks.getLast().getSubprojectId()).isEqualTo(1);
-        assertThat(subprojectTasks.getLast().getEmployeeId()).isEqualTo(2);
         assertThat(subprojectTasks.getLast().getCurrentComplexityId()).isEqualTo(1);
     }
 
@@ -88,7 +86,7 @@ public class TaskRepositoryTest {
         int taskId = taskRepository.getTasksByProjectId(1).getFirst().getTaskId();
 
         // Act
-        Task editedTask = new Task(LocalDate.of(2027, 12, 12), true, "Edited Task", LocalDate.of(2028, 1, 1), 20, 200, 1, 1, 3, 5);
+        Task editedTask = new Task(LocalDate.of(2027, 12, 12), true, "Edited Task", LocalDate.of(2028, 1, 1), 20, 200, 1, 1, 5);
         editedTask.setTaskId(taskId);
         taskRepository.editTask(editedTask);
 

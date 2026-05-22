@@ -40,7 +40,7 @@ public class TaskServiceTest {
     @BeforeEach
     public void setUp() {
         complexityMock = new Complexity(1, 4, "TestComp", 1.2);
-        taskMock = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 1, 0, 2, 1);
+        taskMock = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 100, 0, 2, 1);
     }
 
 

@@ -12,11 +12,10 @@ public class Task {
     private int taskPrice;
     private int projectId;
     private int subprojectId;
-    private int employeeId;
     private int currentComplexityId;
 
     // Used to load object from database (Row Mapper)
-    public Task(int taskId, LocalDate startDate, boolean completed, String taskName, LocalDate deadLine, int taskTime, int taskPrice, int projectId, int subprojectId, int employeeId, int currentComplexityId) {
+    public Task(int taskId, LocalDate startDate, boolean completed, String taskName, LocalDate deadLine, int taskTime, int taskPrice, int projectId, int subprojectId, int currentComplexityId) {
         this.taskId = taskId;
         this.startDate = startDate;
         this.completed = completed;
@@ -26,12 +25,11 @@ public class Task {
         this.taskPrice = taskPrice;
         this.projectId = projectId;
         this.subprojectId = subprojectId;
-        this.employeeId = employeeId;
         this.currentComplexityId = currentComplexityId;
     }
 
     // Used to create task objects
-    public Task(LocalDate startDate, boolean completed, String taskName, LocalDate deadLine, int taskTime, int taskPrice, int projectId, int subprojectId, int employeeId, int currentComplexityId) {
+    public Task(LocalDate startDate, boolean completed, String taskName, LocalDate deadLine, int taskTime, int taskPrice, int projectId, int subprojectId, int currentComplexityId) {
         this.startDate = startDate;
         this.completed = completed;
         this.taskName = taskName;
@@ -40,7 +38,6 @@ public class Task {
         this.taskPrice = taskPrice;
         this.projectId = projectId;
         this.subprojectId = subprojectId;
-        this.employeeId = employeeId;
         this.currentComplexityId = currentComplexityId;
     }
 
@@ -109,14 +106,6 @@ public class Task {
 
     public void setSubprojectId(int subprojectId) {
         this.subprojectId = subprojectId;
-    }
-
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
     }
 
     public boolean getCompleted() {
