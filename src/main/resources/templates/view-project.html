@@ -62,7 +62,9 @@
 
         <!-- ADD TASK OR SUBPROJECT BUTTONS -->
         <div class="add-action-bar">
-            <a th:href="@{/task/project/{projectId}/add(projectId=${project.projectId})}" class="btn-action">+ Add Task</a>
+            <a th:href="@{/task/project/{projectId}/add(projectId=${project.projectId})}" class="btn-action">
+                + Add Task
+            </a>
 
             <a th:href="@{/subproject/project/{projectId}/create(projectId=${project.projectId})}" class="btn-action">
                 + Add Subproject

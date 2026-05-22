@@ -52,7 +52,7 @@ public class TaskController {
     @GetMapping("/subproject/{subprojectId}/add")
     public String createTaskToSubprojectForm(@PathVariable int subprojectId, Model model) {
         SubProject currentSubproject = subProjectService.findSubProjectById(subprojectId);
-        model.addAttribute("subproject", currentSubproject);
+        model.addAttribute("subProject", currentSubproject);
 
         Task task = new Task();
         task.setSubprojectId(subprojectId);

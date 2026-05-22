@@ -17,7 +17,7 @@
     <div class="page-content">
         <h1>Create Task in Subproject</h1>
 
-        <form th:action="@{/task/createTaskForSubroject}" th:object="${task}" method="post">
+        <form th:action="@{/task/createTaskForSubproject}" th:object="${task}" method="post">
 
             <input type="hidden" th:field="*{subprojectId}" />
 
@@ -59,7 +59,7 @@
             <div class="form-group">
                 <label for="employeeId">Employee ID</label>
                 <div class="input-wrapper">
-                    <input type="number" id="employeeId" th:field="*{employeeId}" placeholder="Employee ID" />
+                    <input type="number" id="employeeId" th:field="*{employeeId}" placeholder="Employee ID"/>
                 </div>
             </div>
 
@@ -68,8 +68,15 @@
                 <div class="input-wrapper">
                     <select id="currentComplexityId" th:field="*{currentComplexityId}">
                         <option value="1">Standard</option>
-                        <option value="2">Elevated</option>
-                        <option value="3">Enterprise Grade</option>
+                        <option value="2">Low Complexity</option>
+                        <option value="3">Minor</option>
+                        <option value="4">Moderate</option>
+                        <option value="5">Elevated</option>
+                        <option value="6">High Complexity</option>
+                        <option value="7">Advanced</option>
+                        <option value="8">Critical</option>
+                        <option value="9">Expert Level</option>
+                        <option value="10">Enterprise Grade</option>
                     </select>
                 </div>
             </div>
