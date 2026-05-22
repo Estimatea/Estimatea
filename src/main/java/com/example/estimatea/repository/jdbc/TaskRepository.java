@@ -52,7 +52,7 @@ public class TaskRepository {
     }
 
     public int createTaskForSubproject(Task subTask) {
-        return jdbc.update(CREATE_TASK_FOR_SUBPROJECT, subTask.getStartDate(), subTask.getCompleted(), subTask.getTaskName(), subTask.getDeadLine(), subTask.getTaskTime(), subTask.getProjectId(), subTask.getSubprojectId(), subTask.getCurrentComplexityId());
+        return jdbc.update(CREATE_TASK_FOR_SUBPROJECT, subTask.getStartDate(), subTask.getCompleted(), subTask.getTaskName(), subTask.getDeadLine(), subTask.getTaskTime(), subTask.getSubprojectId(), subTask.getCurrentComplexityId());
     }
 
     public void createTaskForTest(Task task) {
