@@ -104,14 +104,10 @@ public class EmployeeService {
         }
     }
 
-        // SUBPROJECT EMPLOYEES
+    // SUBPROJECT EMPLOYEES
 
     public List<Employee> getAllEmployeesForSubproject(int subProject) { // Retrieves list of employees and their given information assigned to their ID
         return employeeRepository.getAllEmployeesForSubProject(subProject);
-
-//        if (allEmployeesOnSubProject.isEmpty()) {
-//            throw new NotFoundException("No employees found on given subproject " + subProject);
-//        }
     }
 
     public void addEmployeeToSubProject(int projectId, int employeeId, int subProject) {
@@ -160,38 +156,4 @@ public class EmployeeService {
             throw new NotFoundException("Employee not found " + subProjectId + " EMP: " + employeeId);
         }
     }
-
-
-
-    //    public List<Integer> allEmployeesIdsBySubProject(int subProjectId) { // Retrieves list of employees IDS ONLY coupled to a subproject
-//        List<Integer> subProjectEmployeesIds = employeeRepository.getAllEmployeesIdsForSubProject(subProjectId);
-//
-//        if (subProjectEmployeesIds.isEmpty()) {
-//            throw new NotFoundException("No employees found on given subproject: " + subProjectId);
-//        }
-//
-//        return subProjectEmployeesIds;
-//    }
-
-    //    public List<Integer> getAllEmployeesIdsByProjectId(int projectId) { // Retrieve all employees (IDS ONLY) assigned to a given project (id)
-//        List<Integer> projectEmployeeIds = employeeRepository.getAllEmployeeIdsForProject(projectId);
-//
-//        if (projectEmployeeIds.isEmpty()) {
-//            throw new NotFoundException("No employees found on given project: " + projectId);
-//        }
-//
-//        return projectEmployeeIds;
-//    }
-
-
-
-
-
-
-
-
-
-
-
-
 }
