@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${subProject.subName}">Project Overview</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 
-    <div th:replace="~{fragments/header :: header}"></div>
+<div th:replace="~{fragments/header :: header}"></div>
 
 <main>
     <div class="action-bar-nav">
-        <a th:href="@{/projects/{projectId}(projectId=${project.projectId})}" class="btn-back">← Back to project overview</a>
+        <a th:href="@{/projects/{projectId}(projectId=${project.projectId})}" class="btn-back">← Back to project
+            overview</a>
     </div>
 
-<h1 class="section-title" th:text="${subProject.subName}">Subproject name placeholder</h1>
+    <h1 class="section-title" th:text="${subProject.subName}">Subproject name placeholder</h1>
 
+    <div class="detail-card">
+        <div class="card-header-row">
+            <h2 class="card-subtitle">Project Overview</h2>
     <!-- MAIN PROJECT DASHBOARD -->
     <div class="detail-card">
         <div class="card-header-row">
@@ -26,6 +31,47 @@
                  th:classappend="${subProject.completed} ? 'status-green' : 'status-red'"
                  th:text="${subProject.completed ? 'COMPLETED' : 'NOT COMPLETE'}">
                 Status
+            </div>
+            <div class="action-bar">
+                <a th:href="@{/subproject/{subProjectId}/edit(subProjectId=${subProject.subId})}" class="btn-action"> +
+                    Edit Subproject </a>
+            </div>
+        </div>
+
+
+        <div class="info-grid">
+            <div class="info-pair">
+                <span class="label">Estimated Price</span>
+                <span class="value price-tag"
+                      th:text="${subProject.sumPrice != 0 ? subProject.sumPrice + ' kr.' : '–'}">–</span>
+            </div>
+
+            <!-- TASKLIST ON SUBPROJECT -->
+            <div class="add-action-bar">
+                <a th:href="@{/task/subproject/{subProjectId}/add(subProjectId=${subProject.subId})}"
+                   class="btn-action">
+                    + Add Task
+                </a>
+            </div>
+
+            <div class="detail-card">
+                <h2 class="card-header-row"
+                    style="border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 24px;">
+                    <span class="card-subtitle">Task View</span>
+                </h2>
+
+                <div th:if="${taskList != null and !#lists.isEmpty(taskList)}">
+                    <div class="task-list">
+                        <div class="tasks-styling" th:each="task : ${taskList}">
+                            <h3><span th:text="${task.taskName}"></span></h3>
+                            <p><span class="completed-visual"
+                                     th:text="${task.completed} ? 'Completed' : 'In Progress'"></span></p>
+                            <p><span class="label">Complexity:</span> <span
+                                    th:text="${task.currentComplexityId}"></span></p>
+                            <p><span class="label">Deadline:</span> <span th:text="${task.deadLine}"></span></p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="action-bar">
                 <a th:href="@{/subproject/{subProjectId}/edit(subProjectId=${subProject.subId})}" class ="btn-action"> + Edit Subproject </a>
@@ -82,6 +128,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
         <div class="empty-state" th:if="${taskList == null or #lists.isEmpty(taskList)}">
             No active tasks found.
