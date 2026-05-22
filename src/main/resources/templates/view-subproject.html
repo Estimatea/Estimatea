@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${project.projectName}">Project Overview</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <div th:replace="~{fragments/header :: header}"></div>
+
+<main>
+    <div class="action-bar-nav">
+        <a th:href="@{/projects/{projectId}(projectId=${project.projectId})}" class="btn-back">← Back to project overview</a>
+    </div>
+
+<h1 class="section-title" th:text="${subProject.subName}">Subproject name placeholder</h1>
+
+    <div class="detail-card">
+        <div class="card-header-row">
+            <h2 class="card-subtitle">Subproject Overview</h2>
+<!--            <a th:href="@{/subproject/{projectId}/edit(projectId=${project.projectId})}" class="btn-action-small">-->
+<!--                Edit Subproject-->
+<!--            </a>-->
+        </div>
+
+        <div class="completed-status"
+             th:classappend="${subProject.completed} ? 'status-green' : 'status-red'"
+             th:text="${subProject.completed ? 'COMPLETED' : 'NOT COMPLETE'}">
+            Status
+        </div>
+
+
+        <div class="info-grid">
+            <div class="info-pair">
+                <span class="label">Estimated Price</span>
+                <span class="value price-tag" th:text="${subProject.sumPrice != 0 ? subProject.sumPrice + ' kr.' : '–'}">–</span>
+            </div>
+
+            </main>
 
 </body>
 </html>

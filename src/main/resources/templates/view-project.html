@@ -101,7 +101,7 @@
             <div th:if="${subProjectList != null and !#lists.isEmpty(subProjectList)}">
                 <div class="sub-list">
                     <div class="sub-styling" th:each="subproject : ${subProjectList}">
-                        <a th:href="@{subproject/{subProjectId}(subProjectId=${subproject.subId})}">
+                        <a th:href="@{/subproject/{subProjectId}(subProjectId=${subproject.subId})}">
                             <h3 th:text="${subproject.subName}">Sub name placeholder</h3>
                             <p><strong>Start:</strong> <span th:text="${subproject.startDate}">–</span></p>
                             <p><strong>Deadline:</strong> <span th:text="${subproject.deadLine}">–</span></p>

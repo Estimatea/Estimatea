@@ -89,13 +89,11 @@ public class EmployeeService {
         // SUBPROJECT EMPLOYEES
 
     public List<Employee> getAllEmployeesForSubproject(int subProject) { // Retrieves list of employees and their given information assigned to their ID
-        List<Employee> allEmployeesOnSubProject = employeeRepository.getAllEmployeesForSubProject(subProject);
+        return employeeRepository.getAllEmployeesForSubProject(subProject);
 
-        if (allEmployeesOnSubProject.isEmpty()) {
-            throw new NotFoundException("No employees found on given subproject " + subProject);
-        }
-
-        return allEmployeesOnSubProject;
+//        if (allEmployeesOnSubProject.isEmpty()) {
+//            throw new NotFoundException("No employees found on given subproject " + subProject);
+//        }
     }
 
     public void addEmployeeToSubProject(int projectId, int employeeId, int subProject) {

@@ -2,9 +2,11 @@ package com.example.estimatea.controller;
 
 
 import com.example.estimatea.model.Employee;
+import com.example.estimatea.model.Project;
 import com.example.estimatea.model.SubProject;
 import com.example.estimatea.model.Task;
 import com.example.estimatea.service.EmployeeService;
+import com.example.estimatea.service.ProjectService;
 import com.example.estimatea.service.SubProjectService;
 import com.example.estimatea.service.TaskService;
 import org.springframework.stereotype.Controller;
@@ -18,11 +20,13 @@ import java.util.List;
 public class SubProjectController {
 
     private final SubProjectService subProjectService;
+    private final ProjectService projectService;
     private final EmployeeService employeeService;
     private final TaskService taskService;
 
-    public SubProjectController(SubProjectService subProjectService, EmployeeService employeeService,  TaskService taskService) {
+    public SubProjectController(SubProjectService subProjectService, ProjectService projectService, EmployeeService employeeService, TaskService taskService) {
         this.subProjectService = subProjectService;
+        this.projectService = projectService;
         this.employeeService = employeeService;
         this.taskService = taskService;
     }
@@ -32,6 +36,9 @@ public class SubProjectController {
     public String viewSubProject(@PathVariable int subProjectId, Model model) {
         SubProject subProject = subProjectService.findSubProjectById(subProjectId);
         model.addAttribute("subProject", subProject);
+
+        Project project = projectService.findProjectById(subProject.getProjectId());
+        model.addAttribute("project", project);
 
         List<Employee> employeeList = employeeService.getAllEmployeesForSubproject(subProjectId);
         model.addAttribute("employeeList", employeeList);

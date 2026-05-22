@@ -68,9 +68,6 @@ public class EmployeeServiceTest {
         verify(employeeRepository).getAllEmployeesForProject(1);
     }
 
-
-
-
     @Test
     void shouldAddEmployeeToProject() {
         when(employeeRepository.getAllEmployeesInCompany()).thenReturn(List.of(employeeMock));
