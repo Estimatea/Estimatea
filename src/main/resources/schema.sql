@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS complexity(
 CREATE TABLE IF NOT EXISTS task(
     task_id INT AUTO_INCREMENT PRIMARY KEY,
     start_date DATE NOT NULL,
-    completed boolean,
+    completed boolean DEFAULT FALSE,
     task_name VARCHAR(60),
     deadline DATE NOT NULL,
     task_time INT,

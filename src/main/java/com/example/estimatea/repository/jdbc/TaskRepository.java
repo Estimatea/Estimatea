@@ -14,8 +14,8 @@ public class TaskRepository {
     private final TaskMapper taskMapper;
 
     // SQL statements for creating a single Task in both Projects and Subprojects
-    private final String CREATE_TASK_FOR_PROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, project_id,current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, sub_id,current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final String CREATE_TASK_FOR_PROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, project_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final String CREATE_TASK_FOR_SUBPROJECT = "INSERT INTO task (start_date, completed, task_name, deadline, task_time, sub_id, current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String CREATE_TASK_FOR_TEST = "INSERT INTO task (start_date, completed, task_name, deadline, task_time,project_id, sub_id,current_complexity_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     //SQL statement for editing a task in both Projects and Subprojects
@@ -29,6 +29,9 @@ public class TaskRepository {
 
     //SQL statement for getting a single task by ID
     private final String GET_TASK_BY_ID = "SELECT * FROM task WHERE task_id= ?";
+
+    //SQL statement for getting latest task
+    private final String GET_LATEST_TASK = "SELECT * FROM task ORDER BY task_id DESC LIMIT 1";
 
     // SQL statements for getting tasks in both Projects and Subprojects
     private final String GET_TASKS_BY_PROJECT_ID = "SELECT * FROM task WHERE project_id = ?";
@@ -49,16 +52,20 @@ public class TaskRepository {
     }
 
     public int createTaskForSubproject(Task subTask) {
-        return jdbc.update(CREATE_TASK_FOR_SUBPROJECT, subTask.getStartDate(), subTask.getCompleted(), subTask.getTaskName(), subTask.getDeadLine(), subTask.getTaskTime(), subTask.getProjectId(), subTask.getSubprojectId(), subTask.getCurrentComplexityId());
+        return jdbc.update(CREATE_TASK_FOR_SUBPROJECT, subTask.getStartDate(), subTask.getCompleted(), subTask.getTaskName(), subTask.getDeadLine(), subTask.getTaskTime(), subTask.getSubprojectId(), subTask.getCurrentComplexityId());
     }
 
-    public void createTaskForTest(Task task) {
-        jdbc.update(CREATE_TASK_FOR_TEST,task.getStartDate(), task.getCompleted(), task.getTaskName(), task.getDeadLine(), task.getTaskTime(), task.getProjectId(), task.getSubprojectId(), task.getCurrentComplexityId());
+    public int createTaskForTest(Task task) {
+        return jdbc.update(CREATE_TASK_FOR_TEST,task.getStartDate(), task.getCompleted(), task.getTaskName(), task.getDeadLine(), task.getTaskTime(), task.getProjectId(), task.getSubprojectId(), task.getCurrentComplexityId());
     }
 
     // Editing a single Task (works for both Project and Subproject)
     public int editTask(Task task) {
         return jdbc.update(EDIT_TASK, task.getStartDate(), task.getCompleted(), task.getTaskName(), task.getDeadLine(), task.getTaskTime(), task.getTaskPrice(), task.getCurrentComplexityId(), task.getTaskId());
+    }
+
+    public Task getLatestTask() {
+        return jdbc.queryForObject(GET_LATEST_TASK, new TaskMapper());
     }
 
     // Delete a single Task

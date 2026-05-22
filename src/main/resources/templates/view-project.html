@@ -71,6 +71,36 @@
             </a>
         </div>
 
+        <!-- SUBPROJECTS ON MAIN PROJECT -->
+        <div class="detail-card">
+            <h2 class="card-header-row" style="border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 24px;">
+                <span class="card-subtitle">Subprojects</span>
+            </h2>
+
+            <div th:if="${subProjectList != null and !#lists.isEmpty(subProjectList)}">
+                <div class="sub-list">
+                    <div class="sub-styling" th:each="subproject : ${subProjectList}">
+                        <a th:href="@{/subproject/{subProjectId}(subProjectId=${subproject.subId})}">
+                            <div>
+                                <h3 th:text="${subproject.subName}">Sub name placeholder</h3>
+                                <p><strong>Start:</strong> <span th:text="${subproject.startDate}">–</span></p>
+                                <p><strong>Deadline:</strong> <span th:text="${subproject.deadLine}">–</span></p>
+                            </div>
+                            <div class="completed-status"
+                                 th:classappend="${subproject.completed} ? 'status-green' : 'status-red'"
+                                 th:text="${subproject.completed ? 'COMPLETED' : 'NOT COMPLETE'}">
+                                Status
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="empty-state" th:if="${subProjectList == null or #lists.isEmpty(subProjectList)}">
+                No active subprojects found.
+            </div>
+        </div>
+
         <!-- TASK LIST FOR MAIN PROJECT -->
         <div class="detail-card">
             <h2 class="card-header-row" style="border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 24px;">
@@ -93,28 +123,6 @@
             </div>
         </div>
 
-        <!-- SUBPROJECTS ON MAIN PROJECT -->
-        <div class="detail-card">
-            <h2 class="card-header-row" style="border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 24px;">
-                <span class="card-subtitle">Subprojects</span>
-            </h2>
-
-            <div th:if="${subProjectList != null and !#lists.isEmpty(subProjectList)}">
-                <div class="sub-list">
-                    <div class="sub-styling" th:each="subproject : ${subProjectList}">
-                        <a th:href="@{/subproject/{subProjectId}(subProjectId=${subproject.subId})}">
-                            <h3 th:text="${subproject.subName}">Sub name placeholder</h3>
-                            <p><strong>Start:</strong> <span th:text="${subproject.startDate}">–</span></p>
-                            <p><strong>Deadline:</strong> <span th:text="${subproject.deadLine}">–</span></p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="empty-state" th:if="${subProjectList == null or #lists.isEmpty(subProjectList)}">
-                No active subprojects found.
-            </div>
-        </div>
 
         <!-- FULL EMPLOYEE LIST ASSIGNED TO PROJECT -->
         <div class="detail-card">
@@ -130,7 +138,12 @@
             <div class="team-list">
                 <div class="team-member" th:each="employee : ${employeeList}">
                     <div class="member-avatar" th:text="${#strings.substring(employee.getEmployeeName(),0,1)}">E</div>
-                    <span class="member-name" th:text="${employee.getEmployeeName()}">Employee Name</span>
+
+                    <div class="member-info">
+                        <span class="member-name" th:text="${employee.getEmployeeName()}">Employee Name</span>
+                        <span class="member-role" th:text="${employee.getRole().getRoleType()}">Role</span>
+                        <span class="member-id" th:text="|Employee ID: ${employee.getEmployeeId()}|">Employee ID</span>
+                    </div>
                 </div>
             </div>
         </div>

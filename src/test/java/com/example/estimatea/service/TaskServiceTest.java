@@ -15,7 +15,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -55,24 +57,28 @@ public class TaskServiceTest {
         when(complexityService.getComplexityFromId(anyInt()))
                 .thenReturn(complexityMock);
 
-        when(taskRepository.createTaskForProject(taskMock))
+        when(taskRepository.createTaskForProject(any(Task.class)))
                 .thenReturn(1);
 
-        assertDoesNotThrow(() -> taskService.createTaskForTest(taskMock));
-    }
+        when(taskRepository.getLatestTask())
+                .thenReturn(taskMock);
 
+        taskService.createTaskForProject(taskMock);
+
+        verify(taskRepository).createTaskForProject(any(Task.class));
+    }
             @Test
             void createTaskForProject_shouldThrowWhenTaskIsNull() {
 
-                assertThrows(NotFoundException.class, () -> taskService.createTaskForTest(null));
+                assertThrows(NotFoundException.class, () -> taskService.createTaskForProject(null));
             }
 
                     @Test
-                    void createTaskForTest_shouldThrowWhenNoRowsAffected() {
+                    void createTaskForProject_shouldThrowWhenNoRowsAffected() {
 
                         when(taskRepository.createTaskForProject(taskMock)).thenReturn(0);
 
-                        assertThrows(NotFoundException.class, () -> taskService.createTaskForTest(taskMock));
+                        assertThrows(NotFoundException.class, () -> taskService.createTaskForProject(taskMock));
                     }
 
 
@@ -84,10 +90,15 @@ public class TaskServiceTest {
         when(complexityService.getComplexityFromId(anyInt()))
                 .thenReturn(complexityMock);
 
+        when(taskRepository.createTaskForSubproject(any(Task.class)))
+                .thenReturn(1);
 
-        when(taskRepository.createTaskForSubproject(taskMock)).thenReturn(1);
+        when(taskRepository.getLatestTask())
+                .thenReturn(taskMock);
 
-        assertDoesNotThrow(() -> taskService.createTaskForSubproject(taskMock));
+        taskService.createTaskForSubproject(taskMock);
+
+        verify(taskRepository).createTaskForSubproject(any(Task.class));
     }
 
             @Test
