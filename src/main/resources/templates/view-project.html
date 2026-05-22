@@ -116,9 +116,12 @@
 
         <!-- FULL EMPLOYEE LIST ASSIGNED TO PROJECT -->
         <div class="detail-card">
-            <h2 class="card-header-row" style="border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 24px;">
-                <span class="card-subtitle">All Employees On Project</span>
-            </h2>
+            <div class="card-header-row" style="border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 24px;">
+                <h2 class="card-subtitle">All Employees On Project</h2>
+                <div class="action-bar">
+                    <a th:href="@{/employee/add/project(projectId=${project.projectId})}" class="btn-action">+ Add Employee</a>
+                </div>
+            </div>
 
             <div class="team-list">
                 <div class="team-member" th:each="employee : ${employeeList}">
@@ -127,8 +130,8 @@
                 </div>
             </div>
         </div>
-
     </div>
+
 </main>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
