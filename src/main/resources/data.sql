@@ -48,11 +48,11 @@ VALUES ('Emil', 'Eman', '010', 3);
 INSERT INTO project (project_name, start_date, completed, deadline, project_manager)
 VALUES ('Project calculation tool', '2026-01-01', false, '2026-05-28', 1);
 
-INSERT INTO subproject (sub_name, start_date, deadline, sum_time,  sum_price, completed, project_id)
-VALUES ('Turbo Rocket Engine Integration', '2026-02-01', '2026-03-01', 10 , 20,false, 1);
+INSERT INTO subproject (sub_name, start_date, deadline, sum_time, completed, project_id)
+VALUES ('Turbo Rocket Engine Integration', '2026-02-01', '2026-03-01', 10 ,false, 1);
 
 INSERT INTO task (start_date, completed, task_name, deadline, task_time, sub_id, current_complexity_id)
-VALUES ('2026-02-01', false, 'Pruning of Code', '2026-12-01', 10, 1, 3);
+VALUES ('2026-02-01', false, 'Pruning of Code', '2026-12-01', 500, 1, 3);
 
 INSERT INTO project_employee (employee_id, project_id) VALUES (1,1), (2,1), (3,1);
 

@@ -121,7 +121,7 @@ public class TaskService {
 
 
     // Calculates the price for the Task, which cascades through the entire program
-    public void taskPriceCalculatorForTaskInProject(Task task) {
+    public Task taskPriceCalculatorForTaskInProject(Task task) {
         double price = 0;
 
         List <Employee> empList = employeeService.getAllEmployeesByProjectId(task.getProjectId());
@@ -132,10 +132,13 @@ public class TaskService {
         }
         double multiplier = complexityService.getComplexityFromId(task.getCurrentComplexityId()).getRateMultiplier();
 
-        task.setTaskPrice((int)Math.round(price * multiplier));
+        task.setTaskPrice((int) Math.round(price * multiplier));
+        taskRepository.editTask(task);
+
+        return taskRepository.getTaskById(task.getTaskId());
     }
 
-    public void taskPriceCalculatorForTaskInSubProject(Task task) {
+    public Task taskPriceCalculatorForTaskInSubProject(Task task) {
         double price = 0;
 
         List <Employee> empList = employeeService.getAllEmployeesForSubproject(task.getSubprojectId());
@@ -145,7 +148,10 @@ public class TaskService {
         }
         double multiplier = complexityService.getComplexityFromId(task.getCurrentComplexityId()).getRateMultiplier();
 
-        task.setTaskPrice((int)Math.round(price * multiplier));
+        task.setTaskPrice((int) Math.round(price * multiplier));
+        taskRepository.editTask(task);
+
+        return taskRepository.getTaskById(task.getTaskId());
     }
 
 
