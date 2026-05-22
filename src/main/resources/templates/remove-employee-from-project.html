@@ -19,7 +19,7 @@
     <div class="page-content">
         <h1>Remove Employee from Project</h1>
 
-        <form th:action="@{/employee/remove/project}" method="post">
+        <form th:action="@{/employee/remove/{projectId}(projectId=${projectId})}" method="post">
 
             <div class="form-group">
                 <label for="employeeId">Select Employee</label>
@@ -31,13 +31,6 @@
                                 th:text="${emp.employeeName + ' (ID: ' + emp.employeeId + ')'}">
                         </option>
                     </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="projectId">Project ID</label>
-                <div class="input-wrapper">
-                    <input type="number" id="projectId" name="projectId" placeholder="Enter Project ID" required />
                 </div>
             </div>
 

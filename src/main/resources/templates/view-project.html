@@ -129,9 +129,9 @@
             <div class="card-header-row">
                 <h2 class="card-subtitle">All Employees On Project</h2>
                 <div class="action-bar">
-                    <a th:href="@{/employee/add/project(projectId=${project.projectId})}" class="btn-action">+ Add Employee</a>
+                    <a th:href="@{/employee/add/{projectId}(projectId=${project.projectId})}" class="btn-action">+ Add Employee</a>
 
-                    <a th:href="@{/employee/remove/project(projectId=${project.projectId})}" class="btn-action">- Remove Employee</a>
+                    <a th:href="@{/employee/remove/{projectId}(projectId=${project.projectId})}" class="btn-action">- Remove Employee</a>
                 </div>
             </div>
 

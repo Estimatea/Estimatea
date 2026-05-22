@@ -1,8 +1,11 @@
 package com.example.estimatea.service;
+import com.example.estimatea.exception.DuplicateKeyException;
 import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.Employee;
 import com.example.estimatea.repository.jdbc.EmployeeRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,24 +42,39 @@ public class EmployeeService {
         return employeeRepository.getAllEmployeesForProject(projectId);
     }
 
-    public void addEmployeeToProject(int employeeId, int projectId) { // Adds employee to project and check if ID exists in database
-        List<Employee> employeesInCompany = employeeRepository.getAllEmployeesInCompany();
-        boolean isEmpInCompanyDatabase = false;
+    public List<Employee> employeesNotInProject(int projectId) {
+        List<Employee> all = getAllEmployeeInCompany();
+        List<Employee> inProject = getAllEmployeesByProjectId(projectId);
 
-        for (Employee e : employeesInCompany) {
+        List<Employee> notInProject = new ArrayList<>();
 
-            if (e.getEmployeeId() == employeeId) {
-                isEmpInCompanyDatabase = true;
-                break;
+        for (Employee employee : all) {
+            boolean found = false;
+            for (Employee employeeInProject : inProject) {
+                if (employee.getEmployeeId() == employeeInProject.getEmployeeId()) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                notInProject.add(employee);
             }
         }
+        return notInProject;
+    }
 
-        if (!isEmpInCompanyDatabase) {
-            throw new IllegalArgumentException("Employee not found in company database " + employeeId);
+    public void addEmployeeToProject(int employeeId, int projectId) { // Adds employee to project and check if ID exists in database
+        List<Employee> alreadyAssignedEmployees = employeeRepository.getAllEmployeesForProject(projectId);
+
+        for (Employee employee : alreadyAssignedEmployees) {
+            if (employee.getEmployeeId() == employeeId) {
+                throw new DuplicateKeyException("Employee with id " + employeeId + " already assigned to project " + projectId);
+            }
         }
 
         // Adds employee to Main project
         int rowsAffected = employeeRepository.addEmployeeToProject(employeeId, projectId);
+
 
         if (rowsAffected == 0) {
             throw new NotFoundException("Employee not assigned to project: " + projectId + " EMP: " + employeeId);
@@ -82,7 +100,7 @@ public class EmployeeService {
         int rowsAffected = employeeRepository.removeEmployeeFromProject(employeeId, projectId);
 
         if (rowsAffected == 0) {
-            throw new NotFoundException("Employee not found " + projectId + " EMP: " + employeeId);
+            throw new NotFoundException("Employee not removed from projectID: " + projectId + ", with employeeID: " + employeeId);
         }
     }
 
