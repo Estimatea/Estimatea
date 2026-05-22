@@ -14,13 +14,11 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
     private final EmployeeService employeeService;
-    private final RoleService roleService;
     private final ComplexityService complexityService;
 
     public TaskService(TaskRepository taskRepository, EmployeeService employeeService, RoleService roleService,  ComplexityService complexityService) {
         this.taskRepository = taskRepository;
         this.employeeService = employeeService;
-        this.roleService = roleService;
         this.complexityService = complexityService;
     }
 
