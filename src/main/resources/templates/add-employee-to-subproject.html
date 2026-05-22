@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Employee to Project</title>
+    <title>Add Employee to Subproject</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
 <main>
 
     <div class="page-content">
-        <h1>Add Employee to Project</h1>
+        <h1>Add Employee to Subproject</h1>
 
         <form th:action="@{/employee/add/subproject}" method="post">
 
@@ -37,14 +37,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="projectId">Project ID</label>
-                <div class="input-wrapper">
-                    <input type="number" id="projectId" name="projectId" placeholder="Enter Project ID" required />
-                </div>
-            </div>
-
-            <button type="submit" class="btn-save">Add to Project</button>
+            <button type="submit" class="btn-save">Add to Subproject</button>
 
         </form>
     </div>
