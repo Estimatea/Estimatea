@@ -208,6 +208,17 @@ a.project-card:hover {
     line-height: 1.5;
 }
 
+.sub-styling a {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.sub-styling a > div:first-child {
+    display: flex;
+    flex-direction: column;
+}
+
 .card-info-row {
     display: flex;
     justify-content: space-between;

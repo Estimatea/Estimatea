@@ -80,8 +80,8 @@
 
         <div class="info-grid">
             <div class="info-pair">
-                <span class="label">Estimated Project Price</span>
-                <span class="value price-tag" th:text="${project.sumPrice != 0 ? project.sumPrice + ' kr.' : '–'}">–</span>
+                <span class="label">Estimated Subproject Price</span>
+                <span class="value price-tag" th:text="${subProject.sumPrice != 0 ? subProject.sumPrice + ' kr.' : '–'}">–</span>
             </div>
 
             <div class="info-pair">
@@ -133,6 +133,7 @@
         <div class="empty-state" th:if="${taskList == null or #lists.isEmpty(taskList)}">
             No active tasks found.
         </div>
+    </div>
     </div>
 
 

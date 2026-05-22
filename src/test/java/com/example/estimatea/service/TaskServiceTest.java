@@ -58,21 +58,21 @@ public class TaskServiceTest {
         when(taskRepository.createTaskForProject(taskMock))
                 .thenReturn(1);
 
-        assertDoesNotThrow(() -> taskService.createTaskForTest(taskMock));
+        assertDoesNotThrow(() -> taskService.createTaskForProject(taskMock));
     }
 
             @Test
             void createTaskForProject_shouldThrowWhenTaskIsNull() {
 
-                assertThrows(NotFoundException.class, () -> taskService.createTaskForTest(null));
+                assertThrows(NotFoundException.class, () -> taskService.createTaskForProject(null));
             }
 
                     @Test
-                    void createTaskForTest_shouldThrowWhenNoRowsAffected() {
+                    void createTaskForProject_shouldThrowWhenNoRowsAffected() {
 
                         when(taskRepository.createTaskForProject(taskMock)).thenReturn(0);
 
-                        assertThrows(NotFoundException.class, () -> taskService.createTaskForTest(taskMock));
+                        assertThrows(NotFoundException.class, () -> taskService.createTaskForProject(taskMock));
                     }
 
 

@@ -30,6 +30,9 @@ public class TaskRepository {
     //SQL statement for getting a single task by ID
     private final String GET_TASK_BY_ID = "SELECT * FROM task WHERE task_id= ?";
 
+    //SQL statement for getting latest task
+    private final String GET_LATEST_TASK = "SELECT * FROM task ORDER BY task_id DESC LIMIT 1";
+
     // SQL statements for getting tasks in both Projects and Subprojects
     private final String GET_TASKS_BY_PROJECT_ID = "SELECT * FROM task WHERE project_id = ?";
     private final String GET_TASKS_BY_SUB_ID = "SELECT * FROM task WHERE sub_id = ?";
@@ -59,6 +62,10 @@ public class TaskRepository {
     // Editing a single Task (works for both Project and Subproject)
     public int editTask(Task task) {
         return jdbc.update(EDIT_TASK, task.getStartDate(), task.getCompleted(), task.getTaskName(), task.getDeadLine(), task.getTaskTime(), task.getTaskPrice(), task.getCurrentComplexityId(), task.getTaskId());
+    }
+
+    public Task getLatestTask() {
+        return jdbc.queryForObject(GET_LATEST_TASK, new TaskMapper());
     }
 
     // Delete a single Task
