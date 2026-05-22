@@ -1,7 +1,6 @@
 package com.example.estimatea.service;
 
 import com.example.estimatea.exception.NotFoundException;
-import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.Project;
 import com.example.estimatea.model.SubProject;
 import com.example.estimatea.model.Task;
@@ -25,33 +24,27 @@ public class ProjectService {
     }
 
     public List<Project> listAllActiveProjects() {
-        List<Project> projects = new ArrayList<>();
+        List<Project> updatedProjects = new ArrayList<>();
 
-        for (Project p :  projectRepository.getAllProjects()) {
+        for (Project p : projectRepository.getAllProjects()) {
             if (!p.isCompleted()) {
-                projects.add(p);
+                updatedProjects.add(updateProjectScope(p));
             }
         }
 
-        for (Project project : projects) {
-            updateProjectScope(project);
-        }
-        return projects;
+        return updatedProjects;
     }
 
     public List<Project> listAllCompletedProjects() {
-        List<Project> projects = new ArrayList<>();
+        List<Project> updatedProjects = new ArrayList<>();
 
-        for (Project p :  projectRepository.getAllProjects()) {
+        for (Project p : projectRepository.getAllProjects()) {
             if (p.isCompleted()) {
-                projects.add(p);
+                updatedProjects.add(updateProjectScope(p));
             }
         }
 
-        for (Project project : projects) {
-            updateProjectScope(project);
-        }
-        return projects;
+        return updatedProjects;
     }
 
     public void createNewProject(Project project) {
@@ -73,8 +66,8 @@ public class ProjectService {
             throw new NotFoundException("No project with given ID found " + projectId);
         }
 
-        updateProjectScope(project);
-        return project;
+
+        return updateProjectScope(project);
     }
 
     public void editProject(Project project) {
@@ -99,62 +92,43 @@ public class ProjectService {
 
     // PRICE AND TIME ESTIMATION FOR PROJECT
 
-    public void updateProjectScope(Project project) {
-        if (project == null) {
-            throw new IllegalArgumentException("No project object received");
-        }
-        updateProjectPrice(project.getProjectId());
-        updateProjectTime(project.getProjectId());
-    }
+    public void updateProjectPriceAndTime(int projectId) {
+        SubProject updatedSubProject;
 
-    public void updateProjectPrice(int projectId) {
         Project project = projectRepository.getProjectById(projectId);
         if (project == null) {
             throw new NotFoundException("No project with given ID found " + projectId);
         }
         project.setSumPrice(0);
+        project.setSumTime(0);
+
 
         List<SubProject> subProjects = subProjectService.findSubProjectsByProjectId(projectId);
-
-        if (!subProjects.isEmpty()) {
-            for (SubProject s : subProjects) {
-                subProjectService.updateSubProjectScope(s);
-                project.setSumPrice(project.getSumPrice() + s.getSumPrice());
-            }
+        for (SubProject s : subProjects) {
+            updatedSubProject = subProjectService.updateSubProjectScope(s);
+            project.setSumPrice(project.getSumPrice() + updatedSubProject.getSumPrice());
+            project.setSumTime(project.getSumTime() + updatedSubProject.getSumTime());
         }
 
         List<Task> tasks = taskService.getTasksByProjectId(projectId);
-        if (!tasks.isEmpty()) {
-            for (Task t : tasks) {
-                project.setSumPrice(project.getSumPrice() + t.getTaskPrice());
-            }
+        List<Task> updatedTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            updatedTasks.add(taskService.taskPriceCalculatorForTaskInProject(t));
+        }
+
+        for (Task t : updatedTasks) {
+            project.setSumPrice(project.getSumPrice() + t.getTaskPrice());
+            project.setSumTime(project.getSumTime() + t.getTaskTime());
         }
 
         editProject(project);
     }
 
-    public void updateProjectTime(int projectId) {
-        Project project = projectRepository.getProjectById(projectId);
+    public Project updateProjectScope(Project project) {
         if (project == null) {
-            throw new NotFoundException("No project with given ID found " + projectId);
+            throw new IllegalArgumentException("No project object received");
         }
-        project.setSumTime(0);
-
-        List<SubProject> subProjects = subProjectService.findSubProjectsByProjectId(projectId);
-        if (!subProjects.isEmpty()) {
-            for (SubProject s : subProjects) {
-                subProjectService.updateSubProjectScope(s);
-                project.setSumTime(project.getSumTime() + s.getSumTime());
-            }
-        }
-
-        List<Task> tasks = taskService.getTasksByProjectId(projectId);
-        if (!tasks.isEmpty()) {
-            for (Task t : tasks) {
-                project.setSumTime(project.getSumTime() + t.getTaskTime());
-            }
-        }
-
-        editProject(project);
+        updateProjectPriceAndTime(project.getProjectId());
+        return projectRepository.getProjectById(project.getProjectId());
     }
 }
