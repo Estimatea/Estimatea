@@ -115,6 +115,7 @@ public class ProjectService {
         project.setSumPrice(0);
 
         List<SubProject> subProjects = subProjectService.findSubProjectsByProjectId(projectId);
+
         if (!subProjects.isEmpty()) {
             for (SubProject s : subProjects) {
                 subProjectService.updateSubProjectScope(s);

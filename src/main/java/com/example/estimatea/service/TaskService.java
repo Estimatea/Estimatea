@@ -125,6 +125,7 @@ public class TaskService {
         double price = 0;
 
         List <Employee> empList = employeeService.getAllEmployeesByProjectId(task.getProjectId());
+
         for (Employee e : empList) {
             double rate = e.getRole().getRoleRate();
             price += ( rate * task.getTaskTime() ) / empList.size();

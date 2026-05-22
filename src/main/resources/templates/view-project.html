@@ -24,15 +24,14 @@
         <div class="detail-card">
             <div class="card-header-row">
                 <h2 class="card-subtitle">Project Overview</h2>
-                <a th:href="@{/projects/{projectId}/edit(projectId=${project.projectId})}" class="btn-action-small">
-                    Edit Project
-                </a>
-            </div>
-
-            <div class="completed-status"
-                 th:classappend="${project.completed} ? 'status-green' : 'status-red'"
-                 th:text="${project.completed ? 'COMPLETED' : 'NOT COMPLETE'}">
-                Status
+                <div class="completed-status"
+                     th:classappend="${project.completed} ? 'status-green' : 'status-red'"
+                     th:text="${project.completed ? 'COMPLETED' : 'NOT COMPLETE'}">
+                    Status
+                </div>
+                <div class="action-bar">
+                    <a th:href="@{/projects/{projectId}/edit(projectId=${project.projectId})}" class ="btn-action"> + Edit Project </a>
+                </div>
             </div>
 
             <div class="info-grid">
@@ -62,8 +61,10 @@
         </div>
 
         <!-- ADD TASK OR SUBPROJECT BUTTONS -->
-        <div class="action-bar">
-            <a th:href="@{/task/project/{projectId}/add(projectId=${project.projectId})}" class="btn-action">+ Add Task</a>
+        <div class="add-action-bar">
+            <a th:href="@{/task/project/{projectId}/add(projectId=${project.projectId})}" class="btn-action">
+                + Add Task
+            </a>
 
             <a th:href="@{/subproject/project/{projectId}/create(projectId=${project.projectId})}" class="btn-action">
                 + Add Subproject
@@ -101,7 +102,7 @@
             <div th:if="${subProjectList != null and !#lists.isEmpty(subProjectList)}">
                 <div class="sub-list">
                     <div class="sub-styling" th:each="subproject : ${subProjectList}">
-                        <a th:href="@{subproject/{subProjectId}(subProjectId=${subproject.subId})}">
+                        <a th:href="@{/subproject/{subProjectId}(subProjectId=${subproject.subId})}">
                             <h3 th:text="${subproject.subName}">Sub name placeholder</h3>
                             <p><strong>Start:</strong> <span th:text="${subproject.startDate}">–</span></p>
                             <p><strong>Deadline:</strong> <span th:text="${subproject.deadLine}">–</span></p>
