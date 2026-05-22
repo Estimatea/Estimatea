@@ -40,7 +40,7 @@ public class TaskController {
 
             @PostMapping("/createTaskForProject")
             public String createTaskForProject(@ModelAttribute Task task) {
-                taskService.createTaskForTest(task);
+                taskService.createTaskForProject(task);
                 return "redirect:/projects/" + task.getProjectId();
             }
 

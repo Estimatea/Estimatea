@@ -66,7 +66,7 @@ public class TaskControllerTest {
                         .andExpect(status().is3xxRedirection())
                         .andExpect(redirectedUrl("/projects/1"));
 
-                verify(taskService).createTaskForTest(any(Task.class));
+                verify(taskService).createTaskForProject(any(Task.class));
             }
 
     // Add Task to Subproject Form
