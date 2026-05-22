@@ -6,22 +6,22 @@ public class Employee {
     private String employeeName;
     private String employeeUsername;
     private String employeePassword;
-    private int roleId; // Foreign key from role table (role_id)
+    private Role role; // Foreign key from role table (role_id)
 
-    public Employee(int employeeId, String employeeName, String employeeUsername, String employeePassword, int roleId) {
+    public Employee(int employeeId, String employeeName, String employeeUsername, String employeePassword, Role role) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.employeeUsername = employeeUsername;
         this.employeePassword = employeePassword;
-        this.roleId = roleId;
+        this.role = role;
     }
 
 
-    public Employee(String employeeName, String employeeUsername, String employeePassword, int roleId) {
+    public Employee(String employeeName, String employeeUsername, String employeePassword, Role role) {
         this.employeeName = employeeName;
         this.employeeUsername = employeeUsername;
         this.employeePassword = employeePassword;
-        this.roleId = roleId;
+        this.role = role;
     }
 
     public Employee() {
@@ -60,11 +60,11 @@ public class Employee {
         this.employeePassword = employeePassword;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

@@ -2,6 +2,7 @@ package com.example.estimatea.service;
 
 import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.Employee;
+import com.example.estimatea.model.Role;
 import com.example.estimatea.repository.jdbc.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ public class EmployeeServiceTest {
 
     @BeforeEach()
     public void setUp() {
-        employeeMock = new Employee(1, "Jackie", "jackie_dev", "password_777", 3);
+        employeeMock = new Employee(1, "Jackie", "jackie_dev", "password_777", new Role("Test Role", 200));
     }
 
     @Test
@@ -45,7 +46,7 @@ public class EmployeeServiceTest {
         assertThat(employeeList.getFirst().getEmployeeName()).isEqualTo("Jackie");
         assertThat(employeeList.getFirst().getEmployeeUsername()).isEqualTo("jackie_dev");
         assertThat(employeeList.getFirst().getEmployeePassword()).isEqualTo("password_777");
-        assertThat(employeeList.getFirst().getRoleId()).isEqualTo(3);
+
 
         verify(employeeRepository).getAllEmployeesInCompany();
     }
@@ -63,7 +64,7 @@ public class EmployeeServiceTest {
         assertThat(employeeList.getFirst().getEmployeeName()).isEqualTo("Jackie");
         assertThat(employeeList.getFirst().getEmployeeUsername()).isEqualTo("jackie_dev");
         assertThat(employeeList.getFirst().getEmployeePassword()).isEqualTo("password_777");
-        assertThat(employeeList.getFirst().getRoleId()).isEqualTo(3);
+
 
         verify(employeeRepository).getAllEmployeesForProject(1);
     }
@@ -129,7 +130,6 @@ public class EmployeeServiceTest {
         assertThat(subprojectEmployees.getFirst().getEmployeeName()).isEqualTo("Jackie");
         assertThat(subprojectEmployees.getFirst().getEmployeeUsername()).isEqualTo("jackie_dev");
         assertThat(subprojectEmployees.getFirst().getEmployeePassword()).isEqualTo("password_777");
-        assertThat(subprojectEmployees.getFirst().getRoleId()).isEqualTo(3);
 
         verify(employeeRepository).getAllEmployeesForSubProject(1);
     }

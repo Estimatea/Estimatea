@@ -25,9 +25,11 @@ public class RoleRepository {
     public List<Role> getAllRoles() {
         return jdbc.query(GET_ALL_ROLES, roleMapper);
     }
-//
+
+    //
     // Returns specific role
     public Role getRoleById(int roleId) {
-        return jdbc.queryForObject(GET_ROLE_BY_ID, roleMapper, roleId);
+        List<Role> roles = jdbc.query(GET_ROLE_BY_ID, roleMapper, roleId);
+        return roles.isEmpty() ? null : roles.getFirst();
     }
 }

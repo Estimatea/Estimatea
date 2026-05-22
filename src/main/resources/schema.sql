@@ -1,5 +1,5 @@
-DROP SCHEMA IF EXISTS estimatea;
-CREATE SCHEMA estimatea;
+-- DROP SCHEMA IF EXISTS estimatea;
+-- CREATE SCHEMA estimatea;
 
 -- ROLE
 CREATE TABLE IF NOT EXISTS role(
@@ -79,13 +79,11 @@ CREATE TABLE IF NOT EXISTS task(
     deadline DATE NOT NULL,
     task_time INT,
     task_price INT,
-    project_id INT NOT NULL,
+    project_id INT,
     sub_id INT,
-    employee_id INT,
     current_complexity_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE,
-    FOREIGN KEY (sub_id) REFERENCES subproject(sub_id),
-    FOREIGN KEY (employee_id) REFERENCES employee(employee_id),
+    FOREIGN KEY (sub_id) REFERENCES subproject(sub_id) ON DELETE CASCADE,
     FOREIGN KEY (current_complexity_id) REFERENCES complexity(complexity_id)
 );
 
