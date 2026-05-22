@@ -53,7 +53,7 @@ public class EmployeeControllerTest {
     void controllerAddEmployeeToProjectForm() throws Exception { // GET
         when(employeeService.getAllEmployeeInCompany()).thenReturn(List.of(employeeMock));
 
-        mockMvc.perform(get("/employee/add/project")).andExpect(status().isOk())
+        mockMvc.perform(get("/employee/add/project").param("projectId", "1")).andExpect(status().isOk())
                                                      .andExpect(view().name("add-employee-to-project"))
                                                      .andExpect(model().attributeExists("employeeList"));
 
@@ -100,7 +100,7 @@ public class EmployeeControllerTest {
                                 .param("subProjectId", "1")
                                 .param("projectId", "1"))
                         .andExpect(status().is3xxRedirection())
-                        .andExpect(redirectedUrl("/subprojects/1"));
+                        .andExpect(redirectedUrl("/subproject/1"));
 
                 verify(employeeService).addEmployeeToSubProject(1, 1, 1);
             }
@@ -108,7 +108,7 @@ public class EmployeeControllerTest {
 
     @Test
     void controllerRemoveEmployeeFromSubProject() throws Exception {
-        mockMvc.perform(post("/employee/remove/subproject").param("employeeId", "1").param("subProjectId", "1"))
+        mockMvc.perform(post("/employee/remove/subproject").param("employeeId", "1").param("subProjectId", "1").param("projectId", "1"))
                                                            .andExpect(status().is3xxRedirection())
                                                            .andExpect(redirectedUrl("/subproject/1"));
 
