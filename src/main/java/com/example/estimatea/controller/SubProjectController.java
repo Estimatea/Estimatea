@@ -12,6 +12,7 @@ import com.example.estimatea.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -87,6 +88,16 @@ public class SubProjectController {
         return "redirect:/projects/" + sub.getProjectId();
     }
 
-
-
+    // SET SUBPROJECT COMPLETED
+    @PostMapping("/{subprojectId}/complete")
+    public String completeSubProject(@PathVariable int subprojectId, RedirectAttributes redirectAttributes) {
+        try {
+            subProjectService.completeSubProject(subprojectId);
+            int projectId = subProjectService.findSubProjectById(subprojectId).getProjectId();
+            return "redirect:/projects/" + projectId;
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/subproject/" + subprojectId + "/edit";
+        }
+    }
 }
