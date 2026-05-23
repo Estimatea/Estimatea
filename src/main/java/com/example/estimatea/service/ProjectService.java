@@ -108,7 +108,7 @@ public class ProjectService {
                 for (Task subTask : subProjectTaks) {
 
                     if (!subTask.getCompleted()) {
-                        throw new IllegalArgumentException("Cannot complete project: Subproject tasks is still incomplete");
+                        throw new IllegalArgumentException("Cannot complete Subproject: Subproject tasks is still incomplete");
                     }
                 }
             }

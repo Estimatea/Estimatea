@@ -88,7 +88,27 @@ public class SubProjectService {
         }
     }
 
-//         PRICE AND TIME ESTIMATION FOR SUBPROJECT
+    // CHECKs if all Tasks on a Subproject is Completed
+    public void completeSubProject(int subProjectId) {
+
+        List<Task> subProjectTasks = taskService.getTasksForSubprojectId(subProjectId);
+
+        for (Task subTasks : subProjectTasks) {
+
+            if (!subTasks.getCompleted()) {
+                throw new IllegalArgumentException("Cannot complete Subproject: Subproject tasks is still incomplete");
+            }
+        }
+
+       int rowsAffected =  subProjectRepository.completeSubProject(subProjectId);
+
+        if (rowsAffected == 0) {
+            throw new NotFoundException(("Subproject was not set to complete " + subProjectId));
+        }
+    }
+
+
+    // PRICE AND TIME ESTIMATION FOR SUBPROJECT
 
     public SubProject updateSubProjectScope(SubProject subProject) {
         List<Task> tasks = taskService.getTasksForSubprojectId(subProject.getSubId());
