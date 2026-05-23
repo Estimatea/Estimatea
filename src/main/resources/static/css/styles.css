@@ -55,6 +55,7 @@ footer, [th\:replace*="footer"] {
     text-transform: uppercase;
     color: var(--text-dark);
     margin-bottom: 20px;
+    margin-top: 30px;
 }
 
 .label {
@@ -496,4 +497,13 @@ a.project-card:hover {
     border-radius: 4px;
     cursor: pointer;
     font-weight: 600;
+}
+
+.alert-Error {
+    background-color: #ffe0e0;
+    border: 1px solid #ff4d4d;
+    color: #cc0000;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-top: 15px;
 }

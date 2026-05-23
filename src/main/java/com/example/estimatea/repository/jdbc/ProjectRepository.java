@@ -3,8 +3,6 @@ import com.example.estimatea.model.Project;
 import com.example.estimatea.repository.mapper.ProjectMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -21,15 +19,15 @@ public class ProjectRepository {
     private final String UPDATE_PROJECT = "UPDATE project SET project_name = ?, completed = ?, sum_time = ?, sum_price = ?, deadline = ?, project_manager = ? WHERE project_id = ?";
     private final String DELETE_PROJECT = "DELETE FROM project WHERE project_id = ?";
 
-                    // SORTING statements for Project Overview Page
+        // SORTING statements for Project Overview Page
 
     // {Deadline}
-     private final String SHOW_ALL_PROJECTS_IN_ASC_ORDER = "SELECT * FROM project ORDER BY deadline ASC";
-     private final String SHOW_ALL_PROJECTS_IN_DESC_ORDER = "SELECT * FROM project ORDER BY deadline DESC";
+    private final String SHOW_ALL_PROJECTS_IN_ASC_ORDER = "SELECT * FROM project ORDER BY deadline ASC";
+    private final String SHOW_ALL_PROJECTS_IN_DESC_ORDER = "SELECT * FROM project ORDER BY deadline DESC";
 
-     // {start_date}
-     private final String SORT_PROJECTS_BY_START_DATE_ASC = "SELECT * FROM project ORDER BY start_date ASC";
-     private final String SORT_PROJECT_BY_START_DATE_DESC = "SELECT * FROM project ORDER BY start_date DESC";
+    // {start_date}
+    private final String SORT_PROJECTS_BY_START_DATE_ASC = "SELECT * FROM project ORDER BY start_date ASC";
+    private final String SORT_PROJECT_BY_START_DATE_DESC = "SELECT * FROM project ORDER BY start_date DESC";
 
     //SQL statement for completing PROJECT
     private final String COMPLETE_PROJECT = "UPDATE project SET completed = true WHERE project_id = ?";
@@ -40,6 +38,7 @@ public class ProjectRepository {
     }
 
         // CRUD QUERY's for Project table
+
     public List<Project> getAllProjects() {
         return jdbc.query(GET_ALL_PROJECTS, projectMapper);
     }
