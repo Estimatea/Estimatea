@@ -109,12 +109,16 @@
 
             <div th:if="${taskList != null and !#lists.isEmpty(taskList)}">
                 <div class="task-list">
-                    <div class="tasks-styling" th:each="task : ${taskList}">
-                        <h3><span th:text="${task.taskName}"></span></h3>
-                        <p><span class="completed-visual" th:text="${task.completed} ? 'Completed' : 'In Progress'"></span></p>
-                        <p><span class="label">Complexity:</span> <span th:text="${task.currentComplexityId}"></span></p>
-                        <p><span class="label">Deadline:</span> <span th:text="${task.deadLine}"></span></p>
-                    </div>
+                        <div class="tasks-styling" th:each="task : ${taskList}">
+                            <a th:href="@{/task/project/{projectId}/{taskId}/edit(projectId=${project.projectId}, taskId=${task.taskId})}">
+                                <h3><span th:text="${task.taskName}"></span></h3>
+
+                                <p><span th:class="${task.completed} ? 'status-completed' : 'status-in-Progress'" th:text="${task.completed} ? 'Completed' : 'In progress'"></span></p>
+
+                                <p><span class="label">Complexity:</span> <span th:text="${task.currentComplexityId}"></span></p>
+                                <p><span class="label">Deadline:</span> <span th:text="${task.deadLine}"></span></p>
+                            </a>
+                        </div>
                 </div>
             </div>
 

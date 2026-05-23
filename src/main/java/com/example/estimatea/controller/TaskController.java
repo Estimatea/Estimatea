@@ -64,12 +64,12 @@ public class TaskController {
                 return "redirect:/subproject/" + task.getSubprojectId();
             }
 
-    //
     //Edit Task in Project
     @GetMapping("/project/{projectId}/{taskId}/edit")
-    public String editTaskInProjectForm(@PathVariable int taskId, Model model) {
+    public String editTaskInProjectForm(@PathVariable int projectId, @PathVariable int taskId, Model model) {
         Task currentTask = taskService.getTaskById(taskId);
         model.addAttribute("task", currentTask);
+        model.addAttribute("project", projectId);
         return "edit-task-project";
     }
 
@@ -93,7 +93,7 @@ public class TaskController {
                 return "redirect:/subproject/" + task.getSubprojectId();
             }
 
-    //Complete Task in Project and Subproject
+    //Complete Task in Project
     @PostMapping("/complete/task")
     public String completeTaskInProject(@ModelAttribute Task task) {
         taskService.completeTask(task.getTaskId());

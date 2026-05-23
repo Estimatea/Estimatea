@@ -507,3 +507,11 @@ a.project-card:hover {
     border-radius: 6px;
     margin-top: 15px;
 }
+
+.status-completed {
+    color: green;
+}
+
+.status-in-progress {
+    color: red;
+}
