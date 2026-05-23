@@ -63,8 +63,15 @@
                 <div class="input-wrapper">
                     <select id="currentComplexityId" th:field="*{currentComplexityId}">
                         <option value="1">Standard</option>
-                        <option value="2">Elevated</option>
-                        <option value="3">Enterprise Grade</option>
+                        <option value="2">Low Complexity</option>
+                        <option value="3">Minor</option>
+                        <option value="4">Moderate</option>
+                        <option value="5">Elevated</option>
+                        <option value="6">High Complexity</option>
+                        <option value="7">Advanced</option>
+                        <option value="8">Critical</option>
+                        <option value="9">Expert Level</option>
+                        <option value="10">Enterprise Grade</option>
                     </select>
                 </div>
             </div>
@@ -73,6 +80,18 @@
 
         </form>
     </div>
+
+    <div class="completion-zone">
+        <form th:action="@{/task/complete/task}" th:object="${task}" method="post">
+            <input type="hidden" th:field="*{taskId}">
+            <input th:type="hidden" th:field="*{projectId}">
+            <button type="submit" class="btn-complete"
+                    onclick="return confirm('Are you sure you want to mark this Task completed?');">
+                ✓ Complete Task
+            </button>
+        </form>
+    </div>
+
 </main>
 
 <footer th:replace="~{fragments/footer :: footer}"></footer>

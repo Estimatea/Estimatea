@@ -40,7 +40,6 @@ public class TaskRepository {
     // SQL STATEMENTS FOR COMPLEXITY SCORES COUPLED TO TASK
     private final String UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK = "UPDATE task SET current_complexity_id = ? WHERE task_id = ?";
 
-
     public TaskRepository(JdbcTemplate jdbc, TaskMapper taskMapper) {
         this.jdbc = jdbc;
         this.taskMapper = taskMapper;
