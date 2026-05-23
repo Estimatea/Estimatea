@@ -64,7 +64,7 @@ public class TaskController {
                 return "redirect:/subproject/" + task.getSubprojectId();
             }
 
-    //Edit Task in Project
+    // Edit Task in Project
     @GetMapping("/project/{projectId}/{taskId}/edit")
     public String editTaskInProjectForm(@PathVariable int projectId, @PathVariable int taskId, Model model) {
         Task currentTask = taskService.getTaskById(taskId);
@@ -79,7 +79,7 @@ public class TaskController {
                 return "redirect:/projects/" + task.getProjectId();
             }
 
-    //Edit Task in Subproject
+    // Edit Task in Subproject
     @GetMapping("/subproject/{subprojectId}/{taskId}/edit")
     public String editTaskInSubprojectForm(@PathVariable int taskId, Model model) {
         Task currenTask = taskService.getTaskById(taskId);
