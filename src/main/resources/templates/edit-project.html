@@ -52,6 +52,10 @@
 
     </form>
 
+    <div th:if="${errorMessage}" class="alert-Error">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
         <div class="completion-zone">
             <form th:action="@{/projects/{projectId}/complete(projectId=${project.projectId})}" method="post">
                 <button type="submit" class="btn-complete"

@@ -11,6 +11,7 @@ import com.example.estimatea.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -108,8 +109,14 @@ public class ProjectController {
 
     // SET PROJECT COMPLETED
     @PostMapping("/{projectId}/complete")
-    public String completeProject(@PathVariable int projectId) {
-        projectService.completeProject(projectId);
-        return "redirect:/projects/completed";
+    public String completeProject(@PathVariable int projectId, RedirectAttributes redirectAttributes) {
+        try {
+            projectService.completeProject(projectId);
+            return "redirect:/projects/completed";
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/projects/" + projectId + "/edit";
+        }
     }
+
 }

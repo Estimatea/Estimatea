@@ -90,14 +90,16 @@ public class ProjectService {
         }
     }
 
+    // CHECKs both Project and Subproject tasks if completed
     public void completeProject(int projectId) {
 
         List<Task> projectTasks = taskService.getTasksByProjectId(projectId);
         for (Task mainTask : projectTasks) {
 
             if (!mainTask.getCompleted()) {
-                throw new IllegalArgumentException("Cannot complete project: Main project task " + mainTask.getTaskName() + " is still incomplete");
+                throw new IllegalArgumentException("Cannot complete project: Main project task is still incomplete");
             }
+        }
 
         List<SubProject> subProjects = subProjectService.findSubProjectsByProjectId(projectId);
             for (SubProject subProject : subProjects) {
@@ -106,11 +108,11 @@ public class ProjectService {
                 for (Task subTask : subProjectTaks) {
 
                     if (!subTask.getCompleted()) {
-                        throw new IllegalArgumentException("Cannot complete project: Subproject tasks " + subTask.getTaskName() + " is still incomplete");
+                        throw new IllegalArgumentException("Cannot complete project: Subproject tasks is still incomplete");
                     }
                 }
             }
-        }
+
             int rowsAffected = projectRepository.completeProject(projectId);
 
             if (rowsAffected == 0) {
@@ -129,7 +131,6 @@ public class ProjectService {
         }
         project.setSumPrice(0);
         project.setSumTime(0);
-
 
         List<SubProject> subProjects = subProjectService.findSubProjectsByProjectId(projectId);
         for (SubProject s : subProjects) {
