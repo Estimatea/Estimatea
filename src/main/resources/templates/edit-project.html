@@ -51,6 +51,16 @@
         <button type="submit" class="btn-save">Save Changes</button>
 
     </form>
+
+        <div class="completion-zone">
+            <form th:action="@{/projects/{projectId}/complete(projectId=${project.projectId})}" method="post">
+                <button type="submit" class="btn-complete"
+                        onclick="return confirm('Are you sure you want to mark this project as completed?');">
+                    ✓ Complete Project
+                </button>
+            </form>
+        </div>
+
 </main>
 
 <footer th:replace="~{fragments/footer :: footer}"></footer>

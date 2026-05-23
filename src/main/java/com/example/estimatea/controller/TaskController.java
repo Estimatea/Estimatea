@@ -93,9 +93,8 @@ public class TaskController {
                 return "redirect:/subproject/" + task.getSubprojectId();
             }
 
-    //
-    //Complete Task in Project
-    @PostMapping("/complete/project")
+    //Complete Task in Project and Subproject
+    @PostMapping("/complete/task")
     public String completeTaskInProject(@ModelAttribute Task task) {
         taskService.completeTask(task.getTaskId());
         return "redirect:/projects/" + task.getProjectId();

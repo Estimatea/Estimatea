@@ -90,6 +90,34 @@ public class ProjectService {
         }
     }
 
+    public void completeProject(int projectId) {
+
+        List<Task> projectTasks = taskService.getTasksByProjectId(projectId);
+        for (Task mainTask : projectTasks) {
+
+            if (!mainTask.getCompleted()) {
+                throw new IllegalArgumentException("Cannot complete project: Main project task " + mainTask.getTaskName() + " is still incomplete");
+            }
+
+        List<SubProject> subProjects = subProjectService.findSubProjectsByProjectId(projectId);
+            for (SubProject subProject : subProjects) {
+                    List<Task> subProjectTaks = taskService.getTasksForSubprojectId(subProject.getSubId());
+
+                for (Task subTask : subProjectTaks) {
+
+                    if (!subTask.getCompleted()) {
+                        throw new IllegalArgumentException("Cannot complete project: Subproject tasks " + subTask.getTaskName() + " is still incomplete");
+                    }
+                }
+            }
+        }
+            int rowsAffected = projectRepository.completeProject(projectId);
+
+            if (rowsAffected == 0) {
+                throw new NotFoundException("Project was not set to complete " + projectId);
+            }
+    }
+
     // PRICE AND TIME ESTIMATION FOR PROJECT
 
     public void updateProjectPriceAndTime(int projectId) {
