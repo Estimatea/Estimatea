@@ -54,7 +54,7 @@ public class ProjectController {
         return "completed-projects";
     }
 
-    //SPECIFIC PROJECT VIEW
+    // SPECIFIC PROJECT VIEW
     @GetMapping("/{projectId}")
     public String getProjectOverview(@PathVariable int projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
@@ -72,7 +72,7 @@ public class ProjectController {
         return "view-project";
     }
 
-    //EDIT SPECIFIC PROJECT
+    // EDIT SPECIFIC PROJECT
     @GetMapping("/{projectId}/edit")
     public String editProjectForm(@PathVariable int projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
@@ -86,8 +86,7 @@ public class ProjectController {
             return "redirect:/projects/" + project.getProjectId();
         }
 
-
-    //CREATE NEW PROJECT
+    // CREATE NEW PROJECT
     @GetMapping("/create")
     public String createProjectForm(Model model) {
         model.addAttribute("project", new Project());
@@ -100,11 +99,17 @@ public class ProjectController {
             return "redirect:/projects/all";
         }
 
-
-    //DELETE PROJECT
+    // DELETE PROJECT
     @PostMapping("/{projectId}/delete")
     public String deleteProject(@PathVariable int projectId) {
         projectService.deleteProject(projectId);
         return "redirect:/projects/all";
+    }
+
+    // SET PROJECT COMPLETED
+    @PostMapping("/{projectId}/complete")
+    public String completeProject(@PathVariable int projectId) {
+        projectService.completeProject(projectId);
+        return "redirect:/projects/completed";
     }
 }
