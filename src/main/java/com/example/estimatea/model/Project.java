@@ -1,16 +1,23 @@
 package com.example.estimatea.model;
 
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Project {
 
     private int projectId;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate deadLine;
+
     private boolean completed;
     private String projectName;
     private int sumTime;
     private int sumPrice;
-    private LocalDate deadLine;
+
     private int projectManager; // Foreign key from employee table
 
     public Project(int projectId, LocalDate startDate, boolean completed, String projectName, int sumTime, int sumPrice, LocalDate deadLine, int projectManager) {
