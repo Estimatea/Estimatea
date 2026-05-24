@@ -146,13 +146,13 @@ public class TaskControllerTest {
     // Complete Task in Project
     @Test
     void controllerCompleteTaskInProject() throws Exception {
-        mockMvc.perform(post("/task/complete/project")
-                        .param("taskId", "2")
+        mockMvc.perform(post("/task/complete/task")
+                        .param("taskId", "1")
                         .param("projectId", "1"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/projects/1"));
 
-        verify(taskService).completeTask(2);
+        verify(taskService).completeTask(1);
     }
 
     // Complete Task in Subproject

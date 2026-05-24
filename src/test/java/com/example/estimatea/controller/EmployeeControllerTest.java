@@ -51,18 +51,18 @@ public class EmployeeControllerTest {
     // Adding employee to Main Project
     @Test
     void controllerAddEmployeeToProjectForm() throws Exception { // GET
-        when(employeeService.getAllEmployeeInCompany()).thenReturn(List.of(employeeMock));
+        when(employeeService.employeesNotInProject(1)).thenReturn(List.of(employeeMock));
 
-        mockMvc.perform(get("/employee/add/project").param("projectId", "1")).andExpect(status().isOk())
+        mockMvc.perform(get("/employee/add/1").param("projectId", "1")).andExpect(status().isOk())
                                                      .andExpect(view().name("add-employee-to-project"))
                                                      .andExpect(model().attributeExists("employeeList"));
 
-        verify(employeeService).getAllEmployeeInCompany();
+        verify(employeeService).employeesNotInProject(1);
     }
 
             @Test
             void controllerEmployeeAddedToProject() throws Exception { // POST
-                mockMvc.perform(post("/employee/add/project").param("employeeId", "1").param("projectId", "1"))
+                mockMvc.perform(post("/employee/add/1").param("employeeId", "1").param("projectId", "1"))
                                                              .andExpect(status().is3xxRedirection())
                                                              .andExpect(redirectedUrl("/projects/1"));
 
@@ -72,7 +72,7 @@ public class EmployeeControllerTest {
     // Removing employee from Main Project
     @Test
     void controllerRemoveEmployeeFromProject() throws Exception {
-        mockMvc.perform(post("/employee/remove/project").param("employeeId", "1").param("projectId", "1"))
+        mockMvc.perform(post("/employee/remove/1").param("employeeId", "1").param("projectId", "1"))
                                                         .andExpect(status().is3xxRedirection())
                                                         .andExpect(redirectedUrl("/projects/1"));
 
@@ -83,14 +83,14 @@ public class EmployeeControllerTest {
 
     @Test
     void controllerAddEmployeeToSubProjectForm() throws Exception {
-        when(employeeService.getAllEmployeesByProjectId(1)).thenReturn(List.of(employeeMock));
+        when(employeeService.getAllEmployeeViableToAddToSubProject(1,1)).thenReturn(List.of(employeeMock));
 
         mockMvc.perform(get("/employee/add/subproject")
                         .param("projectId", "1")
                         .param("subProjectId", "1"))
                 .andExpect(status().isOk());
 
-        verify(employeeService).getAllEmployeesByProjectId(1);
+        verify(employeeService).getAllEmployeeViableToAddToSubProject(1,1);
     }
 
             @Test

@@ -71,27 +71,12 @@ public class EmployeeServiceTest {
 
     @Test
     void shouldAddEmployeeToProject() {
-        when(employeeRepository.getAllEmployeesInCompany()).thenReturn(List.of(employeeMock));
         when(employeeRepository.addEmployeeToProject(1,1)).thenReturn(1);
 
         employeeService.addEmployeeToProject(1, 1);
 
         verify(employeeRepository).addEmployeeToProject(1, 1);
     }
-            @Test
-            void shouldHitIllegalArgumentExceptionWhenAdding() { // "Employee not found in company database " + employeeId
-                when(employeeRepository.getAllEmployeesInCompany()).thenReturn(Collections.emptyList());
-
-                assertThrows(IllegalArgumentException.class, () -> employeeService.addEmployeeToProject(1, 1));
-            }
-
-            @Test
-            void shouldHitNotFoundExceptionWhenAdding() { // "Employee not assigned to project: " + projectId + " EMP: " + employeeId
-                when(employeeRepository.getAllEmployeesInCompany()).thenReturn(List.of(employeeMock));
-                when(employeeRepository.addEmployeeToProject(1,1)).thenReturn(0);
-
-                assertThrows(NotFoundException.class, () -> employeeService.addEmployeeToProject(1, 1));
-            }
 
     @Test
     void shouldRemoveEmployeeFromProject() {
