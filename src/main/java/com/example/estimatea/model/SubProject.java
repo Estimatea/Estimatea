@@ -3,13 +3,19 @@ package com.example.estimatea.model;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Setter
 public class SubProject {
     private int subId;
     private String subName;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadLine;
+
     private int sumTime;
     private int sumPrice;
     private boolean completed;

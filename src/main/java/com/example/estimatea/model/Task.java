@@ -1,13 +1,21 @@
 package com.example.estimatea.model;
 
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Task {
-    private int taskId;
+
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate deadLine;
+
+
+    private int taskId;
     private boolean completed;
     private String taskName;
-    private LocalDate deadLine;
     private int taskTime;
     private int taskPrice;
     private int projectId;

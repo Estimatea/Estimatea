@@ -26,6 +26,7 @@
         <form th:action="@{/subproject/save}" th:object="${subProject}" method="post">
 
             <input type="hidden" th:field="*{projectId}" />
+            <input type="hidden" th:field="*{subId}" />
 
             <div class="form-group">
                 <label for="subName">Name</label>
