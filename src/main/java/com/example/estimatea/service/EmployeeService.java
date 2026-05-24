@@ -47,9 +47,10 @@ public class EmployeeService {
         List<Employee> inProject = getAllEmployeesByProjectId(projectId);
 
         List<Employee> notInProject = new ArrayList<>();
+        boolean found;
 
         for (Employee employee : all) {
-            boolean found = false;
+            found = false;
             for (Employee employeeInProject : inProject) {
                 if (employee.getEmployeeId() == employeeInProject.getEmployeeId()) {
                     found = true;
@@ -105,6 +106,28 @@ public class EmployeeService {
     }
 
     // SUBPROJECT EMPLOYEES
+
+    public List<Employee> getAllEmployeeViableToAddToSubProject(int subprojectID, int projectID) {
+        List<Employee> projectEmployees = getAllEmployeesByProjectId(projectID);
+        List<Employee> currentSubProjectEmployees = getAllEmployeesForSubproject(subprojectID);
+        List<Employee> viableToAddList = new ArrayList<>();
+        boolean found;
+
+        for (Employee pE : projectEmployees) {
+            found = false;
+            for (Employee sPE : currentSubProjectEmployees) {
+                if (pE.getEmployeeId() == sPE.getEmployeeId()) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                viableToAddList.add(pE);
+            }
+        }
+        return viableToAddList;
+
+    }
 
     public List<Employee> getAllEmployeesForSubproject(int subProject) { // Retrieves list of employees and their given information assigned to their ID
         return employeeRepository.getAllEmployeesForSubProject(subProject);
