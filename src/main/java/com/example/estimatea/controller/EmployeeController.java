@@ -87,7 +87,7 @@ public class EmployeeController {
     // Add employee to Subproject
     @GetMapping("/add/subproject") // GET
     public String addEmployeeToSubProjectForm(@RequestParam int projectId, @RequestParam int subProjectId, Model model) {
-        List<Employee> subProjectEmpList = employeeService.getAllEmployeesByProjectId(projectId);
+        List<Employee> subProjectEmpList = employeeService.getAllEmployeeViableToAddToSubProject(subProjectId, projectId);
         model.addAttribute("subProjectEmployeeList", subProjectEmpList);
         model.addAttribute("projectId", projectId);
         model.addAttribute("subProjectId", subProjectId);
@@ -105,7 +105,7 @@ public class EmployeeController {
     // Remove employee from Subproject
     @GetMapping("/remove/subproject")
     public String removeEmployeeFromSubprojectFrom(@RequestParam int projectId, @RequestParam int subProjectId, Model model) {
-        List<Employee> subProjectemployeeList = employeeService.getAllEmployeesByProjectId(projectId);
+        List<Employee> subProjectemployeeList = employeeService.getAllEmployeesForSubproject(subProjectId);
         model.addAttribute("subProjectEmployeeList", subProjectemployeeList);
         model.addAttribute("projectId", projectId);
         model.addAttribute("subProjectId", subProjectId);
