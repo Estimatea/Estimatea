@@ -50,7 +50,7 @@
 
                 <div class="info-pair">
                     <span class="label">Start-Date</span>
-                    <span class="value" th:text="${#temporals.format(project.startDate, 'dd/MM/yyyy')}">–</span>
+                    <span class="value" th:text="${project.startDate != null ? #temporals.format(project.startDate, 'dd/MM/yyyy'): '-'}">–</span>
                 </div>
 
                 <div class="info-pair">
