@@ -1,16 +1,19 @@
 package com.example.estimatea.controller;
 
+import com.example.estimatea.interceptor.LoginInterceptor;
 import com.example.estimatea.model.Employee;
 import com.example.estimatea.model.Role;
 import com.example.estimatea.service.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -18,8 +21,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
 @WebMvcTest(EmployeeController.class)
+@AutoConfigureMockMvc(addFilters = false)
 @ActiveProfiles("test")
 public class EmployeeControllerTest {
 
@@ -30,8 +33,12 @@ public class EmployeeControllerTest {
     private EmployeeService employeeService;
     private Employee employeeMock;
 
+    @MockitoBean
+    private LoginInterceptor loginInterceptor;
+
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
+        when(loginInterceptor.preHandle(any(), any(), any())).thenReturn(true);
         employeeMock = new Employee(1, "Jackie", "jackie_dev", "password_777", new Role("Test Role", 200));
     }
 

@@ -1,9 +1,8 @@
 package com.example.estimatea.controller;
 
-import com.example.estimatea.model.Employee;
+import com.example.estimatea.interceptor.LoginInterceptor;
 import com.example.estimatea.model.Project;
-import com.example.estimatea.model.SubProject;
-import com.example.estimatea.model.Task;
+
 import com.example.estimatea.service.EmployeeService;
 import com.example.estimatea.service.ProjectService;
 import com.example.estimatea.service.SubProjectService;
@@ -16,6 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -46,9 +46,13 @@ public class ProjectControllerTest {
     @MockitoBean
     private TaskService taskService;
 
+    @MockitoBean
+    private LoginInterceptor loginInterceptor;
+
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
+        when(loginInterceptor.preHandle(any(), any(), any())).thenReturn(true);
         projectMock = new Project(LocalDate.of(2027, 1, 1), false, "Test Project", 0, 0, LocalDate.of(2027, 12, 31), 1);
     }
     

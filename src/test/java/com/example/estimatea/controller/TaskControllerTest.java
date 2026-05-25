@@ -1,5 +1,6 @@
 package com.example.estimatea.controller;
 
+import com.example.estimatea.interceptor.LoginInterceptor;
 import com.example.estimatea.model.Project;
 import com.example.estimatea.model.SubProject;
 import com.example.estimatea.model.Task;
@@ -14,6 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 import static org.mockito.Mockito.*;
@@ -37,10 +39,14 @@ public class TaskControllerTest {
     @MockitoBean
     private TaskService taskService;
 
+    @MockitoBean
+    private LoginInterceptor loginInterceptor;
+
     private Task taskMock;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
+        when(loginInterceptor.preHandle(any(), any(), any())).thenReturn(true);
         taskMock = new Task(LocalDate.of(2027, 1, 1), false, "Test Task", LocalDate.of(2027, 12, 1), 10, 1, 1, 1);
     }
 

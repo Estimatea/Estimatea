@@ -28,9 +28,9 @@ public class EmployeeController {
 
     @PostMapping("/login")
     public String login(@RequestParam String employeeUsername, @RequestParam String employeePassword, HttpSession session) {
-            Employee employee = employeeService.employeeLogin(employeeUsername, employeePassword);
-            session.setAttribute("currentEmployee", employee);
-            return "redirect:/projects/all";
+               Employee employee = employeeService.employeeLogin(employeeUsername, employeePassword);
+               session.setAttribute("currentEmployee", employee);
+               return "redirect:/projects/all";
     }
 
     @GetMapping("/logout")
@@ -79,7 +79,6 @@ public class EmployeeController {
                 employeeService.removeEmployeeFromProject(employeeId, projectId);
                 return "redirect:/projects/" + projectId;
             }
-
 
 
         // Employee handling on Subproject
