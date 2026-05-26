@@ -17,7 +17,7 @@ Sustainable Architecture: Built to evolve alongside growing IT requirements.
 Data-Driven Insights: Leveraging historical data for more accurate future bidding.
 
 ## Projektstruktur
-.
+```
 ├── CONTRIBUTING.md
 ├── Estimatea.iml
 ├── mvnw
@@ -263,4 +263,5 @@ Data-Driven Insights: Leveraging historical data for more accurate future biddin
 └── web
     └── WEB-INF
         └── web.xml
+```
 
