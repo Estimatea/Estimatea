@@ -1,11 +1,8 @@
 package com.example.estimatea.model;
 
-import lombok.Setter;
-
 import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Setter
 public class SubProject {
     private int subId;
     private String subName;
@@ -52,7 +49,6 @@ public class SubProject {
         return subName;
     }
 
-
     public int getProjectId() {
         return projectId;
     }
@@ -85,4 +81,27 @@ public class SubProject {
         return completed;
     }
 
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public void setDeadLine(LocalDate deadLine) {
+        this.deadLine = deadLine;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setSubId(int subId) {
+        this.subId = subId;
+    }
+
+    public void setSubName(String subName) {
+        this.subName = subName;
+    }
 }

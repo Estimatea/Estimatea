@@ -86,23 +86,4 @@ public class SubProjectRepositoryTest {
         assertThat(seededSubProjectsAfterDeletion).hasSize(initialSize - 1);
         assertThat(seededSubProjectsAfterDeletion).extracting(SubProject::getSubId).doesNotContain(subProjectToDelete);
     }
-
-//    @Test
-//    void shouldEditDeadline() {
-//        int subProjectId = subProjectRepository.getAllSubProjects().getFirst().getSubId();
-//
-//        // OLD DEADLINE : '2026-03-01'
-//        subProjectRepository.editSubProjectDeadLine(LocalDate.of(2026, 3, 5), subProjectId);
-//
-//        assertThat(subProjectRepository.getAllSubProjects().getFirst().getDeadLine()).isEqualTo(LocalDate.of(2026, 3, 5));
-//    }
-//
-//    @Test
-//    void shouldSetSubProjectCompleted() {
-//        int subProjectId = subProjectRepository.getAllSubProjects().getFirst().getSubId();
-//
-//        subProjectRepository.editSubProjectCompleted(true, subProjectId);
-//
-//        assertThat(subProjectRepository.getAllSubProjects().getFirst().isCompleted()).isTrue();
-//    }
 }

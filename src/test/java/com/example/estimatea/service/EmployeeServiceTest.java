@@ -167,12 +167,4 @@ public class EmployeeServiceTest {
 
                 assertThrows(NotFoundException.class, () -> employeeService.removeEmployeeFromSubProject(1, 1));
             }
-
-
-
-
-
-
-
-
 }

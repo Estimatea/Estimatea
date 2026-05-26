@@ -1,5 +1,5 @@
--- DROP SCHEMA IF EXISTS estimatea;
--- CREATE SCHEMA estimatea;
+DROP SCHEMA IF EXISTS estimatea;
+CREATE SCHEMA estimatea;
 
 -- ROLE
 CREATE TABLE IF NOT EXISTS role(

@@ -31,7 +31,6 @@ public class RoleServiceTest {
     }
 
     //Unit test on getAllRoles
-    //
     @Test
     void getAllRoles_shouldGetAllRoles() {
 
@@ -51,5 +50,4 @@ public class RoleServiceTest {
 
         assertThrows(NotFoundException.class, () -> roleService.getAllRoles());
     }
-
 }

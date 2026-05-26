@@ -27,19 +27,6 @@ public class SubprojectServiceTest {
     @Mock
     private SubProjectRepository subProjectRepository;
 
-    @Mock
-    private TaskService taskService;          // <-- this was missing
-
-    @Mock
-    private EmployeeRepository employeeRepository;
-
-    @Mock
-    private RoleRepository roleRepository;
-
-    @Mock
-    private ComplexityService complexityService;
-
-
     @InjectMocks
     private SubProjectService subProjectService;
     private SubProject subProjectMock;
@@ -48,8 +35,6 @@ public class SubprojectServiceTest {
     public void setUp() {
         subProjectMock = new SubProject(1, "Project calculation tool", LocalDate.of(2026, 2, 1), LocalDate.of(2026, 3, 1), 10, 20, false, 1);
     }
-
-
 
     @Test
     void shouldReturnAllSubProjects() {

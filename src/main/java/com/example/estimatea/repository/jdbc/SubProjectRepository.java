@@ -49,9 +49,14 @@ public class SubProjectRepository {
 
     // Creates a new subproject with information from thymeleaf
     public int createSubProject(SubProject subProject) {
-        return jdbc.update(CREATE_SUBPROJECT, subProject.getSubName(), subProject.getStartDate(),
-                subProject.getDeadLine(), subProject.getSumTime(), subProject.getSumPrice(),
-                subProject.isCompleted(), subProject.getProjectId());
+        return jdbc.update(CREATE_SUBPROJECT,
+                subProject.getSubName(),
+                subProject.getStartDate(),
+                subProject.getDeadLine(),
+                subProject.getSumTime(),
+                subProject.getSumPrice(),
+                subProject.isCompleted(),
+                subProject.getProjectId());
     }
 
     // Deletes a subproject from the db
@@ -61,22 +66,18 @@ public class SubProjectRepository {
 
     // UPDATE SUBPROJECT
     public int editSubProject(SubProject subProject) {
-        return jdbc.update(UPDATE_SUBPROJECT, subProject.getSubName(), subProject.getStartDate(), subProject.getDeadLine(), subProject.getSumTime(), subProject.getSumPrice(),
-                subProject.isCompleted(), subProject.getSubId());
+        return jdbc.update(UPDATE_SUBPROJECT,
+                subProject.getSubName(),
+                subProject.getStartDate(),
+                subProject.getDeadLine(),
+                subProject.getSumTime(),
+                subProject.getSumPrice(),
+                subProject.isCompleted(),
+                subProject.getSubId());
     }
 
     // SUBPROJECT COMPLETE
     public int completeSubProject(int subProjectId) {
         return jdbc.update(COMPLETE_SUBPROJECT, subProjectId);
     }
-
-//    //edits a subprojects deadline
-//    public void editSubProjectDeadLine(LocalDate newDeadLine, int subProjectId) {
-//        jdbc.update(EDIT_DEADLINE, newDeadLine, subProjectId);
-//    }
-//
-//    //changes whether a subproject is set as completed
-//    public void editSubProjectCompleted(boolean Completed, int subProjectId) {
-//        jdbc.update(EDIT_COMPLETED, Completed, subProjectId);
-//    }
 }

@@ -15,15 +15,15 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
-                .addPathPatterns( // Tell Spring which URLs to watch
+                .addPathPatterns(
                         "/**")
 
-                .excludePathPatterns( // And these to be excluded
-                        "/employee/login",     // Exclude GET login page & POST form submission
-                        "/css/**",             // Exclude styling
-                        "/images/**",          // Exclude logo images
-                        "/js/**",              // Exclude javascript
-                        "/error"               // Exclude default error path
+                .excludePathPatterns(
+                        "/employee/login",
+                        "/css/**",
+                        "/images/**",
+                        "/js/**",
+                        "/error"
                 );
     }
 }

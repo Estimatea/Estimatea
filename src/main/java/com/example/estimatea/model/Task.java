@@ -5,13 +5,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Task {
 
-
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deadLine;
-
 
     private int taskId;
     private boolean completed;
@@ -47,8 +45,6 @@ public class Task {
         this.subprojectId = subprojectId;
         this.currentComplexityId = currentComplexityId;
     }
-
-
 
     public Task() {
     }

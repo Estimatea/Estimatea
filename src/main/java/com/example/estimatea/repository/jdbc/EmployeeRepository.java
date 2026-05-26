@@ -17,10 +17,12 @@ public class EmployeeRepository {
 
     private final String EMPLOYEE_LOGIN = "SELECT * FROM employee WHERE employee_username = ? AND employee_password = ?";
 
-        //SQL STATEMENTS FOR employees
+        // SQL STATEMENTS FOR employees
+
     private final String GET_COMPANY_EMPLOYEE_LIST = "SELECT * FROM employee";
 
-    // SQL STATEMENTS FOR project_employee Linked to a Project
+        // SQL STATEMENTS FOR project_employee Linked to a Project
+
     private final String GET_ALL_EMPLOYEES_FOR_PROJECT = "SELECT e.* FROM employee e " +
                                                          "JOIN project_employee pe ON e.employee_id = pe.employee_id " +
                                                          "WHERE pe.project_id = ?";
@@ -29,7 +31,8 @@ public class EmployeeRepository {
     private final String ADD_EMPLOYEE_TO_PROJECT = "INSERT INTO project_employee (employee_id, project_id) VALUES (?, ?)";
     private final String REMOVE_EMPLOYEE_FROM_PROJECT = "DELETE FROM project_employee WHERE project_employee_id = ? AND project_id = ?";
 
-    // SQL statements for subproject employees
+        // SQL statements for subproject employees
+
     private final String GET_ALL_EMPLOYEES_FOR_SUBPROJECT = "SELECT e.* FROM employee e " +
                                                             "JOIN project_employee pe ON e.employee_id = pe.employee_id " +
                                                             "JOIN sub_project_employee spe ON pe.project_employee_id = spe.project_employee_id " +
@@ -38,10 +41,6 @@ public class EmployeeRepository {
     // ADD & REMOVE employees to/from Sub-project
     private final String ASSIGN_EMPLOYEE_TO_SUBPROJECT = "INSERT INTO sub_project_employee (project_employee_id, sub_id) VALUES (?,?)";
     private final String REMOVE_EMPLOYEE_FROM_SUBPROJECT = "DELETE FROM sub_project_employee WHERE project_employee_id = ? AND sub_id = ?";
-
-    // RETRIEVE employees from project and subproject by id
-    private final String GET_ALL_EMPLOYEES_BY_ID_FOR_SUBPROJECT = "SELECT project_employee_id FROM sub_project_employee WHERE sub_id = ?"; // RETRIEVE Sub-project employees ID's
-    private final String GET_ALL_PROJECT_EMPLOYEES_IDS_FOR_PROJECT = "SELECT project_employee_id FROM project_employee WHERE project_id = ?"; // RETRIEVE Project employees ID's
 
     public EmployeeRepository(JdbcTemplate jdbc, EmployeeMapper employeeMapper) {
         this.jdbc = jdbc;

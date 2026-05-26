@@ -18,9 +18,7 @@ public class Role {
         this.roleRate = roleRate;
     }
 
-    public Role() {
-
-    }
+    public Role() {}
 
     public int getRoleId() {
         return roleId;

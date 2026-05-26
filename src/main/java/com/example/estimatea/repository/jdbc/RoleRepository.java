@@ -26,7 +26,6 @@ public class RoleRepository {
         return jdbc.query(GET_ALL_ROLES, roleMapper);
     }
 
-    //
     // Returns specific role
     public Role getRoleById(int roleId) {
         List<Role> roles = jdbc.query(GET_ROLE_BY_ID, roleMapper, roleId);

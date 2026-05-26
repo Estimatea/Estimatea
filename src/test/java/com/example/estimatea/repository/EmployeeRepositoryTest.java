@@ -133,24 +133,3 @@ public class EmployeeRepositoryTest {
         assertThat(employeesAfterRemoval).extracting(Employee::getEmployeeId).doesNotContain(testEmployee);
     }
 }
-
-//    @Test
-//    void shouldGetAllProjectEmployeesById() {
-//        int projectId = 1;
-//
-//        List<Integer> projectEmployees = employeeRepository.getAllEmployeeIdsForProject(projectId);
-//
-//        assertThat(projectEmployees).isNotNull();
-//        assertThat(projectEmployees).hasSizeGreaterThan(0);
-//        assertThat(projectEmployees.size()).isEqualTo(3);
-//    }
-
-//    void shouldRetrieveAllEmployeesIdsFromSubProject() {
-//        int subProjectId = 1;
-//
-//        List<Integer> subProjectEmployeesById = employeeRepository.getAllEmployeesIdsForSubProject(subProjectId);
-//
-//        assertThat(subProjectEmployeesById).isNotNull();
-//        assertThat(subProjectEmployeesById).hasSizeGreaterThan(0);
-//        assertThat(subProjectEmployeesById.size()).isEqualTo(2);
-//    }
