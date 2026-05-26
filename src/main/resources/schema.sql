@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS task(
     task_id INT AUTO_INCREMENT PRIMARY KEY,
     start_date DATE NOT NULL,
     completed boolean DEFAULT FALSE,
-    task_name VARCHAR(60),
+    task_name VARCHAR(60) NOT NULL,
     deadline DATE NOT NULL,
     task_time INT,
     task_price INT,
