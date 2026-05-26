@@ -1,5 +1,5 @@
 ### ESTIMATEA: Project Planning & Price Estimation
-Project Date: 2026 | Last Updated: April 30, 2026
+Project Date: 2026 | Last Updated: April 30, 2026</br>
 Website: https://estimatea-f8c8g2a2g6e7f2bj.swedencentral-01.azurewebsites.net/employee/login
 
 ## 🚀 Mission Statement
