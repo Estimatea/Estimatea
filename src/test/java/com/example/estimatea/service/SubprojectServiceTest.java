@@ -2,8 +2,6 @@ package com.example.estimatea.service;
 
 import com.example.estimatea.exception.NotFoundException;
 import com.example.estimatea.model.SubProject;
-import com.example.estimatea.repository.jdbc.EmployeeRepository;
-import com.example.estimatea.repository.jdbc.RoleRepository;
 import com.example.estimatea.repository.jdbc.SubProjectRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +24,9 @@ public class SubprojectServiceTest {
 
     @Mock
     private SubProjectRepository subProjectRepository;
+
+    @Mock
+    private TaskService taskService;
 
     @InjectMocks
     private SubProjectService subProjectService;

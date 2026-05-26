@@ -127,6 +127,4 @@ public class TaskRepository {
     public int updateComplexityScore(int complexityId, int taskId) {
         return jdbc.update(UPDATE_CURRENT_COMPLEXITY_SCORE_ON_TASK, complexityId, taskId);
     }
-
-
 }

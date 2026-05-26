@@ -22,10 +22,17 @@ VALUES ('Project calculation tool', '2026-02-01', '2026-03-01', 10 , 20,false, 1
        ('AI integration', '2026-06-06', '2026-12-12', 40, 100, false, 2);
 
 -- 5. complexity
-INSERT INTO complexity (complexity_score, label_type, rate_multiplier)
-VALUES (1, 'Standard', 1.0),
-       (5, 'Elevated', 1.5),
-       (10, 'Enterprise Grade', 3.0);
+INSERT INTO complexity (complexity_score, label_type, rate_multiplier) VALUES
+        (1,  'Standard',          1.0),
+        (2,  'Low Complexity',    1.1),
+        (3,  'Minor',             1.2),
+        (4,  'Moderate',          1.3),
+        (5,  'Elevated',          1.5),
+        (6,  'High Complexity',   1.7),
+        (7,  'Advanced',          2.0),
+        (8,  'Critical',          2.3),
+        (9,  'Expert Level',      2.7),
+        (10, 'Enterprise Grade',  3.0);
 
 -- 6. project_employee
 INSERT INTO project_employee (employee_id, project_id)
@@ -38,6 +45,6 @@ INSERT INTO sub_project_employee (project_employee_id, sub_id)
 VALUES (1,1), -- Joakim
        (2,1); -- Emil
 
-INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, sub_id, employee_id, current_complexity_id)
-VALUES ('2027-01-01', false, 'Alpha Task One', '2027-12-01', 10, 100, 1, 1, 1, 1),
-       ('2027-02-01', false, 'Alpha Task Two', '2027-12-01', 20, 200, 1, 1, 2, 5);
+INSERT INTO task (start_date, completed, task_name, deadline, task_time, task_price, project_id, sub_id, current_complexity_id)
+VALUES ('2027-01-01', false, 'Alpha Task One', '2027-12-01', 10, 100, 1, 1, 1),
+       ('2027-02-01', false, 'Alpha Task Two', '2027-12-01', 20, 200, 1, 1, 5);
