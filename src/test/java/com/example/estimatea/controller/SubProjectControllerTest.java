@@ -29,7 +29,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(SubProjectController.class)
-@ActiveProfiles("test")
 public class SubProjectControllerTest {
 
     @Autowired

@@ -21,12 +21,12 @@ CREATE TABLE IF NOT EXISTS employee(
 -- PROJECT TABLE (Has project_employees and links to subproject and task)
 CREATE TABLE IF NOT EXISTS project(
     project_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    project_name VARCHAR(60) UNIQUE,
-    start_date DATE,
+    project_name VARCHAR(60) NOT NULL UNIQUE,
+    start_date DATE NOT NULL,
     completed boolean,
     sum_time INT,
     sum_price INT,
-    deadline DATE,
+    deadline DATE NOT NULL,
     project_manager INT,
     FOREIGN KEY (project_manager) REFERENCES employee(employee_id)
     );
@@ -43,11 +43,11 @@ CREATE TABLE IF NOT EXISTS project_employee(
 -- SUBPROJECT (Part of Project and links to task & Junction TABLE sub_project__employee)
 CREATE TABLE IF NOT EXISTS subproject(
     sub_id INT AUTO_INCREMENT PRIMARY KEY,
-    sub_name VARCHAR(60),
-    start_date DATE,
+    sub_name VARCHAR(60) NOT NULL,
+    start_date DATE NOT NULL,
     sum_time INT,
     sum_price INT,
-    deadline DATE,
+    deadline DATE NOT NULL,
     completed boolean,
     project_id INT,
     FOREIGN KEY (project_id) REFERENCES project(project_id) ON DELETE CASCADE
