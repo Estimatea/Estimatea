@@ -45,7 +45,7 @@ VALUES ('Simon', 'Sich', '007', 2);
 INSERT INTO employee (employee_name, employee_username, employee_password, role_id)
 VALUES ('Emil', 'Eman', '010', 3);
 
-INSERT INTO employee (employee_name, employee_username, employee_password, rolde_id)
+INSERT INTO employee (employee_name, employee_username, employee_password, role_id)
 VALUES ('Test', 'Test', '1234', 4);
 
 INSERT INTO project (project_name, start_date, completed, deadline, project_manager)
