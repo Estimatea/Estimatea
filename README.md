@@ -15,3 +15,6 @@ Time Tracking & Planning: Granular scheduling to ensure deadlines are met withou
 Sustainable Architecture: Built to evolve alongside growing IT requirements.
 
 Data-Driven Insights: Leveraging historical data for more accurate future bidding.
+
+## Projektstruktur
+jetbrains://idea/navigate/reference?project=Estimatea&path=src
