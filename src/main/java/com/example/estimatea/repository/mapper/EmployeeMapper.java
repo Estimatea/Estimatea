@@ -12,7 +12,6 @@ public class EmployeeMapper implements RowMapper<Employee> {
 
     private final RoleRepository roleRepository;
 
-    // Constructor injection — the recommended approach
     public EmployeeMapper(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
